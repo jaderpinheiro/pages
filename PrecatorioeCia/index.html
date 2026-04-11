@@ -75,8 +75,8 @@
   }
   .nav-logo img {
     height: 42px; width: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.95;
+    filter: sepia(1) saturate(3) hue-rotate(340deg) brightness(1.05);
+    mix-blend-mode: screen;
   }
   .nav-logo-text {
     font-family: 'Cormorant Garamond', serif;
@@ -237,8 +237,8 @@
   }
   .hero-logo-inner img {
     width: 140px; height: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
+    filter: sepia(1) saturate(3) hue-rotate(340deg) brightness(1.05);
+    mix-blend-mode: screen;
   }
   .hero-stats {
     position: absolute; bottom: -20px; right: -20px;
@@ -843,7 +843,7 @@
     display: flex; align-items: center; gap: 12px;
     text-decoration: none;
   }
-  .footer-logo img { height: 32px; filter: brightness(0) invert(1); opacity: 0.5; }
+  .footer-logo img { height: 32px; filter: grayscale(1) brightness(2); mix-blend-mode: screen; opacity: 0.5; }
   .footer-logo span {
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.95rem; color: rgba(255,255,255,0.35);
@@ -970,23 +970,7 @@
 <!-- ─── NAVBAR ─── -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <svg width="42" height="42" viewBox="0 0 42 42"
-         xmlns="http://www.w3.org/2000/svg"
-         xmlns:xlink="http://www.w3.org/1999/xlink"
-         aria-label="Precatórios & Cia Logo" role="img" style="display:block;flex-shrink:0;">
-      <defs>
-        <linearGradient id="navGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#f5c98a"/>
-          <stop offset="45%"  stop-color="#e3a25e"/>
-          <stop offset="100%" stop-color="#b8682a"/>
-        </linearGradient>
-        <mask id="navMask" style="mask-type:alpha">
-          <image xlink:href="Logo.svg" x="0" y="0" width="42" height="42"
-                 preserveAspectRatio="xMidYMid meet"/>
-        </mask>
-      </defs>
-      <rect width="42" height="42" fill="url(#navGrad)" mask="url(#navMask)"/>
-    </svg>
+    <img src="logo.png" alt="Precatórios & Cia Logo" style="display:block;flex-shrink:0;">
     <div class="nav-logo-text">
       Precatórios & Cia
       <span>Antecipação de Precatórios</span>
@@ -1027,22 +1011,7 @@
       <div class="hero-logo-wrap">
         <div class="hero-logo-ring"></div>
         <div class="hero-logo-inner">
-          <svg width="140" height="140" viewBox="0 0 140 140"
-               xmlns="http://www.w3.org/2000/svg"
-               xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-              <linearGradient id="pcGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stop-color="#f5c98a"/>
-                <stop offset="45%"  stop-color="#e3a25e"/>
-                <stop offset="100%" stop-color="#b8682a"/>
-              </linearGradient>
-              <mask id="pcMask" style="mask-type:alpha">
-                <image xlink:href="Logo.svg" x="0" y="0" width="140" height="140"
-                       preserveAspectRatio="xMidYMid meet"/>
-              </mask>
-            </defs>
-            <rect width="140" height="140" fill="url(#pcGrad)" mask="url(#pcMask)"/>
-          </svg>
+          <img src="logo.png" alt="Precatórios & Cia Logo">
         </div>
         <div class="hero-stats">
           <div class="stat-num">R$10M<span>+</span></div>
@@ -1492,23 +1461,7 @@
 <footer>
   <div class="footer-inner">
     <a href="#" class="footer-logo">
-      <svg width="32" height="32" viewBox="0 0 32 32"
-           xmlns="http://www.w3.org/2000/svg"
-           xmlns:xlink="http://www.w3.org/1999/xlink"
-           style="display:block;flex-shrink:0;">
-        <defs>
-          <linearGradient id="footerGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#f5c98a"/>
-            <stop offset="45%"  stop-color="#e3a25e"/>
-            <stop offset="100%" stop-color="#b8682a"/>
-          </linearGradient>
-          <mask id="footerMask" style="mask-type:alpha">
-            <image xlink:href="Logo.svg" x="0" y="0" width="32" height="32"
-                   preserveAspectRatio="xMidYMid meet"/>
-          </mask>
-        </defs>
-        <rect width="32" height="32" fill="url(#footerGrad)" mask="url(#footerMask)"/>
-      </svg>
+      <img src="logo.png" alt="Precatórios & Cia Logo" style="display:block;flex-shrink:0;">
       <span>Precatórios & Cia</span>
     </a>
     <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
