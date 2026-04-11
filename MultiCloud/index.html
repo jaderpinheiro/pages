@@ -1271,6 +1271,11 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
+      transition: transform .35s ease;
+    }
+
+    .founder-card:hover {
+      transform: translateY(-4px);
     }
 
     .founder-avatar {
@@ -1289,6 +1294,12 @@
       box-shadow: 0 0 30px rgba(1, 174, 255, .15);
       position: relative;
       overflow: hidden;
+      transition: border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .founder-card:hover .founder-avatar {
+      border-color: rgba(1, 174, 255, .75);
+      box-shadow: 0 0 22px rgba(1, 174, 255, .35), 0 0 6px rgba(1, 174, 255, .2);
     }
 
     .founder-avatar img {
@@ -1304,6 +1315,11 @@
       inset: -4px;
       border-radius: 50%;
       border: 1px solid rgba(1, 174, 255, .15);
+      transition: border-color .35s ease;
+    }
+
+    .founder-card:hover .founder-avatar::after {
+      border-color: rgba(1, 174, 255, .45);
     }
 
     .founder-name {
@@ -1312,6 +1328,11 @@
       font-weight: 700;
       color: #fff;
       letter-spacing: .05em;
+      transition: color .35s ease;
+    }
+
+    .founder-card:hover .founder-name {
+      color: rgba(1, 174, 255, .9);
     }
 
     .founder-role {
@@ -2060,13 +2081,18 @@
     <p class="founders-title">OS VISIONÁRIOS POR TRÁS DA MULTICLOUD</p>
     <div class="founders-grid">
       <div class="founder-card">
-        <div class="founder-avatar"><img src="founder/Junio.jpeg" alt="Junio"></div>
-        <div class="founder-name">Junio</div>
+        <div class="founder-avatar"><img src="founder/Junio.jpeg" alt="Junio Rodrigues"></div>
+        <div class="founder-name">Junio Rodrigues</div>
         <div class="founder-role">CO-FOUNDER</div>
       </div>
       <div class="founder-card">
-        <div class="founder-avatar"><img src="founder/Rodrigo.jpeg" alt="Rodrigo"></div>
-        <div class="founder-name">Rodrigo</div>
+        <div class="founder-avatar"><img src="Salomao.jpeg" alt="Salomão Pereira"></div>
+        <div class="founder-name">Salomão Pereira</div>
+        <div class="founder-role">CO-FOUNDER</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-avatar"><img src="founder/Rodrigo.jpeg" alt="Rodrigo Rodrigues"></div>
+        <div class="founder-name">Rodrigo Rodrigues</div>
         <div class="founder-role">CO-FOUNDER</div>
       </div>
     </div>
