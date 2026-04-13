@@ -2039,25 +2039,47 @@
       </div>
     </div>
 
+    <!-- Importa EmailJS -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("BK4qGaG0Oyju3Auok"); // Public Key
+      })();
+
+      function handleForm(e) {
+        e.preventDefault();
+
+        emailjs.sendForm(
+          "office365_service",   // Service ID
+          "template_9ypsjlq",    // Template ID
+          e.target
+        ).then(() => {
+          alert("Mensagem enviada com sucesso!");
+        }, (error) => {
+          alert("Erro ao enviar: " + JSON.stringify(error));
+        });
+      }
+    </script>
+
     <div class="contact-form-wrap reveal">
       <h3>Envie sua mensagem</h3>
       <p>Como podemos te ajudar? Nossa equipe responde em até 2 horas úteis.</p>
       <form onsubmit="handleForm(event)">
         <div class="form-group">
           <label>NOME COMPLETO</label>
-          <input type="text" placeholder="Seu nome" required>
+          <input type="text" name="from_name" placeholder="Seu nome" required>
         </div>
         <div class="form-group">
           <label>E-MAIL CORPORATIVO</label>
-          <input type="email" placeholder="seu@empresa.com.br" required>
+          <input type="email" name="from_email" placeholder="seu@empresa.com.br" required>
         </div>
         <div class="form-group">
           <label>EMPRESA</label>
-          <input type="text" placeholder="Nome da sua empresa">
+          <input type="text" name="company" placeholder="Nome da sua empresa">
         </div>
         <div class="form-group">
           <label>SOLUÇÃO DE INTERESSE</label>
-          <select>
+          <select name="solution">
             <option value="">Selecione...</option>
             <option>Cloud Premium</option>
             <option>Cloud Public</option>
@@ -2068,7 +2090,7 @@
         </div>
         <div class="form-group">
           <label>MENSAGEM</label>
-          <textarea placeholder="Descreva sua necessidade..." required></textarea>
+          <textarea name="message" placeholder="Descreva sua necessidade..." required></textarea>
         </div>
         <button type="submit" class="btn-primary" style="width:100%;text-align:center;border:none;font-size:1rem">
           Enviar Mensagem ✈
@@ -2141,7 +2163,10 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 MultiCloud® · Todos os Direitos Reservados </p>
-      <p style="position:absolute;left:50%;transform:translateX(-50%);font-size:.72rem;color:rgba(255,255,255,.18);white-space:nowrap;">Desenvolvido por <a href="https://inlinedigital.com.br" rel="dofollow" target="_blank" style="color:rgba(255,255,255,.28);text-decoration:none;">Inline Digital e Tecnologia</a></p>
+      <p
+        style="position:absolute;left:50%;transform:translateX(-50%);font-size:.72rem;color:rgba(255,255,255,.18);white-space:nowrap;">
+        Desenvolvido por <a href="https://inlinedigital.com.br" rel="dofollow" target="_blank"
+          style="color:rgba(255,255,255,.28);text-decoration:none;">Inline Digital e Tecnologia</a></p>
       <div class="footer-socials">
         <a href="https://www.linkedin.com/multicloud/" class="footer-social" title="LinkedIn">in</a>
         <a href="https://www.instagram.com/multicloud/" class="footer-social" title="Instagram">ig</a>
