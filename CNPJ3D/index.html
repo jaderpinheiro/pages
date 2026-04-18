@@ -894,6 +894,134 @@ footer{
 .footer-links a{font-size:.82rem;color:var(--c-muted);transition:color .2s}
 .footer-links a:hover{color:var(--c-accent)}
 
+/* ─── FOOTER FOUNDERS ─── */
+.footer-founders{
+  border-top:1px solid var(--c-border);
+  padding:2rem 5vw;
+  background:var(--c-bg2);
+  display:flex;align-items:center;justify-content:center;
+  gap:3rem;
+  flex-wrap:wrap;
+}
+.footer-founders-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c-muted);text-align:center;margin-bottom:1.25rem;
+}
+.footer-founders-wrap{
+  display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center;
+}
+.founder-card{
+  display:flex;flex-direction:column;align-items:center;gap:.85rem;
+  cursor:default;
+}
+/* porta (frame) */
+.founder-frame{
+  position:relative;
+  width:100px;height:100px;
+  border-radius:50%;
+  padding:2.5px;
+  background:var(--c-border);
+  transition:background .4s, box-shadow .4s, transform .4s var(--ease-out);
+}
+.founder-frame::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:50%;
+  background:conic-gradient(
+    from var(--beam-angle,0deg),
+    transparent 0deg,
+    transparent 60%,
+    rgba(0,212,255,.3) 66%,
+    var(--c-accent) 72%,
+    rgba(255,255,255,.9) 75%,
+    var(--c-accent) 78%,
+    rgba(124,58,237,.6) 84%,
+    transparent 90%
+  );
+  opacity:0;
+  transition:opacity .45s;
+  animation:founderBeam 2.2s linear infinite paused;
+  z-index:0;
+}
+@keyframes founderBeam{ to{ --beam-angle:360deg } }
+.founder-card:hover .founder-frame{
+  transform:translateY(-5px) scale(1.04);
+  box-shadow:0 0 0 2px rgba(0,212,255,.15), 0 16px 40px rgba(0,0,0,.5);
+}
+.founder-card:hover .founder-frame::before{
+  opacity:1;
+  animation-play-state:running;
+}
+/* foto */
+.founder-photo-wrap{
+  position:relative;z-index:1;
+  width:100%;height:100%;
+  border-radius:50%;
+  overflow:hidden;
+  background:var(--c-surface2);
+}
+.founder-photo-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  transition:transform .55s var(--ease-out), filter .45s, brightness .45s;
+  filter:saturate(.85) brightness(.9);
+}
+.founder-card:hover .founder-photo-wrap img{
+  transform:scale(1.1);
+  filter:saturate(1.1) brightness(1.05);
+}
+/* overlay nome ao hover */
+.founder-photo-wrap::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(0,10,30,.7) 100%);
+  opacity:0;
+  transition:opacity .4s;
+  border-radius:50%;
+}
+.founder-card:hover .founder-photo-wrap::after{opacity:1}
+/* info */
+.founder-info{text-align:center}
+.founder-name{
+  font-family:var(--font-head);font-size:.9rem;font-weight:700;
+  color:var(--c-text);
+  transition:color .3s;
+  letter-spacing:-.01em;
+}
+.founder-card:hover .founder-name{color:var(--c-accent)}
+.founder-role{
+  font-size:.72rem;color:var(--c-muted);
+  margin-top:.2rem;letter-spacing:.03em;
+  transition:color .3s;
+}
+.founder-card:hover .founder-role{color:rgba(0,212,255,.65)}
+/* social mini */
+.founder-social{
+  display:flex;gap:.5rem;margin-top:.5rem;justify-content:center;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .35s .05s,transform .35s .05s var(--ease-out);
+}
+.founder-card:hover .founder-social{opacity:1;transform:translateY(0)}
+.founder-social a{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--c-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;color:var(--c-muted);
+  background:rgba(255,255,255,.03);
+  transition:all .25s;
+}
+.founder-social a.li:hover{background:rgba(10,102,194,.15);border-color:rgba(10,102,194,.5);color:#0a66c2}
+.founder-social a.ig:hover{background:rgba(225,48,108,.12);border-color:rgba(225,48,108,.4);color:#e1306c}
+/* divider vertical */
+.founder-divider{
+  width:1px;height:80px;
+  background:linear-gradient(180deg,transparent,var(--c-border),transparent);
+}
+@media(max-width:600px){
+  .founder-divider{display:none}
+  .footer-founders{gap:2rem}
+}
+
 /* ─── REVEAL ANIMATION ─── */
 .reveal{
   opacity:0;transform:translateY(40px);
@@ -1499,6 +1627,54 @@ footer{
     </div>
   </div>
 </section>
+
+<!-- FOOTER FOUNDERS -->
+<div class="footer-founders">
+  <div>
+    <p class="footer-founders-label">Idealizado por</p>
+    <div class="footer-founders-wrap">
+      <div class="founder-card">
+        <div class="founder-frame">
+          <div class="founder-photo-wrap">
+            <img src="image/Vinicius.jpg" alt="Vinicius Carvalho" loading="lazy">
+          </div>
+        </div>
+        <div class="founder-info">
+          <div class="founder-name">Vinicius Carvalho</div>
+          <div class="founder-role">Co-idealizador · CNPJ 3D</div>
+          <div class="founder-social">
+            <a href="https://www.linkedin.com/in/vinicius-carvalho" target="_blank" rel="noopener" class="li" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/vinicius.carvalho" target="_blank" rel="noopener" class="ig" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="founder-divider"></div>
+      <div class="founder-card">
+        <div class="founder-frame" style="--beam-angle:180deg">
+          <div class="founder-photo-wrap">
+            <img src="image/Rosane.png" alt="Rosane Galvão" loading="lazy">
+          </div>
+        </div>
+        <div class="founder-info">
+          <div class="founder-name">Rosane Galvão</div>
+          <div class="founder-role">Co-idealizadora · CNPJ 3D</div>
+          <div class="founder-social">
+            <a href="https://www.linkedin.com/in/rosane-galvao" target="_blank" rel="noopener" class="li" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/rosane.galvao" target="_blank" rel="noopener" class="ig" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
