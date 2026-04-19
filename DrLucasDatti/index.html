@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dr. Lucas Datti - Dentista em São Paulo. Especialista em Implantes, Ortodontia, Estética Dental e Clareamento. Atendimento Premium, Tecnologia de Ponta. Agende sua consulta!">
+<meta name="description" content="Clínica odontológica na Vila Mariana com tecnologia moderna, atendimento preciso e horários flexíveis. Implante, canal e estética dental. Agende sua consulta.">
+<link rel="canonical" href="https://drlucasdatti.com.br/">
 <meta name="keywords" content="dentista São Paulo, implante dental São Paulo, ortodontia São Paulo, clareamento dental, estética dental, dentista zona sul, dentista Brooklin, dentista Vila Olímpia, Dr Lucas Datti, clínica odontológica São Paulo, facetas de porcelana, alinhador dental, invisalign São Paulo, dentista particular São Paulo">
 <meta name="robots" content="index, follow">
 <meta name="geo.region" content="BR-SP">
@@ -12,9 +13,10 @@
 <meta property="og:description" content="Sorriso que transforma vidas. Implantes, Estética e Ortodontia com tecnologia de ponta em São Paulo.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<title>Dr. Lucas Datti | Dentista Premium em São Paulo — Implantes, Estética & Ortodontia</title>
+<title>Dentista na Vila Mariana SP | Implante, Canal e Estética — Dr. Lucas Datti</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -100,6 +102,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .logo-icon {
     width: 44px; height: 44px;
   }
+  i.logo-icon {
+    font-size: 30px;
+    color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
   .logo-text { line-height: 1.15; }
   .logo-text strong {
     display: block;
@@ -162,10 +170,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-badge::before { content: '★'; color: var(--gold); font-size: 10px; }
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5.5vw, 76px);
+    font-size: clamp(28px, 3.6vw, 52px);
     font-weight: 300;
     color: var(--white);
-    line-height: 1.08;
+    line-height: 1.12;
     margin-bottom: 10px;
   }
   .hero h1 em {
@@ -224,6 +232,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .hero-image {
     position: relative; overflow: hidden;
+    min-height: 100%;
   }
   .hero-image::before {
     content: '';
@@ -234,7 +243,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-image img {
     width: 100%; height: 100%;
     object-fit: cover; object-position: top center;
-    filter: grayscale(15%) contrast(1.05);
+    filter: grayscale(10%) contrast(1.04);
   }
   .hero-decor {
     position: absolute;
@@ -616,24 +625,127 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .hero-sub { animation: fadeUp .7s .2s ease both; }
   .hero-actions { animation: fadeUp .7s .3s ease both; }
   .hero-stats { animation: fadeUp .7s .45s ease both; }
+
+  /* ─── SCROLL REVEAL ─── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+  }
+  [data-reveal="left"]  { transform: translateX(-44px); }
+  [data-reveal="right"] { transform: translateX(44px); }
+  [data-reveal="scale"] { transform: scale(.9) translateY(20px); }
+  [data-reveal].is-visible { opacity: 1 !important; transform: none !important; }
+  [data-delay="1"] { transition-delay: .10s; }
+  [data-delay="2"] { transition-delay: .20s; }
+  [data-delay="3"] { transition-delay: .30s; }
+  [data-delay="4"] { transition-delay: .40s; }
+  [data-delay="5"] { transition-delay: .50s; }
+  [data-delay="6"] { transition-delay: .60s; }
+
+  /* ─── PROGRESS BAR ─── */
+  #scroll-bar {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200%;
+    z-index: 10000;
+    transition: width .08s linear;
+    animation: shimmer-bar 2.5s infinite linear;
+  }
+  @keyframes shimmer-bar { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+
+  /* ─── SHIMMER CTA ─── */
+  .btn-primary, .btn-wa, .loc-wa-btn { overflow: hidden; position: relative; }
+  .btn-primary::after, .btn-wa::after, .loc-wa-btn::after {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+    transition: left .55s ease;
+    pointer-events: none;
+  }
+  .btn-primary:hover::after, .btn-wa:hover::after, .loc-wa-btn:hover::after { left: 160%; }
+
+  /* ─── WHATSAPP RIPPLE ─── */
+  .float-wa {
+    position: fixed;
+    bottom: 28px; right: 28px; z-index: 9999;
+  }
+  .float-wa::before {
+    content: '';
+    position: absolute; inset: -10px;
+    border-radius: 50px;
+    border: 2px solid rgba(37,211,102,.5);
+    animation: ripple-wa 2s infinite;
+    pointer-events: none;
+  }
+  @keyframes ripple-wa {
+    0%   { transform: scale(1); opacity: .7; }
+    100% { transform: scale(1.3); opacity: 0; }
+  }
+
+  /* ─── FLOATING PARTICLES (hero esquerdo) ─── */
+  .hero-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 52%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+  }
+  .hpart {
+    position: absolute; border-radius: 50%;
+    background: var(--gold-light); opacity: 0;
+    box-shadow: 0 0 6px rgba(196,150,58,.5);
+    animation: fpart var(--d,7s) var(--dl,0s) infinite linear;
+  }
+  @keyframes fpart {
+    0%   { opacity: 0;   transform: translateY(0) translateX(0); }
+    6%   { opacity: .5; }
+    88%  { opacity: .18; }
+    100% { opacity: 0;   transform: translateY(-80vh) translateX(var(--x,30px)); }
+  }
+
+  /* ─── CARD HOVER LIFT ─── */
+  .testi-card { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s; }
+  .testi-card:hover { transform: translateY(-8px); box-shadow: 0 16px 56px rgba(0,0,0,.13); }
+  .tech-item { transition: background .3s, transform .35s cubic-bezier(.22,1,.36,1); }
+  .tech-item:hover { transform: translateY(-4px); }
+
+  /* ─── CREDENTIAL SLIDE ─── */
+  .credential { transition: background .25s, border-color .25s, transform .3s cubic-bezier(.22,1,.36,1); }
+  .credential:hover { background: var(--gold-ultra); border-color: var(--gold); transform: translateX(8px); }
+
+  /* ─── GLOW STATS ─── */
+  @keyframes glow-num {
+    0%,100% { text-shadow: none; }
+    50%  { text-shadow: 0 0 32px rgba(196,150,58,.6); }
+  }
+  .hero-stats .stat-num { animation: fadeUp .7s .45s ease both, glow-num 3s 1.5s infinite; }
+
+  /* ─── GOLD DIVIDER GROW ─── */
+  .divider { transition: width .6s cubic-bezier(.22,1,.36,1); }
+  .divider.is-visible { width: 80px; }
 </style>
 </head>
 <body>
+<div id="scroll-bar"></div>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54V7GZNJ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/5511964957263?text=Olá%20Dr.%20Lucas%20Datti!%20Gostaria%20de%20agendar%20uma%20consulta." class="float-wa" target="_blank" rel="noopener" aria-label="Fale pelo WhatsApp">
+<a href="https://wa.me/5511999940779?text=Olá%20Dr.%20Lucas%20Datti!%20Gostaria%20de%20agendar%20uma%20consulta." class="float-wa" target="_blank" rel="noopener" aria-label="Fale pelo WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
   <span class="wa-text">Agendar Consulta</span>
 </a>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  📍 Atendendo São Paulo — Brooklin · Vila Olímpia · Moema · Santo André · São Bernardo &nbsp;|&nbsp;
-  <a href="tel:+5511964957263">☎ (11) 96495-7263</a>
+  📍 Atendendo São Paulo — Vila Mariana · Vila Olímpia · Moema · Santo André · São Bernardo &nbsp;|&nbsp;
+  <a href="tel:+5511999940779">☎ (11) 99994-0779</a>
   <span>|</span>
   <a href="mailto:contato@drlucasdatti.com.br">contato@drlucasdatti.com.br</a>
 </div>
@@ -641,12 +753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAVBAR -->
 <nav>
   <a href="#" class="nav-logo">
-    <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22 4C15 4 9 10 9 17c0 4 1.5 7 3.5 9.5C14.5 29 16 32 16 36c0 1.5 1.5 4 6 4s6-2.5 6-4c0-4 1.5-7 3.5-9.5C33.5 24 35 21 35 17c0-7-6-13-13-13z" stroke="#C4963A" stroke-width="1.8" fill="none"/>
-      <path d="M22 4C15 4 9 10 9 17c0 4 1.5 7 3.5 9.5" stroke="#C4963A" stroke-width="1.8" stroke-linecap="round"/>
-      <!-- star -->
-      <path d="M33 8 L33.6 9.8 L35.5 9.8 L34 11 L34.5 12.8 L33 11.7 L31.5 12.8 L32 11 L30.5 9.8 L32.4 9.8 Z" stroke="#C4963A" stroke-width="1" fill="none" stroke-linejoin="round"/>
-    </svg>
+    <i class="fa-solid fa-tooth logo-icon" aria-hidden="true"></i>
     <div class="logo-text">
       <strong>Dr. Lucas Datti</strong>
       <span>Odontologia Premium</span>
@@ -658,7 +765,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#tecnologia">Tecnologia</a></li>
     <li><a href="#depoimentos">Depoimentos</a></li>
     <li><a href="#localizacao">Localização</a></li>
-    <li><a href="https://wa.me/5511964957263?text=Gostaria%20de%20agendar%20uma%20consulta" class="nav-cta" target="_blank">Agendar Consulta</a></li>
+    <li><a href="https://wa.me/5511999940779?text=Gostaria%20de%20agendar%20uma%20consulta" class="nav-cta" target="_blank">Agendar Consulta</a></li>
   </ul>
   <div class="hamburger" onclick="this.classList.toggle('open')">
     <span></span><span></span><span></span>
@@ -667,12 +774,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-particles"></div>
   <div class="hero-content">
     <div class="hero-badge">Dentista Premium em São Paulo</div>
-    <h1>O Sorriso que <em>Transforma Vidas</em></h1>
-    <p class="hero-sub">Atendimento odontológico de excelência com tecnologia de ponta, precisão diagnóstica e um cuidado genuinamente personalizado para cada paciente.</p>
+    <h1>Tratamentos Odontológicos em <em>São Paulo</em> com Tecnologia e Precisão</h1>
+    <p class="hero-sub">Atendimento ágil, diagnóstico preciso e soluções modernas para cuidar da sua saúde bucal com conforto e segurança.</p>
     <div class="hero-actions">
-      <a href="https://wa.me/5511964957263?text=Olá!%20Quero%20agendar%20uma%20consulta%20com%20o%20Dr.%20Lucas%20Datti." class="btn-primary" target="_blank">
+      <a href="https://wa.me/5511999940779?text=Olá!%20Quero%20agendar%20uma%20consulta%20com%20o%20Dr.%20Lucas%20Datti." class="btn-primary" target="_blank">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
         Agendar pelo WhatsApp
       </a>
@@ -694,8 +802,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="hero-image">
-    <!-- Imagem do Dr. Lucas — substituir pela foto real -->
-    <img src="drlucas.jpeg" alt="Dr Lucas Datti" >
+    <img src="drlucas.jpeg" alt="Dr. Lucas Datti dentista especialista em implantes e estética dental em São Paulo" width="800" height="1000" loading="eager" fetchpriority="high">
     <div class="hero-decor">
       <strong>CRO-SP</strong>
       Especialista Certificado<br>CROSP · CFO
@@ -715,11 +822,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="loc-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 2.22 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
-    <a href="tel:+5511964957263" style="color:#fff;text-decoration:none;">(11) 96495-7263</a>
+    <a href="tel:+5511999940779" style="color:#fff;text-decoration:none;">(11) 99994-0779</a>
   </div>
   <div class="loc-item">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
-    <a href="https://wa.me/5511964957263" target="_blank" style="color:#fff;text-decoration:none;">WhatsApp Direto</a>
+    <a href="https://wa.me/5511999940779" target="_blank" style="color:#fff;text-decoration:none;">WhatsApp Direto</a>
   </div>
 </div>
 
@@ -728,10 +835,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="section-label">Especialidades</div>
   <div class="section-title">Tratamentos que <em>Transformam</em></div>
   <div class="divider"></div>
-  <p class="section-desc">Do diagnóstico ao resultado final, cada procedimento é realizado com precisão clínica, tecnologia de ponta e atenção exclusiva ao seu caso.</p>
+  <p class="section-desc">Dentista na Vila Mariana, São Paulo — do diagnóstico ao resultado final, cada procedimento é realizado com precisão clínica, tecnologia de ponta e atenção exclusiva ao seu caso.</p>
 
   <div class="services-grid">
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="1">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="26" cy="20" r="12"/>
         <path d="M26 8C20 8 15 13 15 20c0 4 2 7 4 9"/>
@@ -740,9 +847,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
       <h3>Implante Dental</h3>
       <p>Reabilitação oral completa com implantes de titânio de última geração. Resultado natural, durabilidade e função mastigatória plena restaurada com segurança.</p>
-      <a href="https://wa.me/5511964957263?text=Tenho%20interesse%20em%20Implante%20Dental" class="service-link" target="_blank">Saiba Mais →</a>
+      <a href="https://wa.me/5511999940779?text=Tenho%20interesse%20em%20Implante%20Dental" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="2">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M16 36 Q14 20 26 16 Q38 20 36 36"/>
         <path d="M20 28 Q26 24 32 28"/>
@@ -751,9 +858,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
       <h3>Ortodontia & Alinhadores</h3>
       <p>Aparelhos convencionais e alinhadores transparentes (Invisalign). Tratamentos personalizados para adultos e adolescentes com discrição e eficácia comprovada.</p>
-      <a href="https://wa.me/5511964957263?text=Quero%20saber%20sobre%20Ortodontia" class="service-link" target="_blank">Saiba Mais →</a>
+      <a href="https://wa.me/5511999940779?text=Quero%20saber%20sobre%20Ortodontia" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="3">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M26 10 L28 16 L34 16 L29 20 L31 26 L26 22 L21 26 L23 20 L18 16 L24 16 Z"/>
         <path d="M14 30 Q26 42 38 30"/>
@@ -761,9 +868,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
       <h3>Estética Dental</h3>
       <p>Facetas de porcelana, lentes de contato dental e resinas compostas para um sorriso harmonioso. Designs personalizados que respeitam sua anatomia facial.</p>
-      <a href="https://wa.me/5511964957263?text=Quero%20saber%20sobre%20Estética%20Dental" class="service-link" target="_blank">Saiba Mais →</a>
+      <a href="https://wa.me/5511999940779?text=Quero%20saber%20sobre%20Estética%20Dental" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="4">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M20 14 Q26 8 32 14 L36 24 Q38 32 26 38 Q14 32 16 24 Z"/>
         <path d="M22 22 L26 26 L32 18"/>
@@ -771,9 +878,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
       <h3>Clareamento Dental</h3>
       <p>Clareamento profissional de consultório e a laser com resultados em uma sessão. Protocolo seguro, sem sensibilidade e com clareamento de até 8 tons.</p>
-      <a href="https://wa.me/5511964957263?text=Quero%20saber%20sobre%20Clareamento" class="service-link" target="_blank">Saiba Mais →</a>
+      <a href="https://wa.me/5511999940779?text=Quero%20saber%20sobre%20Clareamento" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="5">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
         <rect x="12" y="18" width="28" height="20" rx="4"/>
         <path d="M20 18 L20 14 Q20 10 26 10 Q32 10 32 14 L32 18"/>
@@ -782,32 +889,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
       <h3>Prótese & Reabilitação</h3>
       <p>Próteses fixas, removíveis e sobre implante com altíssima precisão estética e funcional. Devolvemos mastigação, fonética e autoestima com naturalidade.</p>
-      <a href="https://wa.me/5511964957263?text=Quero%20saber%20sobre%20Prótese" class="service-link" target="_blank">Saiba Mais →</a>
+      <a href="https://wa.me/5511999940779?text=Quero%20saber%20sobre%20Prótese" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
-    <div class="service-card">
+    <div class="service-card" data-reveal data-delay="6">
       <svg class="service-icon" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M14 26 Q14 14 26 14 Q38 14 38 26"/>
-        <path d="M18 26 Q18 18 26 18 Q34 18 34 26"/>
-        <path d="M22 26 Q22 22 26 22 Q30 22 30 26"/>
-        <path d="M12 30 Q26 38 40 30"/>
+        <path d="M26 10 Q30 10 33 14 Q36 18 36 24 Q36 32 26 38 Q16 32 16 24 Q16 18 19 14 Q22 10 26 10Z"/>
+        <line x1="26" y1="18" x2="26" y2="34" stroke-linecap="round"/>
+        <line x1="20" y1="24" x2="32" y2="24" stroke-linecap="round"/>
       </svg>
-      <h3>Periodontia</h3>
-      <p>Tratamento de gengivite e periodontite com protocolos avançados. Saúde gengival é a base de um sorriso duradouro — cuidamos com atenção e precisão.</p>
-      <a href="https://wa.me/5511964957263?text=Quero%20saber%20sobre%20Periodontia" class="service-link" target="_blank">Saiba Mais →</a>
+      <h3>Tratamento de Canal</h3>
+      <p>Endodontia moderna sem dor em São Paulo. Equipamentos de ponta para diagnóstico preciso e tratamento seguro, preservando o dente natural com total conforto.</p>
+      <a href="https://wa.me/5511999940779?text=Quero%20saber%20sobre%20Tratamento%20de%20Canal" class="service-link" target="_blank">Saiba Mais →</a>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="sobre">
-  <div class="about-img-wrap">
-    <img src="drlucastratamento.jpeg" alt="Dr Lucas Datti" >
+  <div class="about-img-wrap" data-reveal="left">
+    <img src="drlucastratamento.jpeg" alt="Dr. Lucas Datti realizando tratamento odontológico na clínica em São Paulo" width="600" height="560" loading="lazy">
     <div class="about-badge">
       <strong>12+</strong>
       <span>Anos de Experiência</span>
     </div>
   </div>
-  <div>
+  <div data-reveal="right">
     <div class="section-label">Sobre o Dr. Lucas Datti</div>
     <div class="section-title">Excelência com <em>Empatia</em> e Precisão</div>
     <div class="divider"></div>
@@ -835,7 +941,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Certificado Internacional — Invisalign Provider
       </div>
     </div>
-    <a href="https://wa.me/5511964957263?text=Olá%20Dr.%20Lucas!%20Quero%20agendar%20minha%20consulta." class="btn-primary" style="margin-top:36px;display:inline-flex;" target="_blank">
+    <a href="https://wa.me/5511999940779?text=Olá%20Dr.%20Lucas!%20Quero%20agendar%20minha%20consulta." class="btn-primary" style="margin-top:36px;display:inline-flex;" target="_blank">
       Agendar Consulta →
     </a>
   </div>
@@ -849,33 +955,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="section-desc">Investimos continuamente nas tecnologias mais avançadas da odontologia mundial para oferecer diagnósticos precisos, tratamentos minimamente invasivos e resultados excepcionais.</p>
 
   <div class="tech-grid">
-    <div class="tech-item">
+    <div class="tech-item" data-reveal data-delay="1">
       <div class="tech-num">01</div>
-      <h4>Tomografia 3D Cone Beam</h4>
-      <p>Imagens tridimensionais de alta resolução para planejamento cirúrgico preciso em implantes e cirurgias bucomaxilofaciais.</p>
-    </div>
-    <div class="tech-item">
-      <div class="tech-num">02</div>
       <h4>Scanner Intraoral Digital</h4>
       <p>Moldagens digitais sem desconforto. Modelos precisos em minutos para próteses e alinhadores com ajuste perfeito.</p>
     </div>
-    <div class="tech-item">
-      <div class="tech-num">03</div>
+    <div class="tech-item" data-reveal data-delay="2">
+      <div class="tech-num">02</div>
       <h4>Laser Odontológico</h4>
       <p>Procedimentos de baixa e alta potência. Clareamento, cirurgias gengivais e desinfecção com mínimo desconforto e recuperação rápida.</p>
     </div>
-    <div class="tech-item">
-      <div class="tech-num">04</div>
-      <h4>Design Digital do Sorriso (DDS)</h4>
-      <p>Visualize seu resultado antes de começar. Planejamento estético digital para facetas, clareamento e reabilitações completas.</p>
-    </div>
-    <div class="tech-item">
-      <div class="tech-num">05</div>
+    <div class="tech-item" data-reveal data-delay="3">
+      <div class="tech-num">03</div>
       <h4>Implantes Imediatos</h4>
       <p>Protocolo de carga imediata — saindo do consultório com o dente provisório no mesmo dia da cirurgia de implante.</p>
     </div>
-    <div class="tech-item">
-      <div class="tech-num">06</div>
+    <div class="tech-item" data-reveal data-delay="4">
+      <div class="tech-num">04</div>
       <h4>Atendimento Humanizado</h4>
       <p>Ambiente acolhedor, sedação consciente disponível e toda a atenção que você merece do primeiro contato ao pós-tratamento.</p>
     </div>
@@ -891,7 +987,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="section-desc" style="margin:0 auto;text-align:center;">Mais de 3.000 pacientes transformados em São Paulo. Veja o que eles falam sobre a experiência com o Dr. Lucas Datti.</p>
   </div>
   <div class="testi-grid">
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="1">
       <div class="stars">★★★★★</div>
       <p>"Fiz meus implantes com o Dr. Lucas e o resultado foi simplesmente perfeito. Desde o primeiro atendimento me senti acolhida e segura. Hoje tenho o sorriso que sempre quis!"</p>
       <div class="testi-author">
@@ -899,7 +995,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><strong>Ana Paula Ferreira</strong><span>Brooklin, São Paulo</span></div>
       </div>
     </div>
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="2">
       <div class="stars">★★★★★</div>
       <p>"Fiz facetas de porcelana e clareamento. O Dr. Datti tem uma sensibilidade artística incrível — meu sorriso ficou extremamente natural e harmonioso. Recomendo demais!"</p>
       <div class="testi-author">
@@ -907,7 +1003,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><strong>Marcos Henrique</strong><span>Vila Olímpia, São Paulo</span></div>
       </div>
     </div>
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="3">
       <div class="stars">★★★★★</div>
       <p>"Tinha muito medo de dentista. O Dr. Lucas foi extremamente paciente e gentil. O ambiente é luxuoso e a experiência foi tranquila do início ao fim. Voltarei sempre!"</p>
       <div class="testi-author">
@@ -915,7 +1011,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><strong>Carla Mendes</strong><span>Moema, São Paulo</span></div>
       </div>
     </div>
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="4">
       <div class="stars">★★★★★</div>
       <p>"Tratamento ortodôntico com alinhadores invisíveis. Discreto, eficaz e o resultado em tempo recorde! Dr. Datti acompanhou cada etapa com muita atenção e profissionalismo."</p>
       <div class="testi-author">
@@ -923,7 +1019,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><strong>Ricardo Santos</strong><span>Santo André, SP</span></div>
       </div>
     </div>
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="5">
       <div class="stars">★★★★★</div>
       <p>"Vim de São Bernardo do Campo especialmente para me consultar com o Dr. Lucas após indicação. A estrutura da clínica é impecável e o resultado do implante superou minhas expectativas."</p>
       <div class="testi-author">
@@ -931,7 +1027,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div><strong>Fernanda Lima</strong><span>São Bernardo do Campo, SP</span></div>
       </div>
     </div>
-    <div class="testi-card">
+    <div class="testi-card" data-reveal data-delay="6">
       <div class="stars">★★★★★</div>
       <p>"O clareamento ficou incrível — 7 tons mais claro em uma sessão! Processo completamente indolor e o Dr. Datti explicou tudo com muita clareza. Profissional exemplar."</p>
       <div class="testi-author">
@@ -946,7 +1042,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="cta-section">
   <h2>Pronto para Transformar seu Sorriso?</h2>
   <p>Agende sua avaliação gratuita agora mesmo. Atendemos pacientes de toda a região de São Paulo — Brooklin, Vila Olímpia, Moema, Paraíso, Santo André, São Bernardo e mais.</p>
-  <a href="https://wa.me/5511964957263?text=Olá!%20Vi%20o%20site%20e%20quero%20agendar%20minha%20consulta%20de%20avaliação%20gratuita%20com%20o%20Dr.%20Lucas%20Datti." class="btn-wa" target="_blank">
+  <a href="https://wa.me/5511999940779?text=Olá!%20Vi%20o%20site%20e%20quero%20agendar%20minha%20consulta%20de%20avaliação%20gratuita%20com%20o%20Dr.%20Lucas%20Datti." class="btn-wa" target="_blank">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
     Agendar Avaliação Gratuita pelo WhatsApp
   </a>
@@ -970,7 +1066,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-8-6.5-8-13A8 8 0 0 1 20 8c0 6.5-8 13-8 13z"/><circle cx="12" cy="8" r="2"/></svg>
       <div>
         <strong>Endereço</strong>
-        <span>Av. Engenheiro Luís Carlos Berrini, 1748<br>Brooklin, São Paulo – SP, 04571-000</span>
+        <span>Connect Offices — Rua Vergueiro, 3558<br>Vila Mariana, São Paulo – SP, 04102-001</span>
       </div>
     </div>
     <div class="loc-detail">
@@ -984,12 +1080,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 2.22 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
       <div>
         <strong>Telefone & WhatsApp</strong>
-        <span><a href="tel:+5511964957263" style="color:rgba(255,255,255,.65);text-decoration:none;">(11) 96495-7263</a></span>
+        <span><a href="tel:+5511999940779" style="color:rgba(255,255,255,.65);text-decoration:none;">(11) 99994-0779</a></span>
       </div>
     </div>
 
     <div class="region-tags">
-      <span class="region-tag">Brooklin</span>
+      <span class="region-tag">Vila Mariana</span>
       <span class="region-tag">Vila Olímpia</span>
       <span class="region-tag">Moema</span>
       <span class="region-tag">Paraíso</span>
@@ -999,7 +1095,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="region-tag">Diadema</span>
     </div>
 
-    <a href="https://wa.me/5511964957263?text=Olá%20Dr.%20Lucas!%20Gostaria%20de%20agendar%20uma%20consulta." class="loc-wa-btn" target="_blank">
+    <a href="https://wa.me/5511999940779?text=Olá%20Dr.%20Lucas!%20Gostaria%20de%20agendar%20uma%20consulta." class="loc-wa-btn" target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
       Ir direto pelo WhatsApp
     </a>
@@ -1022,7 +1118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="https://youtube.com/@drlucasdatti" class="social-icon" target="_blank" rel="noopener" aria-label="YouTube">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="currentColor" stroke="none"/></svg>
     </a>
-    <a href="https://wa.me/5511964957263" class="social-icon" target="_blank" rel="noopener" aria-label="WhatsApp" style="border-color:#25D366;color:#25D366;">
+    <a href="https://wa.me/5511999940779" class="social-icon" target="_blank" rel="noopener" aria-label="WhatsApp" style="border-color:#25D366;color:#25D366;">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.1 1.51 5.824L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.369l-.36-.214-3.727.976.994-3.632-.235-.374A9.818 9.818 0 112 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
     </a>
   </div>
@@ -1034,10 +1130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="nav-logo" style="margin-bottom:6px;">
-        <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 4C15 4 9 10 9 17c0 4 1.5 7 3.5 9.5C14.5 29 16 32 16 36c0 1.5 1.5 4 6 4s6-2.5 6-4c0-4 1.5-7 3.5-9.5C33.5 24 35 21 35 17c0-7-6-13-13-13z" stroke="#C4963A" stroke-width="1.8" fill="none"/>
-          <path d="M33 8 L33.6 9.8 L35.5 9.8 L34 11 L34.5 12.8 L33 11.7 L31.5 12.8 L32 11 L30.5 9.8 L32.4 9.8 Z" stroke="#C4963A" stroke-width="1" fill="none"/>
-        </svg>
+        <i class="fa-solid fa-tooth logo-icon" aria-hidden="true"></i>
         <div class="logo-text">
           <strong>Dr. Lucas Datti</strong>
           <span style="color:var(--gold);">Odontologia Premium</span>
@@ -1053,7 +1146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#">Estética Dental</a></li>
         <li><a href="#">Clareamento</a></li>
         <li><a href="#">Prótese Dental</a></li>
-        <li><a href="#">Periodontia</a></li>
+        <li><a href="#">Tratamento de Canal</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1063,23 +1156,106 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#tecnologia">Tecnologia</a></li>
         <li><a href="#depoimentos">Depoimentos</a></li>
         <li><a href="#localizacao">Localização</a></li>
-        <li><a href="https://wa.me/5511964957263" target="_blank">Agendar Consulta</a></li>
+        <li><a href="https://wa.me/5511999940779" target="_blank">Agendar Consulta</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h5>Contato</h5>
       <ul>
-        <li><a href="tel:+5511964957263">📞 (11) 96495-7263</a></li>
-        <li><a href="https://wa.me/5511964957263" target="_blank">💬 WhatsApp</a></li>
+        <li><a href="tel:+5511999940779">📞 (11) 99994-0779</a></li>
+        <li><a href="https://wa.me/5511999940779" target="_blank">💬 WhatsApp</a></li>
         <li><a href="mailto:contato@drlucasdatti.com.br">✉ contato@drlucasdatti.com.br</a></li>
-        <li style="margin-top:10px;color:rgba(255,255,255,.35);font-size:12px;">Av. Eng. Luís Carlos Berrini, 1748<br>Brooklin — São Paulo, SP</li>
+        <li style="margin-top:10px;color:rgba(255,255,255,.35);font-size:12px;">Connect Offices — Rua Vergueiro, 3558<br>Vila Mariana — São Paulo, SP</li>
       </ul>
     </div>
   </div>
+  <div style="text-align:center;padding:14px 0;font-size:11.5px;color:rgba(255,255,255,.22);border-top:1px solid rgba(255,255,255,.05);margin-bottom:16px;line-height:1.6;">
+    Clínica odontológica localizada na Vila Mariana, São Paulo, próxima ao metrô Chácara Klabin e Vila Mariana. Atendemos pacientes de Brooklin, Moema, Vila Olímpia, Itaim Bibi, Santo André e São Bernardo do Campo.
+  </div>
   <div class="footer-bottom">
-    © 2025 Dr. Lucas Datti — Odontologia Premium. CRO-SP. Todos os direitos reservados. &nbsp;|&nbsp; Brooklin, São Paulo – SP
+    © 2025 Dr. Lucas Datti — Odontologia Premium. CRO-SP. Todos os direitos reservados. &nbsp;|&nbsp; Vila Mariana, São Paulo – SP
+    <br><span style="font-size:11px;opacity:.35;margin-top:6px;display:inline-block;">Desenvolvido por <a href="#" style="color:rgba(255,255,255,.45);text-decoration:none;border-bottom:1px solid rgba(196,150,58,.25);padding-bottom:1px;" title="Inline Digital — Marketing Odontológico">Inline Digital &amp; Marketing Odontológico</a></span>
   </div>
 </footer>
+
+<script defer>
+// ── SCROLL PROGRESS ──
+const _bar = document.getElementById('scroll-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  _bar.style.width = pct + '%';
+}, { passive: true });
+
+// ── SCROLL REVEAL ──
+const _revEls = document.querySelectorAll('[data-reveal]');
+const _revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); _revObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+_revEls.forEach(el => _revObs.observe(el));
+
+// ── COUNTER ANIMATION ──
+function _animCount(el) {
+  const raw = el.textContent.trim();
+  const hasK = raw.includes('K');
+  const hasStar = raw.includes('★');
+  const hasPlus = raw.startsWith('+');
+  const isDec = raw.includes('.');
+  const numStr = raw.replace(/[^0-9.]/g, '');
+  const target = parseFloat(numStr) * (hasK ? 1000 : 1);
+  let t0 = null;
+  const dur = 1800;
+  const tick = ts => {
+    if (!t0) t0 = ts;
+    const p = Math.min((ts - t0) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const cur = ease * target;
+    if (hasK) el.textContent = (hasPlus ? '+' : '') + (cur >= 1000 ? Math.floor(cur / 1000) + 'K' : Math.round(cur));
+    else if (isDec) el.textContent = (hasPlus ? '+' : '') + cur.toFixed(1) + (hasStar ? '★' : '');
+    else el.textContent = (hasPlus ? '+' : '') + Math.round(cur) + (hasStar ? '★' : '');
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = raw;
+  };
+  requestAnimationFrame(tick);
+}
+const _statEls = document.querySelectorAll('.stat-num');
+const _statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { _animCount(e.target); _statObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+_statEls.forEach(el => _statObs.observe(el));
+
+// ── FLOATING PARTICLES ──
+const _pc = document.querySelector('.hero-particles');
+if (_pc) {
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'hpart';
+    const sz = 2 + Math.random() * 3;
+    const startY = 20 + Math.random() * 80; // inicia em diferentes alturas
+    p.style.cssText = `left:${5+Math.random()*90}%;bottom:${startY}%;width:${sz}px;height:${sz}px;--d:${6+Math.random()*8}s;--dl:${Math.random()*4}s;--x:${(Math.random()-.5)*60}px;`;
+    _pc.appendChild(p);
+  }
+}
+
+// ── MOBILE MENU ──
+const _ham = document.querySelector('.hamburger');
+const _nav = document.querySelector('.nav-links');
+if (_ham && _nav) {
+  _ham.addEventListener('click', () => {
+    const open = _ham.classList.toggle('open');
+    if (open) {
+      _nav.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(254,252,248,.98);backdrop-filter:blur(14px);padding:24px 5vw;gap:18px;border-bottom:1px solid rgba(196,150,58,.2);z-index:998;animation:fadeUp .3s ease both;';
+    } else {
+      _nav.style.cssText = '';
+    }
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    _ham.classList.remove('open');
+    _nav.style.cssText = '';
+  }));
+}
+</script>
 
 <!-- JSON-LD SEO -->
 <script type="application/ld+json">
@@ -1089,16 +1265,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   "name": "Dr. Lucas Datti — Odontologia Premium",
   "description": "Especialista em Implantes, Estética Dental e Ortodontia em São Paulo. Atendimento premium com tecnologia de ponta.",
   "url": "https://drlucasdatti.com.br",
-  "telephone": "+55-11-96495-7263",
+  "telephone": "+55-11-99994-0779",
   "email": "contato@drlucasdatti.com.br",
   "image": "https://drlucasdatti.com.br/foto-dr-lucas.jpg",
   "priceRange": "$$$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Av. Engenheiro Luís Carlos Berrini, 1748",
+    "streetAddress": "Rua Vergueiro, 3558",
     "addressLocality": "São Paulo",
     "addressRegion": "SP",
-    "postalCode": "04571-000",
+    "postalCode": "04102-001",
     "addressCountry": "BR"
   },
   "geo": {
@@ -1130,7 +1306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     "https://facebook.com/drlucasdatti",
     "https://youtube.com/@drlucasdatti"
   ],
-  "medicalSpecialty": ["Implantodontia","Estética Dental","Ortodontia","Periodontia","Prótese Dental"]
+  "medicalSpecialty": ["Implantodontia","Estética Dental","Ortodontia","Endodontia","Prótese Dental","Clareamento Dental"]
 }
 </script>
 
