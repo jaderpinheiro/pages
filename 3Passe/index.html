@@ -716,7 +716,12 @@
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
   }
-  .ig-post:hover { transform: scale(1.02); border-color: var(--border-red); }
+  .ig-post:hover { transform: scale(1.02); }
+  @keyframes igPulse {
+    0%,100% { box-shadow: 0 4px 18px rgba(0,0,0,0.25); }
+    50% { box-shadow: 0 0 0 2px rgba(220,38,38,0.55), 0 6px 28px rgba(220,38,38,0.22); }
+  }
+  .ig-post.ig-lit { animation: igPulse 1.4s ease-in-out; }
   .ig-post-icon { font-size: 48px; opacity: 0.15; }
   .ig-post-overlay {
     position: absolute; inset: 0;
@@ -885,18 +890,18 @@
 
   /* LOGO IMAGE */
   .nav-logo-img {
-    height: 46px;
+    height: 51px;
     width: auto;
     object-fit: contain;
     display: block;
     transition: transform 0.35s, opacity 0.35s;
     filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
   }
-  nav.scrolled .nav-logo-img { height: 38px; }
+  nav.scrolled .nav-logo-img { height: 42px; }
   .nav-logo:hover .nav-logo-img { transform: scale(1.06); opacity: 0.92; }
 
   .footer-logo-img {
-    height: 56px;
+    height: 73px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -1716,7 +1721,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo-wrap">
-        <img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="footer-logo-img">
+        <a href="index.html"><img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="footer-logo-img"></a>
       </div>
       <p>A ponte estratégica entre o franqueado que deseja repassar sua unidade e você que objetiva adquirir um negócio ativo e com potencial.</p>
       <div class="footer-social">
@@ -1848,6 +1853,27 @@
     }
     // Run after initial page render
     setTimeout(runHeroCounters,700);
+  })();
+
+  // Animação sonic: borda pulsando aleatoriamente nos cards do Instagram
+  (function(){
+    function initIgPulse(){
+      var posts = document.querySelectorAll('.ig-grid .ig-post');
+      if(!posts.length) return;
+      var prev = -1;
+      function pulse(){
+        var next;
+        do { next = Math.floor(Math.random() * posts.length); } while (next === prev && posts.length > 1);
+        posts.forEach(function(p){ p.classList.remove('ig-lit'); void p.offsetWidth; });
+        posts[next].classList.add('ig-lit');
+        prev = next;
+      }
+      pulse();
+      setInterval(pulse, 1800);
+    }
+    document.readyState==='loading'
+      ? document.addEventListener('DOMContentLoaded', initIgPulse)
+      : initIgPulse();
   })();
 
   // Particle sparkle on scroll (stat-num in solution section)
