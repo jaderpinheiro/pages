@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanner da Franquia – 3PASSE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1c29; --bg2: #0a1520; --bg3: #112233;
+    --red: #ad293e; --red-light: #d4394f; --red-dark: #8a1f30;
+    --white: #ffffff; --gray: #8a9bb0; --gray2: #c8d4e0;
+    --gold: #c9a84c; --gold2: #e8c96a;
+    --glass: rgba(255,255,255,0.04); --glass2: rgba(173,41,62,0.12);
+    --border: rgba(255,255,255,0.08); --border-red: rgba(173,41,62,0.4);
+    --green: #4caf50; --green-bg: rgba(76,175,80,0.12);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
+  body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+  .cursor{width:12px;height:12px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.3s,height 0.3s;}
+  .cursor-ring{width:36px;height:36px;border:1.5px solid rgba(173,41,62,0.6);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.15s ease-out;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.4;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(14,28,41,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all 0.4s;}
+  nav.scrolled{height:60px;background:rgba(10,21,32,0.97);border-bottom-color:var(--border-red);}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .logo-mark{width:40px;height:40px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;clip-path:polygon(10% 0%,90% 0%,100% 10%,100% 90%,90% 100%,10% 100%,0% 90%,0% 10%);transition:transform 0.3s;}
+  .nav-logo:hover .logo-mark{transform:rotate(15deg);}
+  .logo-text{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);}
+  .logo-sub{display:block;font-size:8px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
+  .nav-logo-img{height:46px;width:auto;object-fit:contain;display:block;transition:transform 0.35s,opacity 0.35s;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));}
+  nav.scrolled .nav-logo-img{height:38px;}
+  .nav-logo:hover .nav-logo-img{transform:scale(1.06);opacity:0.92;}
+  .nav-back{display:flex;align-items:center;gap:8px;color:var(--gray2);text-decoration:none;font-size:13px;letter-spacing:1px;transition:color 0.3s;padding:8px 16px;border:1px solid var(--border);border-radius:4px;}
+  .nav-back:hover{color:var(--white);border-color:var(--border-red);}
+  .nav-cta{display:flex;align-items:center;gap:8px;background:var(--red);color:var(--white);padding:10px 20px;font-size:13px;font-weight:600;text-decoration:none;transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));}
+  .nav-cta:hover{background:var(--red-light);transform:translateY(-1px);}
+
+  /* HERO SCANNER */
+  .scanner-hero{padding:120px 5vw 60px;position:relative;overflow:hidden;}
+  .scanner-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(173,41,62,0.1),transparent 60%),linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+  .scanner-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(173,41,62,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(173,41,62,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at top,black 20%,transparent 70%);}
+  .scanner-hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;}
+  .breadcrumb{display:flex;align-items:center;gap:10px;margin-bottom:28px;font-size:13px;color:var(--gray);}
+  .breadcrumb a{color:var(--gray);text-decoration:none;transition:color 0.3s;}
+  .breadcrumb a:hover{color:var(--red-light);}
+  .breadcrumb span{color:var(--border);}
+
+  .scanner-top{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:flex-start;}
+  .scanner-badge-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+  .s-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;font-weight:600;}
+  .s-badge.hot{background:rgba(173,41,62,0.2);border:1px solid rgba(173,41,62,0.5);color:var(--red-light);}
+  .s-badge.cat{background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--gray2);}
+  .s-badge.green{background:var(--green-bg);border:1px solid rgba(76,175,80,0.4);color:var(--green);}
+  .scanner-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:900;line-height:1.1;margin-bottom:16px;}
+  .scanner-title em{color:var(--red);font-style:italic;}
+  .scanner-subtitle{font-size:1.1rem;color:var(--gray2);line-height:1.7;max-width:600px;margin-bottom:32px;font-weight:300;}
+  .scanner-quick-stats{display:flex;gap:32px;flex-wrap:wrap;}
+  .qs{display:flex;flex-direction:column;}
+  .qs-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+  .qs-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--white);line-height:1;}
+  .qs-val sup{font-size:16px;color:var(--red);font-family:'DM Sans',sans-serif;}
+
+  .scanner-actions{display:flex;flex-direction:column;gap:12px;min-width:240px;}
+  .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:var(--white);padding:16px 28px;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(173,41,62,0.5);}
+  .btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:var(--white);padding:14px 28px;font-size:14px;font-weight:500;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all 0.3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+  .btn-secondary:hover{border-color:var(--red);color:var(--red-light);}
+
+  /* SCANNER DASHBOARD */
+  .scanner-body{max-width:1200px;margin:0 auto;padding:0 5vw 100px;}
+
+  .scanner-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;margin-top:48px;}
+
+  /* TABS */
+  .scanner-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:40px;overflow-x:auto;}
+  .s-tab{padding:14px 24px;font-size:13px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);border-bottom:2px solid transparent;cursor:pointer;transition:all 0.3s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;}
+  .s-tab.active{color:var(--red-light);border-bottom-color:var(--red);}
+  .s-tab:hover{color:var(--white);}
+
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
+
+  /* OVERVIEW SECTION */
+  .scanner-section{margin-bottom:48px;}
+  .scanner-section-title{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+  .scanner-section-title::before{content:'';width:24px;height:2px;background:var(--red);}
+
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .metric-big{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:24px 20px;position:relative;overflow:hidden;transition:all 0.3s;}
+  .metric-big::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+  .metric-big:hover{border-color:var(--border-red);transform:translateY(-3px);}
+  .metric-big:hover::after{transform:scaleX(1);}
+  .mb-icon{font-size:24px;margin-bottom:12px;}
+  .mb-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;}
+  .mb-value{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:var(--white);}
+  .mb-value sup{font-size:18px;color:var(--red);font-family:'DM Sans',sans-serif;}
+  .mb-note{font-size:11px;color:var(--gray);margin-top:6px;}
+  .mb-trend{font-size:11px;color:var(--green);margin-top:4px;display:flex;align-items:center;gap:4px;}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .info-block{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all 0.3s;}
+  .info-block:hover{border-color:var(--border-red);background:var(--glass2);}
+  .ib-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+  .ib-value{font-size:15px;font-weight:600;line-height:1.4;}
+  .ib-value.green{color:var(--green);}
+  .ib-value.red{color:var(--red-light);}
+  .ib-value.gold{color:var(--gold2);}
+
+  /* RADAR CHART VISUAL */
+  .radar-wrap{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;}
+  .radar-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:20px;}
+  .radar-svg{width:100%;max-width:300px;margin:0 auto;display:block;}
+  .radar-legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;}
+  .rl-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--gray2);}
+  .rl-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* SCORE BARS */
+  .score-bar-wrap{margin-bottom:16px;}
+  .score-bar-header{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;}
+  .score-bar-track{height:6px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden;}
+  .score-bar-fill{height:100%;border-radius:100px;transition:width 1.5s cubic-bezier(0.25,0.46,0.45,0.94);}
+  .score-bar-fill.red{background:linear-gradient(90deg,var(--red-dark),var(--red));}
+  .score-bar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+  .score-bar-fill.green{background:linear-gradient(90deg,#388e3c,var(--green));}
+
+  /* CHECKLIST */
+  .checklist{display:flex;flex-direction:column;gap:12px;}
+  .check-item{display:flex;align-items:flex-start;gap:16px;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:8px;transition:all 0.3s;}
+  .check-item:hover{border-color:var(--border-red);}
+  .check-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+  .check-icon.ok{background:var(--green-bg);border:1px solid rgba(76,175,80,0.4);}
+  .check-icon.warn{background:rgba(255,193,7,0.12);border:1px solid rgba(255,193,7,0.4);}
+  .check-text h5{font-size:14px;font-weight:600;margin-bottom:3px;}
+  .check-text p{font-size:12px;color:var(--gray);line-height:1.6;}
+
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),transparent);}
+  .tl-item{position:relative;padding-bottom:28px;}
+  .tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;background:var(--red);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 12px rgba(173,41,62,0.5);}
+  .tl-date{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+  .tl-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+  .tl-desc{font-size:12px;color:var(--gray);line-height:1.6;}
+
+  /* SIDEBAR */
+  .scanner-sidebar{position:sticky;top:100px;height:fit-content;display:flex;flex-direction:column;gap:20px;}
+  .sidebar-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all 0.3s;}
+  .sidebar-card:hover{border-color:var(--border-red);}
+  .sidebar-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:8px;}
+  .sidebar-card p{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:20px;}
+  .sidebar-divider{height:1px;background:var(--border);margin:16px 0;}
+  .sidebar-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .si-label{font-size:12px;color:var(--gray);}
+  .si-val{font-size:13px;font-weight:600;}
+  .urgency-bar{background:rgba(173,41,62,0.1);border:1px solid rgba(173,41,62,0.3);border-radius:8px;padding:14px;text-align:center;margin-top:16px;}
+  .urgency-bar p{font-size:12px;color:var(--red-light);font-weight:600;}
+  .urgency-bar span{font-size:11px;color:var(--gray);}
+
+  .score-card{text-align:center;}
+  .score-circle{width:100px;height:100px;margin:0 auto 16px;position:relative;}
+  .score-circle svg{transform:rotate(-90deg);}
+  .score-number{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+  .score-number .num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--white);line-height:1;}
+  .score-number .of{font-size:12px;color:var(--gray);}
+  .score-label{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);margin-bottom:4px;}
+  .score-sub{font-size:12px;color:var(--gray);line-height:1.5;}
+
+  /* SIMILAR */
+  .similar-card{display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--white);transition:all 0.3s;margin-bottom:12px;}
+  .similar-card:hover{border-color:var(--border-red);transform:translateX(4px);}
+  .similar-icon{width:44px;height:44px;background:rgba(173,41,62,0.12);border:1px solid rgba(173,41,62,0.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .similar-info h5{font-size:13px;font-weight:700;margin-bottom:3px;}
+  .similar-info p{font-size:11px;color:var(--gray);}
+  .similar-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red-light);}
+
+  /* WHATSAPP FLOAT */
+  .wa-float{position:fixed;bottom:32px;right:32px;z-index:400;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,0.4);transition:all 0.3s;animation:waPulse 3s ease-in-out infinite;}
+  .wa-float:hover{transform:scale(1.1);}
+  @keyframes waPulse{0%,100%{box-shadow:0 8px 30px rgba(37,211,102,0.4),0 0 0 0 rgba(37,211,102,0.3);}50%{box-shadow:0 8px 30px rgba(37,211,102,0.4),0 0 0 16px rgba(37,211,102,0);}}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s,transform 0.6s;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* FOOTER */
+  footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 5vw 30px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:48px;}
+  .footer-brand .logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;max-width:280px;margin-bottom:20px;}
+  .footer-social{display:flex;gap:12px;}
+  .footer-social a{width:40px;height:40px;background:var(--glass);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:16px;text-decoration:none;transition:all 0.3s;}
+  .footer-social a:hover{background:var(--red);border-color:var(--red);color:var(--white);transform:translateY(-2px);}
+  .footer-col h4{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--white);font-weight:700;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .footer-col a{display:block;font-size:13px;color:var(--gray);text-decoration:none;margin-bottom:10px;transition:color 0.3s;}
+  .footer-col a:hover{color:var(--red-light);}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px;}
+  .footer-bottom p{font-size:12px;color:var(--gray);}
+  .footer-bottom .links{display:flex;gap:24px;}
+  .footer-bottom .links a{font-size:12px;color:var(--gray);text-decoration:none;}
+  .footer-bottom .links a:hover{color:var(--white);}
+  .footer-logo-img{height:56px;width:auto;object-fit:contain;display:block;margin-bottom:16px;filter:drop-shadow(0 2px 10px rgba(0,0,0,0.4));}
+
+  @media(max-width:1200px){
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  }
+  @media(max-width:1100px){.scanner-layout{grid-template-columns:1fr;}}
+  @media(max-width:768px){
+    nav{padding:0 20px;}
+    .scanner-hero,.scanner-body{padding-left:20px;padding-right:20px;}
+    .scanner-top{grid-template-columns:1fr;}
+    .scanner-actions{flex-direction:row;flex-wrap:wrap;}
+    .metrics-grid{grid-template-columns:1fr 1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    body{cursor:auto;}
+    .cursor,.cursor-ring{display:none;}
+    .footer-grid{grid-template-columns:1fr;gap:28px;}
+    .footer-bottom{flex-direction:column;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="nav-logo-img">
+  </a>
+  <a href="index.html#oportunidades" class="nav-back">
+    ← Voltar às Oportunidades
+  </a>
+  <a href="https://wa.me/5562996345086" target="_blank" class="nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Tenho Interesse
+  </a>
+</nav>
+
+<!-- HERO SCANNER -->
+<section class="scanner-hero">
+  <div class="scanner-hero-bg"></div>
+  <div class="scanner-hero-grid"></div>
+  <div class="scanner-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">3PASSE</a>
+      <span>/</span>
+      <a href="index.html#oportunidades">Oportunidades</a>
+      <span>/</span>
+      <span id="breadcrumb-name">Scanner da Franquia</span>
+    </div>
+    <div class="scanner-top">
+      <div>
+        <div class="scanner-badge-row">
+          <span class="s-badge hot">🔥 Alta Demanda</span>
+          <span class="s-badge cat" id="hero-cat">Alimentação</span>
+          <span class="s-badge green">✓ Números Verificados</span>
+        </div>
+        <h1 class="scanner-title" id="hero-title">Rede Fast Food Premium – <em>Goiânia Sul</em></h1>
+        <p class="scanner-subtitle" id="hero-sub">Unidade consolidada em shopping de grande fluxo, 3 anos de operação sólida, equipe completa e treinada, aguardando novo proprietário.</p>
+        <div class="scanner-quick-stats">
+          <div class="qs"><span class="qs-label">Investimento</span><span class="qs-val" id="qs-inv"><sup>R$</sup>320k</span></div>
+          <div class="qs"><span class="qs-label">Fat. Mensal</span><span class="qs-val" id="qs-fat"><sup>R$</sup>85k</span></div>
+          <div class="qs"><span class="qs-label">Lucro Líq.</span><span class="qs-val" id="qs-lucro">22<sup>%</sup></span></div>
+          <div class="qs"><span class="qs-label">Payback</span><span class="qs-val" id="qs-pay">18<sup>mo</sup></span></div>
+        </div>
+      </div>
+      <div class="scanner-actions">
+        <a href="https://wa.me/5562996345086?text=Olá! Tenho interesse na franquia do scanner. Gostaria de saber mais detalhes e agendar uma reunião." target="_blank" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Quero Esta Franquia
+        </a>
+        <a href="index.html#oportunidades" class="btn-secondary">
+          Ver Outras Opções
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCANNER BODY -->
+<div class="scanner-body">
+  <div class="scanner-layout">
+    <!-- MAIN CONTENT -->
+    <div>
+      <!-- TABS -->
+      <div class="scanner-tabs">
+        <button class="s-tab active" onclick="switchTab('overview',this)">Visão Geral</button>
+        <button class="s-tab" onclick="switchTab('financeiro',this)">Financeiro</button>
+        <button class="s-tab" onclick="switchTab('operacional',this)">Operacional</button>
+        <button class="s-tab" onclick="switchTab('due-diligence',this)">Due Diligence</button>
+        <button class="s-tab" onclick="switchTab('oportunidade',this)">A Oportunidade</button>
+      </div>
+
+      <!-- OVERVIEW TAB -->
+      <div class="tab-content active" id="tab-overview">
+        <!-- KEY METRICS -->
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Métricas Principais</div>
+          <div class="metrics-grid">
+            <div class="metric-big">
+              <div class="mb-icon">💰</div>
+              <div class="mb-label">Faturamento Mensal Médio</div>
+              <div class="mb-value"><sup>R$</sup>85<sup>k</sup></div>
+              <div class="mb-note">Últimos 12 meses</div>
+              <div class="mb-trend">▲ +8% vs ano anterior</div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">📈</div>
+              <div class="mb-label">Lucro Operacional Líquido</div>
+              <div class="mb-value">22<sup>%</sup></div>
+              <div class="mb-note">Margem média verificada</div>
+              <div class="mb-trend">▲ Acima da média da rede</div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">⏱️</div>
+              <div class="mb-label">Payback Estimado</div>
+              <div class="mb-value">18<sup>mo</sup></div>
+              <div class="mb-note">Baseado no faturamento atual</div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">🏆</div>
+              <div class="mb-label">Tempo de Operação</div>
+              <div class="mb-value">3<sup>+</sup></div>
+              <div class="mb-note">Anos em operação contínua</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RADAR SCORES -->
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Score de Avaliação 3PASSE</div>
+          <div class="radar-wrap">
+            <div class="radar-title">Índice de Atratividade da Unidade</div>
+            <svg class="radar-svg" viewBox="0 0 300 280">
+              <defs>
+                <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ad293e" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.3"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid -->
+              <polygon points="150,40 230,90 230,190 150,240 70,190 70,90" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <polygon points="150,70 210,105 210,175 150,210 90,175 90,105" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <polygon points="150,100 190,120 190,160 150,180 110,160 110,120" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <!-- Lines -->
+              <line x1="150" y1="40" x2="150" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <line x1="150" y1="140" x2="230" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <line x1="150" y1="140" x2="230" y2="190" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <line x1="150" y1="140" x2="150" y2="240" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <line x1="150" y1="140" x2="70" y2="190" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <line x1="150" y1="140" x2="70" y2="90" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+              <!-- Data polygon -->
+              <polygon points="150,55 220,98 218,178 150,226 82,182 84,96" fill="url(#g1)" stroke="#ad293e" stroke-width="2"/>
+              <!-- Dots -->
+              <circle cx="150" cy="55" r="5" fill="#ad293e"/>
+              <circle cx="220" cy="98" r="5" fill="#ad293e"/>
+              <circle cx="218" cy="178" r="5" fill="#ad293e"/>
+              <circle cx="150" cy="226" r="5" fill="#ad293e"/>
+              <circle cx="82" cy="182" r="5" fill="#ad293e"/>
+              <circle cx="84" cy="96" r="5" fill="#ad293e"/>
+              <!-- Labels -->
+              <text x="150" y="32" text-anchor="middle" fill="#c8d4e0" font-size="10" font-family="DM Sans">Rentabilidade</text>
+              <text x="244" y="94" text-anchor="start" fill="#c8d4e0" font-size="10" font-family="DM Sans">Localização</text>
+              <text x="244" y="194" text-anchor="start" fill="#c8d4e0" font-size="10" font-family="DM Sans">Equipe</text>
+              <text x="150" y="256" text-anchor="middle" fill="#c8d4e0" font-size="10" font-family="DM Sans">Faturamento</text>
+              <text x="56" y="194" text-anchor="end" fill="#c8d4e0" font-size="10" font-family="DM Sans">Histórico</text>
+              <text x="56" y="94" text-anchor="end" fill="#c8d4e0" font-size="10" font-family="DM Sans">Marca</text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+              <div class="score-bar-wrap">
+                <div class="score-bar-header"><span>Rentabilidade</span><span style="color:var(--red-light)">92/100</span></div>
+                <div class="score-bar-track"><div class="score-bar-fill red" style="width:0%" data-width="92%"></div></div>
+              </div>
+              <div class="score-bar-wrap">
+                <div class="score-bar-header"><span>Localização & Fluxo</span><span style="color:var(--gold2)">88/100</span></div>
+                <div class="score-bar-track"><div class="score-bar-fill gold" style="width:0%" data-width="88%"></div></div>
+              </div>
+              <div class="score-bar-wrap">
+                <div class="score-bar-header"><span>Histórico de Operação</span><span style="color:var(--green)">95/100</span></div>
+                <div class="score-bar-track"><div class="score-bar-fill green" style="width:0%" data-width="95%"></div></div>
+              </div>
+              <div class="score-bar-wrap">
+                <div class="score-bar-header"><span>Solidez da Marca</span><span style="color:var(--red-light)">85/100</span></div>
+                <div class="score-bar-track"><div class="score-bar-fill red" style="width:0%" data-width="85%"></div></div>
+              </div>
+              <div class="score-bar-wrap">
+                <div class="score-bar-header"><span>Equipe & Processos</span><span style="color:var(--gold2)">90/100</span></div>
+                <div class="score-bar-track"><div class="score-bar-fill gold" style="width:0%" data-width="90%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFO GRID -->
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Informações da Unidade</div>
+          <div class="info-grid">
+            <div class="info-block">
+              <div class="ib-label">Localização</div>
+              <div class="ib-value">Shopping Sul – Goiânia, GO</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Setor do Negócio</div>
+              <div class="ib-value">Alimentação – Fast Food Premium</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Área Ocupada</div>
+              <div class="ib-value">68m² + área de preparo</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Colaboradores Ativos</div>
+              <div class="ib-value">7 funcionários treinados</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Motivo do Repasse</div>
+              <div class="ib-value gold">Sucessão familiar</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Status da Operação</div>
+              <div class="ib-value green">✓ 100% Ativa</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Contrato de Locação</div>
+              <div class="ib-value green">Vigente até 2027</div>
+            </div>
+            <div class="info-block">
+              <div class="ib-label">Aprovação Franqueadora</div>
+              <div class="ib-value green">✓ Pré-aprovado para repasse</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCEIRO TAB -->
+      <div class="tab-content" id="tab-financeiro">
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Análise Financeira Detalhada</div>
+          <div class="metrics-grid">
+            <div class="metric-big">
+              <div class="mb-icon">📊</div>
+              <div class="mb-label">Faturamento Bruto Mensal</div>
+              <div class="mb-value"><sup>R$</sup>85<sup>k</sup></div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">💼</div>
+              <div class="mb-label">Despesas Operacionais</div>
+              <div class="mb-value"><sup>R$</sup>52<sup>k</sup></div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">✅</div>
+              <div class="mb-label">Lucro Líquido Mensal</div>
+              <div class="mb-value"><sup>R$</sup>18,7<sup>k</sup></div>
+              <div class="mb-trend">▲ Verificado 12 meses</div>
+            </div>
+            <div class="metric-big">
+              <div class="mb-icon">🎯</div>
+              <div class="mb-label">ROI Anual</div>
+              <div class="mb-value">70<sup>%</sup></div>
+            </div>
+          </div>
+        </div>
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Composição de Despesas</div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="score-bar-wrap">
+              <div class="score-bar-header"><span>Custo de Produtos (CMV)</span><span style="color:var(--gray2)">R$ 28.900 – 34%</span></div>
+              <div class="score-bar-track"><div class="score-bar-fill red" style="width:0%" data-width="34%"></div></div>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar-header"><span>Folha de Pagamento</span><span style="color:var(--gray2)">R$ 12.750 – 15%</span></div>
+              <div class="score-bar-track"><div class="score-bar-fill gold" style="width:0%" data-width="15%"></div></div>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar-header"><span>Royalties + Marketing</span><span style="color:var(--gray2)">R$ 6.800 – 8%</span></div>
+              <div class="score-bar-track"><div class="score-bar-fill green" style="width:0%" data-width="8%"></div></div>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar-header"><span>Aluguel</span><span style="color:var(--gray2)">R$ 8.500 – 10%</span></div>
+              <div class="score-bar-track"><div class="score-bar-fill red" style="width:0%" data-width="10%"></div></div>
+            </div>
+            <div class="score-bar-wrap">
+              <div class="score-bar-header"><span>Outros (energia, insumos, etc.)</span><span style="color:var(--gray2)">R$ 9.350 – 11%</span></div>
+              <div class="score-bar-track"><div class="score-bar-fill gold" style="width:0%" data-width="11%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Histórico de Faturamento</div>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2022 – Média</div><div class="tl-title">R$ 72.000/mês</div><div class="tl-desc">Período de consolidação pós-abertura, crescimento consistente mês a mês.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2023 – Média</div><div class="tl-title">R$ 79.500/mês</div><div class="tl-desc">Crescimento de 10,4% em relação ao ano anterior. Operação em plena maturidade.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2024 – Média</div><div class="tl-title">R$ 85.000/mês</div><div class="tl-desc">Crescimento adicional de 6,9%. Recordes mensais em novembro e dezembro.</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2025 – Projeção</div><div class="tl-title">R$ 91.000+/mês</div><div class="tl-desc">Projeção conservadora baseada na tendência de crescimento verificada.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPERACIONAL TAB -->
+      <div class="tab-content" id="tab-operacional">
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Estrutura Operacional</div>
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-icon ok">✓</div>
+              <div class="check-text"><h5>Equipe completa e treinada</h5><p>7 colaboradores com treinamentos atualizados conforme padrão da franqueadora. Inclui supervisor de operações com 2 anos na unidade.</p></div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon ok">✓</div>
+              <div class="check-text"><h5>Processos e manuais atualizados</h5><p>Todos os manuais operacionais em dia com a versão mais atual da franqueadora. Processos documentados e aplicados no dia a dia.</p></div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon ok">✓</div>
+              <div class="check-text"><h5>Fornecedores homologados e ativos</h5><p>Toda a cadeia de fornecimento homologada pela rede. Contratos vigentes sem pendências.</p></div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon ok">✓</div>
+              <div class="check-text"><h5>Licenças e alvará em dia</h5><p>Vigilância sanitária, bombeiros e prefeitura com documentação regulatória atualizada e sem pendências.</p></div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon ok">✓</div>
+              <div class="check-text"><h5>Equipamentos conservados</h5><p>Laudo técnico de equipamentos realizado em 2024. Todos os itens em perfeito funcionamento, sem necessidade de troca imediata.</p></div>
+            </div>
+            <div class="check-item">
+              <div class="check-icon warn">⚠</div>
+              <div class="check-text"><h5>Renovação contratual em 2027</h5><p>Contrato de locação com vencimento em março/2027. Negociação de renovação prevista e com histórico favorável com o shopping.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DUE DILIGENCE TAB -->
+      <div class="tab-content" id="tab-due-diligence">
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Checklist de Due Diligence 3PASSE</div>
+          <p style="color:var(--gray);font-size:14px;margin-bottom:24px;line-height:1.7;">A 3PASSE realiza uma análise rigorosa antes de apresentar qualquer oportunidade. Você compra com clareza e segurança total.</p>
+          <div class="checklist">
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Documentação fiscal verificada</h5><p>Notas fiscais, declarações e balanços dos últimos 36 meses analisados por nossa equipe.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Extratos bancários auditados</h5><p>Movimento bancário dos últimos 12 meses cruzado com o faturamento declarado.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Ausência de passivos trabalhistas</h5><p>Certidões negativas de débitos junto à Receita Federal, Estadual e Prefeitura emitidas recentemente.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Situação regular junto à franqueadora</h5><p>Sem inadimplência de royalties, marketing ou quaisquer obrigações contratuais com a franqueadora.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Histórico de auditoria da rede aprovado</h5><p>Últimas 3 auditorias internas da franqueadora com resultado satisfatório ou excelente.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Motivo do repasse declarado e verificado</h5><p>Motivo do repasse analisado e considerado legítimo: sucessão familiar verificada.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPORTUNIDADE TAB -->
+      <div class="tab-content" id="tab-oportunidade">
+        <div class="scanner-section reveal">
+          <div class="scanner-section-title">Por Que Esta É Uma Grande Oportunidade</div>
+          <div style="background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:36px;margin-bottom:24px;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;margin-bottom:16px;line-height:1.2;">Você não está comprando uma promessa.<br>Está comprando <em style="color:var(--red)">um resultado.</em></h3>
+            <p style="color:var(--gray2);line-height:1.8;margin-bottom:20px;">Diferente de abrir uma franquia do zero, aqui você assume uma operação que já provou seu valor. Cada mês de faturamento comprovado é um mês a menos de risco para você.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+              <div style="background:rgba(173,41,62,0.08);border:1px solid rgba(173,41,62,0.2);border-radius:10px;padding:20px;">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Abrir do zero</div>
+                <ul style="list-style:none;font-size:13px;color:var(--gray);line-height:2;">
+                  <li>❌ Sem histórico de desempenho</li>
+                  <li>❌ 6 a 18 meses sem lucro</li>
+                  <li>❌ Montar equipe do zero</li>
+                  <li>❌ Construir clientela do início</li>
+                  <li>❌ Risco alto na fase inicial</li>
+                </ul>
+              </div>
+              <div style="background:rgba(76,175,80,0.08);border:1px solid rgba(76,175,80,0.2);border-radius:10px;padding:20px;">
+                <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Com a 3PASSE</div>
+                <ul style="list-style:none;font-size:13px;color:var(--gray2);line-height:2;">
+                  <li>✓ 3 anos de faturamento comprovado</li>
+                  <li>✓ Lucro desde o primeiro mês</li>
+                  <li>✓ Equipe pronta e treinada</li>
+                  <li>✓ Clientela fidelizada inclusa</li>
+                  <li>✓ Risco drasticamente reduzido</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="checklist">
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Sazonalidade favorável</h5><p>Shopping de grande fluxo com pico em dezembro/janeiro. Dados históricos mostram crescimento consistente nos últimos 3 anos.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Potencial de crescimento identificado</h5><p>Delivery ainda não explorado na capacidade total. Oportunidade de ampliar receita com investimento baixo.</p></div></div>
+            <div class="check-item"><div class="check-icon ok">✓</div><div class="check-text"><h5>Suporte 3PASSE na transição</h5><p>Nossa equipe acompanha você do contrato até a virada de chave, com suporte junto à franqueadora e ao vendedor.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="scanner-sidebar">
+      <!-- SCORE -->
+      <div class="sidebar-card score-card">
+        <div class="scanner-section-title" style="justify-content:center;border:none;margin-bottom:16px;">Score 3PASSE</div>
+        <div class="score-circle">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+            <circle cx="50" cy="50" r="44" fill="none" stroke="url(#scoreGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="275" stroke-dashoffset="25" id="scoreCircle"/>
+            <defs>
+              <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ad293e"/>
+                <stop offset="100%" stop-color="#c9a84c"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="score-number">
+            <span class="num">91</span>
+            <span class="of">/100</span>
+          </div>
+        </div>
+        <div class="score-label">EXCELENTE</div>
+        <div class="score-sub">Unidade acima da média das oportunidades analisadas pela 3PASSE</div>
+      </div>
+
+      <!-- CTA CARD -->
+      <div class="sidebar-card">
+        <h3>Tenho Interesse <em style="color:var(--red)">nesta Franquia</em></h3>
+        <p>Fale com nosso especialista agora e receba o dossiê completo com todos os números e contratos disponíveis.</p>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-info"><span class="si-label">Investimento</span><span class="si-val">R$ 320.000</span></div>
+        <div class="sidebar-info"><span class="si-label">Fat. Comprovado</span><span class="si-val" style="color:var(--green)">R$ 85k/mês</span></div>
+        <div class="sidebar-info"><span class="si-label">Payback Est.</span><span class="si-val">18 meses</span></div>
+        <div class="sidebar-divider"></div>
+        <a href="https://wa.me/5562996345086?text=Olá! Tenho interesse na franquia de fast food premium em Goiânia Sul. Gostaria de receber mais informações e agendar uma reunião." target="_blank" class="btn-primary" style="width:100%;margin-bottom:10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a href="mailto:trespassefranquias@gmail.com" class="btn-secondary" style="width:100%;">
+          ✉️ Enviar E-mail
+        </a>
+        <div class="urgency-bar">
+          <p>⚡ Alta procura nesta semana</p>
+          <span>Oportunidades ficam ativas por tempo limitado</span>
+        </div>
+      </div>
+
+      <!-- SIMILAR -->
+      <div class="sidebar-card">
+        <div class="scanner-section-title" style="border:none;margin-bottom:16px;">Oportunidades Similares</div>
+        <a class="similar-card" href="franquia.html?id=cafe">
+          <div class="similar-icon">☕</div>
+          <div class="similar-info">
+            <h5>Cafeteria Gourmet</h5>
+            <p>Jardim América · Alimentos</p>
+            <div class="similar-price">R$ 165k</div>
+          </div>
+        </a>
+        <a class="similar-card" href="franquia.html?id=auto">
+          <div class="similar-icon">🚗</div>
+          <div class="similar-info">
+            <h5>Auto Center</h5>
+            <p>Pedro Ludovico · Automotivo</p>
+            <div class="similar-price">R$ 220k</div>
+          </div>
+        </a>
+        <a class="similar-card" href="franquia.html?id=saude-estetica">
+          <div class="similar-icon">💆</div>
+          <div class="similar-info">
+            <h5>Clínica de Estética</h5>
+            <p>Setor Bueno · Saúde</p>
+            <div class="similar-price">R$ 180k</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap">
+        <img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="footer-logo-img">
+      </div>
+      <p>A ponte estratégica entre o franqueado que deseja repassar sua unidade e você que objetiva adquirir um negócio ativo e com potencial.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/trespasse_franquias/" target="_blank" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/3passe" target="_blank" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://wa.me/5562996345086" target="_blank" title="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <a href="index.html#oportunidades">Oportunidades</a>
+      <a href="index.html#como-funciona">Como Funciona</a>
+      <a href="index.html#sobre">Sobre a 3PASSE</a>
+      <a href="index.html#cases">Cases de Sucesso</a>
+      <a href="index.html#contato">Contato</a>
+    </div>
+    <div class="footer-col">
+      <h4>Segmentos</h4>
+      <a href="franquia.html?id=alimentacao-fast">Alimentação</a>
+      <a href="franquia.html?id=saude-estetica">Saúde &amp; Estética</a>
+      <a href="franquia.html?id=educacao">Educação</a>
+      <a href="franquia.html?id=academia">Fitness</a>
+      <a href="franquia.html?id=varejo">Varejo</a>
+      <a href="franquia.html?id=pet">Pet Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="https://wa.me/5562996345086">(62) 99634-5086</a>
+      <a href="mailto:trespassefranquias@gmail.com">trespassefranquias@gmail.com</a>
+      <a href="https://www.instagram.com/trespasse_franquias/" target="_blank">@trespasse_franquias</a>
+      <a href="https://linkedin.com/company/3passe" target="_blank">LinkedIn 3PASSE</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 3PASSE – Especialistas em Repasse de Franquias. Todos os direitos reservados.</p>
+    <div class="links">
+      <a href="#">Termos e Condições</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Política de Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/5562996345086?text=Olá! Vi o scanner de franquia da 3PASSE e gostaria de saber mais." target="_blank">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const cursor=document.getElementById('cursor');
+  const ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  function animRing(){rx+=(mx-rx)*0.15;ry+=(my-ry)*0.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+  animRing();
+
+  window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);});
+
+  function switchTab(id,btn){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.s-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    animBars();
+  }
+
+  function animBars(){
+    document.querySelectorAll('.score-bar-fill').forEach(bar=>{
+      bar.style.width=bar.dataset.width||'0%';
+    });
+  }
+
+  const revealEls=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:0.1});
+  revealEls.forEach(el=>io.observe(el));
+
+  setTimeout(animBars,500);
+
+  // Load franchise data from URL param
+  const params=new URLSearchParams(window.location.search);
+  const id=params.get('id')||'alimentacao-fast';
+  const franchises={
+    'alimentacao-fast':{title:'Rede Fast Food Premium – <em>Goiânia Sul</em>',cat:'Alimentação',sub:'Unidade consolidada em shopping de grande fluxo, 3 anos de operação sólida, equipe completa e treinada.',inv:'R$320k',fat:'R$85k',lucro:'22%',pay:'18mo',breadcrumb:'Fast Food Premium'},
+    'saude-estetica':{title:'Clínica de Estética Corporal – <em>Setor Bueno</em>',cat:'Saúde & Estética',sub:'Operação completa com 4 salas, clientela fidelizada, agenda lotada há 6 meses consecutivos.',inv:'R$180k',fat:'R$52k',lucro:'31%',pay:'14mo',breadcrumb:'Clínica de Estética'},
+    'educacao':{title:'Escola de Idiomas – <em>Setor Oeste</em>',cat:'Educação',sub:'350+ alunos ativos, marca nacional reconhecida, contrato de locação vantajoso incluso.',inv:'R$240k',fat:'R$68k',lucro:'27%',pay:'16mo',breadcrumb:'Escola de Idiomas'},
+    'academia':{title:'Academia Low Cost – <em>Jardim Goiás</em>',cat:'Fitness',sub:'1.200 alunos ativos, operação enxuta e altamente lucrativa, expansão validada pela franqueadora.',inv:'R$280k',fat:'R$72k',lucro:'24%',pay:'20mo',breadcrumb:'Academia Low Cost'},
+    'varejo':{title:'Moda Feminina Multimarca – <em>Flamboyant</em>',cat:'Varejo',sub:'Ponto premium em um dos maiores shoppings de Goiânia, faturamento crescente mês a mês.',inv:'R$195k',fat:'R$58k',lucro:'28%',pay:'15mo',breadcrumb:'Moda Feminina'},
+    'pet':{title:'Pet Shop & Veterinária – <em>Aldeota</em>',cat:'Pet Care',sub:'Unidade completa com serviços de grooming, pet hotel e veterinário fixo.',inv:'R$150k',fat:'R$38k',lucro:'26%',pay:'17mo',breadcrumb:'Pet Shop'},
+    'cafe':{title:'Cafeteria Gourmet – <em>Jardim América</em>',cat:'Alimentos',sub:'Ambiente sofisticado, ticket médio elevado, faturamento estável nos últimos 18 meses.',inv:'R$165k',fat:'R$42k',lucro:'25%',pay:'17mo',breadcrumb:'Cafeteria Gourmet'},
+    'auto':{title:'Lava Rápido & Auto Center – <em>Pedro Ludovico</em>',cat:'Automotivo',sub:'Alta rotatividade, localização estratégica, 200+ atendimentos por semana.',inv:'R$220k',fat:'R$61k',lucro:'28%',pay:'16mo',breadcrumb:'Auto Center'},
+  };
+  const f=franchises[id]||franchises['alimentacao-fast'];
+  document.getElementById('hero-title').innerHTML=f.title;
+  document.getElementById('hero-cat').textContent=f.cat;
+  document.getElementById('hero-sub').textContent=f.sub;
+  document.getElementById('qs-inv').innerHTML=f.inv;
+  document.getElementById('qs-fat').innerHTML=f.fat;
+  document.getElementById('qs-lucro').innerHTML=f.lucro;
+  document.getElementById('qs-pay').innerHTML=f.pay;
+  document.getElementById('breadcrumb-name').textContent=f.breadcrumb;
+  document.title=f.breadcrumb+' – Scanner 3PASSE';
+</script>
+</body>
+</html>
