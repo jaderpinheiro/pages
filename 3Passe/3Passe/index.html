@@ -526,13 +526,13 @@
   }
   .opp-card-img .cat-icon { font-size: 64px; opacity: 0.3; }
   .opp-card-img .badge-hot {
-    position: absolute; top: 12px; right: 12px;
+    position: absolute; bottom: 12px; right: 12px; top: auto;
     background: var(--red); color: var(--white);
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
     padding: 4px 10px; border-radius: 100px; font-weight: 700;
   }
   .opp-card-img .cat-tag {
-    position: absolute; top: 12px; left: 12px;
+    position: absolute; bottom: 12px; left: 12px; top: auto;
     background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
     font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
     padding: 4px 10px; border-radius: 100px; color: var(--gray2);
@@ -547,7 +547,10 @@
   .opp-card-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s;z-index:0; }
   .opp-card:hover .opp-card-img img { transform:scale(1.07); }
   .opp-card-img .has-overlay { position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.55));z-index:1; }
-  .opp-card-img .cat-icon,.opp-card-img .badge-hot,.opp-card-img .cat-tag,.opp-img-bar { z-index:2;position:relative; }
+  .opp-card-img .badge-hot { z-index:3; }
+  .opp-card-img .cat-tag { z-index:3; }
+  .opp-card-img .cat-icon { z-index:3; }
+  .opp-img-bar { z-index:3; }
 
   .opp-card-body { padding: 24px; }
   .opp-card-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
@@ -714,6 +717,12 @@
     transition: all 0.3s;
   }
   .ig-post:hover { transform: scale(1.02); border-color: var(--border-red); }
+  .ig-post.has-img .ig-post-icon { display: none; }
+  @keyframes igPulse {
+    0%,100% { box-shadow: 0 4px 18px rgba(0,0,0,0.25); }
+    50% { box-shadow: 0 0 0 2px rgba(220,38,38,0.55), 0 6px 28px rgba(220,38,38,0.22); }
+  }
+  .ig-post.ig-lit { animation: igPulse 1.4s ease-in-out; }
   .ig-post-icon { font-size: 48px; opacity: 0.15; }
   .ig-post-overlay {
     position: absolute; inset: 0;
@@ -1236,60 +1245,64 @@
     </div>
     <div class="carousel-track-wrap">
       <div class="carousel-track" id="carouselTrack">
-        <?php
-        $q_dest = new WP_Query([
-          'post_type'      => 'franquias',
-          'posts_per_page' => 8,
-          'post_status'    => 'publish',
-          'meta_key'       => '_f_destaque',
-          'meta_value'     => '1',
-          'orderby'        => ['meta_value_num' => 'DESC', 'date' => 'DESC'],
-        ]);
-        if ($q_dest->have_posts()) :
-          while ($q_dest->have_posts()) : $q_dest->the_post();
-            $pid       = get_the_ID();
-            $url       = get_permalink($pid);
-            $thumb     = get_the_post_thumbnail_url($pid, 'franquia-card');
-            $emoji     = get_post_meta($pid, '_f_emoji',        true) ?: '🏢';
-            $cat       = get_post_meta($pid, '_f_categoria',    true);
-            $badge     = get_post_meta($pid, '_f_badge',        true);
-            $inv       = get_post_meta($pid, '_f_investimento', true);
-            $fat       = get_post_meta($pid, '_f_faturamento',  true);
-            $pay       = get_post_meta($pid, '_f_payback',      true);
-            $lucro     = get_post_meta($pid, '_f_lucro',        true);
-            $desc      = get_post_meta($pid, '_f_desc_curta',   true);
-        ?>
-        <div class="opp-card" onclick="window.location.href='<?php echo esc_url($url); ?>'">
+        <!-- 3PASSE_CAROUSEL_START -->
+        <div class="opp-card" onclick="window.location.href='franquia.html?id=alimentacao-fast'">
           <div class="opp-card-img">
-            <?php if ($thumb): ?>
-              <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
-              <div class="has-overlay"></div>
-            <?php else: ?>
-              <span class="cat-icon"><?php echo esc_html($emoji); ?></span>
-            <?php endif; ?>
-            <?php if ($badge): ?><span class="badge-hot"><?php echo esc_html($badge); ?></span><?php endif; ?>
-            <?php if ($cat): ?><span class="cat-tag"><?php echo esc_html($cat); ?></span><?php endif; ?>
+            <span class="cat-icon">🍕</span>
+            <span class="badge-hot">🔥 Destaque</span>
+            <span class="cat-tag">Alimentação</span>
             <div class="opp-img-bar"></div>
           </div>
           <div class="opp-card-body">
-            <h3><?php the_title(); ?></h3>
-            <?php if ($desc): ?><p><?php echo esc_html($desc); ?></p><?php endif; ?>
+            <h3>Rede Fast Food Premium – Goiânia Sul</h3>
+            <p>Unidade consolidada em shopping de grande fluxo, 3 anos de operação, equipe completa.</p>
             <div class="opp-metrics">
-              <div class="opp-metric"><div class="key">Investimento</div><div class="val"><sup>R$</sup><?php echo esc_html($inv ?: '—'); ?></div></div>
-              <div class="opp-metric"><div class="key">Fat. Mensal</div><div class="val"><sup>R$</sup><?php echo esc_html($fat ?: '—'); ?></div></div>
-              <div class="opp-metric"><div class="key">Payback</div><div class="val"><?php echo esc_html($pay ?: '—'); ?><sup>mo</sup></div></div>
-              <div class="opp-metric"><div class="key">Lucro líq.</div><div class="val"><?php echo esc_html($lucro ?: '—'); ?><sup>%</sup></div></div>
+              <div class="opp-metric"><div class="key">Investimento</div><div class="val"><sup>R$</sup>320k</div></div>
+              <div class="opp-metric"><div class="key">Fat. Mensal</div><div class="val"><sup>R$</sup>85k</div></div>
+              <div class="opp-metric"><div class="key">Payback</div><div class="val">18<sup>mo</sup></div></div>
+              <div class="opp-metric"><div class="key">Lucro líq.</div><div class="val">22<sup>%</sup></div></div>
             </div>
-            <a class="opp-cta" href="<?php echo esc_url($url); ?>">
-              <span>Ver Scanner Completo</span>
-              <span>→</span>
-            </a>
+            <a class="opp-cta" href="franquia.html?id=alimentacao-fast"><span>Ver Scanner Completo</span><span>→</span></a>
           </div>
         </div>
-        <?php endwhile; wp_reset_postdata();
-        else: ?>
-        <p style="color:var(--gray);padding:40px;text-align:center;">Nenhuma oportunidade em destaque cadastrada ainda.</p>
-        <?php endif; ?>
+        <div class="opp-card" onclick="window.location.href='franquia.html?id=saude-estetica'">
+          <div class="opp-card-img" style="background:linear-gradient(135deg,#0a1520,#1a2d40);">
+            <span class="cat-icon">💆</span>
+            <span class="cat-tag">Saúde &amp; Estética</span>
+            <div class="opp-img-bar"></div>
+          </div>
+          <div class="opp-card-body">
+            <h3>Clínica de Estética Corporal – Setor Bueno</h3>
+            <p>Operação completa com 4 salas, clientela fidelizada, agenda lotada há 6 meses consecutivos.</p>
+            <div class="opp-metrics">
+              <div class="opp-metric"><div class="key">Investimento</div><div class="val"><sup>R$</sup>180k</div></div>
+              <div class="opp-metric"><div class="key">Fat. Mensal</div><div class="val"><sup>R$</sup>52k</div></div>
+              <div class="opp-metric"><div class="key">Payback</div><div class="val">14<sup>mo</sup></div></div>
+              <div class="opp-metric"><div class="key">Lucro líq.</div><div class="val">31<sup>%</sup></div></div>
+            </div>
+            <a class="opp-cta" href="franquia.html?id=saude-estetica"><span>Ver Scanner Completo</span><span>→</span></a>
+          </div>
+        </div>
+        <div class="opp-card" onclick="window.location.href='franquia.html?id=educacao'">
+          <div class="opp-card-img" style="background:linear-gradient(135deg,#0a1520,#1a2d40);">
+            <span class="cat-icon">📚</span>
+            <span class="badge-hot" style="background:var(--gold);color:#000;">⭐ Premium</span>
+            <span class="cat-tag">Educação</span>
+            <div class="opp-img-bar"></div>
+          </div>
+          <div class="opp-card-body">
+            <h3>Escola de Idiomas – Setor Oeste</h3>
+            <p>350+ alunos ativos, marca nacional reconhecida, contrato de locação vantajoso incluso.</p>
+            <div class="opp-metrics">
+              <div class="opp-metric"><div class="key">Investimento</div><div class="val"><sup>R$</sup>240k</div></div>
+              <div class="opp-metric"><div class="key">Fat. Mensal</div><div class="val"><sup>R$</sup>68k</div></div>
+              <div class="opp-metric"><div class="key">Payback</div><div class="val">16<sup>mo</sup></div></div>
+              <div class="opp-metric"><div class="key">Lucro líq.</div><div class="val">27<sup>%</sup></div></div>
+            </div>
+            <a class="opp-cta" href="franquia.html?id=educacao"><span>Ver Scanner Completo</span><span>→</span></a>
+          </div>
+        </div>
+        <!-- 3PASSE_CAROUSEL_END -->
       </div>
     </div>
 
@@ -1300,44 +1313,44 @@
         <div class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Outras <em>oportunidades</em> selecionadas</div>
       </div>
       <div class="opps-grid">
-        <?php
-        $q_mini = new WP_Query([
-          'post_type'      => 'franquias',
-          'posts_per_page' => 5,
-          'post_status'    => 'publish',
-          'meta_query'     => [['key' => '_f_destaque', 'compare' => '!=', 'value' => '1']],
-          'orderby'        => 'date',
-          'order'          => 'DESC',
-        ]);
-        if ($q_mini->have_posts()) :
-          while ($q_mini->have_posts()) : $q_mini->the_post();
-            $mid       = get_the_ID();
-            $murl      = get_permalink($mid);
-            $mthumb    = get_the_post_thumbnail_url($mid, 'franquia-mini');
-            $memoji    = get_post_meta($mid, '_f_emoji',        true) ?: '🏢';
-            $mcat      = get_post_meta($mid, '_f_categoria',    true);
-            $minv      = get_post_meta($mid, '_f_investimento', true);
-            $mfat      = get_post_meta($mid, '_f_faturamento',  true);
-            $mdesc     = get_post_meta($mid, '_f_desc_curta',   true);
-        ?>
-        <a class="opp-list-card" href="<?php echo esc_url($murl); ?>">
-          <div class="opp-list-icon">
-            <?php if ($mthumb): ?>
-              <img src="<?php echo esc_url($mthumb); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
-            <?php else: echo esc_html($memoji); endif; ?>
-          </div>
+        <!-- 3PASSE_MINI_START -->
+        <a class="opp-list-card" href="franquia.html?id=pet">
+          <div class="opp-list-icon">🐾</div>
           <div class="opp-list-info">
-            <h4><?php the_title(); ?></h4>
-            <?php if ($mdesc): ?><p><?php echo esc_html($mdesc); ?></p><?php endif; ?>
+            <h4>Pet Shop &amp; Veterinária – Aldeota</h4>
+            <p>Unidade completa com serviços de grooming, pet hotel e veterinário fixo.</p>
             <div class="opp-list-meta">
-              <?php if ($minv): ?><span class="opp-tag">R$ <?php echo esc_html($minv); ?></span><?php endif; ?>
-              <?php if ($mfat): ?><span class="opp-tag highlight">Fat. R$<?php echo esc_html($mfat); ?>/mês</span><?php endif; ?>
-              <?php if ($mcat): ?><span class="opp-tag"><?php echo esc_html($mcat); ?></span><?php endif; ?>
+              <span class="opp-tag">R$ 150k</span>
+              <span class="opp-tag highlight">Fat. R$38k/mês</span>
+              <span class="opp-tag">Pet Care</span>
             </div>
           </div>
         </a>
-        <?php endwhile; wp_reset_postdata();
-        endif; ?>
+        <a class="opp-list-card" href="franquia.html?id=auto">
+          <div class="opp-list-icon">🚗</div>
+          <div class="opp-list-info">
+            <h4>Lava Rápido &amp; Auto Center – Setor Pedro Ludovico</h4>
+            <p>Alta rotatividade, localização estratégica, 200+ atendimentos/semana.</p>
+            <div class="opp-list-meta">
+              <span class="opp-tag">R$ 220k</span>
+              <span class="opp-tag highlight">Fat. R$61k/mês</span>
+              <span class="opp-tag">Automotivo</span>
+            </div>
+          </div>
+        </a>
+        <a class="opp-list-card" href="franquia.html?id=farmacia">
+          <div class="opp-list-icon">💊</div>
+          <div class="opp-list-info">
+            <h4>Farmácia de Manipulação – Setor Sul</h4>
+            <p>Segmento em crescimento acelerado, clientela fidelizada e prescritores parceiros.</p>
+            <div class="opp-list-meta">
+              <span class="opp-tag">R$ 350k</span>
+              <span class="opp-tag highlight">Fat. R$95k/mês</span>
+              <span class="opp-tag">Saúde</span>
+            </div>
+          </div>
+        </a>
+        <!-- 3PASSE_MINI_END -->
         <a class="opp-list-card" href="franquia.html?id=mais">
           <div class="opp-list-icon" style="background:rgba(173,41,62,0.2);border-color:rgba(173,41,62,0.4);">+</div>
           <div class="opp-list-info">
@@ -1583,6 +1596,7 @@
         @trespasse_franquias
       </a>
     </div>
+    <!-- 3PASSE_INSTAGRAM_START -->
     <div class="ig-grid reveal">
       <div class="ig-post" onclick="window.open('https://www.instagram.com/trespasse_franquias/','_blank')">
         <span class="ig-post-icon">🍕</span>
@@ -1625,6 +1639,7 @@
         <div class="ig-label">Novo portfólio disponível – confira!</div>
       </div>
     </div>
+    <!-- 3PASSE_INSTAGRAM_END -->
   </div>
 </section>
 
@@ -1839,6 +1854,39 @@
     }
     // Run after initial page render
     setTimeout(runHeroCounters,700);
+  })();
+
+  // Instagram: carrega imagem via data-igbg com fallback para emoji + animação sonic sequencial
+  (function(){
+    function initIg(){
+      // Carrega imagens dos posts do Instagram
+      document.querySelectorAll('.ig-post[data-igbg]').forEach(function(el){
+        var url = el.getAttribute('data-igbg');
+        if(!url) return;
+        var img = new Image();
+        img.onload = function(){
+          el.style.backgroundImage = 'url("'+url+'")';
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.classList.add('has-img');
+        };
+        img.src = url;
+      });
+      // Animação sonic: borda vermelha pulsando de um card para o próximo
+      var posts = document.querySelectorAll('.ig-grid .ig-post');
+      if(!posts.length) return;
+      var idx = 0;
+      function pulse(){
+        posts.forEach(function(p){ p.classList.remove('ig-lit'); void p.offsetWidth; });
+        posts[idx].classList.add('ig-lit');
+        idx = (idx + 1) % posts.length;
+      }
+      pulse();
+      setInterval(pulse, 1800);
+    }
+    document.readyState==='loading'
+      ? document.addEventListener('DOMContentLoaded', initIg)
+      : initIg();
   })();
 
   // Particle sparkle on scroll (stat-num in solution section)
