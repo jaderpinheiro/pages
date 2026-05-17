@@ -547,7 +547,10 @@
   .opp-card-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s;z-index:0; }
   .opp-card:hover .opp-card-img img { transform:scale(1.07); }
   .opp-card-img .has-overlay { position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.55));z-index:1; }
-  .opp-card-img .cat-icon,.opp-card-img .badge-hot,.opp-card-img .cat-tag,.opp-img-bar { z-index:2;position:relative; }
+  .opp-card-img .badge-hot { z-index:3; }
+  .opp-card-img .cat-tag { z-index:3; }
+  .opp-card-img .cat-icon { z-index:3; }
+  .opp-img-bar { z-index:3; }
 
   .opp-card-body { padding: 24px; }
   .opp-card-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
