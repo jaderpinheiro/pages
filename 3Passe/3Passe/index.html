@@ -716,8 +716,7 @@
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
   }
-  .ig-post:hover { transform: scale(1.02); border-color: var(--border-red); }
-  .ig-post.has-img .ig-post-icon { display: none; }
+  .ig-post:hover { transform: scale(1.02); }
   @keyframes igPulse {
     0%,100% { box-shadow: 0 4px 18px rgba(0,0,0,0.25); }
     50% { box-shadow: 0 0 0 2px rgba(220,38,38,0.55), 0 6px 28px rgba(220,38,38,0.22); }
@@ -1856,23 +1855,9 @@
     setTimeout(runHeroCounters,700);
   })();
 
-  // Instagram: carrega imagem via data-igbg com fallback para emoji + animação sonic sequencial
+  // Animação sonic: borda pulsando sequencialmente nos cards do Instagram
   (function(){
-    function initIg(){
-      // Carrega imagens dos posts do Instagram
-      document.querySelectorAll('.ig-post[data-igbg]').forEach(function(el){
-        var url = el.getAttribute('data-igbg');
-        if(!url) return;
-        var img = new Image();
-        img.onload = function(){
-          el.style.backgroundImage = 'url("'+url+'")';
-          el.style.backgroundSize = 'cover';
-          el.style.backgroundPosition = 'center';
-          el.classList.add('has-img');
-        };
-        img.src = url;
-      });
-      // Animação sonic: borda vermelha pulsando de um card para o próximo
+    function initIgPulse(){
       var posts = document.querySelectorAll('.ig-grid .ig-post');
       if(!posts.length) return;
       var idx = 0;
@@ -1885,8 +1870,8 @@
       setInterval(pulse, 1800);
     }
     document.readyState==='loading'
-      ? document.addEventListener('DOMContentLoaded', initIg)
-      : initIg();
+      ? document.addEventListener('DOMContentLoaded', initIgPulse)
+      : initIgPulse();
   })();
 
   // Particle sparkle on scroll (stat-num in solution section)
