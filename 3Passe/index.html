@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3PASSE – Especialistas em Repasse de Franquias</title>
+<title>Três PASSE Franquias &amp; Licenciamentos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e1c29;
-    --bg2: #0a1520;
-    --bg3: #112233;
-    --red: #ad293e;
-    --red-light: #d4394f;
-    --red-dark: #8a1f30;
+    --bg: #ffffff;
+    --bg2: #f4f5fb;
+    --bg3: #eaecf8;
+    --red: #2e3192;
+    --red-light: #4a50c4;
+    --red-dark: #1e2070;
     --white: #ffffff;
-    --gray: #8a9bb0;
-    --gray2: #c8d4e0;
+    --gray: #7b8aaa;
+    --gray2: #3e4095;
     --gold: #c9a84c;
     --gold2: #e8c96a;
-    --glass: rgba(255,255,255,0.04);
-    --glass2: rgba(173,41,62,0.12);
-    --border: rgba(255,255,255,0.08);
-    --border-red: rgba(173,41,62,0.4);
+    --glass: rgba(62,64,149,0.07);
+    --glass2: rgba(46,49,146,0.09);
+    --border: rgba(46,49,146,0.14);
+    --border-red: rgba(46,49,146,0.3);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,7 +51,7 @@
   }
   .cursor-ring {
     width: 36px; height: 36px;
-    border: 1.5px solid rgba(173,41,62,0.6);
+    border: 1.5px solid rgba(46,49,146,0.6);
     border-radius: 50%;
     position: fixed; top: 0; left: 0;
     pointer-events: none; z-index: 9998;
@@ -67,7 +67,7 @@
     content: '';
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 1000; opacity: 0.4;
+    pointer-events: none; z-index: 1000; opacity: 0.1;
   }
 
   /* NAV */
@@ -76,16 +76,16 @@
     padding: 0 5vw;
     display: flex; align-items: center; justify-content: space-between;
     height: 72px;
-    background: rgba(14,28,41,0.85);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     transition: all 0.4s;
   }
   nav.scrolled {
     height: 60px;
-    background: rgba(10,21,32,0.97);
+    background: rgba(255,255,255,0.98);
     border-bottom-color: var(--border-red);
-    box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 24px rgba(62,64,149,0.12);
   }
 
   .nav-logo {
@@ -100,7 +100,7 @@
     clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .nav-logo:hover .logo-mark { transform: rotate(15deg); box-shadow: 0 0 20px rgba(173,41,62,0.6); }
+  .nav-logo:hover .logo-mark { transform: rotate(15deg); box-shadow: 0 0 20px rgba(46,49,146,0.6); }
   .nav-logo .logo-text {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px; letter-spacing: 3px;
@@ -140,7 +140,7 @@
     transition: background 0.3s, transform 0.2s, box-shadow 0.3s !important;
     display: flex; align-items: center; gap: 8px;
   }
-  .nav-cta:hover { background: var(--red-light) !important; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(173,41,62,0.4) !important; }
+  .nav-cta:hover { background: var(--red-light) !important; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(46,49,146,0.4) !important; }
   .nav-cta::after { display: none !important; }
 
   .nav-social { display: flex; gap: 14px; align-items: center; }
@@ -164,17 +164,17 @@
 
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(173,41,62,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(14,28,41,0.8) 0%, transparent 70%),
-      linear-gradient(135deg, #0a1520 0%, #0e1c29 50%, #112233 100%);
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(62,64,149,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(244,245,251,0.7) 0%, transparent 70%),
+      linear-gradient(135deg, #f8f9ff 0%, #ffffff 50%, #f4f5fb 100%);
   }
 
   .hero-grid {
     position: absolute; inset: 0;
     background-image: 
-      linear-gradient(rgba(173,41,62,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(173,41,62,0.05) 1px, transparent 1px);
+      linear-gradient(rgba(46,49,146,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,49,146,0.05) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     animation: gridPulse 8s ease-in-out infinite;
@@ -191,7 +191,7 @@
     animation: orbFloat 12s ease-in-out infinite;
     pointer-events: none;
   }
-  .hero-orb-1 { width: 600px; height: 600px; background: rgba(173,41,62,0.15); top: -100px; right: -100px; }
+  .hero-orb-1 { width: 600px; height: 600px; background: rgba(46,49,146,0.15); top: -100px; right: -100px; }
   .hero-orb-2 { width: 400px; height: 400px; background: rgba(201,168,76,0.08); bottom: -50px; left: 30%; animation-delay: -4s; }
   @keyframes orbFloat {
     0%,100% { transform: translate(0,0) scale(1); }
@@ -203,8 +203,8 @@
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(173,41,62,0.15);
-    border: 1px solid rgba(173,41,62,0.4);
+    background: rgba(46,49,146,0.15);
+    border: 1px solid rgba(46,49,146,0.4);
     padding: 8px 18px; border-radius: 100px;
     font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--red-light); font-weight: 600;
@@ -212,7 +212,7 @@
     animation: fadeInDown 0.8s ease both;
   }
   .hero-badge .dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; animation: pulse 2s ease infinite; }
-  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(173,41,62,0.6)} 50%{box-shadow:0 0 0 8px rgba(173,41,62,0)} }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(46,49,146,0.6)} 50%{box-shadow:0 0 0 8px rgba(46,49,146,0)} }
 
   .hero-headline {
     font-family: 'Playfair Display', serif;
@@ -244,7 +244,7 @@
     font-size: 13px; font-weight: 500; color: var(--gray2);
   }
   .hero-bullet .chk {
-    width: 20px; height: 20px; background: rgba(173,41,62,0.2);
+    width: 20px; height: 20px; background: rgba(46,49,146,0.2);
     border: 1px solid var(--red); border-radius: 4px;
     display: flex; align-items: center; justify-content: center;
     font-size: 11px; color: var(--red); flex-shrink: 0;
@@ -270,7 +270,7 @@
     background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
     transform: translateX(-100%); transition: transform 0.5s;
   }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(173,41,62,0.5); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(46,49,146,0.5); }
   .btn-primary:hover::before { transform: translateX(100%); }
 
   .btn-secondary {
@@ -282,7 +282,7 @@
     transition: all 0.3s;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
-  .btn-secondary:hover { border-color: var(--red); color: var(--red-light); transform: translateY(-2px); background: rgba(173,41,62,0.06); }
+  .btn-secondary:hover { border-color: var(--red); color: var(--red-light); transform: translateY(-2px); background: rgba(46,49,146,0.06); }
 
   .hero-visual {
     position: absolute; right: 5vw; top: 50%;
@@ -330,26 +330,49 @@
   @keyframes scrollLine { 0%{height:0;opacity:0} 50%{height:50px;opacity:1} 100%{height:0;opacity:0;margin-top:50px} }
 
   /* MARQUEE */
+  @keyframes sonicPulseMarquee {
+    0%   { box-shadow: 0 0 0 0 rgba(46,49,146,0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(46,49,146,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,49,146,0); }
+  }
   .marquee-wrap {
     background: var(--red);
-    padding: 14px 0;
+    padding: 17px 0;
     overflow: hidden;
     position: relative;
   }
   .marquee-track {
     display: flex; gap: 0;
-    animation: marquee 25s linear infinite;
+    animation: marquee 28s linear infinite;
     width: max-content;
   }
   @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
   .marquee-item {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px; letter-spacing: 3px;
+    font-size: 15px; letter-spacing: 2.5px;
+    color: #ffffff;
     white-space: nowrap;
-    padding: 0 40px;
-    display: flex; align-items: center; gap: 16px;
+    padding: 5px 24px;
+    border-radius: 50px;
+    display: flex; align-items: center; gap: 12px;
+    transition: background 0.32s ease, color 0.32s ease;
+    cursor: default;
   }
-  .marquee-item .sep { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; }
+  .marquee-item:hover { background: rgba(255,255,255,0.96); color: #3e4095; }
+  .marquee-item .sep {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(255,255,255,0.7);
+    transition: background 0.32s ease;
+  }
+  .marquee-item:hover .sep { background: rgba(62,64,149,0.45); }
+  img.m-logo {
+    width: 36px; height: 36px; object-fit: contain; display: block;
+    border-radius: 6px;
+    flex-shrink: 0;
+    transition: transform 0.32s ease;
+  }
+  .marquee-item:hover img.m-logo { transform: scale(1.15); }
 
   /* SECTION BASE */
   section { padding: 100px 5vw; position: relative; }
@@ -388,7 +411,7 @@
     transition: all 0.3s;
   }
   .pain-item:hover { border-color: var(--border-red); background: var(--glass2); transform: translateX(6px); }
-  .pain-icon { width: 44px; height: 44px; background: rgba(173,41,62,0.15); border: 1px solid rgba(173,41,62,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .pain-icon { width: 44px; height: 44px; background: rgba(46,49,146,0.15); border: 1px solid rgba(46,49,146,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
   .pain-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
   .pain-item p { font-size: 13px; color: var(--gray); line-height: 1.6; }
 
@@ -402,7 +425,7 @@
   .reframe-big::before {
     content: 'IMAGINE'; position: absolute;
     font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px,18vw,220px);
-    color: rgba(173,41,62,0.04); top: 50%; left: 50%;
+    color: rgba(46,49,146,0.04); top: 50%; left: 50%;
     transform: translate(-50%,-50%);
     white-space: nowrap; pointer-events: none;
     letter-spacing: 20px;
@@ -429,18 +452,18 @@
   }
   .reframe-card::before {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(173,41,62,0.1) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(46,49,146,0.1) 0%, transparent 60%);
     opacity: 0; transition: opacity 0.4s;
   }
   .reframe-card:hover { transform: translateY(-8px); border-color: var(--border-red); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
   .reframe-card:hover::before { opacity: 1; }
   .reframe-card .num {
     font-family: 'Bebas Neue', sans-serif; font-size: 64px;
-    color: rgba(173,41,62,0.2); line-height: 1;
+    color: rgba(46,49,146,0.2); line-height: 1;
     margin-bottom: 16px; display: block;
     transition: color 0.4s;
   }
-  .reframe-card:hover .num { color: rgba(173,41,62,0.4); }
+  .reframe-card:hover .num { color: rgba(46,49,146,0.4); }
   .reframe-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
   .reframe-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
 
@@ -455,8 +478,8 @@
     border: 1px solid var(--border); border-radius: 8px;
     cursor: default; transition: all 0.3s;
   }
-  .solution-feat:hover { border-color: rgba(173,41,62,0.5); background: rgba(173,41,62,0.07); transform: translateX(4px); }
-  .feat-dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 12px rgba(173,41,62,0.5); }
+  .solution-feat:hover { border-color: rgba(46,49,146,0.5); background: rgba(46,49,146,0.07); transform: translateX(4px); }
+  .feat-dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 12px rgba(46,49,146,0.5); }
   .feat-text h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
   .feat-text p { font-size: 13px; color: var(--gray); line-height: 1.6; }
 
@@ -464,7 +487,7 @@
   .solution-big-number {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(80px,12vw,140px);
-    color: rgba(173,41,62,0.08); line-height: 1;
+    color: rgba(46,49,146,0.08); line-height: 1;
     text-align: center; margin-bottom: -40px;
   }
   .solution-stats {
@@ -565,7 +588,7 @@
   .opp-cta {
     width: 100%;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(173,41,62,0.1); border: 1px solid rgba(173,41,62,0.3);
+    background: rgba(46,49,146,0.1); border: 1px solid rgba(46,49,146,0.3);
     padding: 12px 16px; border-radius: 8px;
     font-size: 13px; font-weight: 600; color: var(--red-light);
     transition: all 0.3s; text-decoration: none;
@@ -584,12 +607,12 @@
     align-items: flex-start;
   }
   .opp-list-card:hover { border-color: var(--border-red); transform: translateY(-4px); background: var(--glass2); }
-  .opp-list-icon { width: 52px; height: 52px; background: rgba(173,41,62,0.12); border: 1px solid rgba(173,41,62,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .opp-list-icon { width: 52px; height: 52px; background: rgba(46,49,146,0.12); border: 1px solid rgba(46,49,146,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
   .opp-list-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
   .opp-list-info p { font-size: 12px; color: var(--gray); line-height: 1.5; margin-bottom: 10px; }
   .opp-list-meta { display: flex; gap: 12px; flex-wrap: wrap; }
   .opp-tag { font-size: 11px; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 100px; color: var(--gray2); border: 1px solid var(--border); }
-  .opp-tag.highlight { background: rgba(173,41,62,0.12); color: var(--red-light); border-color: rgba(173,41,62,0.3); }
+  .opp-tag.highlight { background: rgba(46,49,146,0.12); color: var(--red-light); border-color: rgba(46,49,146,0.3); }
 
   /* HOW IT WORKS */
   .hiw-section { background: var(--bg2); }
@@ -616,7 +639,7 @@
   }
   .hiw-step:hover .step-num {
     background: var(--red); color: var(--white);
-    box-shadow: 0 0 30px rgba(173,41,62,0.5), 0 0 0 6px var(--bg2);
+    box-shadow: 0 0 30px rgba(46,49,146,0.5), 0 0 0 6px var(--bg2);
     transform: scale(1.1);
   }
   .hiw-step h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
@@ -638,8 +661,8 @@
     background: linear-gradient(135deg, var(--red-dark), var(--red));
     display: flex; align-items: center; justify-content: center;
     font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-    flex-shrink: 0; border: 2px solid rgba(173,41,62,0.5);
-    box-shadow: 0 0 24px rgba(173,41,62,0.3);
+    flex-shrink: 0; border: 2px solid rgba(46,49,146,0.5);
+    box-shadow: 0 0 24px rgba(46,49,146,0.3);
   }
   .founder-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .founder-info .role { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--red-light); margin-bottom: 12px; }
@@ -667,7 +690,7 @@
   .case-quote { font-size: 40px; color: var(--red); opacity: 0.4; line-height: 0.8; margin-bottom: 16px; font-family: Georgia, serif; }
   .case-text { font-size: 14px; color: var(--gray2); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
   .case-result {
-    background: rgba(173,41,62,0.1); border: 1px solid rgba(173,41,62,0.2);
+    background: rgba(46,49,146,0.1); border: 1px solid rgba(46,49,146,0.2);
     border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
   }
   .case-result .r-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
@@ -693,7 +716,7 @@
   .testi-ava { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--bg3), var(--red-dark)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; border: 1.5px solid var(--border-red); }
   .testi-author-info h5 { font-size: 14px; font-weight: 700; }
   .testi-author-info span { font-size: 11px; color: var(--gray); }
-  .testi-tag { display: inline-block; font-size: 10px; background: rgba(173,41,62,0.12); color: var(--red-light); padding: 3px 8px; border-radius: 100px; margin-top: 4px; border: 1px solid rgba(173,41,62,0.25); }
+  .testi-tag { display: inline-block; font-size: 10px; background: rgba(46,49,146,0.12); color: var(--red-light); padding: 3px 8px; border-radius: 100px; margin-top: 4px; border: 1px solid rgba(46,49,146,0.25); }
 
   /* INSTAGRAM */
   .instagram-section { background: var(--bg2); }
@@ -719,13 +742,13 @@
   .ig-post:hover { transform: scale(1.02); }
   @keyframes igPulse {
     0%,100% { box-shadow: 0 4px 18px rgba(0,0,0,0.25); }
-    50% { box-shadow: 0 0 0 2px rgba(220,38,38,0.55), 0 6px 28px rgba(220,38,38,0.22); }
+    50% { box-shadow: 0 0 0 2px rgba(46,49,146,0.55), 0 6px 28px rgba(46,49,146,0.22); }
   }
   .ig-post.ig-lit { animation: igPulse 1.4s ease-in-out; }
   .ig-post-icon { font-size: 48px; opacity: 0.15; }
   .ig-post-overlay {
     position: absolute; inset: 0;
-    background: rgba(173,41,62,0.85);
+    background: rgba(46,49,146,0.85);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     opacity: 0; transition: opacity 0.3s;
   }
@@ -744,7 +767,7 @@
     margin-bottom: 20px; transition: all 0.3s;
   }
   .office-info-block:hover { border-color: var(--border-red); transform: translateX(4px); background: var(--glass); }
-  .office-icon { width: 44px; height: 44px; background: rgba(173,41,62,0.12); border: 1px solid rgba(173,41,62,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .office-icon { width: 44px; height: 44px; background: rgba(46,49,146,0.12); border: 1px solid rgba(46,49,146,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
   .office-text h4 { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; }
   .office-text p { font-size: 15px; font-weight: 500; line-height: 1.5; }
   .office-text a { color: var(--red-light); text-decoration: none; }
@@ -757,7 +780,7 @@
   }
   .office-visual::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at top right, rgba(173,41,62,0.12), transparent 60%);
+    background: radial-gradient(ellipse at top right, rgba(46,49,146,0.12), transparent 60%);
   }
   .office-visual h3 {
     font-family: 'Playfair Display', serif;
@@ -947,10 +970,50 @@
     50% { filter: drop-shadow(0 0 6px rgba(255,255,255,0.35)); }
   }
 
-  .hero-card-1 { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-  .hero-card-2 { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-  .hero-card-3 { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-  .hero-card-4 { box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .hero-card-1 { box-shadow: 0 6px 20px rgba(62,64,149,0.1); }
+  .hero-card-2 { box-shadow: 0 6px 20px rgba(62,64,149,0.1); }
+  .hero-card-3 { box-shadow: 0 6px 20px rgba(62,64,149,0.1); }
+  .hero-card-4 { box-shadow: 0 6px 20px rgba(62,64,149,0.1); }
+
+  /* ── LIGHT THEME OVERRIDES ─────────────────────────────────────────── */
+  body{color:#3e4095;}
+  .nav-links a:hover{color:#1e2070;}
+  .hamburger span{background:#3e4095;}
+  .metric-value{color:#1e2070;}
+  .metric-change{color:#26b573;}
+  .stat-num{color:#1e2070;}
+  .opp-card{color:#3e4095;}
+  .footer-col h4{color:#2e3192;}
+  .hero-metric-card{background:rgba(255,255,255,0.88);border:1px solid rgba(62,64,149,0.12);box-shadow:0 6px 22px rgba(62,64,149,0.1);}
+  .hero-metric-card:hover{background:#fff;animation-play-state:paused;}
+  .hero-metric-card::after{background:linear-gradient(90deg,transparent,rgba(62,64,149,0.06),transparent);}
+  @keyframes counterGlow{0%,100%{filter:none;}50%{filter:drop-shadow(0 0 5px rgba(46,49,146,0.28));}}
+  .btn-primary{background:#26b573;}
+  .btn-primary:hover{background:#2acc82;box-shadow:0 16px 40px rgba(38,181,115,0.4);}
+  .btn-white{background:#fff!important;color:var(--red)!important;}
+  .btn-white:hover{background:#eceef8!important;color:var(--red-dark)!important;transform:translateY(-3px);}
+  .btn-secondary{color:var(--red);border-color:var(--border-red);}
+  .cta-banner{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 50%,#2430a0 100%);}
+  .cta-banner h2,.cta-banner p{color:#ffffff;}
+  .cta-proposta { margin-top: 52px; text-align: center; }
+  .cta-proposta-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 0 auto 28px; max-width: 420px;
+  }
+  .cta-proposta-divider::before,.cta-proposta-divider::after {
+    content:''; flex:1; height:1px; background:rgba(255,255,255,0.2);
+  }
+  .cta-proposta-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); font-weight: 600; white-space: nowrap;
+  }
+  .cta-proposta-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    color: rgba(255,255,255,0.82);
+    line-height: 1.85; font-style: italic;
+    max-width: 660px; margin: 0 auto;
+  }
 </style>
 </head>
 <body>
@@ -961,7 +1024,7 @@
 <!-- NAV -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
-    <img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="nav-logo-img">
+    <img src="image/3Passe-logo.png" alt="Três PASSE Franquias &amp; Licenciamentos" class="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="#oportunidades">Oportunidades</a></li>
@@ -1016,13 +1079,14 @@
       <span class="accent">e reduza o risco.</span>
     </h1>
     <p class="hero-sub">
-      Acesse oportunidades com histórico real de lucro, números validados e suporte completo na transição. Você não começa do zero — você começa <strong>do meio, com vantagem.</strong>
+      Referência em repasse de franquias no Estado de Goiás. Acesse oportunidades com histórico real de lucro, números validados e suporte completo na transição. Você não começa do zero — você começa <strong>do meio, com vantagem.</strong>
     </p>
     <div class="hero-bullets">
       <div class="hero-bullet"><span class="chk">✓</span> Negócios já em operação</div>
       <div class="hero-bullet"><span class="chk">✓</span> Renda comprovada</div>
       <div class="hero-bullet"><span class="chk">✓</span> Estrutura pronta para assumir</div>
       <div class="hero-bullet"><span class="chk">✓</span> Análise gratuita do perfil</div>
+      <div class="hero-bullet"><span class="chk">✓</span> Franquia no Estado de Goiás</div>
     </div>
     <div class="hero-actions">
       <a href="#oportunidades" class="btn-primary">
@@ -1068,22 +1132,26 @@
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <div class="marquee-item">NEGÓCIOS JÁ FATURANDO <span class="sep"></span></div>
-    <div class="marquee-item">RENDA COMPROVADA <span class="sep"></span></div>
-    <div class="marquee-item">ANÁLISE GRATUITA <span class="sep"></span></div>
-    <div class="marquee-item">ENGENHARIA FINANCEIRA <span class="sep"></span></div>
-    <div class="marquee-item">TRANSIÇÃO APOIADA <span class="sep"></span></div>
-    <div class="marquee-item">FRANQUIAS SELECIONADAS <span class="sep"></span></div>
-    <div class="marquee-item">REPASSE ESPECIALIZADO <span class="sep"></span></div>
-    <div class="marquee-item">GOIÂNIA – BRASIL <span class="sep"></span></div>
-    <div class="marquee-item">NEGÓCIOS JÁ FATURANDO <span class="sep"></span></div>
-    <div class="marquee-item">RENDA COMPROVADA <span class="sep"></span></div>
-    <div class="marquee-item">ANÁLISE GRATUITA <span class="sep"></span></div>
-    <div class="marquee-item">ENGENHARIA FINANCEIRA <span class="sep"></span></div>
-    <div class="marquee-item">TRANSIÇÃO APOIADA <span class="sep"></span></div>
-    <div class="marquee-item">FRANQUIAS SELECIONADAS <span class="sep"></span></div>
-    <div class="marquee-item">REPASSE ESPECIALIZADO <span class="sep"></span></div>
-    <div class="marquee-item">GOIÂNIA – BRASIL <span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/subway.jpg" alt="Subway">Subway<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/subway.jpg" alt="Subway">Subway<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span class="sep"></span></div>
+    <div class="marquee-item"><img class="m-logo" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span class="sep"></span></div>
   </div>
 </div>
 
@@ -1094,7 +1162,7 @@
       <div class="reveal-left">
         <div class="section-label">O Problema Real</div>
         <h2>Abrir do zero parece seguro… até você ver o que <em>está realmente em jogo</em></h2>
-        <p>Você investe alto, aprende tudo do zero e ainda espera meses — ou anos — para ter retorno. E o pior: sem garantia real de resultado.</p>
+        <p>Você investe alto, aprende tudo do zero e ainda espera meses — ou anos — para ter retorno. No mercado goiano de franquias — um dos que mais cresce no Centro-Oeste — a concorrência não espera e o capital perdido não volta.</p>
         <p>O maior erro não é investir. É investir <strong>no negócio errado, na hora errada, sem dados reais.</strong></p>
       </div>
       <div class="pain-items reveal-right">
@@ -1164,8 +1232,8 @@
     <div class="solution-grid">
       <div class="reveal-left">
         <div class="section-label">A Solução</div>
-        <div class="section-title">A <em>3PASSE</em> conecta você a franquias ativas, prontas para assumir</div>
-        <p class="section-sub">Negócios reais, com histórico de desempenho e operação estruturada. Aqui, você não aposta. Você analisa e decide com base em dados.</p>
+        <div class="section-title">A <em>Três PASSE</em> conecta você às melhores franquias ativas de Goiás</div>
+        <p class="section-sub">Maior plataforma de repasse de franquias do Estado. Negócios reais, com histórico de desempenho comprovado e operação estruturada. Aqui, você não aposta — você analisa, decide com dados e <strong>sai na frente.</strong></p>
         <div class="solution-features">
           <div class="solution-feat">
             <div class="feat-dot"></div>
@@ -1244,7 +1312,7 @@
     </div>
     <div class="carousel-track-wrap">
       <div class="carousel-track" id="carouselTrack">
-        <!-- 3PASSE_CAROUSEL_START -->
+        <!-- Três PASSE_CAROUSEL_START -->
         <div class="opp-card" onclick="window.location.href='franquia.html?id=alimentacao-fast'">
           <div class="opp-card-img">
             <span class="cat-icon">🍕</span>
@@ -1301,7 +1369,7 @@
             <a class="opp-cta" href="franquia.html?id=educacao"><span>Ver Scanner Completo</span><span>→</span></a>
           </div>
         </div>
-        <!-- 3PASSE_CAROUSEL_END -->
+        <!-- Três PASSE_CAROUSEL_END -->
       </div>
     </div>
 
@@ -1312,7 +1380,7 @@
         <div class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Outras <em>oportunidades</em> selecionadas</div>
       </div>
       <div class="opps-grid">
-        <!-- 3PASSE_MINI_START -->
+        <!-- Três PASSE_MINI_START -->
         <a class="opp-list-card" href="franquia.html?id=pet">
           <div class="opp-list-icon">🐾</div>
           <div class="opp-list-info">
@@ -1349,9 +1417,9 @@
             </div>
           </div>
         </a>
-        <!-- 3PASSE_MINI_END -->
+        <!-- Três PASSE_MINI_END -->
         <a class="opp-list-card" href="/oportunidades">
-          <div class="opp-list-icon" style="background:rgba(173,41,62,0.2);border-color:rgba(173,41,62,0.4);">+</div>
+          <div class="opp-list-icon" style="background:rgba(46,49,146,0.2);border-color:rgba(46,49,146,0.4);">+</div>
           <div class="opp-list-info">
             <h4>Ver todas as oportunidades</h4>
             <p>Temos um portfólio em constante atualização. Fale com um especialista para ver o que se encaixa no seu perfil.</p>
@@ -1408,19 +1476,21 @@
   <div class="founders-inner">
     <div style="text-align:center;margin-bottom:20px;">
       <div class="section-label" style="justify-content:center;">Time Especialista</div>
-      <div class="section-title" style="text-align:center;">Quem está por trás da <em>3PASSE</em></div>
+      <div class="section-title" style="text-align:center;">Quem está por trás da <em>Três PASSE</em></div>
     </div>
     <div class="founders-grid reveal">
       <div class="founder-card">
-        <div class="founder-avatar">M</div>
+        <div class="founder-avatar" style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
+          <img src="image/mauro-mansur.jpeg" alt="Mauro Mansur" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;">
+        </div>
         <div class="founder-info">
-          <h3>Mauro</h3>
-          <div class="role">Fundador & CEO</div>
-          <p>Mais de 20 anos no setor de franchising, com passagens por grandes redes nacionais como consultor e franqueado. Especialista em due diligence e valuation de unidades franqueadas em operação.</p>
+          <h3>Mauro Mansur</h3>
+          <div class="role">CEO 3Passe</div>
+          <p>Empresário, contador, consultor empresarial a mais de 25 anos, larga experiência em M&A e REPASSE de franquias em Goiás.</p>
           <div class="founder-tags">
-            <span class="founder-tag">Franchising</span>
+            <span class="founder-tag">Franchising em Goiás</span>
             <span class="founder-tag">Due Diligence</span>
-            <span class="founder-tag">M&A</span>
+            <span class="founder-tag">M&A & REPASSE</span>
           </div>
         </div>
       </div>
@@ -1447,7 +1517,7 @@
     <div style="text-align:center;">
       <div class="section-label" style="justify-content:center;">Resultados Reais</div>
       <div class="section-title" style="text-align:center;">Cases de <em>Sucesso</em></div>
-      <p class="section-sub" style="text-align:center;margin:0 auto 60px;">Histórias reais de investidores que assumiram negócios ativos com a 3PASSE.</p>
+      <p class="section-sub" style="text-align:center;margin:0 auto 60px;">Histórias reais de investidores que assumiram negócios ativos com a Três PASSE.</p>
     </div>
     <div class="cases-grid">
       <div class="case-card reveal">
@@ -1467,7 +1537,7 @@
       </div>
       <div class="case-card reveal" style="transition-delay:0.1s">
         <div class="case-quote">"</div>
-        <p class="case-text">A 3PASSE me ajudou a usar meu apartamento como parte do pagamento. Fiz engenharia financeira que nunca teria conseguido sozinho. O negócio estava faturando antes de eu fechar o contrato.</p>
+        <p class="case-text">A Três PASSE me ajudou a usar meu apartamento como parte do pagamento. Fiz engenharia financeira que nunca teria conseguido sozinho. O negócio estava faturando antes de eu fechar o contrato.</p>
         <div class="case-result">
           <div class="r-label">Investimento inicial</div>
           <div class="r-val">R$0 em dinheiro</div>
@@ -1533,7 +1603,7 @@
       </div>
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">O diferencial da 3PASSE é a transparência. Você vê os números, conversa com quem estava na operação e decide com clareza total.</p>
+        <p class="testi-text">O diferencial da Três PASSE é a transparência. Você vê os números, conversa com quem estava na operação e decide com clareza total.</p>
         <div class="testi-author">
           <div class="testi-ava">JN</div>
           <div class="testi-author-info">
@@ -1557,7 +1627,7 @@
       </div>
       <div class="testi-card">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Estava com medo de empreender. A 3PASSE transformou esse medo em segurança. Comprei um negócio que já conhecia o caminho.</p>
+        <p class="testi-text">Estava com medo de empreender. A Três PASSE transformou esse medo em segurança. Comprei um negócio que já conhecia o caminho.</p>
         <div class="testi-author">
           <div class="testi-ava">FT</div>
           <div class="testi-author-info">
@@ -1595,7 +1665,7 @@
         @trespasse_franquias
       </a>
     </div>
-    <!-- 3PASSE_INSTAGRAM_START -->
+    <!-- Três PASSE_INSTAGRAM_START -->
     <div class="ig-grid reveal">
       <div class="ig-post" onclick="window.open('https://www.instagram.com/trespasse_franquias/','_blank')">
         <span class="ig-post-icon">🍕</span>
@@ -1638,7 +1708,7 @@
         <div class="ig-label">Novo portfólio disponível – confira!</div>
       </div>
     </div>
-    <!-- 3PASSE_INSTAGRAM_END -->
+    <!-- Três PASSE_INSTAGRAM_END -->
   </div>
 </section>
 
@@ -1685,7 +1755,7 @@
           <h3>Receba sua análise<br>de perfil <em style="color:var(--red);">gratuitamente</em></h3>
           <p>Fale com um especialista e descubra quais oportunidades fazem sentido para o seu perfil, objetivos e capacidade de investimento. Sem compromisso. Com total clareza.</p>
           <div class="office-cta-group">
-            <a href="https://wa.me/5562996345086?text=Olá! Quero conhecer as oportunidades da 3PASSE e receber uma análise gratuita do meu perfil." target="_blank" class="btn-primary" style="justify-content:center;">
+            <a href="https://wa.me/5562996345086?text=Olá! Quero conhecer as oportunidades da Três PASSE e receber uma análise gratuita do meu perfil." target="_blank" class="btn-primary" style="justify-content:center;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Falar no WhatsApp Agora
             </a>
@@ -1705,13 +1775,17 @@
     <h2>Existem oportunidades disponíveis agora que podem fazer sentido para você</h2>
     <p>Mas elas não ficam abertas por muito tempo. Fale com um especialista e veja as opções disponíveis antes que alguém tome sua frente.</p>
     <div class="cta-banner-btns">
-      <a href="https://wa.me/5562996345086?text=Olá! Quero falar com um especialista da 3PASSE sobre as franquias disponíveis." target="_blank" class="btn-primary btn-white">
+      <a href="https://wa.me/5562996345086?text=Olá! Quero falar com um especialista da Três PASSE sobre as franquias disponíveis." target="_blank" class="btn-primary btn-white">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Quero falar no WhatsApp agora
       </a>
       <a href="#oportunidades" class="btn-secondary btn-outline-white">
         Ver oportunidades disponíveis
       </a>
+    </div>
+    <div class="cta-proposta">
+      <div class="cta-proposta-divider"><span class="cta-proposta-label">Proposta de Valor</span></div>
+      <p class="cta-proposta-text">"Atuar de forma consultiva, transparente e colaborativa, tanto para quem está vendendo quanto para quem está comprando uma franquia de repasse. Nosso principal objetivo é ofertar oportunidades reais de negócios saudáveis, auditáveis e viáveis, com potencial de crescimento e perspectiva de maximização de resultados."</p>
     </div>
   </div>
 </div>
@@ -1721,7 +1795,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="logo-wrap">
-        <a href="index.html"><img src="image/3Passe.png" alt="3PASSE – Especialistas em Repasse de Franquias" class="footer-logo-img"></a>
+        <a href="index.html"><img src="image/3Passe-logo.png" alt="Três PASSE Franquias &amp; Licenciamentos" class="footer-logo-img"></a>
       </div>
       <p>A ponte estratégica entre o franqueado que deseja repassar sua unidade e você que objetiva adquirir um negócio ativo e com potencial.</p>
       <div class="footer-social">
@@ -1740,7 +1814,7 @@
       <h4>Navegação</h4>
       <a href="#oportunidades">Oportunidades</a>
       <a href="#como-funciona">Como Funciona</a>
-      <a href="#sobre">Sobre a 3PASSE</a>
+      <a href="#sobre">Sobre a Três PASSE</a>
       <a href="#cases">Cases de Sucesso</a>
       <a href="#contato">Contato</a>
     </div>
@@ -1758,24 +1832,22 @@
       <a href="https://wa.me/5562996345086">(62) 99634-5086</a>
       <a href="mailto:trespassefranquias@gmail.com">trespassefranquias@gmail.com</a>
       <a href="https://www.instagram.com/trespasse_franquias/" target="_blank">@trespasse_franquias</a>
-      <a href="https://linkedin.com/company/3passe" target="_blank">LinkedIn 3PASSE</a>
+      <a href="https://linkedin.com/company/3passe" target="_blank">LinkedIn Três PASSE</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 3PASSE – Especialistas em Repasse de Franquias. Todos os direitos reservados.</p>
+    <p style="font-size:11px;color:var(--gray);">© 2025 Três PASSE Franquias &amp; Licenciamentos. Todos os direitos reservados.</p>
+    <p style="font-size:11px;color:var(--gray);">Desenvolvido por <a href="https://inlinedigital.com.br" rel="dofollow" target="_blank" style="color:var(--gray2);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='#2e3192'" onmouseout="this.style.color='#3e4095'">Inline Digital &amp; Tecnologia</a></p>
     <div class="links">
       <a href="#">Termos e Condições</a>
       <a href="#">Política de Privacidade</a>
       <a href="#">Política de Cookies</a>
     </div>
   </div>
-  <div style="text-align:center;padding-top:14px;border-top:1px solid var(--border);margin-top:14px;">
-    <p style="font-size:11px;color:var(--gray);">Desenvolvido por <a href="https://inlinedigital.com.br" rel="dofollow" target="_blank" style="color:var(--gray2);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--gray2)'">Inline Digital &amp; Tecnologia</a></p>
-  </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a class="wa-float" href="https://wa.me/5562996345086?text=Olá! Vi o site da 3PASSE e quero saber mais sobre as franquias disponíveis." target="_blank" title="Falar no WhatsApp">
+<a class="wa-float" href="https://wa.me/5562996345086?text=Olá! Vi o site da Três PASSE e quero saber mais sobre as franquias disponíveis." target="_blank" title="Falar no WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
