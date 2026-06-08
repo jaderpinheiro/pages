@@ -2296,35 +2296,48 @@
       const infoEl = document.getElementById('leadImovelInfo');
       if (_leadImovelId) {
         const all = [...imoveis.destaque, ...imoveis.novos, ...imoveis.lancamentos];
-        const p = all.find(i => i.id === _leadImovelId);
-        if (p) { infoEl.innerHTML = '🏠 <strong>' + p.title + '</strong> — ' + p.price; infoEl.style.display = 'block'; }
+        // Busca no array estático OU no cache de imóveis WP
+        let p = all.find(i => i.id === _leadImovelId);
+        if (!p && window._tiImoveisCache) p = window._tiImoveisCache[_leadImovelId];
+        if (p) { infoEl.innerHTML = '🏠 <strong>' + (p.title||'') + '</strong> — ' + (p.price||''); infoEl.style.display = 'block'; }
+        else { infoEl.style.display = 'none'; }
       } else { infoEl.style.display = 'none'; }
       document.getElementById('leadPopup').classList.add('active');
       document.getElementById('leadNome').focus();
     }
     function closeLeadPopup() { document.getElementById('leadPopup').classList.remove('active'); }
     function submitLead() {
-      const nome = document.getElementById('leadNome').value.trim();
-      const tel = document.getElementById('leadTelefone').value.trim();
+      const nome  = document.getElementById('leadNome').value.trim();
+      const tel   = document.getElementById('leadTelefone').value.trim();
       const email = document.getElementById('leadEmail').value.trim();
       if (!nome || !tel) { document.getElementById(nome ? 'leadTelefone' : 'leadNome').focus(); return; }
+
+      // Dados do imóvel: array estático OU cache WP
       const all = [...imoveis.destaque, ...imoveis.novos, ...imoveis.lancamentos];
-      const p = _leadImovelId ? all.find(i => i.id === _leadImovelId) : null;
-      // Enviar para WP se disponível
-      if (typeof ti_ajax !== 'undefined') {
-        fetch(ti_ajax.url, {
+      let p = _leadImovelId ? all.find(i => i.id === _leadImovelId) : null;
+      if (!p && _leadImovelId && window._tiImoveisCache) p = window._tiImoveisCache[_leadImovelId];
+
+      // Salva no CRM WP — usa globals injetados pelo plugin (TI_AJAX_URL / TI_NONCE)
+      const ajaxUrl   = window.TI_AJAX_URL || (typeof ti_ajax !== 'undefined' ? ti_ajax.url   : null);
+      const ajaxNonce = window.TI_NONCE    || (typeof ti_ajax !== 'undefined' ? ti_ajax.nonce : null);
+      if (ajaxUrl && ajaxNonce) {
+        const wpId = p && p.id ? String(p.id).replace('wp-', '') : '';
+        fetch(ajaxUrl, {
           method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            action: 'ti_save_lead', nonce: ti_ajax.nonce,
-            nome, telefone: tel, email, imovel_id: p ? p.id : '', imovel_nome: p ? p.title : ''
-          })
+          body: new URLSearchParams({ action: 'ti_save_lead', nonce: ajaxNonce,
+            nome, telefone: tel, email, imovel_id: wpId, imovel_nome: p ? (p.title||'') : '' })
         });
       }
+
+      // Mensagem WA
+      const phone   = window.TI_PHONE    || '5562995219521';
+      const siteUrl = window.TI_SITE_URL || 'https://tarlypinheiroimoveis.com.br';
+      const propUrl = p ? (p.url || p._wpUrl || siteUrl) : siteUrl;
       const msg = p
-        ? `Olá Tarly! Me chamo ${nome}. Tenho interesse no imóvel: ${p.title} (${p.loc}) — ${p.price}. Meu celular: ${tel}`
-        : `Olá Tarly! Me chamo ${nome}. Gostaria de informações sobre os imóveis. Meu celular: ${tel}`;
+        ? `Olá Tarly! Me chamo ${nome}.\nTenho interesse: *${p.title||''}* — ${p.price||''}\nVeja: ${propUrl}\nMeu celular: ${tel}`
+        : `Olá Tarly! Me chamo ${nome}.\nGostaria de informações sobre imóveis.\nSite: ${siteUrl}\nMeu celular: ${tel}`;
       closeLeadPopup();
-      window.open('https://wa.me/5562995219521?text=' + encodeURIComponent(msg), '_blank');
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
     }
 
     function contactWA(id) { openLeadPopup(id); }
@@ -2361,7 +2374,8 @@
       if (input) p.set('busca', input);
       if (tipo  && tipo  !== 'Todos os imóveis') p.set('tipo',  tipo);
       if (faixa && faixa !== 'Qualquer valor')   p.set('faixa', faixa);
-      window.location.href = '/imoveis/?' + p.toString();
+      var base = (window.TI_SITE_URL || '').replace(/\/?$/, '/');
+      window.location.href = base + 'imoveis/?' + p.toString();
     }
 
     // NAV SCROLL
@@ -2389,6 +2403,42 @@
     renderCards(imoveis.novos, 'novos-grid');
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
     setTimeout(observeReveal, 100);
+
+    // Corrige links de região/SEO/busca com a URL base do WP (injetada via TI_SITE_URL)
+    setTimeout(function() {
+      var base = (window.TI_SITE_URL || '').replace(/\/?$/, '/');
+      if (!base) return;
+      document.querySelectorAll('.region-link').forEach(function(a) {
+        a.href = base + 'imoveis/?busca=' + encodeURIComponent(a.textContent.trim());
+      });
+      document.querySelectorAll('.seo-phrase').forEach(function(a) {
+        a.href = base + 'imoveis/?busca=' + encodeURIComponent(a.textContent.trim());
+      });
+      // "Ver todos →" nas seções (destaque→Venda, novos→Venda, lançamentos→Lançamento)
+      var verTodos = document.querySelectorAll('.section-link');
+      var negs = ['Venda','Venda','Lançamento'];
+      verTodos.forEach(function(a, i) {
+        if (a.textContent.trim() === 'Ver todos →')
+          a.href = base + 'imoveis/?negocio=' + encodeURIComponent(negs[i] || 'Venda');
+      });
+      // Buscar Imóveis no footer
+      document.querySelectorAll('.footer-links a').forEach(function(a) {
+        var t = a.textContent.trim();
+        var map = {
+          'Buscar Imóveis': base+'imoveis/',
+          'Comprar imóvel': base+'imoveis/?negocio=Venda',
+          'Alugar imóvel':  base+'imoveis/?negocio=Aluguel',
+          'Lançamentos':    base+'imoveis/?negocio=Lançamento',
+          'Setor Bueno':    base+'imoveis/?busca=Setor+Bueno',
+          'Setor Marista':  base+'imoveis/?busca=Setor+Marista',
+          'Jardim Goiás':   base+'imoveis/?busca=Jardim+Goias',
+          'Negrão de Lima': base+'imoveis/?busca=Negrao+de+Lima',
+          'Aparecida de Goiânia': base+'imoveis/?busca=Aparecida+de+Goiania',
+          'Alphaville Goiânia':   base+'imoveis/?busca=Alphaville',
+        };
+        if (map[t]) a.href = map[t];
+      });
+    }, 200);
 
     // ── WP REST API: carrega imóveis reais ──────────────────────────────────────
     // window.TI_WP_REST é injetado pelo plugin via wp_head (tem prioridade).
