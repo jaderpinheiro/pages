@@ -2447,6 +2447,8 @@
       var REST_URL = (typeof window.TI_WP_REST !== 'undefined')
         ? window.TI_WP_REST
         : new URL('wp-json/ti/v1/imoveis', window.location.href).href;
+      // Evita mixed content: força o mesmo protocolo da página (http→https)
+      REST_URL = REST_URL.replace(/^https?:/, window.location.protocol);
       fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
         .then(function (data) {
