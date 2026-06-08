@@ -2390,11 +2390,13 @@
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
     setTimeout(observeReveal, 100);
 
-    // ── WP REST API: carrega imóveis reais se WordPress estiver disponível ──
+    // ── WP REST API: carrega imóveis reais ──────────────────────────────────────
+    // window.TI_WP_REST é injetado pelo plugin via wp_head (tem prioridade).
+    // Fallback: new URL() resolve path relativo (funciona quando servido direto pelo WP).
     (function () {
-      // new URL() resolve corretamente tanto raiz quanto subdiretório
-      // Ex: http://localhost/Tarlypinheiro/ → http://localhost/Tarlypinheiro/wp-json/ti/v1/imoveis
-      var REST_URL = new URL('wp-json/ti/v1/imoveis', window.location.href).href;
+      var REST_URL = (typeof window.TI_WP_REST !== 'undefined')
+        ? window.TI_WP_REST
+        : new URL('wp-json/ti/v1/imoveis', window.location.href).href;
       fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
         .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
         .then(function (data) {
