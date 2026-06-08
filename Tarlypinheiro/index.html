@@ -1722,7 +1722,7 @@
           <span class="creci-badge">CRECI 105224</span>
         </div>
         <div class="topbar-right">
-          <span>☎ (62) 9 9521-9521</span>
+          <a href="tel:+5562995219521" style="color:rgba(255,255,255,0.75);text-decoration:none;">☎ (62) 9 9521-9521</a>
           <a href="javascript:void(0)" onclick="openLeadPopup(null)" class="btn-contact-top">Falar no WhatsApp</a>
         </div>
       </div>
@@ -2352,33 +2352,16 @@
     }
 
     function doSearch() {
-      const input = document.querySelector('.search-field input').value.trim();
-      const sels = document.querySelectorAll('.search-field select');
-      const tipo = sels[0] ? sels[0].value : '';
-      const faixa = sels[1] ? sels[1].value : '';
+      const input   = document.querySelector('.search-field input').value.trim();
+      const sels    = document.querySelectorAll('.search-field select');
+      const tipo    = sels[0] ? sels[0].value : '';
+      const faixa   = sels[1] ? sels[1].value : '';
       const negocio = (document.querySelector('.stab.active') || {}).textContent || 'Comprar';
-
-      // Modo WP: redireciona para a página de busca
-      if (typeof ti_ajax !== 'undefined') {
-        const p = new URLSearchParams({ negocio: negocio.trim() });
-        if (input) p.set('busca', input);
-        if (tipo && tipo !== 'Todos os imóveis') p.set('tipo', tipo);
-        if (faixa && faixa !== 'Qualquer valor') p.set('faixa', faixa);
-        window.location.href = '/imoveis/?' + p.toString();
-        return;
-      }
-
-      // Modo standalone: filtra cards locais
-      const all = [...imoveis.destaque, ...imoveis.novos, ...imoveis.lancamentos];
-      const term = input.toLowerCase();
-      const filtrados = all.filter(p => {
-        const m = !term || p.title.toLowerCase().includes(term) || p.loc.toLowerCase().includes(term);
-        const t = !tipo || tipo === 'Todos os imóveis' || p.title.toLowerCase().includes(tipo.toLowerCase());
-        return m && t;
-      });
-      if (!filtrados.length) { alert('Nenhum imóvel encontrado para os filtros selecionados.'); return; }
-      renderCards(filtrados.slice(0, 4), 'destaque-grid');
-      document.getElementById('comprar').scrollIntoView({ behavior: 'smooth' });
+      const p = new URLSearchParams({ negocio: negocio.trim() });
+      if (input) p.set('busca', input);
+      if (tipo  && tipo  !== 'Todos os imóveis') p.set('tipo',  tipo);
+      if (faixa && faixa !== 'Qualquer valor')   p.set('faixa', faixa);
+      window.location.href = '/imoveis/?' + p.toString();
     }
 
     // NAV SCROLL
@@ -2406,6 +2389,83 @@
     renderCards(imoveis.novos, 'novos-grid');
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
     setTimeout(observeReveal, 100);
+
+    // ── WP REST API: carrega imóveis reais se WordPress estiver disponível ──
+    // Quando o arquivo index.html é servido diretamente, esta seção injeta os
+    // imóveis cadastrados no WP substituindo os dados estáticos acima.
+    (function () {
+      var REST_URL = window.location.origin + '/wp-json/ti/v1/imoveis';
+      fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data || (!data.destaque && !data.novos)) return;
+
+          // Mapear dados WP → formato dos cards estáticos
+          function wpToCard(p, idx) {
+            var colors = ['#E8F0F7','#F5F0E8','#EAF5EA','#F0E8F5','#FCEEE8','#E8F5F0'];
+            return {
+              id:        'wp-' + p.id,
+              title:     p.title,
+              loc:       p.loc,
+              area:      p.area  || '',
+              quartos:   p.quartos || '',
+              banheiros: '',
+              vagas:     p.vagas || '',
+              price:     p.price || 'Consulte',
+              cond:      '',
+              badge:     p.negocio || 'Venda',
+              badgeClass: p.destaque ? 'gold' : '',
+              desc:      '',
+              color:     colors[idx % colors.length],
+              _wpUrl:    p.url,
+              _wpThumb:  p.thumb || '',
+            };
+          }
+
+          // Função de render para cards WP (abre URL direta ao invés de openDetail)
+          function renderWPCards(list, containerId) {
+            var container = document.getElementById(containerId);
+            if (!container || !list || !list.length) return;
+            // Preenche o cache de imóveis para o popup de lead
+            if (!window._tiImoveisCache) window._tiImoveisCache = {};
+            list.forEach(function (p) {
+              window._tiImoveisCache[p.id] = { id: p.id, title: p.title, price: p.price, url: p._wpUrl };
+            });
+            container.innerHTML = list.map(function (p, i) {
+              var imgHtml = p._wpThumb
+                ? '<img src="' + p._wpThumb + '" alt="' + p.title + '" loading="lazy" style="width:100%;height:200px;object-fit:cover;">'
+                : '<div class="ig-placeholder" style="background:linear-gradient(135deg,' + p.color + ',' + p.color + '88);height:200px;"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="rgba(100,130,160,0.35)" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>';
+              return '<div class="card reveal" onclick="window.location.href=\'' + p._wpUrl + '\'">'
+                + '<div class="card-img">' + imgHtml
+                + '<span class="card-badge ' + p.badgeClass + '">' + p.badge + '</span></div>'
+                + '<div class="card-body">'
+                + '<div class="card-title">' + p.title + '</div>'
+                + '<div class="card-loc">📍 ' + p.loc + '</div>'
+                + '<div class="card-features">'
+                + (p.area    ? '<span class="feat">📐 ' + p.area + '</span>' : '')
+                + (p.quartos ? '<span class="feat">🛏 ' + p.quartos + '</span>' : '')
+                + (p.vagas   ? '<span class="feat">🚗 ' + p.vagas + '</span>' : '')
+                + '</div>'
+                + '<div class="card-price">' + p.price + '</div>'
+                + '</div>'
+                + '<div class="card-footer">'
+                + '<button class="btn-card btn-card-primary" onclick="event.stopPropagation();openLeadPopup(\'' + p.id + '\')">Tenho interesse</button>'
+                + '<a href="' + p._wpUrl + '" class="btn-card btn-card-outline" onclick="event.stopPropagation()">Ver detalhes →</a>'
+                + '</div></div>';
+            }).join('');
+            // Re-observar animações
+            setTimeout(observeReveal, 100);
+          }
+
+          if (data.destaque && data.destaque.length) {
+            renderWPCards(data.destaque.map(wpToCard), 'destaque-grid');
+          }
+          if (data.novos && data.novos.length) {
+            renderWPCards(data.novos.map(wpToCard), 'novos-grid');
+          }
+        })
+        .catch(function () { /* WordPress indisponível — mantém dados estáticos */ });
+    })();
   </script>
 </body>
 
