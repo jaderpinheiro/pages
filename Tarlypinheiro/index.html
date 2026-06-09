@@ -171,6 +171,23 @@
 
     .logo {
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 6px;
+    }
+
+    .logo-text {
+      display: flex;
       flex-direction: column;
       line-height: 1;
     }
@@ -301,6 +318,16 @@
     .hero-left {
       padding: 80px 48px 80px 64px;
       animation: slideUp 0.8s ease both;
+    }
+
+    .hero-logo {
+      display: block;
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.72;
+      margin-bottom: 20px;
+      border-radius: 6px;
     }
 
     .hero-tag {
@@ -721,10 +748,11 @@
     }
 
     .card-price {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 22px;
       font-weight: 700;
       color: var(--navy);
+      font-variant-numeric: tabular-nums;
     }
 
     .card-price-sub {
@@ -1442,11 +1470,12 @@
     }
 
     .price-big {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 36px;
       font-weight: 700;
       color: var(--navy);
       margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
     }
 
     .price-cond {
@@ -1658,6 +1687,9 @@
     }
 
     @media(max-width:480px) {
+      .logo-img { height: 32px; }
+      .logo-name { font-size: 18px; }
+      .logo-sub  { font-size: 8px; letter-spacing: 2px; }
       .cards-grid {
         grid-template-columns: 1fr;
       }
@@ -1687,7 +1719,7 @@
       <p>Preencha seus dados e entraremos em contato agora mesmo</p>
       <div id="leadImovelInfo" class="lead-imovel-info"></div>
       <input type="text" id="leadNome" placeholder="Seu nome completo *" autocomplete="name">
-      <input type="tel" id="leadTelefone" placeholder="(62) 9 9521-9521 *" autocomplete="tel">
+      <input type="tel" id="leadTelefone" placeholder="(62) 9 9521-9521 *" autocomplete="tel" oninput="tiMaskPhone(this)" maxlength="16">
       <input type="email" id="leadEmail" placeholder="Seu e-mail (opcional)" autocomplete="email">
       <button class="btn-lead-submit" onclick="submitLead()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -1732,8 +1764,11 @@
     <nav id="mainNav">
       <div class="nav-inner">
         <div class="logo">
-          <span class="logo-name">Tarly Pinheiro</span>
-          <span class="logo-sub">Imóveis · CRECI 105224</span>
+          <img src="image/tarlypinheiro%20tarlypinheiro.com.br.png" alt="Tarly Pinheiro Imóveis" class="logo-img" onerror="this.style.display='none'">
+          <div class="logo-text">
+            <span class="logo-name">Tarly Pinheiro</span>
+            <span class="logo-sub">Imóveis · CRECI 105224</span>
+          </div>
         </div>
         <div class="nav-links">
           <a href="#comprar" class="nav-link active">Comprar</a>
@@ -1751,6 +1786,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-left">
+        <img src="image/tarlypinheiro%20tarlypinheiro.com.br.png" alt="Tarly Pinheiro Imóveis" class="hero-logo" onerror="this.style.display='none'">
         <div class="hero-tag">Especialista em Goiânia</div>
         <h1 class="hero-h1">O imóvel que você<br>sempre sonhou está<br><em>mais perto</em> do que<br>você imagina.</h1>
         <p class="hero-sub">Com expertise, dedicação e o melhor portfólio de imóveis em Goiânia e região, transformamos
@@ -2288,6 +2324,21 @@
       document.title = 'Tarly Pinheiro Imóveis | CRECI 105224 | Goiânia';
     }
 
+    // MASKS
+    function tiMaskPhone(el) {
+      var v = el.value.replace(/\D/g, '');
+      if (v.length <= 10) {
+        v = v.replace(/^(\d{0,2})(\d{0,4})(\d{0,4}).*/, function(_, a, b, c) {
+          return (a ? '(' + a : '') + (b ? ') ' + b : '') + (c ? '-' + c : '');
+        });
+      } else {
+        v = v.replace(/^(\d{0,2})(\d{1})(\d{0,4})(\d{0,4}).*/, function(_, a, b, c, d) {
+          return (a ? '(' + a : '') + (b ? ') ' + b : '') + (c ? ' ' + c : '') + (d ? '-' + d : '');
+        });
+      }
+      el.value = v;
+    }
+
     // LEAD POPUP
     let _leadImovelId = null;
 
@@ -2440,94 +2491,76 @@
       });
     }, 200);
 
-    // ── WP REST API: carrega imóveis reais ──────────────────────────────────────
-    // window.TI_WP_REST é injetado pelo plugin via wp_head (tem prioridade).
-    // Fallback: new URL() resolve path relativo (funciona quando servido direto pelo WP).
-    (function () {
-      var REST_URL = (typeof window.TI_WP_REST !== 'undefined')
-        ? window.TI_WP_REST
-        : new URL('wp-json/ti/v1/imoveis', window.location.href).href;
-      // Evita mixed content: força o mesmo protocolo da página (http→https)
-      REST_URL = REST_URL.replace(/^https?:/, window.location.protocol);
-      fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
-        .then(function (data) {
-          if (!data) return;
+  </script>
 
-          // Mapear dados WP → formato dos cards estáticos
-          function wpToCard(p, idx) {
-            var colors = ['#E8F0F7','#F5F0E8','#EAF5EA','#F0E8F5','#FCEEE8','#E8F5F0'];
-            return {
-              id:        'wp-' + p.id,
-              title:     p.title,
-              loc:       p.loc,
-              area:      p.area  || '',
-              quartos:   p.quartos || '',
-              banheiros: '',
-              vagas:     p.vagas || '',
-              price:     p.price || 'Consulte',
-              cond:      '',
-              badge:     p.negocio || 'Venda',
-              badgeClass: p.destaque ? 'gold' : '',
-              desc:      '',
-              color:     colors[idx % colors.length],
-              _wpUrl:    p.url,
-              _wpThumb:  p.thumb || '',
-            };
-          }
+  <!-- WP REST: bloco isolado — roda mesmo se o script acima tiver erro -->
+  <script>
+  (function () {
+    var REST_URL = (typeof window.TI_WP_REST !== 'undefined')
+      ? window.TI_WP_REST
+      : new URL('wp-json/ti/v1/imoveis', window.location.href).href;
+    REST_URL = REST_URL.replace(/^https?:/, window.location.protocol);
 
-          // Função de render para cards WP (abre URL direta ao invés de openDetail)
-          function renderWPCards(list, containerId) {
-            var container = document.getElementById(containerId);
-            if (!container || !list || !list.length) return;
-            // Preenche o cache de imóveis para o popup de lead
-            if (!window._tiImoveisCache) window._tiImoveisCache = {};
-            list.forEach(function (p) {
-              window._tiImoveisCache[p.id] = { id: p.id, title: p.title, price: p.price, url: p._wpUrl };
-            });
-            container.innerHTML = list.map(function (p, i) {
-              var imgHtml = p._wpThumb
-                ? '<img src="' + p._wpThumb + '" alt="' + p.title + '" loading="lazy" style="width:100%;height:200px;object-fit:cover;">'
-                : '<div class="ig-placeholder" style="background:linear-gradient(135deg,' + p.color + ',' + p.color + '88);height:200px;"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="rgba(100,130,160,0.35)" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>';
-              return '<div class="card reveal" onclick="window.location.href=\'' + p._wpUrl + '\'">'
-                + '<div class="card-img">' + imgHtml
-                + '<span class="card-badge ' + p.badgeClass + '">' + p.badge + '</span></div>'
-                + '<div class="card-body">'
-                + '<div class="card-title">' + p.title + '</div>'
-                + '<div class="card-loc">📍 ' + p.loc + '</div>'
-                + '<div class="card-features">'
-                + (p.area    ? '<span class="feat">📐 ' + p.area + '</span>' : '')
-                + (p.quartos ? '<span class="feat">🛏 ' + p.quartos + '</span>' : '')
-                + (p.vagas   ? '<span class="feat">🚗 ' + p.vagas + '</span>' : '')
-                + '</div>'
-                + '<div class="card-price">' + p.price + '</div>'
-                + '</div>'
-                + '<div class="card-footer">'
-                + '<button class="btn-card btn-card-primary" onclick="event.stopPropagation();openLeadPopup(\'' + p.id + '\')">Tenho interesse</button>'
-                + '<a href="' + p._wpUrl + '" class="btn-card btn-card-outline" onclick="event.stopPropagation()">Ver detalhes →</a>'
-                + '</div></div>';
-            }).join('');
-            // Re-observar animações
-            setTimeout(observeReveal, 100);
-          }
+    function wpToCard(p, idx) {
+      var colors = ['#E8F0F7','#F5F0E8','#EAF5EA','#F0E8F5','#FCEEE8','#E8F5F0'];
+      return {
+        id: 'wp-' + p.id, title: p.title, loc: p.loc,
+        area: p.area || '', quartos: p.quartos || '', vagas: p.vagas || '',
+        price: p.price || 'Consulte', badge: p.negocio || 'Venda',
+        badgeClass: p.destaque ? 'gold' : '', color: colors[idx % colors.length],
+        _wpUrl: p.url, _wpThumb: p.thumb || ''
+      };
+    }
 
-          // Se destaque tiver imóveis, substitui o grid de destaque
-          if (Array.isArray(data.destaque) && data.destaque.length) {
-            renderWPCards(data.destaque.map(wpToCard), 'destaque-grid');
-          }
-          // novos sempre substitui (retorna todos os publicados sem filtro)
-          if (Array.isArray(data.novos) && data.novos.length) {
-            renderWPCards(data.novos.map(wpToCard), 'novos-grid');
-          }
-          // Se destaque vazio mas novos tem imóveis, também preenche destaque-grid
-          if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length)) {
-            renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
-          }
-        })
-        .catch(function (err) {
-          console.warn('[T Imóveis] REST API indisponível:', err, '\nURL tentada:', REST_URL);
-        });
-    })();
+    function renderWPCards(list, containerId) {
+      var container = document.getElementById(containerId);
+      if (!container || !list || !list.length) return;
+      if (!window._tiImoveisCache) window._tiImoveisCache = {};
+      list.forEach(function (p) {
+        window._tiImoveisCache[p.id] = { id: p.id, title: p.title, price: p.price, url: p._wpUrl };
+      });
+      container.innerHTML = list.map(function (p) {
+        var img = p._wpThumb
+          ? '<img src="' + p._wpThumb + '" alt="' + p.title.replace(/"/g,'&quot;') + '" loading="lazy" style="width:100%;height:200px;object-fit:cover;">'
+          : '<div style="background:' + p.color + ';height:200px;display:flex;align-items:center;justify-content:center;"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="rgba(100,130,160,0.35)" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>';
+        var safeId  = String(p.id).replace(/'/g,'');
+        var safeUrl = p._wpUrl.replace(/'/g,'%27');
+        return '<div class="card reveal" onclick="window.location.href=\'' + safeUrl + '\'">'
+          + '<div class="card-img">' + img
+          + '<span class="card-badge ' + p.badgeClass + '">' + p.badge + '</span></div>'
+          + '<div class="card-body">'
+          + '<div class="card-title">' + p.title + '</div>'
+          + '<div class="card-loc">📍 ' + p.loc + '</div>'
+          + '<div class="card-features">'
+          + (p.area    ? '<span class="feat">📐 ' + p.area + '</span>' : '')
+          + (p.quartos ? '<span class="feat">🛏 ' + p.quartos + '</span>' : '')
+          + (p.vagas   ? '<span class="feat">🚗 ' + p.vagas + '</span>' : '')
+          + '</div>'
+          + '<div class="card-price">' + p.price + '</div>'
+          + '</div>'
+          + '<div class="card-footer">'
+          + '<button class="btn-card btn-card-primary" onclick="event.stopPropagation();(window.openLeadPopup||function(){})(\'' + safeId + '\')">Tenho interesse</button>'
+          + '<a href="' + p._wpUrl + '" class="btn-card btn-card-outline" onclick="event.stopPropagation()">Ver detalhes →</a>'
+          + '</div></div>';
+      }).join('');
+      if (typeof observeReveal === 'function') setTimeout(observeReveal, 100);
+    }
+
+    fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
+      .then(function (data) {
+        if (!data) return;
+        if (Array.isArray(data.destaque) && data.destaque.length)
+          renderWPCards(data.destaque.map(wpToCard), 'destaque-grid');
+        if (Array.isArray(data.novos) && data.novos.length)
+          renderWPCards(data.novos.map(wpToCard), 'novos-grid');
+        if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length))
+          renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
+      })
+      .catch(function (err) {
+        console.warn('[T Imoveis] REST indisponivel:', err, REST_URL);
+      });
+  })();
   </script>
 </body>
 
