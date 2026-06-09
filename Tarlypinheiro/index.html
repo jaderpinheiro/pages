@@ -284,13 +284,18 @@
 
     /* HERO */
     .hero {
-      min-height: 88vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
       background: linear-gradient(135deg, var(--white) 0%, var(--blue-light) 60%, var(--cream) 100%);
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      min-height: 88vh;
     }
 
     .hero::before {
@@ -322,7 +327,7 @@
 
     .hero-logo {
       display: block;
-      height: 56px;
+      height: 72px;
       width: auto;
       object-fit: contain;
       opacity: 0.72;
@@ -428,6 +433,8 @@
       box-shadow: 0 20px 60px rgba(13, 27, 42, 0.12), 0 0 0 1px var(--border);
       padding: 32px;
       position: relative;
+      max-width: 440px;
+      margin: 0 auto;
     }
 
     .search-box::before {
@@ -1621,7 +1628,7 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .hero {
+      .hero-inner {
         grid-template-columns: 1fr;
       }
 
@@ -1785,6 +1792,7 @@
 
     <!-- HERO -->
     <section class="hero">
+      <div class="hero-inner">
       <div class="hero-left">
         <img src="image/tarlypinheiro%20tarlypinheiro.com.br.png" alt="Tarly Pinheiro Imóveis" class="hero-logo" onerror="this.style.display='none'">
         <div class="hero-tag">Especialista em Goiânia</div>
@@ -1854,6 +1862,7 @@
           </button>
         </div>
       </div>
+      </div><!-- /hero-inner -->
     </section>
 
     <!-- DESTAQUE E OPORTUNIDADES -->
@@ -2445,9 +2454,9 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    function observeReveal() {
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
+    window.observeReveal = function observeReveal() {
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+    };
 
     function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
     function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
@@ -2456,7 +2465,7 @@
     renderCards(imoveis.destaque, 'destaque-grid');
     renderCards(imoveis.novos, 'novos-grid');
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
-    setTimeout(observeReveal, 100);
+    setTimeout(window.observeReveal, 100);
 
     // Corrige links de região/SEO/busca com a URL base do WP (injetada via TI_SITE_URL)
     setTimeout(function() {
