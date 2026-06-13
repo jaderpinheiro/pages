@@ -1105,6 +1105,9 @@
     .dev-credit strong {
       color: rgba(255, 255, 255, 0.6);
     }
+    .ti-inline-link{color:inherit;text-decoration:none;}
+    @keyframes ti-glow-sweep{0%{background-position:-250% center}100%{background-position:250% center}}
+    .ti-inline-glow{background:linear-gradient(90deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,1) 45%,rgba(255,255,255,0.45) 100%);background-size:250% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:ti-glow-sweep 4s linear infinite;}
 
     /* LEAD POPUP */
     .lead-popup {
@@ -1873,7 +1876,7 @@
             <p class="section-label">Seleção exclusiva</p>
             <h2 class="section-title">Imóveis em Destaque &amp; Oportunidades</h2>
           </div>
-          <a href="#" class="section-link">Ver todos →</a>
+          <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
         <div class="cards-grid" id="destaque-grid">
           <!-- Gerado via JS -->
@@ -1889,7 +1892,7 @@
             <p class="section-label">Prontos para morar</p>
             <h2 class="section-title">Imóveis Novos Entregues</h2>
           </div>
-          <a href="#" class="section-link">Ver todos →</a>
+          <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
         <div class="cards-grid" id="novos-grid"></div>
       </div>
@@ -1903,7 +1906,7 @@
             <p class="section-label">Pré-lançamento</p>
             <h2 class="section-title">Lançamentos Exclusivos</h2>
           </div>
-          <a href="#" class="section-link">Ver todos →</a>
+          <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
         <div class="cards-grid" id="lancamentos-grid"></div>
       </div>
@@ -2141,7 +2144,7 @@
       <div class="footer-bottom">
         <p>© 2025 Tarly Pinheiro Imóveis | CRECI 105224 | Todos os direitos reservados | <a href="#">Política de
             Privacidade</a> | <a href="#">Termos de Uso</a></p>
-        <p class="dev-credit">Desenvolvido por <strong>Inline Digital &amp; Tecnologia</strong></p>
+        <p class="dev-credit">Desenvolvido por <strong><a href="https://inlinedigital.com.br" target="_blank" rel="noopener" class="ti-inline-link"><span class="ti-inline-glow">Inline Digital &amp; Tecnologia</span></a></strong></p>
       </div>
     </footer>
 
@@ -2211,7 +2214,7 @@
     </div>
     <div style="background:var(--navy);padding:16px 24px;text-align:center;">
       <p style="font-size:12px;color:rgba(255,255,255,0.35);">© 2025 Tarly Pinheiro Imóveis | CRECI 105224 |
-        Desenvolvido por <strong style="color:rgba(255,255,255,0.6)">Inline Digital & Tecnologia</strong></p>
+        Desenvolvido por <strong style="color:rgba(255,255,255,0.6)"><a href="https://inlinedigital.com.br" target="_blank" rel="noopener" class="ti-inline-link"><span class="ti-inline-glow">Inline Digital & Tecnologia</span></a></strong></p>
     </div>
   </div>
 
@@ -2572,6 +2575,17 @@
       .catch(function (err) {
         console.warn('[T Imoveis] REST indisponivel:', err, REST_URL);
       });
+  })();
+  </script>
+  <script>
+  // Corrige region-links e previne href="#" de rolar para o topo
+  (function(){
+    document.querySelectorAll('.region-link[href="#"]').forEach(function(a){
+      a.href='/imoveis/?busca='+encodeURIComponent(a.textContent.trim());
+    });
+    document.querySelectorAll('a[href="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){e.preventDefault();});
+    });
   })();
   </script>
 </body>
