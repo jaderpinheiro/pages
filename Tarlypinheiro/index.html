@@ -1575,6 +1575,42 @@
       transform: translateY(0);
     }
 
+    /* ACCESSIBILITY UTILITIES (não alteram o layout visual) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 1000;
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 0 0 8px 0;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      left: 0;
+    }
+
+    form.search-box,
+    form.lead-popup-box,
+    form.footer-newsletter {
+      margin: 0;
+    }
+
     /* MOBILE NAV */
     .mobile-menu {
       display: none;
@@ -1716,35 +1752,39 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQZX45G2" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
   <!-- LEAD POPUP -->
-  <div id="leadPopup" class="lead-popup" onclick="if(event.target===this)closeLeadPopup()">
-    <div class="lead-popup-box">
-      <button class="lead-popup-close" onclick="closeLeadPopup()" aria-label="Fechar">✕</button>
-      <h3>Falar com Tarly</h3>
+  <div id="leadPopup" class="lead-popup" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="leadPopupTitle" onclick="if(event.target===this)closeLeadPopup()">
+    <form class="lead-popup-box" toolname="contactRealEstateAgent" tooldescription="Envia um pedido de contato com a Tarly Pinheiro Imóveis (CRECI 105224) sobre um imóvel, abrindo o WhatsApp com a mensagem pronta." onsubmit="event.preventDefault();submitLead();if(event.agentInvoked){event.respondWith(Promise.resolve('Solicitação de contato enviada via WhatsApp.'));}">
+      <button class="lead-popup-close" type="button" onclick="closeLeadPopup()" aria-label="Fechar">✕</button>
+      <h3 id="leadPopupTitle">Falar com Tarly</h3>
       <p>Preencha seus dados e entraremos em contato agora mesmo</p>
       <div id="leadImovelInfo" class="lead-imovel-info"></div>
-      <input type="text" id="leadNome" placeholder="Seu nome completo *" autocomplete="name">
-      <input type="tel" id="leadTelefone" placeholder="(62) 9 9521-9521 *" autocomplete="tel" oninput="tiMaskPhone(this)" maxlength="16">
-      <input type="email" id="leadEmail" placeholder="Seu e-mail (opcional)" autocomplete="email">
-      <button class="btn-lead-submit" onclick="submitLead()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <label class="sr-only" for="leadNome">Seu nome completo</label>
+      <input type="text" id="leadNome" name="nome" placeholder="Seu nome completo *" autocomplete="name" required>
+      <label class="sr-only" for="leadTelefone">Seu telefone com DDD</label>
+      <input type="tel" id="leadTelefone" name="telefone" placeholder="(62) 9 9521-9521 *" autocomplete="tel" oninput="tiMaskPhone(this)" maxlength="16" required>
+      <label class="sr-only" for="leadEmail">Seu e-mail (opcional)</label>
+      <input type="email" id="leadEmail" name="email" placeholder="Seu e-mail (opcional)" autocomplete="email" toolparamdescription="E-mail opcional para contato.">
+      <button class="btn-lead-submit" type="submit">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path
             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
         </svg>
         Falar no WhatsApp agora
       </button>
       <p class="lead-popup-note">Seus dados são 100% seguros e não serão compartilhados.</p>
-    </div>
+    </form>
   </div>
 
   <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <button class="mobile-close" type="button" onclick="closeMobileMenu()" aria-label="Fechar menu">✕</button>
     <a href="#comprar" class="nav-link" onclick="closeMobileMenu()">Comprar</a>
     <a href="#alugar" class="nav-link" onclick="closeMobileMenu()">Alugar</a>
     <a href="#lancamentos" class="nav-link" onclick="closeMobileMenu()">Lançamentos</a>
@@ -1755,6 +1795,7 @@
   <!-- MAIN PAGE -->
   <div id="main-page">
 
+    <header>
     <!-- TOP BAR -->
     <div class="topbar">
       <div class="topbar-inner">
@@ -1765,13 +1806,13 @@
         </div>
         <div class="topbar-right">
           <a href="tel:+5562995219521" style="color:rgba(255,255,255,0.75);text-decoration:none;">☎ (62) 9 9521-9521</a>
-          <a href="javascript:void(0)" onclick="openLeadPopup(null)" class="btn-contact-top">Falar no WhatsApp</a>
+          <a href="javascript:void(0)" onclick="openLeadPopup(null)" class="btn-contact-top" role="button">Falar no WhatsApp</a>
         </div>
       </div>
     </div>
 
     <!-- NAV -->
-    <nav id="mainNav">
+    <nav id="mainNav" aria-label="Navegação principal">
       <div class="nav-inner">
         <div class="logo">
           <img src="image/tarlypinheiro%20tarlypinheiro.com.br.png" alt="Tarly Pinheiro Imóveis" class="logo-img" onerror="this.style.display='none'">
@@ -1786,13 +1827,15 @@
           <a href="#lancamentos" class="nav-link">Lançamentos</a>
           <a href="#financiamento" class="nav-link">Financiamento</a>
         </div>
-        <a href="javascript:void(0)" onclick="openLeadPopup(null)" class="nav-cta">📱 Contato</a>
-        <div class="hamburger" onclick="openMobileMenu()">
+        <a href="javascript:void(0)" onclick="openLeadPopup(null)" class="nav-cta" role="button">📱 Contato</a>
+        <div class="hamburger" onclick="openMobileMenu()" role="button" tabindex="0" aria-label="Abrir menu" aria-haspopup="true">
           <span></span><span></span><span></span>
         </div>
       </div>
     </nav>
+    </header>
 
+    <main id="main-content">
     <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
@@ -1818,22 +1861,22 @@
         </div>
       </div>
       <div class="hero-right">
-        <div class="search-box">
+        <form class="search-box" id="searchForm" toolname="searchProperties" tooldescription="Busca imóveis para comprar ou alugar em Goiânia e Aparecida de Goiânia, filtrando por localização, tipo de imóvel e faixa de preço." onsubmit="event.preventDefault();doSearch();if(event.agentInvoked){event.respondWith(Promise.resolve('Busca de imóveis realizada.'));}">
           <p class="search-title">A chance de encontrar o imóvel dos sonhos <em
               style="font-style:normal;color:var(--gold)">agora!</em></p>
           <p class="search-subtitle">Busque entre centenas de opções exclusivas</p>
-          <div class="search-tabs">
-            <button class="stab active" onclick="setTab(this,'Comprar')">Comprar</button>
-            <button class="stab" onclick="setTab(this,'Alugar')">Alugar</button>
-            <button class="stab" onclick="setTab(this,'Imóvel Novo')">Imóvel novo</button>
+          <div class="search-tabs" role="group" aria-label="Tipo de negócio">
+            <button class="stab active" type="button" onclick="setTab(this,'Comprar')">Comprar</button>
+            <button class="stab" type="button" onclick="setTab(this,'Alugar')">Alugar</button>
+            <button class="stab" type="button" onclick="setTab(this,'Imóvel Novo')">Imóvel novo</button>
           </div>
           <div class="search-field">
-            <label>Onde deseja morar?</label>
-            <input type="text" placeholder="Bairro, cidade ou região...">
+            <label for="searchLocalizacao">Onde deseja morar?</label>
+            <input type="text" id="searchLocalizacao" name="localizacao" placeholder="Bairro, cidade ou região..." toolparamdescription="Bairro, cidade ou região onde o imóvel deve estar localizado.">
           </div>
           <div class="search-field">
-            <label>Tipo de imóvel</label>
-            <select>
+            <label for="searchTipo">Tipo de imóvel</label>
+            <select id="searchTipo" name="tipo" toolparamdescription="Tipo do imóvel desejado.">
               <option>Todos os imóveis</option>
               <option>Casa</option>
               <option>Apartamento</option>
@@ -1844,8 +1887,8 @@
             </select>
           </div>
           <div class="search-field">
-            <label>Faixa de preço</label>
-            <select>
+            <label for="searchFaixa">Faixa de preço</label>
+            <select id="searchFaixa" name="faixa" toolparamdescription="Faixa de preço desejada para o imóvel.">
               <option>Qualquer valor</option>
               <option>Até R$ 300.000</option>
               <option>R$ 300.000 – R$ 600.000</option>
@@ -1853,17 +1896,17 @@
               <option>Acima de R$ 1.000.000</option>
             </select>
           </div>
-          <button class="btn-search" onclick="doSearch()">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <button class="btn-search" type="submit">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
             Buscar
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="m9 18 6-6-6-6" />
             </svg>
           </button>
-        </div>
+        </form>
       </div>
       </div><!-- /hero-inner -->
     </section>
@@ -1924,7 +1967,7 @@
         </div>
         <div class="ig-grid">
           <!-- 8 instagram mock cards -->
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#E8F0F7,#C8DFF0);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#B8D0E8" stroke-width="1.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -1934,7 +1977,7 @@
             </div>
             <div class="ig-overlay"><span>🏠 Apartamento | Setor Bueno</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#F5F0E8,#EAD8A8);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#C9A84C" stroke-width="1.5">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -1944,7 +1987,7 @@
             </div>
             <div class="ig-overlay"><span>🏡 Casa | Jardim Goiás</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#E8F0F7,#D4EAD4);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#8BC8A0" stroke-width="1.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -1954,7 +1997,7 @@
             </div>
             <div class="ig-overlay"><span>🏢 Cobertura | Marista</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#F0E8F5,#D8B8E8);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#B084C8" stroke-width="1.5">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -1964,7 +2007,7 @@
             </div>
             <div class="ig-overlay"><span>🌳 Chácara | Aparecida</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#FCEEE8,#F8C8B0);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#E8986C" stroke-width="1.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -1974,7 +2017,7 @@
             </div>
             <div class="ig-overlay"><span>🏗️ Lançamento | Sudoeste</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#E8F5F0,#A8D8C8);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#60B898" stroke-width="1.5">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -1984,7 +2027,7 @@
             </div>
             <div class="ig-overlay"><span>🏠 Casa Duplex | Alphaville</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#E8ECF8,#B8C4E8);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#7880C8" stroke-width="1.5">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -1994,7 +2037,7 @@
             </div>
             <div class="ig-overlay"><span>🌆 Flat | Centro</span></div>
           </div>
-          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')">
+          <div class="ig-card" onclick="window.open('https://instagram.com/tarlypinheiro.imoveis','_blank')" role="link" tabindex="0" aria-label="Ver publicação no Instagram (abre em nova guia)">
             <div class="ig-placeholder" style="background:linear-gradient(135deg,#F8F0E8,#E8D098);">
               <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#C8A040" stroke-width="1.5">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -2089,6 +2132,8 @@
       </div>
     </section>
 
+    </main>
+
     <!-- FOOTER -->
     <footer id="contato">
       <div class="footer-top">
@@ -2133,10 +2178,11 @@
           <p class="footer-h">Newsletter</p>
           <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px;">Receba os melhores imóveis antes de
             todos.</p>
-          <div class="footer-newsletter">
-            <input type="email" placeholder="Seu melhor e-mail">
-            <button class="btn-newsletter">Quero receber novidades</button>
-          </div>
+          <form class="footer-newsletter" toolname="subscribeNewsletter" tooldescription="Inscreve um e-mail para receber novidades de imóveis da Tarly Pinheiro Imóveis." onsubmit="event.preventDefault();subscribeNewsletter(this.elements.email.value);if(event.agentInvoked){event.respondWith(Promise.resolve('Inscrição na newsletter enviada.'));}">
+            <label class="sr-only" for="newsletterEmail">Seu melhor e-mail</label>
+            <input type="email" id="newsletterEmail" name="email" placeholder="Seu melhor e-mail" required>
+            <button class="btn-newsletter" type="submit">Quero receber novidades</button>
+          </form>
           <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:12px;">Não enviamos spam. Cancele quando
             quiser.</p>
         </div>
@@ -2368,10 +2414,16 @@
         if (p) { infoEl.innerHTML = '🏠 <strong>' + (p.title||'') + '</strong> — ' + (p.price||''); infoEl.style.display = 'block'; }
         else { infoEl.style.display = 'none'; }
       } else { infoEl.style.display = 'none'; }
-      document.getElementById('leadPopup').classList.add('active');
+      const popup = document.getElementById('leadPopup');
+      popup.classList.add('active');
+      popup.setAttribute('aria-hidden', 'false');
       document.getElementById('leadNome').focus();
     }
-    function closeLeadPopup() { document.getElementById('leadPopup').classList.remove('active'); }
+    function closeLeadPopup() {
+      const popup = document.getElementById('leadPopup');
+      popup.classList.remove('active');
+      popup.setAttribute('aria-hidden', 'true');
+    }
     function submitLead() {
       const nome  = document.getElementById('leadNome').value.trim();
       const tel   = document.getElementById('leadTelefone').value.trim();
@@ -2463,6 +2515,65 @@
 
     function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); }
     function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    function subscribeNewsletter(email) {
+      email = (email || '').trim();
+      if (!email) return;
+      const phone = window.TI_PHONE || '5562995219521';
+      const msg = `Olá Tarly! Quero receber novidades de imóveis no e-mail ${email}.`;
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    // ACESSIBILIDADE: ativa elementos com role="button"/"link" via teclado (Enter/Espaço)
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"], [role="link"]')) {
+        e.preventDefault();
+        e.target.click();
+      }
+    });
+
+    // WEBMCP — ferramentas imperativas para agentes de IA (com detecção de suporte do navegador)
+    (function registerWebMCPTools() {
+      if (!('modelContext' in document)) return;
+      try {
+        document.modelContext.registerTool({
+          name: 'listFeaturedProperties',
+          description: 'Lista os imóveis em destaque, novos entregues e lançamentos exibidos na página inicial da Tarly Pinheiro Imóveis.',
+          inputSchema: { type: 'object', properties: {} },
+          annotations: { readOnlyHint: true },
+          execute: async function () {
+            const pick = function (p) { return { id: p.id, titulo: p.title, localizacao: p.loc, preco: p.price, quartos: p.quartos, vagas: p.vagas }; };
+            return JSON.stringify({
+              destaque: imoveis.destaque.map(pick),
+              novos: imoveis.novos.map(pick),
+              lancamentos: imoveis.lancamentos.map(pick)
+            });
+          }
+        });
+        document.modelContext.registerTool({
+          name: 'viewPropertyDetails',
+          description: 'Abre a página de detalhes de um imóvel específico pelo seu ID.',
+          inputSchema: { type: 'object', properties: { id: { type: 'string', description: 'ID do imóvel, retornado por listFeaturedProperties.' } }, required: ['id'] },
+          annotations: { readOnlyHint: true },
+          execute: async function (params) {
+            const id = isNaN(Number(params.id)) ? params.id : Number(params.id);
+            openDetail(id);
+            return currentImovel ? ('Exibindo detalhes de: ' + currentImovel.title) : 'Imóvel não encontrado.';
+          }
+        });
+        document.modelContext.registerTool({
+          name: 'contactAgent',
+          description: 'Abre o formulário de contato com a corretora Tarly Pinheiro sobre um imóvel (opcional) e prepara mensagem no WhatsApp.',
+          inputSchema: { type: 'object', properties: { propertyId: { type: 'string', description: 'ID do imóvel de interesse (opcional).' } } },
+          execute: async function (params) {
+            openLeadPopup(params && params.propertyId ? params.propertyId : null);
+            return 'Formulário de contato aberto.';
+          }
+        });
+      } catch (err) {
+        console.warn('[WebMCP] Falha ao registrar ferramentas:', err);
+      }
+    })();
 
     // INIT
     renderCards(imoveis.destaque, 'destaque-grid');
