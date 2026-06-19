@@ -2680,6 +2680,8 @@
           renderWPCards(data.destaque.map(wpToCard), 'destaque-grid');
         if (Array.isArray(data.novos) && data.novos.length)
           renderWPCards(data.novos.map(wpToCard), 'novos-grid');
+        if (Array.isArray(data.lancamentos) && data.lancamentos.length)
+          renderWPCards(data.lancamentos.map(wpToCard), 'lancamentos-grid');
         if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length))
           renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
       })
