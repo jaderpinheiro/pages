@@ -165,6 +165,9 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 /* SECTION base */
 .section{padding:104px 0}
 .section.alt{background:var(--paper-2)}
+.lideranca-sec{position:relative;overflow:hidden}
+.lideranca-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(8,24,38,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(8,24,38,.05) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(75% 65% at 50% 35%,#000 35%,transparent 100%);pointer-events:none}
+.lideranca-sec .wrap{position:relative}
 .s-head{max-width:760px;margin-bottom:54px}
 .s-head h2{font-size:clamp(2rem,4vw,3.05rem);color:var(--slate);margin:16px 0 18px}
 .s-head p{font-size:1.12rem;color:var(--muted)}
@@ -225,7 +228,10 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .creds li b{display:block;color:var(--slate);font-family:var(--ff-d);font-weight:700;font-size:.95rem}
 
 /* AWARD */
-.award{display:flex;gap:26px;align-items:center;background:linear-gradient(120deg,#fff,#fff7ec);border:1px solid #f3e0c2;border-radius:24px;padding:38px 40px}
+.award{position:relative;display:flex;gap:26px;align-items:center;background:linear-gradient(120deg,#fff,#fff7ec);border:1px solid #f3e0c2;border-radius:24px;padding:38px 40px}
+.award::before,.award::after{content:"";position:absolute;inset:0;border-radius:24px;border:1px solid rgba(245,155,47,.28);filter:blur(.5px);animation:sonarPulse 4.4s ease-out infinite;pointer-events:none}
+.award::after{animation-delay:2.2s}
+@keyframes sonarPulse{0%{transform:scale(1);opacity:.32}100%{transform:scale(1.018);opacity:0}}
 .award .medal{width:84px;height:84px;flex:none;border-radius:20px;background:linear-gradient(135deg,var(--orange),#e07a12);display:grid;place-items:center;box-shadow:0 16px 36px -14px rgba(245,155,47,.7)}
 .award h3{font-size:1.45rem;color:var(--slate);margin-bottom:8px}
 .award p{color:var(--muted);font-size:1.02rem}
@@ -484,7 +490,8 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 </section>
 
 <!-- LIDERANÇA -->
-<section class="section alt" id="lideranca">
+<section class="section alt lideranca-sec" id="lideranca">
+  <div class="lideranca-grid-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="s-head rv">
       <p class="eyebrow">Liderança</p>
@@ -642,7 +649,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     <div class="wrap foot-bottom-in">
       <span>© <span id="yr"></span> UP Consultoria & Franchising. Todos os direitos reservados.</span>
       <span>Exponenciando negócios <span class="grad">↑</span> do local ao nacional.</span>
-      <span class="foot-credit">Desenvolvido por <b>Inline Digital & Tecnologia</b></span>
+      <span class="foot-credit">Desenvolvido por <a href="https://inlinedigital.com.br" target="_blank" rel="noopener"><b>Inline Digital & Tecnologia</b></a></span>
     </div>
   </div>
 </footer>
