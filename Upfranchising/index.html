@@ -104,7 +104,9 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .nav.scrolled{background:rgba(8,24,38,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 .nav-in{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:11px;font-family:var(--ff-d);font-weight:800;font-size:1.32rem;color:#fff;letter-spacing:-.02em}
-.brand .mk{width:38px;height:38px;flex:none}
+.brand .logo-mark{width:48px;height:48px;flex:none;display:grid;place-items:center;transition:transform .35s var(--ease)}
+.brand .logo-mark img{width:100%;height:100%;object-fit:contain}
+.brand:hover .logo-mark{transform:scale(1.1)}
 .brand small{display:block;font-family:var(--ff-b);font-weight:500;font-size:.6rem;letter-spacing:.18em;color:var(--blue-bright);text-transform:uppercase;margin-top:1px}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{color:rgba(255,255,255,.82);font-weight:500;font-size:.95rem;transition:color .25s;position:relative}
@@ -182,6 +184,10 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .mvv .card p{color:var(--muted);font-size:1.02rem}
 .values{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 .values li{list-style:none;font-family:var(--ff-d);font-weight:600;font-size:.85rem;color:var(--blue);background:var(--paper-2);border:1px solid #dfeaf3;padding:7px 14px;border-radius:30px}
+.segs{margin-top:56px;padding-top:40px;border-top:1px solid #e3edf5}
+.segs-label{font-family:var(--ff-d);font-weight:700;font-size:.95rem;color:var(--slate);margin-bottom:14px}
+.segs .values li{transition:transform .3s var(--ease),background .3s,color .3s}
+.segs .values li:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}
 
 /* SERVICES */
 .serv{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
@@ -214,7 +220,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .avatar:hover::before{opacity:1;filter:blur(8px)}
 .avatar:hover::after{opacity:.85;filter:blur(28px)}
 .avatar-mask{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;overflow:hidden;box-shadow:0 0 0 4px var(--ink-2),0 0 0 6px rgba(255,255,255,.08)}
-.avatar-mask img{position:absolute;left:50%;top:-14px;width:300px;max-width:none;height:auto;transform:translateX(-50%)}
+.avatar-mask img{width:100%;height:100%;object-fit:cover;object-position:center}
 @keyframes spin{to{transform:rotate(360deg)}}
 .founder-card h3{font-size:1.55rem;position:relative}
 .founder-card .role{color:var(--orange-soft);font-weight:600;font-size:.95rem;margin:4px 0 4px;position:relative}
@@ -235,6 +241,34 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .award .medal{width:84px;height:84px;flex:none;border-radius:20px;background:linear-gradient(135deg,var(--orange),#e07a12);display:grid;place-items:center;box-shadow:0 16px 36px -14px rgba(245,155,47,.7)}
 .award h3{font-size:1.45rem;color:var(--slate);margin-bottom:8px}
 .award p{color:var(--muted);font-size:1.02rem}
+
+/* CLIENTES — galeria/carrossel */
+.clients-sec{position:relative;overflow:hidden}
+.clients-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(8,24,38,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(8,24,38,.05) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(70% 60% at 50% 30%,#000 35%,transparent 100%);pointer-events:none}
+.clients-sec .wrap{position:relative}
+.clients-rail-wrap{position:relative;margin-top:18px;margin-bottom:60px;perspective:1600px}
+.clients-badge{position:absolute;z-index:5;top:-22px;right:18px}
+.clients-rail{display:flex;flex-direction:column;gap:22px;transform:rotateX(2deg);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+.clients-track{display:flex;gap:22px;width:max-content;will-change:transform}
+.clients-track.row-a{animation:clientsLeft 42s linear infinite}
+.clients-track.row-b{animation:clientsRight 52s linear infinite}
+.clients-rail-wrap.paused .clients-track,.clients-rail-wrap:hover .clients-track{animation-play-state:paused}
+@keyframes clientsLeft{to{transform:translateX(-50%)}}
+@keyframes clientsRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.client-card{position:relative;flex:none;width:178px;height:108px;background:#fff;border:1px solid #e3edf5;border-radius:16px;display:grid;place-items:center;padding:8px 12px;overflow:hidden;box-shadow:0 10px 26px -18px rgba(19,40,59,.22);transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s}
+.client-card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-130%);transition:transform .75s var(--ease);pointer-events:none}
+.client-card img{max-width:100%;max-height:88px;width:auto;height:auto;object-fit:contain;filter:grayscale(.85) contrast(1.05) opacity(.78);transition:filter .45s var(--ease),transform .45s var(--ease)}
+.client-card:hover{transform:translateY(-8px) scale(1.05);box-shadow:0 28px 48px -20px rgba(19,40,59,.32);border-color:var(--blue-bright);z-index:2}
+.client-card:hover img{filter:none;transform:scale(1.05)}
+.client-card:hover::after{transform:translateX(130%)}
+.clients-toggle{position:absolute;right:0;bottom:-50px;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #e3edf5;border-radius:30px;padding:9px 16px 9px 14px;font-family:var(--ff-d);font-weight:600;font-size:.82rem;color:var(--slate);cursor:pointer;transition:border-color .3s,box-shadow .3s}
+.clients-toggle:hover{border-color:var(--blue-bright);box-shadow:0 10px 24px -12px rgba(41,120,174,.3)}
+.clients-toggle svg{flex:none}
+@media(max-width:640px){
+  .client-card{width:142px;height:92px;padding:7px 10px}
+  .client-card img{max-height:72px}
+  .clients-badge{right:0;top:-18px}
+}
 
 /* PODCAST */
 .podcast-wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:start;margin-bottom:46px}
@@ -331,8 +365,8 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a href="#topo" class="brand" aria-label="UP Consultoria e Franchising, página inicial">
-      <svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#2978ae"/><path d="M11 27V14m0 0l-4 5m4-5l4 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 13c4 0 6 2 6 5s-2 5-6 5h-1v4" stroke="#f59b2f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-      <span>UP<small>Consultoria & Franchising</small></span>
+      <span class="logo-mark"><img src="image/logoUp-transparente.png" alt="UP Consultoria & Franchising"></span>
+      <span><small>Consultoria & Franchising</small></span>
     </a>
     <nav class="nav-links" id="navlinks" aria-label="Principal">
       <a href="#sobre">Quem Somos</a>
@@ -362,8 +396,9 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       </div>
       <div class="trust rv d4">
         <div class="t"><b><span class="grad">+200</span></b><span>empresas atendidas</span></div>
-        <div class="t"><b>2019</b><span>Prêmio Leão de Ouro</span></div>
-        <div class="t"><b>BR</b><span>atuação nacional</span></div>
+        <div class="t"><b>20mil+</b><span>horas de consultoria</span></div>
+        <div class="t"><b>+30</b><span>projetos de franquia</span></div>
+        <div class="t"><b>2017</b><span>desde a fundação</span></div>
       </div>
     </div>
 
@@ -375,7 +410,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       <span class="particle p3" aria-hidden="true"></span>
       <span class="particle p4" aria-hidden="true"></span>
       <span class="particle p5" aria-hidden="true"></span>
-      <img class="hero-photo" src="image/Luciano Upfranchising.com.jpeg" alt="Luciano Sousa, Diretor Executivo da UP Consultoria & Franchising" loading="eager">
+      <img class="hero-photo" src="image/Luciano.jpeg" alt="Luciano Sousa, Diretor Executivo da UP Consultoria & Franchising" loading="eager">
       <div class="hero-photo-tint" aria-hidden="true"></div>
 
       <div class="float-badge fb1">
@@ -420,7 +455,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     <div class="s-head rv">
       <p class="eyebrow">Quem somos</p>
       <h2>Uma consultoria que existe para um único objetivo: exponenciar o seu negócio.</h2>
-      <p>Há mais de uma década estruturando marcas, a UP Consultoria & Franchising une rigor financeiro e visão de expansão para transformar empresas sólidas em redes de franquias e operações prontas para escalar.</p>
+      <p>Fundada em 2017, a UP Consultoria & Franchising já apoiou mais de 200 empresas em crescimento e organização, somando mais de 20 mil horas de consultoria, +30 projetos de franquia e +50 empresas modeladas. Unimos rigor financeiro e visão de expansão para transformar negócios sólidos em redes de franquias e operações prontas para escalar.</p>
     </div>
     <div class="mvv">
       <article class="card rv d1">
@@ -441,6 +476,12 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
           <li>Pensamento Inovador</li><li>Comprometimento</li><li>Estratégia</li><li>Evolução</li><li>Ética</li><li>Ação</li>
         </ul>
       </article>
+    </div>
+    <div class="segs rv">
+      <p class="segs-label">Segmentos de atuação</p>
+      <ul class="values">
+        <li>Varejo</li><li>Alimentação</li><li>Agronegócio</li><li>Saúde</li><li>Farmacêutico</li><li>Beleza e Bem-Estar</li><li>Startups</li><li>Distribuição</li><li>Consultoria</li><li>Franquias</li><li>Ótica</li><li>Tecnologia e Comunicação</li><li>Educação</li><li>Veterinária</li><li>Indústria e Panificação</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -478,6 +519,39 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
   </div>
 </section>
 
+<!-- CONSULTORIA ESTRATÉGICA -->
+<section class="section" id="consultoria-estrategica">
+  <div class="wrap">
+    <div class="s-head rv">
+      <p class="eyebrow">Consultoria Estratégica</p>
+      <h2>Estratégia que transforma diagnóstico em decisão e decisão em resultado.</h2>
+      <p>Antes de pensar em franquia, valuation ou M&A, toda jornada de exponenciação começa com clareza estratégica. Estruturamos o caminho entre onde sua empresa está hoje e onde ela precisa chegar.</p>
+    </div>
+    <div class="serv">
+      <article class="card rv d1">
+        <span class="num">01</span>
+        <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>Diagnóstico Estratégico</h3>
+        <ul><li>Leitura completa do negócio, mercado e concorrência</li><li>Análise financeira e de performance atual</li></ul>
+      </article>
+      <article class="card rv d2">
+        <span class="num">02</span>
+        <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>Plano de Ação</h3>
+        <ul><li>Metas, prioridades e cronograma claros e executáveis</li><li>Modelo de negócio e Business Model Canvas</li></ul>
+      </article>
+      <article class="card rv d3">
+        <span class="num">03</span>
+        <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005 14.6a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09A1.65 1.65 0 0019.4 15z"/></svg></span>Execução Acompanhada</h3>
+        <ul><li>Implementação lado a lado com a liderança</li><li>Indicadores de gestão e ajustes em tempo real</li></ul>
+      </article>
+      <article class="card rv d4">
+        <span class="num">04</span>
+        <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>Decisão com Dados</h3>
+        <ul><li>Embasamento sólido para expansão, valuation ou M&A</li><li>Relatórios e apresentações para a alta gestão</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- BANNER STATEMENT -->
 <section class="section">
   <div class="wrap">
@@ -499,10 +573,11 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     </div>
     <div class="founder">
       <div class="founder-card rv d1">
-        <div class="avatar"><div class="avatar-mask"><img src="image/Luciano Upfranchising.com.jpeg" alt="Luciano Sousa"></div></div>
+        <div class="avatar"><div class="avatar-mask"><img src="image/Luciano-avatar.jpg" alt="Luciano Sousa"></div></div>
         <h3>Luciano Sousa</h3>
         <p class="role">Diretor Executivo</p>
         <p class="reg">Administrador de Empresas · CRA 6-00166</p>
+        <p class="reg">Experiência em Citibank, Unibanco, Ambev, Wickbold e Telefônica-Vivo</p>
         <div class="fsoc">
           <a href="https://www.instagram.com/luciano_upfranchising/" target="_blank" rel="noopener" aria-label="Instagram de Luciano Sousa"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.1 3.3c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.1-.1-3.3c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 100 9.8 4.9 4.9 0 000-9.8zm0 8a3.1 3.1 0 110-6.2 3.1 3.1 0 010 6.2zm6.3-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a>
           <a href="https://www.linkedin.com/in/luciano-sousa-79633970/" target="_blank" rel="noopener" aria-label="LinkedIn de Luciano Sousa"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 005 0 2.5 2.5 0 00-2.52-2.5zM3 8.98h4V21H3V8.98zM9.5 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.33c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4V8.98z"/></svg></a>
@@ -510,12 +585,12 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       </div>
       <div class="rv d2">
         <ul class="creds">
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Gestão Financeira de Empresas</b>Graduação</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Gestão Estratégica de Negócios</b>MBA</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Private Equity, M&A e Growth</b>MBA</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Valuation Professional</b>Certificação ANBIMA</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Viabilidade de Projetos</b>Certificação FGV</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Finanças Corporativas & FIP/FIDC</b>FGV + ANBIMA</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Economia, Investimentos e Banking</b>MBA · USP</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Administração Estratégica, Private Equity e M&A</b>Pós-graduação</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Valuation</b>Certificação ANBIMA</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Franchising</b>Certificação Grupo Bittencourt</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Economia dos Negócios & Finanças Corporativas</b>FGV</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Governança Corporativa & M&A</b>Trevisan</span></li>
         </ul>
       </div>
     </div>
@@ -532,6 +607,69 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
         <h3>Prêmio Leão de Ouro · 2019</h3>
         <p>Indicada pela Câmara de Investimentos e Comércio Brasil-Panamá (CICBP) durante o Panamá Brazilian Day, conferência internacional realizada na Cidade do Panamá. Uma honraria que valoriza boas práticas de mercado, transparência e compliance.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="section alt clients-sec" id="clientes">
+  <div class="clients-grid-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="s-head rv">
+      <p class="eyebrow">Quem confia na UP</p>
+      <h2>Marcas que já exponenciaram com a UP.</h2>
+      <p>De redes de alimentação a startups, mais de 200 empresas dos mais diversos segmentos já confiaram na metodologia UP para crescer com solidez.</p>
+    </div>
+
+    <div class="clients-rail-wrap rv d1" id="clientsRailWrap">
+      <div class="clients-badge">
+        <div class="fb-inner">
+          <span class="ar" style="background:linear-gradient(135deg,var(--blue),var(--blue-bright))"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
+          <span><b>+200</b><small>empresas atendidas</small></span>
+        </div>
+      </div>
+
+      <div class="clients-rail">
+        <div class="clients-track row-a">
+          <div class="client-card"><img src="image/cliente/c1.png" alt="Empório Prime" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c3.png" alt="Betumax Solução em Asfalto" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c5.png" alt="Sweet Nana" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c7.png" alt="The Black Beans Feijoada Gourmet" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c9.png" alt="Pastelarô" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c11.png" alt="Fast Açaí" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c13.png" alt="Mercearia do Banho" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c15.png" alt="Detroit Steakhouse" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c1.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c3.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c5.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c7.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c9.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c11.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c13.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c15.png" alt="" loading="lazy"></div>
+        </div>
+        <div class="clients-track row-b">
+          <div class="client-card"><img src="image/cliente/c2.png" alt="Bio Resíduos Soluções Ambientais" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c4.png" alt="heyhub" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c6.png" alt="Ferreira Amaro Dental Lab" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c8.png" alt="20 Locar" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c10.png" alt="Maré Sport & Bar" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c12.png" alt="Lá Mucca Puro Gelato" loading="lazy"></div>
+          <div class="client-card"><img src="image/cliente/c14.png" alt="London Fries" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c2.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c4.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c6.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c8.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c10.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c12.png" alt="" loading="lazy"></div>
+          <div class="client-card" aria-hidden="true"><img src="image/cliente/c14.png" alt="" loading="lazy"></div>
+        </div>
+      </div>
+
+      <button class="clients-toggle" id="clientsToggle" type="button" aria-pressed="false">
+        <svg id="clientsToggleIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        <span id="clientsToggleLabel">Pausar</span>
+      </button>
     </div>
   </div>
 </section>
@@ -607,8 +745,8 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     <div class="foot-grid">
       <div>
         <a href="#topo" class="brand" aria-label="UP Consultoria e Franchising">
-          <svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#2978ae"/><path d="M11 27V14m0 0l-4 5m4-5l4 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 13c4 0 6 2 6 5s-2 5-6 5h-1v4" stroke="#f59b2f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-          <span>UP<small>Consultoria & Franchising</small></span>
+          <span class="logo-mark"><img src="image/logoUp-transparente.png" alt="UP Consultoria & Franchising"></span>
+          <span><small>Consultoria & Franchising</small></span>
         </a>
         <p class="foot-about">Formatação de franquias, consultoria estratégica, valuation e M&A. Exponenciamos negócios em Goiânia, GO, com atuação em todo o Brasil.</p>
         <div class="foot-soc">
@@ -683,6 +821,18 @@ if(podcastForm){
     var whatsapp=podcastForm.whatsapp.value.trim();
     var msg='Olá! Quero participar do Podcast GO-UP Franchising.\nEmpresa: '+empresa+(site?'\nSite/Instagram: '+site:'')+'\nMeu WhatsApp: '+whatsapp;
     window.open('https://wa.me/5562998691668?text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+}
+
+// clients carousel pause/play
+var clientsWrap=document.getElementById('clientsRailWrap');
+var clientsToggle=document.getElementById('clientsToggle');
+if(clientsWrap&&clientsToggle){
+  var clientsLabel=document.getElementById('clientsToggleLabel');
+  clientsToggle.addEventListener('click',function(){
+    var paused=clientsWrap.classList.toggle('paused');
+    clientsToggle.setAttribute('aria-pressed',paused);
+    clientsLabel.textContent=paused?'Retomar':'Pausar';
   });
 }
 
