@@ -2072,6 +2072,11 @@
       var metsHtml='';
       if(v.valor)metsHtml+='<div class="vitrine-met"><span class="vitrine-mk">Franquia</span><span class="vitrine-mv">'+esc(v.valor)+'</span></div>';
       if(v.faturamento)metsHtml+='<div class="vitrine-met"><span class="vitrine-mk">Fat./mês</span><span class="vitrine-mv">'+esc(v.faturamento)+'</span></div>';
+      var waHtml='';
+      if(v.whatsapp){
+        var waMsg=encodeURIComponent('Olá! Vi a franquia "'+esc(v.nome)+'" no site 3 PASSE e gostaria de mais informações.');
+        waHtml='<a class="vitrine-wa" href="https://wa.me/'+esc(v.whatsapp)+'?text='+waMsg+'" target="_blank" rel="noopener">💬 WhatsApp</a>';
+      }
       var el=document.createElement('div');
       el.className='vitrine-card v-fade-in';
       el.style.animationDelay=delay+'ms';
@@ -2080,7 +2085,8 @@
         +(v.categoria?'<span class="vitrine-cat">'+esc(v.categoria)+'</span>':'')
         +'<div class="vitrine-nome">'+esc(v.nome)+'</div>'
         +(metsHtml?'<div class="vitrine-mets">'+metsHtml+'</div>':'')
-        +'</div>';
+        +'</div>'
+        +waHtml;
       return el;
     }
 
