@@ -2053,6 +2053,56 @@
     },interval);
   })();
 
+  // ── VITRINE ROTAÇÃO ──
+  (function(){
+    var data=window._3pVit;
+    var interval=(window._3pVitInt||5)*1000;
+    if(!data||data.length<2)return;
+
+    function esc(s){
+      var d=document.createElement('div');
+      d.textContent=s||'';
+      return d.innerHTML;
+    }
+    function buildCard(v,delay){
+      var imgHtml=v.foto_url
+        ?'<img src="'+esc(v.foto_url)+'" alt="'+esc(v.nome)+'" loading="lazy">'
+        :'<div class="vitrine-foto-ph">🏪</div>';
+      var tagHtml=v.tag?'<span class="vitrine-tag-badge">'+esc(v.tag)+'</span>':'';
+      var metsHtml='';
+      if(v.valor)metsHtml+='<div class="vitrine-met"><span class="vitrine-mk">Franquia</span><span class="vitrine-mv">'+esc(v.valor)+'</span></div>';
+      if(v.faturamento)metsHtml+='<div class="vitrine-met"><span class="vitrine-mk">Fat./mês</span><span class="vitrine-mv">'+esc(v.faturamento)+'</span></div>';
+      var el=document.createElement('div');
+      el.className='vitrine-card v-fade-in';
+      el.style.animationDelay=delay+'ms';
+      el.innerHTML='<div class="vitrine-foto">'+imgHtml+tagHtml+'</div>'
+        +'<div class="vitrine-info">'
+        +(v.categoria?'<span class="vitrine-cat">'+esc(v.categoria)+'</span>':'')
+        +'<div class="vitrine-nome">'+esc(v.nome)+'</div>'
+        +(metsHtml?'<div class="vitrine-mets">'+metsHtml+'</div>':'')
+        +'</div>';
+      return el;
+    }
+
+    function render(container){
+      if(!container)return;
+      var cards=container.querySelectorAll('.vitrine-card');
+      cards.forEach(function(c){c.classList.add('v-fade-out');});
+      setTimeout(function(){
+        container.innerHTML='';
+        data.slice(0,4).forEach(function(v,i){
+          container.appendChild(buildCard(v,i*90));
+        });
+      },400);
+    }
+
+    setInterval(function(){
+      data.unshift(data.pop());
+      render(document.getElementById('vitrineHero'));
+      render(document.getElementById('vitrineMobile'));
+    },interval);
+  })();
+
   // Click tracker
   function _3pNegClick(uid){
     if(!window._3pNegAjax||!uid)return;
