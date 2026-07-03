@@ -1148,6 +1148,7 @@
       <div class="hero-bullet"><span class="chk">✓</span> Estrutura pronta para assumir</div>
       <div class="hero-bullet"><span class="chk">✓</span> Análise gratuita do perfil</div>
       <div class="hero-bullet"><span class="chk">✓</span> Franquia no Estado de Goiás</div>
+      <div class="hero-bullet"><span class="chk">✓</span> Anunciamos sua franquia</div>
     </div>
     <div class="hero-actions">
       <a href="#oportunidades" class="btn-primary">
@@ -1808,6 +1809,62 @@
   </div>
 </section>
 
+<!-- ANUNCIE SUA FRANQUIA -->
+<section class="anuncie-section" style="background:var(--bg2);">
+  <div class="office-inner">
+
+    <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto 60px;">
+      <div class="section-label" style="justify-content:center;">Anuncie sua Franquia</div>
+      <div class="section-title">Sua franquia pode estar mais <em>valorizada</em><br>do que você imagina</div>
+      <p class="section-sub" style="text-align:center;margin:16px auto 0;">Se você está pensando em vender, o processo de repasse precisa ser bem planejado para garantir segurança e sucesso.</p>
+    </div>
+
+    <div class="office-grid">
+      <div class="reveal-left">
+        <div class="office-info-block">
+          <div class="office-icon">🏆</div>
+          <div class="office-text">
+            <h4>Valorização Real</h4>
+            <p>Avaliamos profissionalmente o histórico, faturamento e estrutura da sua unidade para posicioná-la pelo valor que ela realmente merece.</p>
+          </div>
+        </div>
+        <div class="office-info-block">
+          <div class="office-icon">🔒</div>
+          <div class="office-text">
+            <h4>Compradores Validados</h4>
+            <p>Apresentamos sua franquia apenas a interessados pré-qualificados — perfil financeiro e intenção confirmados antes do primeiro contato.</p>
+          </div>
+        </div>
+        <div class="office-info-block">
+          <div class="office-icon">🤝</div>
+          <div class="office-text">
+            <h4>Suporte do Anúncio à Assinatura</h4>
+            <p>Nossa equipe conduz todo o processo: da divulgação estratégica à negociação e formalização, sem você precisar se preocupar com detalhes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="office-visual">
+          <div class="section-label" style="justify-content:center;margin-bottom:16px;">Intermediação Profissional</div>
+          <h3>Negociação <em style="color:var(--red);">tranquila</em><br>e estratégica</h3>
+          <p>Com a 3Passe, você conta com intermediação profissional, validação de interessados e todo o suporte para uma negociação tranquila e estratégica. Do primeiro contato até a transferência, você não fica sozinho.</p>
+          <div class="office-cta-group">
+            <a href="https://wa.me/5562996345086?text=Olá! Quero anunciar minha franquia na 3 PASSE e entender como funciona o processo de repasse." target="_blank" class="btn-primary" style="justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Quero Anunciar Minha Franquia
+            </a>
+            <a href="mailto:trespassefranquias@gmail.com" class="btn-secondary" style="justify-content:center;">
+              ✉️ Solicitar Avaliação Gratuita
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA BANNER -->
 <div class="cta-banner">
   <div class="cta-banner-inner">
@@ -2059,6 +2116,8 @@
 
   // ── VITRINE ROTAÇÃO ──
   (function(){
+    if(window._3pVitStarted)return; // plugin já injetou o IIFE antes de </body>
+    window._3pVitStarted=true;
     var data=window._3pVit;
     var interval=(window._3pVitInt||5)*1000;
     if(!data||data.length<2)return;
@@ -2097,7 +2156,7 @@
     function render(container){
       if(!container)return;
       var cards=container.querySelectorAll('.vitrine-card');
-      cards.forEach(function(c){c.classList.add('v-fade-out');});
+      cards.forEach(function(c){c.classList.remove('v-fade-in');c.classList.add('v-fade-out');});
       setTimeout(function(){
         container.innerHTML='';
         data.slice(0,4).forEach(function(v,i){
