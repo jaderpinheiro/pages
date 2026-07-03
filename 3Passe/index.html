@@ -711,13 +711,18 @@
     align-items: flex-start;
   }
   .founder-card:hover { border-color: var(--border-red); transform: translateY(-4px); background: var(--glass2); }
+  @keyframes founderSonic {
+    0%   { box-shadow: 0 0 0 0 rgba(46,49,146,0.52), 0 0 0 0 rgba(46,49,146,0.22), 0 0 20px rgba(46,49,146,0.22); }
+    65%  { box-shadow: 0 0 0 13px rgba(46,49,146,0), 0 0 0 26px rgba(46,49,146,0), 0 0 20px rgba(46,49,146,0.22); }
+    100% { box-shadow: 0 0 0 13px rgba(46,49,146,0), 0 0 0 26px rgba(46,49,146,0), 0 0 20px rgba(46,49,146,0.22); }
+  }
   .founder-avatar {
-    width: 80px; height: 80px; border-radius: 50%;
+    width: 92px; height: 92px; border-radius: 50%;
     background: linear-gradient(135deg, var(--red-dark), var(--red));
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 30px;
     flex-shrink: 0; border: 2px solid rgba(46,49,146,0.5);
-    box-shadow: 0 0 24px rgba(46,49,146,0.3);
+    animation: founderSonic 3s ease-out infinite;
   }
   .founder-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .founder-info .role { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--red-light); margin-bottom: 12px; }
@@ -1535,15 +1540,17 @@
         </div>
       </div>
       <div class="founder-card">
-        <div class="founder-avatar">CA</div>
+        <div class="founder-avatar" style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
+          <img src="/image/Jefferson%203passos.png" alt="Jefferson Rocha" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
         <div class="founder-info">
-          <h3>Carlos Alberto</h3>
-          <div class="role">Co-Fundador & Diretor Comercial</div>
-          <p>Consultor de negócios com formação em administração e especialização em mercado de capitais. Responsável pela engenharia financeira e estruturação das operações de repasse.</p>
+          <h3>Jefferson Rocha</h3>
+          <div class="role">Sócio Diretor</div>
+          <p>Consultor empresarial com 20 anos de experiência, formação em Administração (ênfase em Comércio Exterior) e pós-graduação pela FGV em Auditoria, Finanças e Compliance. Certificado Empretec, CAV e PSC, atua no desenvolvimento de negócios, diagnóstico financeiro e estruturação de operações comerciais para pequenas e médias empresas.</p>
           <div class="founder-tags">
-            <span class="founder-tag">Finanças</span>
-            <span class="founder-tag">Negociação</span>
-            <span class="founder-tag">Estruturação</span>
+            <span class="founder-tag">Consultoria Empresarial</span>
+            <span class="founder-tag">Diagnóstico Financeiro</span>
+            <span class="founder-tag">Desenvolvimento de Negócios</span>
           </div>
         </div>
       </div>
