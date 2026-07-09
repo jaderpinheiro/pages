@@ -5,11 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3 PASSE Franquias &amp; Licenciamentos</title>
+  <meta name="description" content="Compre uma franquia já faturando em Goiás com a 3 PASSE. Repasse de franquias com números verificados, Score de Avaliação e suporte completo na transição.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
+    rel="preload"
+    as="style"
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap"
-    rel="stylesheet">
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap"
+      rel="stylesheet">
+  </noscript>
   <style>
     :root {
       --bg: #ffffff;
@@ -19,7 +27,7 @@
       --red-light: #4a50c4;
       --red-dark: #1e2070;
       --white: #ffffff;
-      --gray: #7b8aaa;
+      --gray: #5c6a86;
       --gray2: #3e4095;
       --gold: #c9a84c;
       --gold2: #e8c96a;
@@ -385,22 +393,32 @@
     }
 
     .hero-badge .dot {
+      position: relative;
       width: 7px;
       height: 7px;
       background: var(--red);
       border-radius: 50%;
+    }
+
+    .hero-badge .dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--red);
       animation: pulse 2s ease infinite;
+      pointer-events: none;
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(46, 49, 146, 0.6)
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
       }
 
-      50% {
-        box-shadow: 0 0 0 8px rgba(46, 49, 146, 0)
+      100% {
+        transform: scale(2.15);
+        opacity: 0;
       }
     }
 
@@ -420,7 +438,7 @@
     }
 
     .hero-headline em {
-      color: var(--gold);
+      color: #9c7a2a;
       font-style: normal;
     }
 
@@ -645,24 +663,24 @@
       width: 1px;
       height: 50px;
       background: linear-gradient(to bottom, var(--red), transparent);
+      transform-origin: top;
       animation: scrollLine 2s ease-in-out infinite;
     }
 
     @keyframes scrollLine {
       0% {
-        height: 0;
-        opacity: 0
+        transform: scaleY(0);
+        opacity: 0;
       }
 
       50% {
-        height: 50px;
-        opacity: 1
+        transform: scaleY(1);
+        opacity: 1;
       }
 
       100% {
-        height: 0;
+        transform: scaleY(0);
         opacity: 0;
-        margin-top: 50px
       }
     }
 
@@ -1071,7 +1089,7 @@
       flex-shrink: 0;
     }
 
-    .pain-item h4 {
+    .pain-item h3 {
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 5px;
@@ -1246,7 +1264,7 @@
       box-shadow: 0 0 12px rgba(46, 49, 146, 0.5);
     }
 
-    .feat-text h4 {
+    .feat-text h3 {
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 4px;
@@ -1639,7 +1657,7 @@
       animation: oppIconSonic 1.2s ease-out infinite;
     }
 
-    .opp-list-info h4 {
+    .opp-list-info h3 {
       font-size: 15px;
       font-weight: 700;
       margin-bottom: 4px;
@@ -1735,7 +1753,7 @@
       transform: scale(1.1);
     }
 
-    .hiw-step h4 {
+    .hiw-step h3 {
       font-size: 14px;
       font-weight: 700;
       margin-bottom: 8px;
@@ -1781,19 +1799,18 @@
 
     @keyframes founderSonic {
       0% {
-        box-shadow: 0 0 0 0 rgba(46, 49, 146, 0.52), 0 0 0 0 rgba(46, 49, 146, 0.22), 0 0 20px rgba(46, 49, 146, 0.22);
-      }
-
-      65% {
-        box-shadow: 0 0 0 13px rgba(46, 49, 146, 0), 0 0 0 26px rgba(46, 49, 146, 0), 0 0 20px rgba(46, 49, 146, 0.22);
+        transform: scale(1);
+        opacity: 0.55;
       }
 
       100% {
-        box-shadow: 0 0 0 13px rgba(46, 49, 146, 0), 0 0 0 26px rgba(46, 49, 146, 0), 0 0 20px rgba(46, 49, 146, 0.22);
+        transform: scale(1.32);
+        opacity: 0;
       }
     }
 
     .founder-avatar {
+      position: relative;
       width: 101px;
       height: 101px;
       border-radius: 50%;
@@ -1805,7 +1822,22 @@
       font-size: 33px;
       flex-shrink: 0;
       border: 2px solid rgba(46, 49, 146, 0.5);
+      box-shadow: 0 0 20px rgba(46, 49, 146, 0.22);
+    }
+
+    .founder-avatar::before,
+    .founder-avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(46, 49, 146, 0.45);
       animation: founderSonic 3s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .founder-avatar::after {
+      animation-delay: 0.5s;
     }
 
     .founder-media {
@@ -1974,7 +2006,7 @@
       font-weight: 700;
     }
 
-    .case-author-info h5 {
+    .case-author-info h3 {
       font-size: 14px;
       font-weight: 700;
     }
@@ -2014,7 +2046,7 @@
     }
 
     .testi-stars {
-      color: var(--gold);
+      color: #8f6f24;
       font-size: 14px;
       margin-bottom: 16px;
       letter-spacing: 2px;
@@ -2046,7 +2078,7 @@
       border: 1.5px solid var(--border-red);
     }
 
-    .testi-author-info h5 {
+    .testi-author-info h3 {
       font-size: 14px;
       font-weight: 700;
     }
@@ -2230,7 +2262,7 @@
       flex-shrink: 0;
     }
 
-    .office-text h4 {
+    .office-text h3 {
       font-size: 13px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -2415,7 +2447,7 @@
       transform: translateY(-2px);
     }
 
-    .footer-col h4 {
+    .footer-col h3 {
       font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -2523,7 +2555,6 @@
       text-decoration: none;
       box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
       transition: all 0.3s;
-      animation: waPulse 3s ease-in-out infinite;
     }
 
     .wa-float:hover {
@@ -2531,15 +2562,25 @@
       box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
     }
 
-    @keyframes waPulse {
+    .wa-float::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, 0.55);
+      animation: waPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-      0%,
-      100% {
-        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.3);
+    @keyframes waPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.7;
       }
 
-      50% {
-        box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4), 0 0 0 16px rgba(37, 211, 102, 0);
+      100% {
+        transform: scale(1.45);
+        opacity: 0;
       }
     }
 
@@ -2865,12 +2906,12 @@
 
       0%,
       40% {
-        left: -150%;
+        transform: translateX(0);
       }
 
       65%,
       100% {
-        left: 220%;
+        transform: translateX(462.5%);
       }
     }
 
@@ -2946,18 +2987,18 @@
     }
 
     .opp-metric .key {
-      color: #7b8aaa;
+      color: #5c6a86;
     }
 
     .opp-list-card {
       color: #2e3192;
     }
 
-    .opp-list-info h4 {
+    .opp-list-info h3 {
       color: #2e3192;
     }
 
-    .footer-col h4 {
+    .footer-col h3 {
       color: #2e3192;
     }
 
@@ -3175,45 +3216,45 @@
   <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item"><img class="m-logo" src="image/logos/subway.jpg" alt="Subway">Subway<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/subway.jpg" alt="Subway">Subway<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span>
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span>
       </div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/subway.jpg" alt="Subway">Subway<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/subway.jpg" alt="Subway">Subway<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/bobs.jpg" alt="Bob's">Bob's<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/girafas.jpg" alt="Giraffas">Giraffas<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/kopenhagen.jpg" alt="Kopenhagen">Kopenhagen<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/sushi-loco.jpg" alt="Sushi Loko">Sushi Loko<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/milk-moo.jpg" alt="Milk Moo">Milk Moo<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span>
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/ccaa.jpg" alt="CCAA">CCAA<span class="sep"></span>
       </div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/gio-laser.jpg" alt="Giolaser">Giolaser<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/popcorn.jpg" alt="Popcorn">Popcorn<span
           class="sep"></span></div>
-      <div class="marquee-item"><img class="m-logo" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span
+      <div class="marquee-item"><img class="m-logo" width="36" height="36" src="image/logos/fast-escova.jpg" alt="Fast Escova">Fast Escova<span
           class="sep"></span></div>
     </div>
   </div>
@@ -3236,28 +3277,28 @@
           <div class="pain-item">
             <div class="pain-icon">💸</div>
             <div>
-              <h4>Investimento alto, retorno incerto</h4>
+              <h3>Investimento alto, retorno incerto</h3>
               <p>Franquias abertas do zero exigem capital elevado sem histórico de desempenho comprovado no local.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-icon">⏳</div>
             <div>
-              <h4>Meses esperando o primeiro lucro</h4>
+              <h3>Meses esperando o primeiro lucro</h3>
               <p>A fase de maturação pode durar de 6 a 24 meses, com toda a pressão financeira nesse período.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-icon">🎲</div>
             <div>
-              <h4>Sem dados reais para decidir</h4>
+              <h3>Sem dados reais para decidir</h3>
               <p>Projeções otimistas da franqueadora não substituem números reais de operação em andamento.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-icon">🏗️</div>
             <div>
-              <h4>Estrutura, equipe e processos do zero</h4>
+              <h3>Estrutura, equipe e processos do zero</h3>
               <p>Montar uma operação do início consome tempo, energia e recursos enquanto a receita ainda não entra.</p>
             </div>
           </div>
@@ -3302,7 +3343,7 @@
       <div class="solution-grid">
         <div class="reveal-left">
           <div class="section-label">A Solução</div>
-          <div class="section-title">A <em class="brand-3passe">3 PASSE</em> conecta você às melhores franquias ativas de Goiás</div>
+          <h2 class="section-title">A <em class="brand-3passe">3 PASSE</em> conecta você às melhores franquias ativas de Goiás</h2>
           <p class="section-sub">Maior plataforma de repasse de franquias do Estado. Negócios reais, com histórico de
             desempenho comprovado e operação estruturada. Aqui, você não aposta, você analisa, decide com dados e
             <strong>sai na frente.</strong>
@@ -3311,35 +3352,35 @@
             <div class="solution-feat">
               <div class="feat-dot"></div>
               <div class="feat-text">
-                <h4>Números reais da operação</h4>
+                <h3>Números reais da operação</h3>
                 <p>Faturamento, histórico e indicadores auditados antes de qualquer decisão.</p>
               </div>
             </div>
             <div class="solution-feat">
               <div class="feat-dot"></div>
               <div class="feat-text">
-                <h4>Engenharia financeira personalizada</h4>
+                <h3>Engenharia financeira personalizada</h3>
                 <p>Aplicamos soluções para viabilizar sua entrada utilizando os ativos que você tem disponíveis.</p>
               </div>
             </div>
             <div class="solution-feat">
               <div class="feat-dot"></div>
               <div class="feat-text">
-                <h4>Apoio total na negociação</h4>
+                <h3>Apoio total na negociação</h3>
                 <p>Estruturamos e conduzimos toda a negociação entre comprador e vendedor.</p>
               </div>
             </div>
             <div class="solution-feat">
               <div class="feat-dot"></div>
               <div class="feat-text">
-                <h4>Transição acompanhada</h4>
+                <h3>Transição acompanhada</h3>
                 <p>Suporte completo junto à franqueadora para garantir uma virada de chave segura.</p>
               </div>
             </div>
             <div class="solution-feat">
               <div class="feat-dot"></div>
               <div class="feat-text">
-                <h4>Análise de perfil gratuita</h4>
+                <h3>Análise de perfil gratuita</h3>
                 <p>Consultamos seu momento, objetivos e capacidade para indicar as melhores oportunidades.</p>
               </div>
             </div>
@@ -3376,7 +3417,7 @@
       <div class="opps-header">
         <div>
           <div class="section-label">Garimpo Exclusivo</div>
-          <div class="section-title">Melhores <em>Oportunidades</em><br>em Destaque</div>
+          <h2 class="section-title">Melhores <em>Oportunidades</em><br>em Destaque</h2>
         </div>
         <div class="opps-controls">
           <button class="opp-ctrl" id="prevBtn" onclick="moveCarousel(-1)">&#8592;</button>
@@ -3488,15 +3529,15 @@
       <div class="more-opps reveal">
         <div class="more-opps-header">
           <div class="section-label">Mais Oportunidades</div>
-          <div class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Outras <em>oportunidades</em>
-            selecionadas</div>
+          <h2 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Outras <em>oportunidades</em>
+            selecionadas</h2>
         </div>
         <div class="opps-grid">
           <!-- 3PASSE_MINI_START -->
           <a class="opp-list-card" href="franquia.html?id=pet">
             <div class="opp-list-icon">🐾</div>
             <div class="opp-list-info">
-              <h4>Pet Shop &amp; Veterinária – Aldeota</h4>
+              <h3>Pet Shop &amp; Veterinária – Aldeota</h3>
               <p>Unidade completa com serviços de grooming, pet hotel e veterinário fixo.</p>
               <div class="opp-list-meta">
                 <span class="opp-tag">R$ 150k</span>
@@ -3508,7 +3549,7 @@
           <a class="opp-list-card" href="franquia.html?id=auto">
             <div class="opp-list-icon">🚗</div>
             <div class="opp-list-info">
-              <h4>Lava Rápido &amp; Auto Center – Setor Pedro Ludovico</h4>
+              <h3>Lava Rápido &amp; Auto Center – Setor Pedro Ludovico</h3>
               <p>Alta rotatividade, localização estratégica, 200+ atendimentos/semana.</p>
               <div class="opp-list-meta">
                 <span class="opp-tag">R$ 220k</span>
@@ -3520,7 +3561,7 @@
           <a class="opp-list-card" href="franquia.html?id=farmacia">
             <div class="opp-list-icon">💊</div>
             <div class="opp-list-info">
-              <h4>Farmácia de Manipulação – Setor Sul</h4>
+              <h3>Farmácia de Manipulação – Setor Sul</h3>
               <p>Segmento em crescimento acelerado, clientela fidelizada e prescritores parceiros.</p>
               <div class="opp-list-meta">
                 <span class="opp-tag">R$ 350k</span>
@@ -3533,7 +3574,7 @@
           <a class="opp-list-card" href="/oportunidades">
             <div class="opp-list-icon" style="background:rgba(46,49,146,0.2);border-color:rgba(46,49,146,0.4);">+</div>
             <div class="opp-list-info">
-              <h4>Ver todas as oportunidades</h4>
+              <h3>Ver todas as oportunidades</h3>
               <p>Temos um portfólio em constante atualização. Fale com um especialista para ver o que se encaixa no seu
                 perfil.</p>
               <div class="opp-list-meta">
@@ -3551,34 +3592,34 @@
     <div class="hiw-inner">
       <div style="text-align:center;">
         <div class="section-label" style="justify-content:center;">Processo Transparente</div>
-        <div class="section-title" style="text-align:center;">Como funciona na <em>prática</em></div>
+        <h2 class="section-title" style="text-align:center;">Como funciona na <em>prática</em></h2>
         <p class="section-sub" style="text-align:center;margin:0 auto;">5 etapas para você assumir sua franquia com
           total segurança e clareza.</p>
       </div>
       <div class="hiw-steps reveal">
         <div class="hiw-step">
           <div class="step-num">01</div>
-          <h4>Entendemos seu perfil</h4>
+          <h3>Entendemos seu perfil</h3>
           <p>Seu momento financeiro, objetivos e tipo de negócio ideal.</p>
         </div>
         <div class="hiw-step">
           <div class="step-num">02</div>
-          <h4>Selecionamos oportunidades</h4>
+          <h3>Selecionamos oportunidades</h3>
           <p>Negócios alinhados ao seu perfil e capacidade de investimento.</p>
         </div>
         <div class="hiw-step">
           <div class="step-num">03</div>
-          <h4>Validamos os números</h4>
+          <h3>Validamos os números</h3>
           <p>Você analisa dados reais da operação antes de qualquer decisão.</p>
         </div>
         <div class="hiw-step">
           <div class="step-num">04</div>
-          <h4>Apoiamos na negociação</h4>
+          <h3>Apoiamos na negociação</h3>
           <p>Estruturação financeira e condução de toda a negociação.</p>
         </div>
         <div class="hiw-step">
           <div class="step-num">05</div>
-          <h4>Acompanhamos a transição</h4>
+          <h3>Acompanhamos a transição</h3>
           <p>Entrada segura e monitorada junto à franqueadora.</p>
         </div>
       </div>
@@ -3590,7 +3631,7 @@
     <div class="founders-inner">
       <div style="text-align:center;margin-bottom:20px;">
         <div class="section-label" style="justify-content:center;">Time Especialista</div>
-        <div class="section-title" style="text-align:center;">Quem está por trás da <em class="brand-3passe">3 PASSE</em></div>
+        <h2 class="section-title" style="text-align:center;">Quem está por trás da <em class="brand-3passe">3 PASSE</em></h2>
       </div>
       <div class="founders-grid reveal">
         <div class="founder-card">
@@ -3644,7 +3685,7 @@
     <div class="cases-inner">
       <div style="text-align:center;">
         <div class="section-label" style="justify-content:center;">Resultados Reais</div>
-        <div class="section-title" style="text-align:center;">Cases de <em>Sucesso</em></div>
+        <h2 class="section-title" style="text-align:center;">Cases de <em>Sucesso</em></h2>
         <p class="section-sub" style="text-align:center;margin:0 auto 60px;">Histórias reais de investidores que
           assumiram negócios ativos com a 3 PASSE.</p>
       </div>
@@ -3660,7 +3701,7 @@
           <div class="case-author">
             <div class="case-ava">MF</div>
             <div class="case-author-info">
-              <h5>Marcelo F.</h5>
+              <h3>Marcelo F.</h3>
               <span>Alimentação – Goiânia, GO</span>
             </div>
           </div>
@@ -3676,7 +3717,7 @@
           <div class="case-author">
             <div class="case-ava">PA</div>
             <div class="case-author-info">
-              <h5>Paulo A.</h5>
+              <h3>Paulo A.</h3>
               <span>Estética – Anápolis, GO</span>
             </div>
           </div>
@@ -3692,7 +3733,7 @@
           <div class="case-author">
             <div class="case-ava">LR</div>
             <div class="case-author-info">
-              <h5>Letícia R.</h5>
+              <h3>Letícia R.</h3>
               <span>Idiomas – Goiânia, GO</span>
             </div>
           </div>
@@ -3706,7 +3747,7 @@
     <div class="testimonials-inner">
       <div style="text-align:center;">
         <div class="section-label" style="justify-content:center;">Depoimentos</div>
-        <div class="section-title" style="text-align:center;">O que nossos clientes <em>dizem</em></div>
+        <h2 class="section-title" style="text-align:center;">O que nossos clientes <em>dizem</em></h2>
       </div>
       <div class="testi-grid reveal">
         <div class="testi-card">
@@ -3716,7 +3757,7 @@
           <div class="testi-author">
             <div class="testi-ava">RS</div>
             <div class="testi-author-info">
-              <h5>Ricardo S.</h5>
+              <h3>Ricardo S.</h3>
               <span>Empresário</span>
               <div><span class="testi-tag">Academia</span></div>
             </div>
@@ -3729,7 +3770,7 @@
           <div class="testi-author">
             <div class="testi-ava">AO</div>
             <div class="testi-author-info">
-              <h5>Amanda O.</h5>
+              <h3>Amanda O.</h3>
               <span>Investidora</span>
               <div><span class="testi-tag">Fast Food</span></div>
             </div>
@@ -3742,7 +3783,7 @@
           <div class="testi-author">
             <div class="testi-ava">JN</div>
             <div class="testi-author-info">
-              <h5>João N.</h5>
+              <h3>João N.</h3>
               <span>Empreendedor</span>
               <div><span class="testi-tag">Varejo</span></div>
             </div>
@@ -3755,7 +3796,7 @@
           <div class="testi-author">
             <div class="testi-ava">CM</div>
             <div class="testi-author-info">
-              <h5>Carla M.</h5>
+              <h3>Carla M.</h3>
               <span>Empresária</span>
               <div><span class="testi-tag">Saúde</span></div>
             </div>
@@ -3768,7 +3809,7 @@
           <div class="testi-author">
             <div class="testi-ava">FT</div>
             <div class="testi-author-info">
-              <h5>Fábio T.</h5>
+              <h3>Fábio T.</h3>
               <span>Ex-executivo</span>
               <div><span class="testi-tag">Educação</span></div>
             </div>
@@ -3781,7 +3822,7 @@
           <div class="testi-author">
             <div class="testi-ava">BP</div>
             <div class="testi-author-info">
-              <h5>Beatriz P.</h5>
+              <h3>Beatriz P.</h3>
               <span>Franqueada</span>
               <div><span class="testi-tag">Pet Shop</span></div>
             </div>
@@ -3796,7 +3837,7 @@
     <div class="instagram-inner">
       <div class="ig-header reveal">
         <div class="section-label" style="justify-content:center;">Redes Sociais</div>
-        <div class="section-title" style="text-align:center;">Conheça nossas <em>postagens</em></div>
+        <h2 class="section-title" style="text-align:center;">Conheça nossas <em>postagens</em></h2>
         <p class="section-sub" style="text-align:center;margin:0 auto 24px;">Acompanhe conteúdo exclusivo sobre o
           mercado de repasse de franquias.</p>
         <a href="https://www.instagram.com/trespasse_franquias/" target="_blank" class="ig-handle">
@@ -3876,34 +3917,34 @@
       <div class="office-grid">
         <div class="reveal-left">
           <div class="section-label">Nosso Escritório</div>
-          <div class="section-title">Venha nos <em>visitar</em> em Goiânia</div>
+          <h2 class="section-title">Venha nos <em>visitar</em> em Goiânia</h2>
           <p class="section-sub" style="margin-bottom:36px;">Nosso escritório está aberto para reuniões, apresentações
             de portfólio e análise personalizada do seu perfil de investidor.</p>
           <div class="office-info-block">
             <div class="office-icon">📍</div>
             <div class="office-text">
-              <h4>Endereço</h4>
+              <h3>Endereço</h3>
               <p>Av. Assis Chateaubriand, Qd 30 Lt 16<br>Setor Oeste, Goiânia – GO<br>CEP: 74.130-012</p>
             </div>
           </div>
           <div class="office-info-block">
             <div class="office-icon">📞</div>
             <div class="office-text">
-              <h4>Telefone & WhatsApp</h4>
+              <h3>Telefone & WhatsApp</h3>
               <p><a href="https://wa.me/5562996345086">(62) 99634-5086</a></p>
             </div>
           </div>
           <div class="office-info-block">
             <div class="office-icon">✉️</div>
             <div class="office-text">
-              <h4>E-mail</h4>
+              <h3>E-mail</h3>
               <p><a href="mailto:trespassefranquias@gmail.com">trespassefranquias@gmail.com</a></p>
             </div>
           </div>
           <div class="office-info-block">
             <div class="office-icon">🕐</div>
             <div class="office-text">
-              <h4>Horário de Atendimento</h4>
+              <h3>Horário de Atendimento</h3>
               <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h (com agendamento)</p>
             </div>
           </div>
@@ -3939,7 +3980,7 @@
 
       <div class="reveal" style="text-align:center;max-width:720px;margin:0 auto 60px;">
         <div class="section-label" style="justify-content:center;">Anuncie sua Franquia</div>
-        <div class="section-title">Sua franquia pode estar mais <em>valorizada</em><br>do que você imagina</div>
+        <h2 class="section-title">Sua franquia pode estar mais <em>valorizada</em><br>do que você imagina</h2>
         <p class="section-sub" style="text-align:center;margin:16px auto 0;">Se você está pensando em vender, o processo
           de repasse precisa ser bem planejado para garantir segurança e sucesso.</p>
       </div>
@@ -3949,7 +3990,7 @@
           <div class="office-info-block">
             <div class="office-icon">🏆</div>
             <div class="office-text">
-              <h4>Valorização Real</h4>
+              <h3>Valorização Real</h3>
               <p>Avaliamos profissionalmente o histórico, faturamento e estrutura da sua unidade para posicioná-la pelo
                 valor que ela realmente merece.</p>
             </div>
@@ -3957,7 +3998,7 @@
           <div class="office-info-block">
             <div class="office-icon">🔒</div>
             <div class="office-text">
-              <h4>Compradores Validados</h4>
+              <h3>Compradores Validados</h3>
               <p>Apresentamos sua franquia apenas a interessados pré-qualificados — perfil financeiro e intenção
                 confirmados antes do primeiro contato.</p>
             </div>
@@ -3965,7 +4006,7 @@
           <div class="office-info-block">
             <div class="office-icon">🤝</div>
             <div class="office-text">
-              <h4>Suporte do Anúncio à Assinatura</h4>
+              <h3>Suporte do Anúncio à Assinatura</h3>
               <p>Nossa equipe conduz todo o processo: da divulgação estratégica à negociação e formalização, sem você
                 precisar se preocupar com detalhes.</p>
             </div>
@@ -4060,7 +4101,7 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Navegação</h4>
+        <h3>Navegação</h3>
         <a href="#oportunidades">Oportunidades</a>
         <a href="#como-funciona">Como Funciona</a>
         <a href="#sobre">Sobre a 3 PASSE</a>
@@ -4068,7 +4109,7 @@
         <a href="#contato">Contato</a>
       </div>
       <div class="footer-col">
-        <h4>Segmentos</h4>
+        <h3>Segmentos</h3>
         <a href="franquia.html?id=alimentacao-fast">Alimentação</a>
         <a href="franquia.html?id=saude-estetica">Saúde & Estética</a>
         <a href="franquia.html?id=educacao">Educação</a>
@@ -4077,7 +4118,7 @@
         <a href="franquia.html?id=pet">Pet Care</a>
       </div>
       <div class="footer-col">
-        <h4>Contato</h4>
+        <h3>Contato</h3>
         <a href="https://wa.me/5562996345086">(62) 99634-5086</a>
         <a href="mailto:trespassefranquias@gmail.com">trespassefranquias@gmail.com</a>
         <a href="https://www.instagram.com/trespasse_franquias/" target="_blank">@trespasse_franquias</a>
