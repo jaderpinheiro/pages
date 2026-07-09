@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Montserrat:wght@800;900&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -48,6 +48,13 @@
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
       cursor: none;
+    }
+
+    .brand-3passe {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-style: normal;
+      letter-spacing: 0.02em;
     }
 
     /* CUSTOM CURSOR */
@@ -1603,8 +1610,8 @@
     }
 
     .opp-list-icon {
-      width: 52px;
-      height: 52px;
+      width: 60px;
+      height: 60px;
       background: rgba(46, 49, 146, 0.12);
       border: 1px solid rgba(46, 49, 146, 0.25);
       border-radius: 10px;
@@ -1613,6 +1620,23 @@
       justify-content: center;
       font-size: 24px;
       flex-shrink: 0;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    @keyframes oppIconSonic {
+      0% {
+        box-shadow: 0 0 0 0 rgba(46, 49, 146, 0.32), 0 0 10px rgba(46, 49, 146, 0.18);
+      }
+
+      100% {
+        box-shadow: 0 0 0 9px rgba(46, 49, 146, 0), 0 0 10px rgba(46, 49, 146, 0.18);
+      }
+    }
+
+    .opp-list-card:hover .opp-list-icon {
+      border-color: rgba(46, 49, 146, 0.5);
+      animation: oppIconSonic 1.2s ease-out infinite;
     }
 
     .opp-list-info h4 {
@@ -1770,18 +1794,45 @@
     }
 
     .founder-avatar {
-      width: 92px;
-      height: 92px;
+      width: 101px;
+      height: 101px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--red-dark), var(--red));
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 30px;
+      font-size: 33px;
       flex-shrink: 0;
       border: 2px solid rgba(46, 49, 146, 0.5);
       animation: founderSonic 3s ease-out infinite;
+    }
+
+    .founder-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .founder-linkedin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(46, 49, 146, 0.1);
+      border: 1px solid rgba(46, 49, 146, 0.3);
+      color: #2e3192;
+      transition: all 0.25s;
+    }
+
+    .founder-linkedin:hover {
+      background: #2e3192;
+      color: #fff;
+      transform: translateY(-2px);
     }
 
     .founder-info h3 {
@@ -1815,7 +1866,7 @@
       font-size: 11px;
       background: rgba(201, 168, 76, 0.1);
       border: 1px solid rgba(201, 168, 76, 0.3);
-      color: var(--gold2);
+      color: #2e3192;
       padding: 3px 10px;
       border-radius: 100px;
     }
@@ -3251,7 +3302,7 @@
       <div class="solution-grid">
         <div class="reveal-left">
           <div class="section-label">A Solução</div>
-          <div class="section-title">A <em>3 PASSE</em> conecta você às melhores franquias ativas de Goiás</div>
+          <div class="section-title">A <em class="brand-3passe">3 PASSE</em> conecta você às melhores franquias ativas de Goiás</div>
           <p class="section-sub">Maior plataforma de repasse de franquias do Estado. Negócios reais, com histórico de
             desempenho comprovado e operação estruturada. Aqui, você não aposta, você analisa, decide com dados e
             <strong>sai na frente.</strong>
@@ -3356,7 +3407,7 @@
                 </div>
                 <div class="opp-metric">
                   <div class="key">Payback</div>
-                  <div class="val">18<sup>mo</sup></div>
+                  <div class="val">18<sup>meses</sup></div>
                 </div>
                 <div class="opp-metric">
                   <div class="key">Lucro líq.</div>
@@ -3387,7 +3438,7 @@
                 </div>
                 <div class="opp-metric">
                   <div class="key">Payback</div>
-                  <div class="val">14<sup>mo</sup></div>
+                  <div class="val">14<sup>meses</sup></div>
                 </div>
                 <div class="opp-metric">
                   <div class="key">Lucro líq.</div>
@@ -3419,7 +3470,7 @@
                 </div>
                 <div class="opp-metric">
                   <div class="key">Payback</div>
-                  <div class="val">16<sup>mo</sup></div>
+                  <div class="val">16<sup>meses</sup></div>
                 </div>
                 <div class="opp-metric">
                   <div class="key">Lucro líq.</div>
@@ -3539,13 +3590,16 @@
     <div class="founders-inner">
       <div style="text-align:center;margin-bottom:20px;">
         <div class="section-label" style="justify-content:center;">Time Especialista</div>
-        <div class="section-title" style="text-align:center;">Quem está por trás da <em>3 PASSE</em></div>
+        <div class="section-title" style="text-align:center;">Quem está por trás da <em class="brand-3passe">3 PASSE</em></div>
       </div>
       <div class="founders-grid reveal">
         <div class="founder-card">
-          <div class="founder-avatar"
-            style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
-            <!-- 3PASSE_FOTO_MAURO -->
+          <div class="founder-media">
+            <div class="founder-avatar"
+              style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
+              <!-- 3PASSE_FOTO_MAURO -->
+            </div>
+            <!-- 3PASSE_LINKEDIN_MAURO -->
           </div>
           <div class="founder-info">
             <h3>Mauro Mansur</h3>
@@ -3560,9 +3614,12 @@
           </div>
         </div>
         <div class="founder-card">
-          <div class="founder-avatar"
-            style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
-            <!-- 3PASSE_FOTO_JEFFERSON -->
+          <div class="founder-media">
+            <div class="founder-avatar"
+              style="padding:0;overflow:hidden;background:none;border:2px solid rgba(46,49,146,0.5);">
+              <!-- 3PASSE_FOTO_JEFFERSON -->
+            </div>
+            <!-- 3PASSE_LINKEDIN_JEFFERSON -->
           </div>
           <div class="founder-info">
             <h3>Jefferson Rocha</h3>
@@ -4223,7 +4280,7 @@
 
     // ── VITRINE ROTAÇÃO ──
     (function () {
-      if (window._3pVitStarted) return; // plugin já injetou o IIFE antes de </body>
+      if (window._3pVitStarted) return; // plugin ja injetou o IIFE antes do fechamento do body
       window._3pVitStarted = true;
       var data = window._3pVit;
       var interval = (window._3pVitInt || 5) * 1000;
