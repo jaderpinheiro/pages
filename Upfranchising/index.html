@@ -56,7 +56,7 @@
     "@type": "Person",
     "name": "Luciano Sousa",
     "jobTitle": "Diretor Executivo",
-    "sameAs": ["https://www.instagram.com/luciano_upfranchising/", "https://www.linkedin.com/in/luciano-sousa-79633970/"]
+    "sameAs": ["https://www.instagram.com/luciano_upfranchising/", "https://www.linkedin.com/in/luciano-sousa-823930392/"]
   },
   "sameAs": ["https://www.instagram.com/upfranchising/"],
   "makesOffer": [
@@ -130,7 +130,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
 .trust .t{display:flex;flex-direction:column}
 .trust .t b{font-family:var(--ff-d);font-weight:700;font-size:1.7rem;color:#fff;line-height:1}
 .trust .t span{font-size:.82rem;color:rgba(200,216,230,.7);margin-top:6px;letter-spacing:.02em}
-.trust .t b .grad{font-weight:800}
+.trust .t b .grad{font-weight:700}
 
 /* hero visual / founder photo */
 .hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:440px;padding:20px}
@@ -352,6 +352,82 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
   .podcast-form{padding:30px 24px}
   .pf-row{flex-direction:column;gap:14px}
 }
+/* SEGS — sequential pulse one-at-a-time */
+@keyframes segPulse{0%,2.5%,97.5%,100%{color:var(--blue);background:var(--paper-2);border-color:#dfeaf3;text-shadow:none}1.25%{color:#3fb5f2;background:rgba(91,179,230,.13);border-color:rgba(91,179,230,.55);text-shadow:0 0 14px rgba(91,179,230,.45)}}
+.segs .values li{animation:segPulse 15s ease-in-out infinite}
+.segs .values li:hover{animation:none}
+.segs .values li:nth-child(1){animation-delay:0s}.segs .values li:nth-child(2){animation-delay:1s}.segs .values li:nth-child(3){animation-delay:2s}.segs .values li:nth-child(4){animation-delay:3s}.segs .values li:nth-child(5){animation-delay:4s}.segs .values li:nth-child(6){animation-delay:5s}.segs .values li:nth-child(7){animation-delay:6s}.segs .values li:nth-child(8){animation-delay:7s}.segs .values li:nth-child(9){animation-delay:8s}.segs .values li:nth-child(10){animation-delay:9s}.segs .values li:nth-child(11){animation-delay:10s}.segs .values li:nth-child(12){animation-delay:11s}.segs .values li:nth-child(13){animation-delay:12s}.segs .values li:nth-child(14){animation-delay:13s}.segs .values li:nth-child(15){animation-delay:14s}
+
+/* CONSULTORIA ESTRATÉGICA — marca d'água */
+#consultoria-estrategica{position:relative}
+#consultoria-estrategica::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;background:url('image/logoUp-transparente.png') no-repeat center/contain;opacity:.045;pointer-events:none;z-index:0}
+#consultoria-estrategica>.wrap{position:relative;z-index:1}
+
+/* YOUTUBE BUTTON — sonar ring (dois anéis dourados pulsando) */
+.btn-yt{position:relative}
+.btn-yt::before,.btn-yt::after{content:"";position:absolute;inset:-3px;border-radius:64px;border:1.5px solid rgba(201,162,39,.6);animation:sonarPulse 2.6s ease-out infinite;pointer-events:none;z-index:-1}
+.btn-yt::after{animation-delay:1.3s;border-color:rgba(201,162,39,.38)}
+
+/* GOOGLE REVIEWS */
+.reviews-sec{background:var(--ink);color:#fff;padding:96px 0;position:relative;overflow:hidden}
+.reviews-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 80% 20%,rgba(245,155,47,.1),transparent 65%),radial-gradient(40% 50% at 20% 80%,rgba(41,120,174,.16),transparent 60%);pointer-events:none}
+.reviews-sec .wrap{position:relative}
+.reviews-sec .s-head h2{color:#fff}
+.rev-head{margin-bottom:40px}
+.rev-layout{display:grid;grid-template-columns:196px 1fr;gap:28px;align-items:start}
+.rev-rating-block{display:flex;flex-direction:column;align-items:center;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:28px 18px 22px;cursor:pointer;transition:border-color .35s,background .35s;text-decoration:none;position:sticky;top:104px}
+.rev-rating-block:hover{border-color:rgba(245,200,66,.48);background:rgba(255,255,255,.1)}
+.rev-score-num{font-family:var(--ff-d);font-weight:800;font-size:3.6rem;color:#fff;line-height:1;margin-bottom:9px}
+.rev-stars{display:flex;gap:3px;margin-bottom:7px;justify-content:center}
+.rev-stars svg{width:15px;height:15px;fill:#f5c842}
+.rev-count{font-size:.76rem;color:rgba(200,216,230,.6)}
+.rev-g-badge{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font-size:.71rem;color:rgba(200,216,230,.46)}
+.rev-carousel-col{min-width:0}
+/* reviews carousel */
+.rev-carousel-outer{position:relative;padding:0 62px}
+.rev-carousel-wrap{overflow:hidden;border-radius:24px}
+.rev-track{display:flex;transition:transform .75s cubic-bezier(.16,.84,.44,1);will-change:transform}
+.rev-card{flex:0 0 100%;min-width:100%;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:52px 60px 42px;text-decoration:none;display:block;transition:border-color .35s}
+.rev-card:hover{border-color:rgba(245,200,66,.38)}
+.rev-quote{font-family:Georgia,'Times New Roman',serif;font-size:5rem;line-height:.85;color:rgba(245,155,47,.38);display:block;margin-bottom:4px;user-select:none;pointer-events:none}
+.rev-text-main{font-size:1.13rem;color:rgba(226,236,245,.9);line-height:1.78;margin-bottom:32px;font-style:italic;max-width:820px}
+.rev-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.rev-card-id{display:flex;align-items:center;gap:13px}
+.rev-av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--ff-d);font-weight:800;font-size:1.1rem;color:#fff;flex:none}
+.rev-name{font-family:var(--ff-d);font-weight:700;font-size:.95rem;color:#fff;line-height:1.2}
+.rev-badge{font-size:.71rem;color:var(--blue-bright);margin-top:3px}
+.rev-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.rev-cstars{display:flex;gap:3px}
+.rev-cstars svg{width:15px;height:15px;fill:#f5c842}
+.rev-date{font-size:.73rem;color:rgba(200,216,230,.42)}
+.rev-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);cursor:pointer;display:grid;place-items:center;transition:background .3s,border-color .3s,transform .3s var(--ease);z-index:3;flex:none}
+.rev-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.42);transform:translateY(-50%) scale(1.1)}
+.rev-prev{left:8px}.rev-next{right:8px}
+.rev-dots{display:flex;justify-content:center;gap:8px;margin-top:26px}
+.rev-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22);border:0;cursor:pointer;padding:0;transition:background .4s,width .4s var(--ease)}
+.rev-dot.active{background:#f5c842;width:26px;border-radius:4px}
+.rev-cta-wrap{margin-top:38px;text-align:center}
+.btn-google{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:60px;padding:14px 28px;font-family:var(--ff-d);font-weight:600;font-size:.95rem;transition:background .3s,border-color .3s,transform .3s var(--ease)}
+.btn-google:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.38);transform:translateY(-3px)}
+@media(max-width:900px){.rev-card{padding:36px 30px 28px}.rev-carousel-outer{padding:0 52px}}
+@media(max-width:760px){.rev-layout{grid-template-columns:1fr}.rev-rating-block{flex-direction:row;text-align:left;gap:16px;padding:18px 22px;position:static;align-items:center}.rev-score-num{font-size:2.8rem;margin-bottom:0}.rev-stars{margin-bottom:0}.rev-g-badge{flex-direction:row;margin-top:0;padding-top:0;border-top:none}}
+@media(max-width:560px){.rev-card{padding:26px 20px 22px}.rev-text-main{font-size:.96rem}.rev-btn{display:none}.rev-carousel-outer{padding:0}}
+
+/* OBRIGADO PAGE */
+.obg-hero{position:relative;background:radial-gradient(120% 90% at 78% 8%,#103a5c 0%,var(--ink-2) 42%,var(--ink) 100%);color:#fff;padding:150px 0 90px;overflow:hidden}
+.obg-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 40% at 88% 75%,rgba(245,155,47,.16),transparent 70%);pointer-events:none}
+.obg-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(80% 70% at 50% 30%,#000 40%,transparent 100%);pointer-events:none}
+.obg-in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.obg-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,155,47,.15);border:1px solid rgba(245,155,47,.4);border-radius:30px;padding:7px 16px;font-size:.8rem;font-weight:600;color:var(--orange-soft);margin-bottom:22px;text-transform:uppercase;letter-spacing:.1em}
+.obg-in h1{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-bottom:18px;line-height:1.1}
+.obg-in p.lead{font-size:1.1rem;color:rgba(226,236,245,.82);margin-bottom:36px;max-width:480px}
+.obg-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-download{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:60px;padding:15px 26px;font-family:var(--ff-d);font-weight:600;font-size:.96rem;transition:background .3s,border-color .3s,transform .3s var(--ease)}
+.btn-download:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45);transform:translateY(-3px)}
+.obg-video-wrap{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 40px 80px -28px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12)}
+.obg-video-wrap iframe{width:100%;height:100%;display:block;border:0}
+@media(max-width:900px){.obg-in{grid-template-columns:1fr;gap:40px}}
+
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none;transition:none}
@@ -395,7 +471,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
         <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
       </div>
       <div class="trust rv d4">
-        <div class="t"><b><span class="grad">+200</span></b><span>empresas atendidas</span></div>
+        <div class="t"><b>+200</b><span>empresas atendidas</span></div>
         <div class="t"><b>20mil+</b><span>horas de consultoria</span></div>
         <div class="t"><b>+30</b><span>projetos de franquia</span></div>
         <div class="t"><b>2017</b><span>desde a fundação</span></div>
@@ -434,7 +510,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       <div class="float-badge fb4">
         <div class="fb-inner">
           <span class="ar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></span>
-          <span><b>Franquia</b><small>do local ao nacional</small></span>
+          <span><b>Franquia</b><small>crescimento e valorização</small></span>
         </div>
       </div>
     </div>
@@ -455,13 +531,13 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     <div class="s-head rv">
       <p class="eyebrow">Quem somos</p>
       <h2>Uma consultoria que existe para um único objetivo: exponenciar o seu negócio.</h2>
-      <p>Fundada em 2017, a UP Consultoria & Franchising já apoiou mais de 200 empresas em crescimento e organização, somando mais de 20 mil horas de consultoria, +30 projetos de franquia e +50 empresas modeladas. Unimos rigor financeiro e visão de expansão para transformar negócios sólidos em redes de franquias e operações prontas para escalar.</p>
+      <p>Fundada em 2017, a UP Consultoria & Franchising já apoiou mais de 200 empresas em crescimento e organização, somando mais de 20 mil horas de consultoria, +30 projetos de franquia e +100 empresas modeladas. Unimos rigor financeiro e visão de expansão para transformar negócios sólidos em redes de franquias e operações prontas para escalar.</p>
     </div>
     <div class="mvv">
       <article class="card rv d1">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="#fff"/></svg></div>
         <h3>Missão</h3>
-        <p>Exponenciar negócios, levando cada empresa atendida ao próximo patamar de performance e valor de mercado.</p>
+        <p>Consolidar-se como a principal empresa de consultoria estratégica e de exponenciação de negócios do Centro-Oeste.</p>
       </article>
       <article class="card rv d2">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
@@ -498,22 +574,22 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       <article class="card rv d1">
         <span class="num">01</span>
         <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>Estratégia</h3>
-        <ul><li>Planejamento estratégico</li><li>Metodologias ágeis</li><li>Plano de negócios</li><li>Business Model Canvas</li></ul>
+        <ul><li>Planejamento Estratégico</li><li>Metodologias Ágeis</li><li>Plano de Negócios</li><li>Business Model Canvas</li></ul>
       </article>
       <article class="card rv d2">
         <span class="num">02</span>
         <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></span>Franchising</h3>
-        <ul><li>Formatação de franquias</li><li>Venda de franquias e plano de expansão</li><li>Assessoria e instrumentação jurídica</li><li>Associação à ABF e mentoria</li></ul>
+        <ul><li>Formatação de Franquias</li><li>Venda de Franquias e Plano de Expansão</li><li>Assessoria e Instrumentação Jurídica</li><li>Associação à ABF e Mentoria</li></ul>
       </article>
       <article class="card rv d3">
         <span class="num">03</span>
         <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v6l4 12H5L9 8z"/><path d="M8 14h8"/></svg></span>Estudos & Avaliações</h3>
-        <ul><li>Estudo de viabilidade econômico-financeiro</li><li>Valuation (avaliação de empresas)</li><li>Projetos e pitch para startups</li><li>Conexão com investidores</li></ul>
+        <ul><li>Estudo de Viabilidade Econômico-Financeiro</li><li>Valuation (Avaliação de Empresas)</li><li>Projetos e Pitch para Startups</li><li>Conexão com Investidores</li></ul>
       </article>
       <article class="card rv d4">
         <span class="num">04</span>
         <h3><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2978ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M21 3l-9 9"/><path d="M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg></span>Business</h3>
-        <ul><li>Business Broker (intermediação de negócios)</li><li>Processos de M&A</li><li>Due diligence</li></ul>
+        <ul><li>Business Broker (Intermediação de Negócios)</li><li>Processos de M&A</li><li>Due Diligence</li></ul>
       </article>
     </div>
   </div>
@@ -557,7 +633,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
   <div class="wrap">
     <div class="banner rv">
       <h2>Dê adeus às consultorias convencionais e confie à UP o desafio de exponenciar o seu negócio.</h2>
-      <p>Cada projeto começa com um diagnóstico honesto e termina com um plano executável, do modelo de receita à expansão por franquias.</p>
+      <p>Cada projeto começa com um diagnóstico honesto e termina com um plano executável, do desenho do negócio à estruturação da expansão.</p>
       <a class="btn btn-primary" href="https://wa.me/5562998691668?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20com%20a%20UP%20Franchising." target="_blank" rel="noopener">Quero um diagnóstico</a>
     </div>
   </div>
@@ -573,24 +649,24 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
     </div>
     <div class="founder">
       <div class="founder-card rv d1">
-        <div class="avatar"><div class="avatar-mask"><img src="image/Luciano-avatar.jpg" alt="Luciano Sousa"></div></div>
+        <div class="avatar"><div class="avatar-mask"><img src="image/Luciano%20Upfranchising.com.jpeg" alt="Luciano Sousa" style="object-position:50% 12%"></div></div>
         <h3>Luciano Sousa</h3>
         <p class="role">Diretor Executivo</p>
         <p class="reg">Administrador de Empresas · CRA 6-00166</p>
         <p class="reg">Experiência em Citibank, Unibanco, Ambev, Wickbold e Telefônica-Vivo</p>
         <div class="fsoc">
           <a href="https://www.instagram.com/luciano_upfranchising/" target="_blank" rel="noopener" aria-label="Instagram de Luciano Sousa"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.1 3.3c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.1-.1-3.3c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 100 9.8 4.9 4.9 0 000-9.8zm0 8a3.1 3.1 0 110-6.2 3.1 3.1 0 010 6.2zm6.3-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a>
-          <a href="https://www.linkedin.com/in/luciano-sousa-79633970/" target="_blank" rel="noopener" aria-label="LinkedIn de Luciano Sousa"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 005 0 2.5 2.5 0 00-2.52-2.5zM3 8.98h4V21H3V8.98zM9.5 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.33c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4V8.98z"/></svg></a>
+          <a href="https://www.linkedin.com/in/luciano-sousa-823930392/" target="_blank" rel="noopener" aria-label="LinkedIn de Luciano Sousa"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 005 0 2.5 2.5 0 00-2.52-2.5zM3 8.98h4V21H3V8.98zM9.5 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.33c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4V8.98z"/></svg></a>
         </div>
       </div>
       <div class="rv d2">
         <ul class="creds">
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Economia, Investimentos e Banking</b>MBA · USP</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Administração Estratégica, Private Equity e M&A</b>Pós-graduação</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Administração Estratégica e Gestão de Negócios</b>Pós Graduação · FIA Business School</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Private Equity, M&A e Growth</b>MBA · Trevisan</span></li>
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Valuation</b>Certificação ANBIMA</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Franchising</b>Certificação Grupo Bittencourt</span></li>
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Economia dos Negócios & Finanças Corporativas</b>FGV</span></li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Governança Corporativa & M&A</b>Trevisan</span></li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59b2f" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg><span><b>Fundos de Investimentos (FIDC e FIP)</b>Anbima</span></li>
         </ul>
       </div>
     </div>
@@ -674,6 +750,156 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
   </div>
 </section>
 
+<!-- GOOGLE REVIEWS -->
+<section class="reviews-sec" id="avaliacoes">
+  <div class="wrap">
+    <div class="rev-head rv">
+      <p class="eyebrow on-dark">Avaliações Google</p>
+      <h2 style="color:#fff">O que dizem quem já exponenciou.</h2>
+      <p style="color:rgba(200,216,230,.72);margin-top:10px">Resultados reais de quem confiou à UP o desafio de crescer.</p>
+    </div>
+
+    <div class="rev-layout rv d1">
+      <a class="rev-rating-block" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener" aria-label="Ver avaliações no Google">
+        <div class="rev-score-num">5,0</div>
+        <div class="rev-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="rev-count">12 avaliações</div>
+        <div class="rev-g-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span>Google Meu Negócio</span>
+        </div>
+        <span style="font-size:.7rem;color:rgba(200,216,230,.34);margin-top:7px">Ver todas →</span>
+      </a>
+      <div class="rev-carousel-col">
+        <div class="rev-carousel-outer" id="revCarousel">
+      <div class="rev-carousel-wrap">
+        <div class="rev-track" id="revTrack">
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">Realizamos a formatação da nossa franquia com a Up Franchising e ficamos extremamente satisfeitos com a qualidade dos serviços prestados, o alto nível de profissionalismo e, principalmente, com todo o conhecimento adquirido ao longo do processo.</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#f59b2f,#ff8a1f)">C</div>
+                <div><div class="rev-name">COMBOS BEAUTY</div><div class="rev-badge">1 avaliação</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">Excelente a consultoria. Realizamos o processo de formatação de franquia da empresa MeBelisca. O cronograma foi entregue conforme acordado e fiquei muito satisfeito com o resultado!</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#2978ae,#5bb3e6)">L</div>
+                <div><div class="rev-name">Lucas Lima</div><div class="rev-badge">Local Guide · 107 avaliações</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">Seguramente, a empresa mais séria e capacitada de Goiás no segmento de consultoria em franchising. Capitaneada pelo seu CEO Luciano Souza, profissional de alta envergadura. Recomendamos!!</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#0d7a6e,#1ab5a5)">T</div>
+                <div><div class="rev-name">TRESPASSE FRANQUIAS</div><div class="rev-badge">1 avaliação</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">Profissional sério e muito preparado para o propósito que buscávamos. Fomos atendidos com cordialidade e a entrega do contrato no prazo combinado, foi feita de forma muito clara e objetiva.</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#6a3fb5,#9b6de8)">F</div>
+                <div><div class="rev-name">Fabrício Vieira</div><div class="rev-badge">3 avaliações</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">Já fiz vários rodeios das minhas empresas, fui muito bem atendido — a qualidade dos serviços prestados foram excelentes. Super indico!</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#0a7f3c,#1fc469)">W</div>
+                <div><div class="rev-name">Wanderson Vidal</div><div class="rev-badge">4 avaliações · 1 foto</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+          <a class="rev-card" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+            <span class="rev-quote" aria-hidden="true">"</span>
+            <p class="rev-text-main">A UP franchising foi fundamental na formatação da nossa franquia. Processo muito profissional e bem estruturado. Recomendo!</p>
+            <div class="rev-bottom">
+              <div class="rev-card-id">
+                <div class="rev-av" style="background:linear-gradient(135deg,#c04b18,#e8783b)">M</div>
+                <div><div class="rev-name">Marcillio Canedo</div><div class="rev-badge">5 avaliações</div></div>
+              </div>
+              <div class="rev-right">
+                <div class="rev-cstars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="rev-date">3 meses atrás</div>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+      <button class="rev-btn rev-prev" id="revPrev" aria-label="Avaliação anterior">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="rev-btn rev-next" id="revNext" aria-label="Próxima avaliação">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+        </div>
+        <div class="rev-dots" id="revDots">
+          <button class="rev-dot active" aria-label="Avaliação 1"></button>
+          <button class="rev-dot" aria-label="Avaliação 2"></button>
+          <button class="rev-dot" aria-label="Avaliação 3"></button>
+          <button class="rev-dot" aria-label="Avaliação 4"></button>
+          <button class="rev-dot" aria-label="Avaliação 5"></button>
+          <button class="rev-dot" aria-label="Avaliação 6"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-cta-wrap rv">
+      <a class="btn-google" href="https://www.google.com/maps/search/UP+Consultoria+%26+Franchising+Goi%C3%A2nia" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Ver todas as avaliações no Google
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- PODCAST -->
 <section class="section alt" id="podcast">
   <div class="wrap">
@@ -693,7 +919,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
         <span class="podcast-tag">Episódio 01</span>
         <h3>É melhor abrir um negócio novo ou investir em uma franquia?</h3>
         <p>Essa é uma das maiores dúvidas de quem deseja empreender ou investir em um novo negócio. Afinal, vale mais a pena construir uma marca do zero ou ingressar em uma rede de franquias já estruturada? Neste primeiro episódio, reunimos especialistas com diferentes visões do mercado para discutir os desafios, oportunidades, riscos e vantagens de cada modelo de negócio.</p>
-        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=28bM9FabRL8" target="_blank" rel="noopener">
+        <a class="btn btn-primary btn-yt" href="https://www.youtube.com/watch?v=28bM9FabRL8" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           Assistir no YouTube
         </a>
@@ -704,7 +930,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
       <div class="s-head center" style="margin-bottom:30px">
         <p class="eyebrow">Participe</p>
         <h3>Quer participar do Podcast GO-UP Franchising?</h3>
-        <p>Conte um pouco sobre o seu negócio e nossa equipe entra em contato pelo WhatsApp.</p>
+        <p>Conte um pouco sobre o seu negócio e nossa equipe entrará em contato pelo WhatsApp.</p>
       </div>
       <form id="podcastForm" autocomplete="off">
         <div class="pf-row">
@@ -751,7 +977,7 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:700;line-height:1.08;letter-spacing
         <p class="foot-about">Formatação de franquias, consultoria estratégica, valuation e M&A. Exponenciamos negócios em Goiânia, GO, com atuação em todo o Brasil.</p>
         <div class="foot-soc">
           <a href="https://www.instagram.com/upfranchising/" target="_blank" rel="noopener" aria-label="Instagram da UP Franchising"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.9a4.9 4.9 0 100 9.8 4.9 4.9 0 000-9.8zm0 8a3.1 3.1 0 110-6.2 3.1 3.1 0 010 6.2zm6.3-8.2a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a>
-          <a href="https://www.linkedin.com/in/luciano-sousa-79633970/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 005 0 2.5 2.5 0 00-2.52-2.5zM3 8.98h4V21H3V8.98zM9.5 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.33c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4V8.98z"/></svg></a>
+          <a href="https://www.linkedin.com/in/luciano-sousa-823930392/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M4.98 3.5A2.5 2.5 0 002.5 6a2.5 2.5 0 005 0 2.5 2.5 0 00-2.52-2.5zM3 8.98h4V21H3V8.98zM9.5 8.98h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.33c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21h-4V8.98z"/></svg></a>
         </div>
       </div>
       <div>
@@ -821,6 +1047,7 @@ if(podcastForm){
     var whatsapp=podcastForm.whatsapp.value.trim();
     var msg='Olá! Quero participar do Podcast GO-UP Franchising.\nEmpresa: '+empresa+(site?'\nSite/Instagram: '+site:'')+'\nMeu WhatsApp: '+whatsapp;
     window.open('https://wa.me/5562998691668?text='+encodeURIComponent(msg),'_blank','noopener');
+    window.location.href='obrigado.html';
   });
 }
 
@@ -835,6 +1062,31 @@ if(clientsWrap&&clientsToggle){
     clientsLabel.textContent=paused?'Retomar':'Pausar';
   });
 }
+
+// reviews carousel
+(function(){
+  var carousel=document.getElementById('revCarousel');
+  var track=document.getElementById('revTrack');
+  var dots=document.querySelectorAll('#revDots .rev-dot');
+  if(!carousel||!track||!dots.length)return;
+  var total=dots.length,current=0,timer;
+  function goTo(n){
+    current=(n+total)%total;
+    track.style.transform='translateX(-'+current*100+'%)';
+    dots.forEach(function(d,i){d.classList.toggle('active',i===current)});
+  }
+  function start(){timer=setInterval(function(){goTo(current+1)},5200)}
+  function stop(){clearInterval(timer)}
+  carousel.addEventListener('mouseenter',stop);
+  carousel.addEventListener('mouseleave',start);
+  document.getElementById('revPrev').addEventListener('click',function(){stop();goTo(current-1);start()});
+  document.getElementById('revNext').addEventListener('click',function(){stop();goTo(current+1);start()});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();goTo(i);start()})});
+  var sx=0;
+  carousel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  carousel.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>48){stop();goTo(current+(dx<0?1:-1));start()}},{passive:true});
+  start();
+})();
 
 // reveal on scroll
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
@@ -852,6 +1104,13 @@ function drawChart(){
   });
 }
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){requestAnimationFrame(function(){setTimeout(drawChart,250)})}
+
+// redireciona para obrigado.html ao clicar em qualquer link WhatsApp
+document.querySelectorAll('a[href*="wa.me"]').forEach(function(el){
+  el.addEventListener('click',function(){
+    setTimeout(function(){window.location.href='obrigado.html';},150);
+  });
+});
 </script>
 </body>
 </html>
