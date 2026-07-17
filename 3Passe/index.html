@@ -34,6 +34,7 @@
       --glass2: rgba(46, 49, 146, 0.09);
       --border: rgba(46, 49, 146, 0.14);
       --border-red: rgba(46, 49, 146, 0.3);
+      --hero-pad: max(5vw, calc((100vw - 1200px) / 2));
     }
 
     *,
@@ -128,7 +129,7 @@
       left: 0;
       right: 0;
       z-index: 500;
-      padding: 0 5vw;
+      padding: 0 var(--hero-pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -291,7 +292,6 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      --hero-pad: max(5vw, calc((100vw - 1200px) / 2));
       padding: 120px var(--hero-pad) 80px;
     }
 
@@ -2394,7 +2394,7 @@
     footer {
       background: var(--bg2);
       border-top: 1px solid var(--border);
-      padding: 60px 5vw 30px;
+      padding: 60px var(--hero-pad) 30px;
     }
 
     .footer-grid {
@@ -3274,6 +3274,7 @@
           </p>
           <p>O maior erro não é investir. É investir <strong>no negócio errado, na hora errada, sem dados
               reais.</strong></p>
+          <!-- 3PASSE_PAIN_VIDEO -->
         </div>
         <div class="pain-items reveal-right">
           <div class="pain-item">
