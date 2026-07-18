@@ -2977,6 +2977,26 @@
       color: #2e3192;
     }
 
+    /* Título do card pulsa suavemente pra branco e volta — chama atenção sem alterar o design */
+    .opp-card-body h3 {
+      animation: oppTitleGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes oppTitleGlow {
+
+      0%,
+      60%,
+      100% {
+        color: #2e3192;
+        text-shadow: none;
+      }
+
+      30% {
+        color: #fff;
+        text-shadow: 0 0 14px rgba(46, 49, 146, 0.55), 0 0 4px rgba(255, 255, 255, 0.9);
+      }
+    }
+
     .opp-ctrl {
       color: #2e3192;
     }
@@ -3402,7 +3422,7 @@
               <div class="stat-label">Taxa de satisfação dos compradores</div>
             </div>
             <div class="stat-card">
-              <div class="stat-num">2<sup>+</sup></div>
+              <div class="stat-num">20<sup>+</sup></div>
               <div class="stat-label">Anos de mercado especializado</div>
             </div>
             <div class="stat-card">
