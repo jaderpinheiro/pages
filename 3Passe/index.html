@@ -1462,7 +1462,20 @@
       text-transform: uppercase;
       padding: 4px 10px;
       border-radius: 100px;
-      color: var(--gray2);
+      color: #fff;
+      animation: catTagGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes catTagGlow {
+
+      0%,
+      100% {
+        text-shadow: none;
+      }
+
+      50% {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.85), 0 0 3px rgba(255, 255, 255, 1);
+      }
     }
 
     .opp-img-bar {
@@ -2975,26 +2988,6 @@
 
     .opp-card {
       color: #2e3192;
-    }
-
-    /* Título do card pulsa suavemente pra branco e volta — chama atenção sem alterar o design */
-    .opp-card-body h3 {
-      animation: oppTitleGlow 6s ease-in-out infinite;
-    }
-
-    @keyframes oppTitleGlow {
-
-      0%,
-      60%,
-      100% {
-        color: #2e3192;
-        text-shadow: none;
-      }
-
-      30% {
-        color: #fff;
-        text-shadow: 0 0 14px rgba(46, 49, 146, 0.55), 0 0 4px rgba(255, 255, 255, 0.9);
-      }
     }
 
     .opp-ctrl {
