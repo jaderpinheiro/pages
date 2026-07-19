@@ -1047,7 +1047,7 @@ if(podcastForm){
     var whatsapp=podcastForm.whatsapp.value.trim();
     var msg='Olá! Quero participar do Podcast GO-UP Franchising.\nEmpresa: '+empresa+(site?'\nSite/Instagram: '+site:'')+'\nMeu WhatsApp: '+whatsapp;
     window.open('https://wa.me/5562998691668?text='+encodeURIComponent(msg),'_blank','noopener');
-    window.location.href='obrigado.html';
+    window.location.href='https://upfranchising.com/obrigado/';
   });
 }
 
@@ -1105,10 +1105,10 @@ function drawChart(){
 }
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){requestAnimationFrame(function(){setTimeout(drawChart,250)})}
 
-// redireciona para obrigado.html ao clicar em qualquer link WhatsApp
+// redireciona para upfranchising.com/obrigado/ ao clicar em qualquer link WhatsApp
 document.querySelectorAll('a[href*="wa.me"]').forEach(function(el){
   el.addEventListener('click',function(){
-    setTimeout(function(){window.location.href='obrigado.html';},150);
+    setTimeout(function(){window.location.href='https://upfranchising.com/obrigado/';},150);
   });
 });
 </script>
