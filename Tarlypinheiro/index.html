@@ -679,8 +679,15 @@
     }
 
     .cards-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+    }
+
+    /* Carousel — só aplicado na seção Lançamentos */
+    .cards-grid.carousel {
+      display: flex;
+      grid-template-columns: none;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
@@ -689,7 +696,13 @@
       padding-bottom: 8px;
     }
 
-    .cards-grid::-webkit-scrollbar { display: none; }
+    .cards-grid.carousel::-webkit-scrollbar { display: none; }
+
+    .cards-grid.carousel .card {
+      flex: 0 0 300px;
+      width: 300px;
+      scroll-snap-align: start;
+    }
 
     .card {
       background: var(--white);
@@ -699,9 +712,6 @@
       transition: var(--transition);
       cursor: pointer;
       position: relative;
-      flex: 0 0 300px;
-      width: 300px;
-      scroll-snap-align: start;
     }
 
     .card:hover {
@@ -1727,7 +1737,11 @@
 
     /* RESPONSIVE */
     @media(max-width:1024px) {
-      .card {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cards-grid.carousel .card {
         flex: 0 0 280px;
         width: 280px;
       }
@@ -1781,7 +1795,11 @@
         display: flex;
       }
 
-      .card {
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cards-grid.carousel .card {
         flex: 0 0 82vw;
         width: 82vw;
       }
@@ -1821,7 +1839,11 @@
       .logo-img { height: 32px; }
       .logo-name { font-size: 18px; }
       .logo-sub  { font-size: 8px; letter-spacing: 2px; }
-      .card {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid.carousel .card {
         flex: 0 0 88vw;
         width: 88vw;
       }
@@ -2007,12 +2029,7 @@
           </div>
           <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
-        <div class="carousel-outer">
-          <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('destaque-grid',-1)" aria-label="Anterior">&#8249;</button>
-          <div class="cards-grid" id="destaque-grid"><!-- Gerado via JS --></div>
-          <button class="carousel-btn carousel-next" onclick="tiCarouselMove('destaque-grid',1)" aria-label="Próximo">&#8250;</button>
-          <div class="carousel-dots" id="destaque-dots"></div>
-        </div>
+        <div class="cards-grid" id="destaque-grid"><!-- Gerado via JS --></div>
       </div>
     </section>
 
@@ -2026,12 +2043,7 @@
           </div>
           <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
-        <div class="carousel-outer">
-          <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('novos-grid',-1)" aria-label="Anterior">&#8249;</button>
-          <div class="cards-grid" id="novos-grid"></div>
-          <button class="carousel-btn carousel-next" onclick="tiCarouselMove('novos-grid',1)" aria-label="Próximo">&#8250;</button>
-          <div class="carousel-dots" id="novos-dots"></div>
-        </div>
+        <div class="cards-grid" id="novos-grid"></div>
       </div>
     </section>
 
@@ -2047,7 +2059,7 @@
         </div>
         <div class="carousel-outer">
           <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('lancamentos-grid',-1)" aria-label="Anterior">&#8249;</button>
-          <div class="cards-grid" id="lancamentos-grid"></div>
+          <div class="cards-grid carousel" id="lancamentos-grid"></div>
           <button class="carousel-btn carousel-next" onclick="tiCarouselMove('lancamentos-grid',1)" aria-label="Próximo">&#8250;</button>
           <div class="carousel-dots" id="lancamentos-dots"></div>
         </div>
@@ -2751,8 +2763,6 @@
     renderCards(imoveis.novos, 'novos-grid');
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
     setTimeout(function() {
-      initCarousel('destaque-grid');
-      initCarousel('novos-grid');
       initCarousel('lancamentos-grid');
       window.observeReveal();
     }, 100);
@@ -2860,11 +2870,9 @@
           renderWPCards(data.lancamentos.map(wpToCard), 'lancamentos-grid');
         if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length))
           renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
-        // Re-init carousel after WP cards replace the static ones
+        // Re-init carousel lançamentos após dados WP
         setTimeout(function() {
           if (typeof initCarousel === 'function') {
-            initCarousel('destaque-grid');
-            initCarousel('novos-grid');
             initCarousel('lancamentos-grid');
             if (typeof window.observeReveal === 'function') window.observeReveal();
           }
