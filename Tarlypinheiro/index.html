@@ -619,11 +619,77 @@
     }
 
     /* CARDS */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+    .carousel-outer {
+      position: relative;
     }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      box-shadow: 0 4px 20px rgba(13,27,42,0.14);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      transition: var(--transition);
+      opacity: 0.9;
+    }
+
+    .carousel-btn:hover {
+      opacity: 1;
+      box-shadow: 0 8px 28px rgba(13,27,42,0.2);
+      transform: translateY(-50%) scale(1.07);
+    }
+
+    .carousel-prev { left: -22px; }
+    .carousel-next { right: -22px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--navy);
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    .cards-grid {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+
+    .cards-grid::-webkit-scrollbar { display: none; }
 
     .card {
       background: var(--white);
@@ -633,6 +699,9 @@
       transition: var(--transition);
       cursor: pointer;
       position: relative;
+      flex: 0 0 300px;
+      width: 300px;
+      scroll-snap-align: start;
     }
 
     .card:hover {
@@ -1658,8 +1727,9 @@
 
     /* RESPONSIVE */
     @media(max-width:1024px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .card {
+        flex: 0 0 280px;
+        width: 280px;
       }
 
       .ig-grid {
@@ -1711,9 +1781,13 @@
         display: flex;
       }
 
-      .cards-grid {
-        grid-template-columns: 1fr 1fr;
+      .card {
+        flex: 0 0 82vw;
+        width: 82vw;
       }
+
+      .carousel-prev { left: -8px; }
+      .carousel-next { right: -8px; }
 
       .ig-grid {
         grid-template-columns: repeat(2, 2fr);
@@ -1747,8 +1821,9 @@
       .logo-img { height: 32px; }
       .logo-name { font-size: 18px; }
       .logo-sub  { font-size: 8px; letter-spacing: 2px; }
-      .cards-grid {
-        grid-template-columns: 1fr;
+      .card {
+        flex: 0 0 88vw;
+        width: 88vw;
       }
 
       .ig-grid {
@@ -1932,8 +2007,11 @@
           </div>
           <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
-        <div class="cards-grid" id="destaque-grid">
-          <!-- Gerado via JS -->
+        <div class="carousel-outer">
+          <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('destaque-grid',-1)" aria-label="Anterior">&#8249;</button>
+          <div class="cards-grid" id="destaque-grid"><!-- Gerado via JS --></div>
+          <button class="carousel-btn carousel-next" onclick="tiCarouselMove('destaque-grid',1)" aria-label="Próximo">&#8250;</button>
+          <div class="carousel-dots" id="destaque-dots"></div>
         </div>
       </div>
     </section>
@@ -1948,7 +2026,12 @@
           </div>
           <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
-        <div class="cards-grid" id="novos-grid"></div>
+        <div class="carousel-outer">
+          <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('novos-grid',-1)" aria-label="Anterior">&#8249;</button>
+          <div class="cards-grid" id="novos-grid"></div>
+          <button class="carousel-btn carousel-next" onclick="tiCarouselMove('novos-grid',1)" aria-label="Próximo">&#8250;</button>
+          <div class="carousel-dots" id="novos-dots"></div>
+        </div>
       </div>
     </section>
 
@@ -1962,7 +2045,12 @@
           </div>
           <a href="/imoveis/" class="section-link">Ver todos →</a>
         </div>
-        <div class="cards-grid" id="lancamentos-grid"></div>
+        <div class="carousel-outer">
+          <button class="carousel-btn carousel-prev" onclick="tiCarouselMove('lancamentos-grid',-1)" aria-label="Anterior">&#8249;</button>
+          <div class="cards-grid" id="lancamentos-grid"></div>
+          <button class="carousel-btn carousel-next" onclick="tiCarouselMove('lancamentos-grid',1)" aria-label="Próximo">&#8250;</button>
+          <div class="carousel-dots" id="lancamentos-dots"></div>
+        </div>
       </div>
     </section>
 
@@ -2290,22 +2378,22 @@
     // DATA
     const imoveis = {
       destaque: [
-        { id: 1, title: 'Apartamento Luxo Setor Bueno', loc: 'Setor Bueno, Goiânia', area: '180 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'R$ 1.200.000', cond: 'Cond. R$ 1.200 · IPTU R$ 350', badge: 'Destaque', badgeClass: 'gold', desc: 'Sofisticado apartamento no coração do Setor Bueno, com acabamento premium, varanda gourmet e vista privilegiada para a cidade. Condomínio com área de lazer completa.', color: '#E8F0F7' },
-        { id: 2, title: 'Casa em Condomínio Fechado', loc: 'Jardim Goiás, Goiânia', area: '320 m²', quartos: 4, banheiros: 5, vagas: 3, price: 'R$ 2.800.000', cond: 'Cond. R$ 2.500 · IPTU R$ 400', badge: 'Oportunidade', badgeClass: '', desc: 'Casa espetacular em condomínio fechado de alto padrão, com piscina privativa, home theater, churrasqueira e paisagismo exclusivo. Um refúgio no centro de Goiânia.', color: '#F5F0E8' },
-        { id: 3, title: 'Cobertura Duplex Marista', loc: 'Setor Marista, Goiânia', area: '420 m²', quartos: 4, banheiros: 6, vagas: 4, price: 'R$ 3.500.000', cond: 'Cond. R$ 3.200 · IPTU R$ 600', badge: 'Exclusivo', badgeClass: 'gold', desc: 'Cobertura icônica com terraço privativo de 200m², piscina aquecida e vista 360° para Goiânia. Projeto arquitetônico assinado, com materiais importados e automação completa.', color: '#EAD8F8' },
-        { id: 4, title: 'Apartamento Negrão de Lima', loc: 'Negrão de Lima, Goiânia', area: '85 m²', quartos: 2, banheiros: 2, vagas: 1, price: 'R$ 380.000', cond: 'Cond. R$ 450 · IPTU R$ 120', badge: 'Novo', badgeClass: 'green', desc: 'Apartamento bem localizado com fácil acesso ao centro e serviços. Ótimo para investidores ou moradia, com varanda, área de lazer e segurança 24h.', color: '#E8F5E8' },
+        { id: 1, title: 'Apartamento Luxo Setor Bueno', loc: 'Setor Bueno, Goiânia', area: '180 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'R$ 1.200.000', cond: 'Cond. R$ 1.200 · IPTU R$ 350', badge: 'Destaque', badgeClass: 'gold', desc: 'Sofisticado apartamento no coração do Setor Bueno, com acabamento premium, varanda gourmet e vista privilegiada para a cidade. Condomínio com área de lazer completa.', color: '#E8F0F7', img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80' },
+        { id: 2, title: 'Casa em Condomínio Fechado', loc: 'Jardim Goiás, Goiânia', area: '320 m²', quartos: 4, banheiros: 5, vagas: 3, price: 'R$ 2.800.000', cond: 'Cond. R$ 2.500 · IPTU R$ 400', badge: 'Oportunidade', badgeClass: '', desc: 'Casa espetacular em condomínio fechado de alto padrão, com piscina privativa, home theater, churrasqueira e paisagismo exclusivo. Um refúgio no centro de Goiânia.', color: '#F5F0E8', img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80' },
+        { id: 3, title: 'Cobertura Duplex Marista', loc: 'Setor Marista, Goiânia', area: '420 m²', quartos: 4, banheiros: 6, vagas: 4, price: 'R$ 3.500.000', cond: 'Cond. R$ 3.200 · IPTU R$ 600', badge: 'Exclusivo', badgeClass: 'gold', desc: 'Cobertura icônica com terraço privativo de 200m², piscina aquecida e vista 360° para Goiânia. Projeto arquitetônico assinado, com materiais importados e automação completa.', color: '#EAD8F8', img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80' },
+        { id: 4, title: 'Apartamento Negrão de Lima', loc: 'Negrão de Lima, Goiânia', area: '85 m²', quartos: 2, banheiros: 2, vagas: 1, price: 'R$ 380.000', cond: 'Cond. R$ 450 · IPTU R$ 120', badge: 'Novo', badgeClass: 'green', desc: 'Apartamento bem localizado com fácil acesso ao centro e serviços. Ótimo para investidores ou moradia, com varanda, área de lazer e segurança 24h.', color: '#E8F5E8', img: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80' },
       ],
       novos: [
-        { id: 5, title: 'Residencial Boulevard', loc: 'Setor Sudoeste, Goiânia', area: '95 m²', quartos: 3, banheiros: 2, vagas: 2, price: 'R$ 650.000', cond: 'Cond. R$ 600 · IPTU R$ 180', badge: 'Entregue', badgeClass: 'green', desc: 'Residencial moderno recém-entregue, com projeto de interiores contemporâneo, piso porcelanato em todas as áreas, cozinha americana e varanda integrada.', color: '#E8F0F7' },
-        { id: 6, title: 'Flat Premium Centro', loc: 'Setor Central, Goiânia', area: '55 m²', quartos: 1, banheiros: 1, vagas: 1, price: 'R$ 320.000', cond: 'Cond. R$ 350 · IPTU R$ 90', badge: 'Entregue', badgeClass: 'green', desc: 'Flat compacto e inteligente no centro de Goiânia. Ideal para investimento em locação de curta temporada ou moradia urbana prática.', color: '#F5F0E8' },
-        { id: 7, title: 'Casa Sobrado Alphaville', loc: 'Alphaville Goiânia', area: '260 m²', quartos: 4, banheiros: 4, vagas: 3, price: 'R$ 1.900.000', cond: 'Cond. R$ 1.800 · IPTU R$ 300', badge: 'Entregue', badgeClass: 'green', desc: 'Sobrado de alto padrão no Alphaville Goiânia, recém-construído com acabamento nível AAA. Cozinha gourmet, suíte máster com closet e área externa projetada.', color: '#E8F8E8' },
-        { id: 8, title: 'Apartamento Europa', loc: 'Jardim Europa, Goiânia', area: '120 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'R$ 780.000', cond: 'Cond. R$ 750 · IPTU R$ 200', badge: 'Entregue', badgeClass: 'green', desc: 'Apartamento de padrão médio-alto no Jardim Europa, bairro nobre e tranquilo. Projeto moderno com espaços integrados e vista jardim.', color: '#F0E8F8' },
+        { id: 5, title: 'Residencial Boulevard', loc: 'Setor Sudoeste, Goiânia', area: '95 m²', quartos: 3, banheiros: 2, vagas: 2, price: 'R$ 650.000', cond: 'Cond. R$ 600 · IPTU R$ 180', badge: 'Entregue', badgeClass: 'green', desc: 'Residencial moderno recém-entregue, com projeto de interiores contemporâneo, piso porcelanato em todas as áreas, cozinha americana e varanda integrada.', color: '#E8F0F7', img: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80' },
+        { id: 6, title: 'Flat Premium Centro', loc: 'Setor Central, Goiânia', area: '55 m²', quartos: 1, banheiros: 1, vagas: 1, price: 'R$ 320.000', cond: 'Cond. R$ 350 · IPTU R$ 90', badge: 'Entregue', badgeClass: 'green', desc: 'Flat compacto e inteligente no centro de Goiânia. Ideal para investimento em locação de curta temporada ou moradia urbana prática.', color: '#F5F0E8', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80' },
+        { id: 7, title: 'Casa Sobrado Alphaville', loc: 'Alphaville Goiânia', area: '260 m²', quartos: 4, banheiros: 4, vagas: 3, price: 'R$ 1.900.000', cond: 'Cond. R$ 1.800 · IPTU R$ 300', badge: 'Entregue', badgeClass: 'green', desc: 'Sobrado de alto padrão no Alphaville Goiânia, recém-construído com acabamento nível AAA. Cozinha gourmet, suíte máster com closet e área externa projetada.', color: '#E8F8E8', img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80' },
+        { id: 8, title: 'Apartamento Europa', loc: 'Jardim Europa, Goiânia', area: '120 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'R$ 780.000', cond: 'Cond. R$ 750 · IPTU R$ 200', badge: 'Entregue', badgeClass: 'green', desc: 'Apartamento de padrão médio-alto no Jardim Europa, bairro nobre e tranquilo. Projeto moderno com espaços integrados e vista jardim.', color: '#F0E8F8', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80' },
       ],
       lancamentos: [
-        { id: 9, title: 'Lumière Residence', loc: 'Setor Bueno, Goiânia', area: 'A partir 100 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'A partir R$ 850.000', cond: 'Previsão: Dez 2026', badge: 'Pré-lançamento', badgeClass: '', desc: 'O mais novo empreendimento de alto padrão do Setor Bueno. Arquitetura contemporânea, sustentável e sofisticada. Reserve sua unidade agora com condições especiais de lançamento.', color: '#FFF0E8' },
-        { id: 10, title: 'Sky Marista Tower', loc: 'Setor Marista, Goiânia', area: 'A partir 140 m²', quartos: 3, banheiros: 4, vagas: 3, price: 'A partir R$ 1.200.000', cond: 'Previsão: Jun 2027', badge: 'Lançamento', badgeClass: 'gold', desc: 'Torre residencial exclusiva de 30 andares com rooftop panorâmico, academia premium e concierge 24h. O ponto mais alto do Setor Marista.', color: '#E8EEF8' },
-        { id: 11, title: 'Verde Vida Condomínio', loc: 'Aparecida de Goiânia', area: 'A partir 200 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'A partir R$ 550.000', cond: 'Previsão: Mar 2027', badge: 'Lançamento', badgeClass: '', desc: 'Condomínio fechado com área verde preservada, trilhas, lago artificial e clube completo. O equilíbrio perfeito entre natureza e urbanidade.', color: '#E8F5E8' },
-        { id: 12, title: 'Palazzo Residences', loc: 'Setor Pedro Ludovico, Goiânia', area: 'A partir 180 m²', quartos: 4, banheiros: 4, vagas: 3, price: 'A partir R$ 1.500.000', cond: 'Previsão: Set 2026', badge: 'Pré-lançamento', badgeClass: 'gold', desc: 'Projeto inspirado na arquitetura clássica italiana, com materiais importados, jardins europeus e clube privativo. Uma obra de arte habitável.', color: '#F8EEE0' },
+        { id: 9, title: 'Lumière Residence', loc: 'Setor Bueno, Goiânia', area: 'A partir 100 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'A partir R$ 850.000', cond: 'Previsão: Dez 2026', badge: 'Pré-lançamento', badgeClass: '', desc: 'O mais novo empreendimento de alto padrão do Setor Bueno. Arquitetura contemporânea, sustentável e sofisticada. Reserve sua unidade agora com condições especiais de lançamento.', color: '#FFF0E8', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=80' },
+        { id: 10, title: 'Sky Marista Tower', loc: 'Setor Marista, Goiânia', area: 'A partir 140 m²', quartos: 3, banheiros: 4, vagas: 3, price: 'A partir R$ 1.200.000', cond: 'Previsão: Jun 2027', badge: 'Lançamento', badgeClass: 'gold', desc: 'Torre residencial exclusiva de 30 andares com rooftop panorâmico, academia premium e concierge 24h. O ponto mais alto do Setor Marista.', color: '#E8EEF8', img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80' },
+        { id: 11, title: 'Verde Vida Condomínio', loc: 'Aparecida de Goiânia', area: 'A partir 200 m²', quartos: 3, banheiros: 3, vagas: 2, price: 'A partir R$ 550.000', cond: 'Previsão: Mar 2027', badge: 'Lançamento', badgeClass: '', desc: 'Condomínio fechado com área verde preservada, trilhas, lago artificial e clube completo. O equilíbrio perfeito entre natureza e urbanidade.', color: '#E8F5E8', img: 'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=600&q=80' },
+        { id: 12, title: 'Palazzo Residences', loc: 'Setor Pedro Ludovico, Goiânia', area: 'A partir 180 m²', quartos: 4, banheiros: 4, vagas: 3, price: 'A partir R$ 1.500.000', cond: 'Previsão: Set 2026', badge: 'Pré-lançamento', badgeClass: 'gold', desc: 'Projeto inspirado na arquitetura clássica italiana, com materiais importados, jardins europeus e clube privativo. Uma obra de arte habitável.', color: '#F8EEE0', img: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80' },
       ]
     };
 
@@ -2326,7 +2414,10 @@
       container.innerHTML = data.map(p => `
     <div class="card reveal" onclick="openDetail(${p.id})">
       <div class="card-img">
-        <div class="ig-placeholder" style="background:linear-gradient(135deg,${p.color},${p.color}88);height:200px;">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.title}" loading="lazy" style="width:100%;height:200px;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ''}
+        <div class="ig-placeholder" style="background:linear-gradient(135deg,${p.color},${p.color}88);height:200px;${p.img ? 'display:none' : ''}">
           <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="rgba(100,130,160,0.35)" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <span class="card-badge ${p.badgeClass}">${p.badge}</span>
@@ -2586,11 +2677,85 @@
       }
     })();
 
+    // CAROUSEL ENGINE
+    var _tiCarouselTimers = {};
+    var _tiCarouselPaused = {};
+
+    function initCarousel(gridId) {
+      var grid = document.getElementById(gridId);
+      if (!grid || !grid.children.length) return;
+      var dotsId = gridId.replace('-grid', '-dots');
+      var dotsEl = document.getElementById(dotsId);
+      var cards = grid.querySelectorAll('.card');
+
+      // Build dots
+      if (dotsEl && cards.length > 1) {
+        dotsEl.innerHTML = Array.from(cards).map(function(_, i) {
+          return '<button class="carousel-dot' + (i === 0 ? ' active' : '') + '" onclick="tiCarouselGoTo(\'' + gridId + '\',' + i + ')" aria-label="Card ' + (i+1) + '"></button>';
+        }).join('');
+      }
+
+      // Sync dots on scroll
+      grid.addEventListener('scroll', function() {
+        if (!dotsEl) return;
+        var cardW = (grid.querySelector('.card') || {offsetWidth: 300}).offsetWidth + 20;
+        var idx = Math.round(grid.scrollLeft / cardW);
+        dotsEl.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+      }, {passive: true});
+
+      // Pause on interaction
+      _tiCarouselPaused[gridId] = false;
+      grid.addEventListener('mouseenter', function() { _tiCarouselPaused[gridId] = true; });
+      grid.addEventListener('mouseleave', function() { _tiCarouselPaused[gridId] = false; });
+      grid.addEventListener('touchstart', function() { _tiCarouselPaused[gridId] = true; }, {passive: true});
+      grid.addEventListener('touchend', function() { setTimeout(function(){ _tiCarouselPaused[gridId] = false; }, 2500); }, {passive: true});
+
+      // Clear existing timer before starting new one
+      if (_tiCarouselTimers[gridId]) clearInterval(_tiCarouselTimers[gridId]);
+
+      _tiCarouselTimers[gridId] = setInterval(function() {
+        if (_tiCarouselPaused[gridId]) return;
+        var cardEl = grid.querySelector('.card');
+        if (!cardEl) return;
+        var cardW = cardEl.offsetWidth + 20;
+        var maxScroll = grid.scrollWidth - grid.clientWidth;
+        if (maxScroll <= 4) return;
+        if (grid.scrollLeft >= maxScroll - 4) {
+          grid.scrollTo({left: 0, behavior: 'smooth'});
+        } else {
+          grid.scrollTo({left: grid.scrollLeft + cardW, behavior: 'smooth'});
+        }
+      }, 4000);
+    }
+
+    function tiCarouselMove(gridId, dir) {
+      var grid = document.getElementById(gridId);
+      if (!grid) return;
+      var cardEl = grid.querySelector('.card');
+      var cardW = cardEl ? cardEl.offsetWidth + 20 : 320;
+      grid.scrollTo({left: grid.scrollLeft + dir * cardW, behavior: 'smooth'});
+    }
+
+    function tiCarouselGoTo(gridId, idx) {
+      var grid = document.getElementById(gridId);
+      if (!grid) return;
+      var cardEl = grid.querySelector('.card');
+      var cardW = cardEl ? cardEl.offsetWidth + 20 : 320;
+      grid.scrollTo({left: idx * cardW, behavior: 'smooth'});
+    }
+
     // INIT
     renderCards(imoveis.destaque, 'destaque-grid');
     renderCards(imoveis.novos, 'novos-grid');
     renderCards(imoveis.lancamentos, 'lancamentos-grid');
-    setTimeout(window.observeReveal, 100);
+    setTimeout(function() {
+      initCarousel('destaque-grid');
+      initCarousel('novos-grid');
+      initCarousel('lancamentos-grid');
+      window.observeReveal();
+    }, 100);
 
     // Corrige links de região/SEO/busca com a URL base do WP (injetada via TI_SITE_URL)
     setTimeout(function() {
@@ -2695,6 +2860,15 @@
           renderWPCards(data.lancamentos.map(wpToCard), 'lancamentos-grid');
         if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length))
           renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
+        // Re-init carousel after WP cards replace the static ones
+        setTimeout(function() {
+          if (typeof initCarousel === 'function') {
+            initCarousel('destaque-grid');
+            initCarousel('novos-grid');
+            initCarousel('lancamentos-grid');
+            if (typeof window.observeReveal === 'function') window.observeReveal();
+          }
+        }, 80);
       })
       .catch(function (err) {
         console.warn('[T Imoveis] REST indisponivel:', err, REST_URL);
