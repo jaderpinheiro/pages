@@ -398,7 +398,8 @@ footer.site-footer{background:var(--dark);color:#fff;padding:4rem 0 3rem;border-
 .founder-ring::before,.founder-ring::after{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .founder-ring::before{top:-4px;left:50%;transform:translateX(-50%)}
 .founder-ring::after{bottom:-4px;left:50%;transform:translateX(-50%);opacity:.4}
-.founder-avatar{position:relative;width:100%;height:100%;border-radius:50%;background:linear-gradient(145deg,var(--dark-2),var(--dark));border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:3.4rem;letter-spacing:.02em;color:#fff;box-shadow:0 0 0 8px rgba(195,60,41,.08);transition:box-shadow .4s ease,transform .4s ease}
+.founder-avatar{position:relative;width:100%;height:100%;border-radius:50%;background:linear-gradient(145deg,var(--dark-2),var(--dark));border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:3.4rem;letter-spacing:.02em;color:#fff;box-shadow:0 0 0 8px rgba(195,60,41,.08);transition:box-shadow .4s ease,transform .4s ease;overflow:hidden}
+.founder-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .founder-photo-wrap:hover .founder-avatar{transform:scale(1.03);box-shadow:0 0 0 14px rgba(195,60,41,.14)}
 @keyframes founderSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .founder-role{font-size:1rem;color:var(--accent);font-family:var(--font-mono);font-weight:600;margin-top:.4rem;letter-spacing:.03em}
@@ -865,8 +866,7 @@ footer.site-footer{background:var(--dark);color:#fff;padding:4rem 0 3rem;border-
       <div class="founder-grid reveal">
         <div class="founder-photo-wrap">
           <div class="founder-ring"></div>
-          <!-- SUBSTITUIR pelo arquivo de foto real: <img class="founder-avatar" style="object-fit:cover" src="image/walkenio.jpg" alt="Walkenio Vicente Cavarzan, CEO da HMC Construtora"> -->
-          <div class="founder-avatar" role="img" aria-label="Foto de Walkenio Vicente Cavarzan">WVC</div>
+          <div class="founder-avatar"><img src="image/walkenio-vicente-cavarzan.png" alt="Walkenio Vicente Cavarzan, fundador e diretor de engenharia da HMC Construtora" loading="lazy"></div>
         </div>
         <div>
           <h3 style="font-family:var(--font-display);font-weight:800;font-size:1.9rem;text-transform:uppercase;color:#fff">Walkenio Vicente Cavarzan</h3>
