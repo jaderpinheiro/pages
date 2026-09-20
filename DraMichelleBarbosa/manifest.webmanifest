@@ -1,0 +1,14 @@
+{
+  "name": "Dra. Michelle Barbosa — Ortodontia e Harmonização Facial",
+  "short_name": "Dra. Michelle",
+  "description": "Ortodontia, Invisalign, clareamento e harmonização facial em Goiânia.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08080A",
+  "theme_color": "#08080A",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/og-cover.jpg", "sizes": "1200x630", "type": "image/jpeg" }
+  ]
+}

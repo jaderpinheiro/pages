@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.dramichellebarbosa.com.br/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.dramichellebarbosa.com.br/assets/og-cover.jpg</image:loc>
+      <image:title>Dra. Michelle Barbosa — Ortodontia e Harmonização Facial em Goiânia</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dramichellebarbosa.com.br/assets/dra-michelle-retrato.webp</image:loc>
+      <image:title>Dra. Michelle Barbosa, cirurgiã-dentista CRO-GO 9865</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.dramichellebarbosa.com.br/assets/dra-michelle-itero.webp</image:loc>
+      <image:title>Scanner intraoral iTero Element 5D no consultório em Goiânia</image:title>
+    </image:image>
+  </url>
+</urlset>
