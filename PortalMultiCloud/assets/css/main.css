@@ -674,7 +674,7 @@ section { position: relative; }
 .leader:nth-child(2) { margin-top: 90px; }
 .leader:nth-child(3) { margin-top: 180px; }
 .leader__photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--bg-2); }
-.leader__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: grayscale(1) contrast(1.06) brightness(.88); transform: scale(1.08); transition: filter .8s var(--ease), transform 1.2s var(--ease); }
+.leader__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; transform-origin: 50% 0%; filter: grayscale(1) contrast(1.06) brightness(.88); transform: scale(1.08); transition: filter .8s var(--ease), transform 1.2s var(--ease); }
 .leader__photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0, 45, 75, .55), transparent 45%); mix-blend-mode: multiply; transition: opacity .8s; }
 .leader:hover .leader__photo img { filter: grayscale(0) contrast(1) brightness(1); transform: scale(1.02); }
 .leader:hover .leader__photo::after { opacity: 0; }
