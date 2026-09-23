@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MultiCloud – Além da Nuvem | Cloud, Segurança e Governança de TI</title>
+  <meta name="description" content="23 anos de expertise em Nuvem Privada, Nuvem Pública, Segurança e Governança de TI. Suporte especializado, 365 dias por ano. Fale com um especialista MultiCloud.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://multicloud.com.br/">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="MultiCloud">
+  <meta property="og:title" content="MultiCloud – Além da Nuvem">
+  <meta property="og:description" content="23 anos de expertise em Nuvem Privada, Nuvem Pública, Segurança e Governança de TI. Suporte especializado, 365 dias por ano.">
+  <meta property="og:url" content="https://multicloud.com.br/">
+  <meta property="og:image" content="https://multicloud.com.br/MultiCloud.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MultiCloud – Além da Nuvem">
+  <meta name="twitter:description" content="23 anos de expertise em Nuvem Privada, Nuvem Pública, Segurança e Governança de TI.">
+  <meta name="twitter:image" content="https://multicloud.com.br/MultiCloud.png">
+
+  <link rel="icon" type="image/png" href="assets/img/brand/multicloud-simbolo.png">
+
+  <!-- Tipografia oficial MultiCloud: Rajdhani (títulos), Exo 2 (texto), Space Mono (dados) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="preload" as="image" href="assets/img/visuais/hero-infraestrutura-1600.webp" imagesrcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w, assets/img/visuais/hero-infraestrutura-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script>
+    document.documentElement.classList.replace('no-js', 'js');
+    // Proteção: se o JavaScript principal não iniciar, a abertura sai e o conteúdo aparece em modo estático.
+    setTimeout(function () {
+      if (window.__mcBooted) return;
+      var loader = document.getElementById('loader');
+      if (loader) loader.parentNode.removeChild(loader);
+      document.body.classList.remove('is-loading');
+      document.documentElement.classList.add('no-boot');
+    }, 12000);
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MultiCloud",
+    "alternateName": "MultiCloud Além da Nuvem",
+    "url": "https://multicloud.com.br/",
+    "logo": "https://multicloud.com.br/MultiCloud.png",
+    "foundingDate": "2003",
+    "description": "Empresa especialista em Computação na Cloud, Segurança e Governança de TI, com suporte especializado 365 dias por ano.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Assis Chateaubriand, 1595 - 2 Andar Sala 09 - St. Oeste",
+      "addressLocality": "Goiânia",
+      "addressRegion": "GO",
+      "postalCode": "74130-012",
+      "addressCountry": "BR"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+55-0800-000-5542",
+      "contactType": "customer service",
+      "email": "comercial@multicloud.com.br",
+      "availableLanguage": "Portuguese"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/multicloud/",
+      "https://www.instagram.com/multicloud/",
+      "https://www.facebook.com/multicloud/",
+      "https://tiktok.com/muilticloud",
+      "https://youtube.com/multicloudoficial"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Quais soluções a MultiCloud oferece?", "acceptedAnswer": { "@type": "Answer", "text": "Nuvem Privada, Nuvem Pública, Segurança e Governança de TI. As soluções são projetadas sob medida, respeitando a realidade e os objetivos do seu negócio — da estratégia à operação." } },
+      { "@type": "Question", "name": "Com quais nuvens públicas a MultiCloud trabalha?", "acceptedAnswer": { "@type": "Answer", "text": "Arquitetamos com os principais players de mercado — Azure, Oracle Cloud e AWS — de acordo com o seu negócio, com a operação certificada da MultiCloud, monitoramento 24/7 e gerenciamento especializado." } },
+      { "@type": "Question", "name": "Quando a Nuvem Privada é indicada?", "acceptedAnswer": { "@type": "Answer", "text": "Para aplicações críticas que não podem parar. É um ambiente exclusivo, com alto desempenho, escalabilidade, disponibilidade máxima e failover automático." } },
+      { "@type": "Question", "name": "O suporte funciona aos fins de semana?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Nossos analistas de suporte estão disponíveis 365 dias por ano, de segunda a segunda." } },
+      { "@type": "Question", "name": "O que está incluído nas soluções de Segurança?", "acceptedAnswer": { "@type": "Answer", "text": "Soluções de firewalls, monitoramento de ativos avançado, backup gerenciado, antivírus corporativo e gestão de vulnerabilidades." } },
+      { "@type": "Question", "name": "Quais frameworks são usados em Governança de TI?", "acceptedAnswer": { "@type": "Answer", "text": "ITIL e COBIT, junto com planejamento estratégico de TI, gestão de riscos, políticas e processos e relatórios e KPIs executivos." } },
+      { "@type": "Question", "name": "Em quanto tempo recebo um retorno?", "acceptedAnswer": { "@type": "Answer", "text": "Nossa equipe responde em até 2 horas úteis às mensagens enviadas pelo formulário. Para falar agora, use o WhatsApp (62) 3142-0818 ou o 0800 000 5542." } },
+      { "@type": "Question", "name": "Onde a MultiCloud está localizada?", "acceptedAnswer": { "@type": "Answer", "text": "Av. Assis Chateaubriand, 1595 — 2º andar, sala 09 — St. Oeste, Goiânia – GO, 74130-012. Atendemos empresas em todo o Brasil." } }
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics (preservado do site atual). Não carrega em ambiente local,
+       para que testes não poluam os dados reais. -->
+  <script>
+    (function () {
+      var local = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname) || location.protocol === 'file:';
+      if (local) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-SFLP29Z77V';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-SFLP29Z77V');
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Ícones reutilizáveis -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.057 23.428a.5.5 0 0 0 .515.572l5.701-.914A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.53-5.228-1.449l-.374-.224-3.384.543.552-3.303-.244-.386A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" d="M4 12h15M13 5.5 19.5 12 13 18.5"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" d="M12 4v15M5.5 13 12 19.5 18.5 13"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 4v16M4 12h16"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ABERTURA -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__grid"></div>
+    <div class="loader__center">
+      <div class="loader__mark">
+        <svg class="loader__ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96"/></svg>
+        <img class="loader__symbol" src="assets/img/brand/multicloud-simbolo.png" alt="" width="237" height="170">
+      </div>
+      <div class="loader__word"><img src="assets/img/brand/multicloud-letreiro.png" alt="" width="878" height="137"></div>
+      <p class="loader__tag">Além da nuvem</p>
+    </div>
+    <div class="loader__foot">
+      <span class="loader__label">Iniciando infraestrutura</span>
+      <span class="loader__count"><span id="loaderCount">000</span></span>
+    </div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <div class="loader__shutter loader__shutter--top"></div>
+    <div class="loader__shutter loader__shutter--bottom"></div>
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <header class="header" id="header">
+    <div class="header__top">
+      <div class="container header__top-inner">
+        <span class="header__status"><i class="dot" aria-hidden="true"></i>Suporte 24/7 · 365 dias</span>
+        <a href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener">+55 (62) 3142-0818</a>
+        <a href="tel:08000005542">0800 000 5542</a>
+        <a href="mailto:comercial@multicloud.com.br">comercial@multicloud.com.br</a>
+      </div>
+    </div>
+    <nav class="nav container" aria-label="Navegação principal">
+      <a href="#home" class="nav__logo" aria-label="MultiCloud — voltar ao início">
+        <img src="assets/img/brand/multicloud-logo.png" alt="MultiCloud" width="480" height="90" id="navLogo">
+      </a>
+      <ul class="nav__links">
+        <li><a href="#about">A MultiCloud</a></li>
+        <li><a href="#solutions">Soluções</a></li>
+        <li><a href="#arquitetura">Arquitetura</a></li>
+        <li><a href="#suporte">Suporte</a></li>
+        <li><a href="#clients">Clientes</a></li>
+        <li><a href="#contact">Fale Conosco</a></li>
+      </ul>
+      <a class="btn btn--primary btn--sm nav__cta" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener">
+        <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Falar com Especialista</span>
+      </a>
+      <button class="nav__toggle" id="menuToggle" aria-expanded="false" aria-controls="menu">
+        <span class="nav__toggle-label">Menu</span><span class="nav__toggle-lines" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <nav class="menu__inner container" aria-label="Menu">
+      <ol class="menu__links">
+        <li><a href="#home"><small>00</small>Home</a></li>
+        <li><a href="#about"><small>01</small>A MultiCloud</a></li>
+        <li><a href="#solutions"><small>02</small>Soluções</a></li>
+        <li><a href="#arquitetura"><small>03</small>Arquitetura</a></li>
+        <li><a href="#suporte"><small>04</small>Suporte</a></li>
+        <li><a href="#clients"><small>05</small>Clientes</a></li>
+        <li><a href="#contact"><small>06</small>Fale Conosco</a></li>
+      </ol>
+      <div class="menu__foot">
+        <a class="btn btn--primary" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+        <a href="tel:08000005542" class="menu__meta">0800 000 5542</a>
+        <a href="mailto:comercial@multicloud.com.br" class="menu__meta">comercial@multicloud.com.br</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Indicador de progresso da narrativa -->
+  <div class="rail" id="rail" aria-hidden="true">
+    <span class="rail__index" id="railIndex">00</span>
+    <span class="rail__track"><span class="rail__fill" id="railFill"></span></span>
+    <span class="rail__name" id="railName">Home</span>
+  </div>
+
+  <canvas class="infra-canvas" id="infraCanvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main id="conteudo">
+
+    <!-- 01 — HERO · infraestrutura em vista explodida -->
+    <section id="home" class="hero" data-chapter="Home" aria-labelledby="heroTitle">
+      <div class="hero__stage">
+        <picture class="hero__photo" id="heroPhoto">
+          <img src="assets/img/visuais/hero-infraestrutura-1600.webp"
+               srcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w, assets/img/visuais/hero-infraestrutura-2400.webp 2400w"
+               sizes="100vw" width="2400" height="1340" alt="Módulo de infraestrutura em grafite com indicadores de status em azul, suspenso em ambiente escuro" fetchpriority="high">
+        </picture>
+        <div class="hero__scan" id="heroScan" aria-hidden="true"><span></span></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="hero__labels" id="heroLabels" aria-hidden="true">
+          <div class="callout" data-anchor="cover"><i></i><span class="callout__id">A1</span><span class="callout__txt">Soluções de firewalls</span></div>
+          <div class="callout" data-anchor="led"><i></i><span class="callout__id">A2</span><span class="callout__txt">Monitoramento 24/7</span></div>
+          <div class="callout" data-anchor="bays"><i></i><span class="callout__id">A3</span><span class="callout__txt">Backup gerenciado</span></div>
+          <div class="callout" data-anchor="board"><i></i><span class="callout__id">A4</span><span class="callout__txt">Aumento de performance</span></div>
+          <div class="callout" data-anchor="psu" data-side="left"><i></i><span class="callout__id">A5</span><span class="callout__txt">Failover automático</span></div>
+          <div class="callout" data-anchor="fans"><i></i><span class="callout__id">A6</span><span class="callout__txt">Alta disponibilidade</span></div>
+        </div>
+
+        <div class="hero__intro container" id="heroIntro">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Além da nuvem · 23 anos de expertise</p>
+          <h1 class="hero__title" id="heroTitle"><span class="line">A sua nuvem,</span><span class="line line--accent">sem limites.</span></h1>
+          <p class="hero__lead">Com mais de duas décadas de expertise, a MultiCloud oferece infraestrutura de classe empresarial com alta disponibilidade, suporte que atende suas necessidades e tecnologia escalável. Somos especialistas que ouvem e entendem o seu negócio.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Falar com Especialista</span></a>
+            <a class="btn btn--ghost" href="#solutions"><span>Conheça as Soluções</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+
+        <ul class="hero__stats container" id="heroStats">
+          <li><strong data-count="23" data-suffix="+">23+</strong><span>Anos no mercado</span></li>
+          <li><strong data-count="24" data-suffix="h">24h</strong><span>Monitoramento</span></li>
+          <li><strong data-count="99.9" data-suffix="%" data-decimals="1">99,9%</strong><span>Disponibilidade</span></li>
+          <li><strong data-count="365">365</strong><span>Dias por ano</span></li>
+        </ul>
+
+        <div class="hero__chapter container" id="heroChapterA">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Vista técnica</p>
+          <h2 class="hero__chapter-title">De ponta a ponta.</h2>
+          <p>Da estratégia à operação, entregamos projetos completos alinhados às necessidades reais do seu negócio.</p>
+        </div>
+
+        <div class="hero__chapter hero__chapter--right container" id="heroChapterB">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Por dentro</p>
+          <h2 class="hero__chapter-title">Além da nuvem.</h2>
+          <p>Infraestrutura de classe empresarial, alta disponibilidade e tecnologia escalável.</p>
+        </div>
+
+        <p class="hero__question container" id="heroQuestion">Quanto custa sua empresa ficar parada <em>1 hora?</em></p>
+
+        <div class="hero__cue" id="heroCue" aria-hidden="true">
+          <span>Role para abrir a infraestrutura</span>
+          <span class="hero__cue-line"><i></i></span>
+        </div>
+        <div class="hero__hud" id="heroHud" aria-hidden="true">
+          <span>MC—INFRA</span><span id="heroHudPct">000</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 — CUSTO DA INDISPONIBILIDADE -->
+    <section id="custo" class="cost" data-chapter="Indisponibilidade" aria-labelledby="costTitle">
+      <div class="cost__stage">
+        <div class="container cost__inner">
+          <header class="cost__head">
+            <p class="eyebrow"><span class="eyebrow__line"></span>Continuidade operacional</p>
+            <h2 class="h2" id="costTitle">Quanto custa <span class="accent">1 hora de indisponibilidade</span> para sua empresa?</h2>
+            <p class="lead">Estudos globais mostram que o custo de uma hora de indisponibilidade pode ser extremamente alto, e esses impactos aumentam a cada ano. Enquanto você lê isso, empresas sem infraestrutura robusta estão perdendo receita, clientes e reputação.</p>
+          </header>
+
+          <div class="cost__clock" aria-hidden="true">
+            <div class="cost__time"><span id="costMinutes">00:00</span><small>/ 60:00 min</small></div>
+            <div class="cost__ticks" id="costTicks"></div>
+            <div class="cost__bar"><span id="costBar"></span></div>
+          </div>
+
+          <ul class="cost__list">
+            <li class="cost__item">
+              <span class="cost__value" data-cost="50000" data-final="R$ 50k+">R$ 50k+</span>
+              <span class="cost__label">Pequenas empresas / hora</span>
+            </li>
+            <li class="cost__item">
+              <span class="cost__value" data-cost="300000" data-final="R$ 300k+">R$ 300k+</span>
+              <span class="cost__label">Médias empresas / hora</span>
+            </li>
+            <li class="cost__item">
+              <span class="cost__value" data-cost="1000000" data-final="R$ 1M+">R$ 1M+</span>
+              <span class="cost__label">Grandes corporações / hora</span>
+            </li>
+          </ul>
+
+          <div class="cost__cta">
+            <a class="btn btn--primary" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Proteja Sua Empresa Agora</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — A MULTICLOUD -->
+    <section id="about" class="about" data-chapter="A MultiCloud" aria-labelledby="aboutTitle">
+      <div class="container about__grid">
+        <div class="about__year" aria-hidden="true">
+          <span class="about__num" id="aboutNum">23</span>
+          <span class="about__num-cap">anos no mercado<br>desde 2003 · Goiânia – GO</span>
+        </div>
+        <div class="about__content">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Quem somos</p>
+          <h2 class="h2" id="aboutTitle">Somos uma <span class="accent">cloud de gente!</span></h2>
+          <p class="about__text" data-scrub-words>Com 23 anos no mercado, a MultiCloud é especialista em Computação na Cloud, Segurança e Governança de TI. Mais do que tecnologia, atuamos como parceiros estratégicos. Nossa equipe entende o seu ambiente de TI e trabalha lado a lado para entregar soluções eficientes e seguras.</p>
+
+          <ol class="pillars">
+            <li class="pillar">
+              <span class="pillar__n">01</span>
+              <div>
+                <h3>De ponta a ponta</h3>
+                <p>Da estratégia à operação, entregamos projetos completos alinhados às necessidades reais do seu negócio.</p>
+              </div>
+            </li>
+            <li class="pillar">
+              <span class="pillar__n">02</span>
+              <div>
+                <h3>Especialistas próximos</h3>
+                <p>Contamos com uma equipe experiente, comprometida com boas práticas de TI e focada em entregar resultados consistentes no dia a dia.</p>
+              </div>
+            </li>
+            <li class="pillar">
+              <span class="pillar__n">03</span>
+              <div>
+                <h3>Inovação constante</h3>
+                <p>Acompanhamos as inovações tecnológicas para garantir que sua empresa esteja sempre à frente com as melhores soluções disponíveis no mercado.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <figure class="band" id="aboutBand">
+        <div class="band__media">
+          <img src="assets/img/visuais/datacenter-corredor-1600.webp"
+               srcset="assets/img/visuais/datacenter-corredor-960.webp 960w, assets/img/visuais/datacenter-corredor-1600.webp 1600w, assets/img/visuais/datacenter-corredor-2400.webp 2400w"
+               sizes="100vw" width="2400" height="1340" loading="lazy" decoding="async"
+               alt="Corredor de datacenter com racks em grafite e indicadores de status em azul">
+        </div>
+        <figcaption class="band__caption container">
+          <span class="band__quote">Somos especialistas que ouvem e entendem o seu negócio.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- 04 — SOLUÇÕES (rolagem horizontal) -->
+    <section id="solutions" class="solutions" data-chapter="Soluções" aria-labelledby="solTitle">
+      <div class="solutions__stage">
+        <div class="solutions__track" id="solTrack">
+
+          <div class="sol-intro">
+            <p class="eyebrow"><span class="eyebrow__line"></span>Portfólio</p>
+            <h2 class="h2" id="solTitle">Soluções <span class="accent">de ponta a ponta</span></h2>
+            <p class="lead">Cada empresa possui desafios e necessidades próprias. Por isso, nossas soluções são projetadas sob medida, respeitando a realidade e os objetivos do seu negócio.</p>
+            <ol class="sol-intro__index" aria-label="Soluções">
+              <li><a href="#cloud-premium"><span>01</span>Nuvem Privada</a></li>
+              <li><a href="#cloud-public"><span>02</span>Nuvem Pública</a></li>
+              <li><a href="#governance"><span>03</span>Segurança</a></li>
+              <li><a href="#compliance"><span>04</span>Governança de TI</a></li>
+            </ol>
+          </div>
+
+          <article class="sol" id="cloud-premium" aria-labelledby="sol1">
+            <div class="sol__visual sol__visual--photo" aria-hidden="true">
+              <div class="sol__photo">
+                <img src="assets/img/visuais/hero-infraestrutura-1600.webp" srcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="893" alt="" loading="lazy" decoding="async">
+              </div>
+              <span class="sol__tag">Ambiente exclusivo</span>
+            </div>
+            <div class="sol__body">
+              <span class="sol__n">01</span>
+              <h3 class="sol__title" id="sol1">Nuvem Privada</h3>
+              <p class="sol__desc">Alto desempenho, escalabilidade e disponibilidade máxima em um ambiente exclusivo. Ideal para aplicações críticas que não podem parar.</p>
+              <ul class="sol__list">
+                <li>Aumento de Performance</li>
+                <li>Redução de Custos Operacionais</li>
+                <li>Ideal para Aplicações Críticas</li>
+                <li>Soluções 99,99% Personalizadas</li>
+                <li>Failover Automático</li>
+              </ul>
+              <a class="link-arrow" href="#contact" data-solution="Nuvem Privada">Solicitar proposta <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="sol" id="cloud-public" aria-labelledby="sol2">
+            <div class="sol__visual" aria-hidden="true">
+              <svg class="orbit" viewBox="0 0 600 600">
+                <defs>
+                  <radialGradient id="orbCore" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#01aeff" stop-opacity=".35"/><stop offset="1" stop-color="#01aeff" stop-opacity="0"/></radialGradient>
+                </defs>
+                <circle class="orbit__glow" cx="300" cy="300" r="150" fill="url(#orbCore)"/>
+                <circle class="orbit__ring" cx="300" cy="300" r="210"/>
+                <circle class="orbit__ring orbit__ring--dash" cx="300" cy="300" r="250"/>
+                <circle class="orbit__ring orbit__ring--faint" cx="300" cy="300" r="120"/>
+                <g class="orbit__links">
+                  <path d="M300 300 L300 90"/><path d="M300 300 L481.9 405"/><path d="M300 300 L118.1 405"/>
+                </g>
+                <g class="orbit__pulses">
+                  <circle r="3.5" class="pulse" data-path="0"/><circle r="3.5" class="pulse" data-path="1"/><circle r="3.5" class="pulse" data-path="2"/>
+                </g>
+                <g class="orbit__node" transform="translate(300 90)"><rect x="-70" y="-22" width="140" height="44" rx="2"/><text y="5">Azure</text></g>
+                <g class="orbit__node" transform="translate(481.9 405)"><rect x="-80" y="-22" width="160" height="44" rx="2"/><text y="5">Oracle Cloud</text></g>
+                <g class="orbit__node" transform="translate(118.1 405)"><rect x="-60" y="-22" width="120" height="44" rx="2"/><text y="5">AWS</text></g>
+                <g class="orbit__core" transform="translate(300 300)"><circle r="54"/><text y="-4">MultiCloud</text><text y="14" class="small">OPERAÇÃO</text></g>
+              </svg>
+              <span class="sol__tag">Azure · Oracle Cloud · AWS</span>
+            </div>
+            <div class="sol__body">
+              <span class="sol__n">02</span>
+              <h3 class="sol__title" id="sol2">Nuvem Pública</h3>
+              <p class="sol__desc">A força da nuvem pública com a operação certificada da MultiCloud. Arquitetamos com os principais players de mercado (Azure, Oracle Cloud e AWS) de acordo com o seu negócio.</p>
+              <ul class="sol__list">
+                <li>Monitoramento 24/7</li>
+                <li>Escalabilidade Flexível</li>
+                <li>Alta Disponibilidade</li>
+                <li>Gerenciamento Especializado</li>
+                <li>Otimização de Investimento</li>
+              </ul>
+              <a class="link-arrow" href="#contact" data-solution="Nuvem Pública">Solicitar proposta <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="sol" id="governance" aria-labelledby="sol3">
+            <div class="sol__visual" aria-hidden="true">
+              <div class="plates">
+                <div class="plates__stack">
+                  <span class="plate" style="--i:0"><em>Gestão de Vulnerabilidades</em></span>
+                  <span class="plate" style="--i:1"><em>Antivírus Corporativo</em></span>
+                  <span class="plate" style="--i:2"><em>Backup Gerenciado</em></span>
+                  <span class="plate" style="--i:3"><em>Monitoramento de Ativos</em></span>
+                  <span class="plate" style="--i:4"><em>Soluções de Firewalls</em></span>
+                  <span class="plates__beam"></span>
+                </div>
+              </div>
+              <span class="sol__tag">Proteção em camadas</span>
+            </div>
+            <div class="sol__body">
+              <span class="sol__n">03</span>
+              <h3 class="sol__title" id="sol3">Segurança</h3>
+              <p class="sol__desc">Proteja os ativos digitais da sua empresa com soluções robustas de cibersegurança. Monitoramento contínuo, prevenção de ameaças e respostas rápidas para manter sua infraestrutura sempre segura.</p>
+              <ul class="sol__list">
+                <li>Soluções de Firewalls</li>
+                <li>Monitoramento de Ativos Avançado</li>
+                <li>Backup Gerenciado</li>
+                <li>Antivírus Corporativo</li>
+                <li>Gestão de Vulnerabilidades</li>
+              </ul>
+              <a class="link-arrow" href="#contact" data-solution="Segurança">Solicitar proposta <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+          <article class="sol" id="compliance" aria-labelledby="sol4">
+            <div class="sol__visual" aria-hidden="true">
+              <svg class="blueprint" viewBox="0 0 600 600">
+                <defs>
+                  <pattern id="bpGrid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="rgba(1,174,255,.10)" stroke-width="1"/></pattern>
+                </defs>
+                <rect width="600" height="600" fill="url(#bpGrid)"/>
+                <path class="bp__path" d="M90 120 H300 V240 H510 V360 H300 V480 H90"/>
+                <g class="bp__node" transform="translate(90 120)"><circle r="7"/><text x="18" y="-14">Planejamento estratégico</text></g>
+                <g class="bp__node" transform="translate(510 240)"><circle r="7"/><text x="-18" y="-14" text-anchor="end">ITIL · COBIT</text></g>
+                <g class="bp__node" transform="translate(300 360)"><circle r="7"/><text x="18" y="-14">Gestão de riscos</text></g>
+                <g class="bp__node" transform="translate(300 480)"><circle r="7"/><text x="18" y="-14">Políticas e processos</text></g>
+                <g class="bp__node" transform="translate(90 480)"><circle r="7"/><text x="0" y="34" text-anchor="start">Relatórios e KPIs</text></g>
+                <path class="bp__marks" d="M60 60 h20 M60 60 v20 M540 60 h-20 M540 60 v20 M60 540 h20 M60 540 v-20 M540 540 h-20 M540 540 v-20"/>
+              </svg>
+              <span class="sol__tag">Frameworks reconhecidos</span>
+            </div>
+            <div class="sol__body">
+              <span class="sol__n">04</span>
+              <h3 class="sol__title" id="sol4">Governança de TI</h3>
+              <p class="sol__desc">Estruture e alinhe a TI à estratégia do seu negócio com frameworks reconhecidos. Reduza riscos, otimize processos e tome decisões baseadas em dados para maximizar os resultados da sua organização.</p>
+              <ul class="sol__list">
+                <li>Planejamento Estratégico de TI</li>
+                <li>Frameworks ITIL e COBIT</li>
+                <li>Gestão de Riscos de TI</li>
+                <li>Políticas e Processos</li>
+                <li>Relatórios e KPIs Executivos</li>
+              </ul>
+              <a class="link-arrow" href="#contact" data-solution="Governança de TI">Solicitar proposta <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </article>
+
+        </div>
+        <div class="solutions__progress" aria-hidden="true"><span id="solProgress"></span></div>
+      </div>
+    </section>
+
+    <!-- 05 — ARQUITETURA · como as soluções se organizam -->
+    <section id="arquitetura" class="arch" data-chapter="Arquitetura" aria-labelledby="archTitle">
+      <div class="arch__stage">
+        <div class="container arch__grid">
+          <div class="arch__copy">
+            <p class="eyebrow"><span class="eyebrow__line"></span>Arquitetura</p>
+            <h2 class="h2" id="archTitle">Da estratégia <span class="accent">à operação.</span></h2>
+            <p class="lead">Da estratégia à operação, entregamos projetos completos alinhados às necessidades reais do seu negócio.</p>
+            <ol class="arch__list" id="archList">
+              <li data-layer="0"><span class="arch__k">Estratégia</span><strong>Governança de TI</strong><small>Planejamento estratégico · ITIL e COBIT · Gestão de riscos</small></li>
+              <li data-layer="1"><span class="arch__k">Infraestrutura</span><strong>Nuvem Privada · Nuvem Pública</strong><small>Ambiente exclusivo · Azure, Oracle Cloud e AWS</small></li>
+              <li data-layer="2"><span class="arch__k">Proteção</span><strong>Segurança</strong><small>Firewalls · Backup gerenciado · Antivírus · Gestão de vulnerabilidades</small></li>
+              <li data-layer="3"><span class="arch__k">Operação</span><strong>Suporte especializado</strong><small>Monitoramento 24h · 365 dias por ano</small></li>
+              <li data-layer="4"><span class="arch__k">Resultado</span><strong>Seu negócio</strong><small>Para empresas que não podem parar</small></li>
+            </ol>
+          </div>
+          <div class="arch__visual" aria-hidden="true">
+            <div class="iso" id="iso">
+              <div class="iso__layer" data-layer="0"><span class="iso__plate"></span><span class="iso__label">Estratégia</span></div>
+              <div class="iso__layer" data-layer="1"><span class="iso__plate"></span><span class="iso__label">Infraestrutura</span></div>
+              <div class="iso__layer" data-layer="2"><span class="iso__plate"></span><span class="iso__label">Proteção</span></div>
+              <div class="iso__layer" data-layer="3"><span class="iso__plate"></span><span class="iso__label">Operação</span></div>
+              <div class="iso__layer iso__layer--base" data-layer="4"><span class="iso__plate"></span><span class="iso__label">Seu negócio</span></div>
+              <span class="iso__axis"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 — SEGURANÇA · camadas de proteção -->
+    <section id="seguranca" class="sec" data-chapter="Segurança" aria-labelledby="secTitle">
+      <div class="sec__stage">
+        <canvas class="sec__canvas" id="secCanvas" aria-hidden="true"></canvas>
+        <div class="container sec__grid">
+          <div class="sec__copy">
+            <p class="eyebrow"><span class="eyebrow__line"></span>Segurança</p>
+            <h2 class="h2" id="secTitle">Proteja os ativos <span class="accent">digitais da sua empresa.</span></h2>
+            <p class="lead">Monitoramento contínuo, prevenção de ameaças e respostas rápidas para manter sua infraestrutura sempre segura.</p>
+          </div>
+          <ol class="sec__layers" id="secLayers">
+            <li><span>L1</span>Soluções de Firewalls</li>
+            <li><span>L2</span>Gestão de Vulnerabilidades</li>
+            <li><span>L3</span>Antivírus Corporativo</li>
+            <li><span>L4</span>Monitoramento de Ativos Avançado</li>
+            <li><span>L5</span>Backup Gerenciado</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 — SUPORTE 24/7 · 365 -->
+    <section id="suporte" class="support" data-chapter="Suporte" aria-labelledby="supTitle">
+      <div class="container support__grid">
+        <div class="support__copy">
+          <p class="eyebrow"><span class="eyebrow__line eyebrow__line--live"></span>É simples!</p>
+          <h2 class="h2" id="supTitle">Estamos prontos <span class="accent">para atendê-lo.</span></h2>
+          <p class="lead">Nossos analistas de suporte estão disponíveis, 365 dias por ano.</p>
+          <div class="support__ctas">
+            <a class="btn btn--primary" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Falar com o Suporte</span></a>
+            <a class="btn btn--ghost" href="tel:08000005542"><span>0800 000 5542</span></a>
+          </div>
+        </div>
+        <div class="dial" aria-label="Horário atual em Goiânia">
+          <svg class="dial__svg" viewBox="0 0 400 400" aria-hidden="true">
+            <circle class="dial__track" cx="200" cy="200" r="180"/>
+            <circle class="dial__arc" id="dialArc" cx="200" cy="200" r="180"/>
+            <g id="dialTicks"></g>
+            <line class="dial__hand" id="dialHand" x1="200" y1="200" x2="200" y2="40"/>
+            <circle class="dial__hub" cx="200" cy="200" r="5"/>
+          </svg>
+          <div class="dial__center">
+            <span class="dial__label">Agora em Goiânia</span>
+            <span class="dial__time" id="dialTime">--:--</span>
+            <span class="dial__status"><i class="dot" aria-hidden="true"></i>Suporte disponível</span>
+          </div>
+        </div>
+      </div>
+      <div class="ticker" aria-label="Diferenciais do suporte">
+        <div class="ticker__track" id="tickerTrack">
+          <span>Suporte 24/7</span><i></i><span>365 dias/ano</span><i></i><span>Segunda a Segunda</span><i></i><span>Resposta Imediata</span><i></i><span>Equipe Certificada</span><i></i>
+          <span aria-hidden="true">Suporte 24/7</span><i></i><span aria-hidden="true">365 dias/ano</span><i></i><span aria-hidden="true">Segunda a Segunda</span><i></i><span aria-hidden="true">Resposta Imediata</span><i></i><span aria-hidden="true">Equipe Certificada</span><i></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 — CLIENTES -->
+    <section id="clients" class="clients" data-chapter="Clientes" aria-labelledby="cliTitle">
+      <div class="container">
+        <header class="clients__head">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Clientes &amp; Parceiros</p>
+          <h2 class="h2" id="cliTitle">Empresas que confiam <span class="accent">na MultiCloud</span></h2>
+          <p class="clients__count"><strong>+21</strong> empresas atendidas em todo o Brasil</p>
+        </header>
+        <ul class="logos" id="logos">
+          <li><img src="assets/img/clientes/web/artefacto.webp" alt="Artefacto" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/cartorio-senador-canedo.webp" alt="Cartório Senador Canedo" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/centro-sul.webp" alt="Centro Sul Portas e Janelas" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/conenge.webp" alt="Conenge" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/fieg.webp" alt="FIEG" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/fisiogyn.webp" alt="Clínica Fisiogyn" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/globostell.webp" alt="Globsteel" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/gpl.webp" alt="GPL Incorporadora" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/iel.webp" alt="IEL" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/marajoara.webp" alt="Marajoara" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/mls.webp" alt="MLS Serviços Contábeis" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/onpower.webp" alt="OnPower Grupos Geradores" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/perfil.webp" alt="Perfil Gestão Contábil e Fiscal" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/provenda.webp" alt="Provenda A Imobiliária" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/senai.webp" alt="SENAI" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/sesi.webp" alt="SESI" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/unimed.webp" alt="Unimed" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/usina-xavantes.webp" alt="Usina Xavantes" loading="lazy" decoding="async"></li>
+          <li><img src="assets/img/clientes/web/vila-cavalcare.webp" alt="Villa Cavalcare" loading="lazy" decoding="async"></li>
+          <li class="logos__cta"><a href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><small>Sua empresa</small><span>Fale com um especialista</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 09 — LIDERANÇA -->
+    <section id="lideranca" class="leaders" data-chapter="Liderança" aria-labelledby="leadTitle">
+      <div class="container">
+        <header class="leaders__head">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Os visionários por trás da MultiCloud</p>
+          <h2 class="h2" id="leadTitle">Liderança que <span class="accent">inspira confiança</span></h2>
+          <p class="lead">Uma empresa além da nuvem. 23 anos entregando infraestrutura cloud de alto desempenho, Segurança e Governança de TI para empresas que não podem parar.</p>
+        </header>
+        <ul class="leaders__grid">
+          <li class="leader">
+            <figure class="leader__photo"><img src="assets/img/lideranca/web/junio-rodrigues.webp" alt="Junio Rodrigues" width="720" height="926" loading="lazy" decoding="async"></figure>
+            <div class="leader__meta">
+              <h3>Junio Rodrigues</h3>
+              <p>CEO — Diretor Executivo</p>
+              <a class="leader__in" href="https://www.linkedin.com/in/juniorodriguesgyn/" target="_blank" rel="noopener" aria-label="LinkedIn de Junio Rodrigues"><svg class="ico" aria-hidden="true"><use href="#i-in"/></svg></a>
+            </div>
+          </li>
+          <li class="leader">
+            <figure class="leader__photo"><img src="assets/img/lideranca/web/salomao-pereira.webp" alt="Salomão Pereira" width="720" height="926" loading="lazy" decoding="async"></figure>
+            <div class="leader__meta">
+              <h3>Salomão Pereira</h3>
+              <p>CIO — Cloud Expert Infrastructure</p>
+              <a class="leader__in" href="https://www.linkedin.com/in/salom%C3%A3o-pereira-12b90a22/" target="_blank" rel="noopener" aria-label="LinkedIn de Salomão Pereira"><svg class="ico" aria-hidden="true"><use href="#i-in"/></svg></a>
+            </div>
+          </li>
+          <li class="leader">
+            <figure class="leader__photo"><img src="assets/img/lideranca/web/rodrigo-rodrigues.webp" alt="Rodrigo Rodrigues" width="720" height="926" loading="lazy" decoding="async"></figure>
+            <div class="leader__meta">
+              <h3>Rodrigo Rodrigues</h3>
+              <p>CTO — Diretor de TI</p>
+              <a class="leader__in" href="https://www.linkedin.com/in/rodrigo-rodrigues-da-costa-496064403/" target="_blank" rel="noopener" aria-label="LinkedIn de Rodrigo Rodrigues"><svg class="ico" aria-hidden="true"><use href="#i-in"/></svg></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS E CASES — estrutura pronta, desativada.
+         Não há depoimentos nem cases reais no conteúdo atual da MultiCloud, então nada foi inventado.
+         Para ativar: remova os marcadores de comentário do bloco e substitua cada campo {{...}} por conteúdo real.
+
+    <section id="depoimentos" class="quotes" data-chapter="Depoimentos" aria-labelledby="quotesTitle">
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow__line"></span>Depoimentos</p>
+        <h2 class="h2" id="quotesTitle">Quem opera com a <span class="accent">MultiCloud</span></h2>
+        <ul class="quotes__grid">
+          <li class="quote"><blockquote>{{DEPOIMENTO_01}}</blockquote><p class="quote__who">{{NOME_01}} · {{CARGO_01}} · {{EMPRESA_01}}</p></li>
+          <li class="quote"><blockquote>{{DEPOIMENTO_02}}</blockquote><p class="quote__who">{{NOME_02}} · {{CARGO_02}} · {{EMPRESA_02}}</p></li>
+          <li class="quote"><blockquote>{{DEPOIMENTO_03}}</blockquote><p class="quote__who">{{NOME_03}} · {{CARGO_03}} · {{EMPRESA_03}}</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="cases" class="cases" data-chapter="Cases" aria-labelledby="casesTitle">
+      <div class="container">
+        <p class="eyebrow"><span class="eyebrow__line"></span>Cases</p>
+        <h2 class="h2" id="casesTitle">Projetos <span class="accent">entregues</span></h2>
+        <article class="case">
+          <h3>{{CASE_01}}</h3>
+          <dl>
+            <div><dt>Contexto</dt><dd>{{CASE_01_CONTEXTO}}</dd></div>
+            <div><dt>Problema</dt><dd>{{CASE_01_PROBLEMA}}</dd></div>
+            <div><dt>Solução</dt><dd>{{CASE_01_SOLUCAO}}</dd></div>
+            <div><dt>Resultado</dt><dd>{{CASE_01_RESULTADO}}</dd></div>
+            <div><dt>Tecnologia</dt><dd>{{CASE_01_TECNOLOGIA}}</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+    -->
+
+    <!-- 10 — JORNADA DE ATENDIMENTO -->
+    <section id="jornada" class="journey" data-chapter="Jornada" aria-labelledby="jourTitle">
+      <div class="container">
+        <header class="journey__head">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Como começamos</p>
+          <h2 class="h2" id="jourTitle">Do primeiro contato <span class="accent">à operação contínua.</span></h2>
+        </header>
+        <div class="steps-wrap">
+        <div class="steps__line" aria-hidden="true"><span id="stepsLine"></span></div>
+        <ol class="steps" id="steps">
+          <li class="step">
+            <span class="step__n">01</span>
+            <h3>Contato</h3>
+            <p>Fale com um especialista pelo WhatsApp, telefone ou formulário. Nossa equipe responde em até 2 horas úteis.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">02</span>
+            <h3>Entendimento</h3>
+            <p>Nossa equipe de especialistas entende a sua necessidade e o seu ambiente de TI.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">03</span>
+            <h3>Arquitetura</h3>
+            <p>Arquitetamos a solução ideal para o seu ambiente, sob medida para a realidade e os objetivos do seu negócio.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">04</span>
+            <h3>Operação</h3>
+            <p>Da estratégia à operação: suporte especializado 365 dias por ano, de segunda a segunda, com monitoramento 24h.</p>
+          </li>
+        </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 — PERGUNTAS FREQUENTES (respostas compostas a partir do conteúdo oficial) -->
+    <section id="faq" class="faq" data-chapter="Perguntas" aria-labelledby="faqTitle">
+      <div class="container faq__grid">
+        <header class="faq__head">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Perguntas frequentes</p>
+          <h2 class="h2" id="faqTitle">Antes de <span class="accent">conversarmos.</span></h2>
+        </header>
+        <div class="faq__list" id="faqList">
+          <details class="qa">
+            <summary><span>Quais soluções a MultiCloud oferece?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Nuvem Privada, Nuvem Pública, Segurança e Governança de TI. As soluções são projetadas sob medida, respeitando a realidade e os objetivos do seu negócio — da estratégia à operação.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Com quais nuvens públicas a MultiCloud trabalha?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Arquitetamos com os principais players de mercado — Azure, Oracle Cloud e AWS — de acordo com o seu negócio, com a operação certificada da MultiCloud, monitoramento 24/7 e gerenciamento especializado.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Quando a Nuvem Privada é indicada?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Para aplicações críticas que não podem parar. É um ambiente exclusivo, com alto desempenho, escalabilidade, disponibilidade máxima e failover automático.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>O suporte funciona aos fins de semana?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Sim. Nossos analistas de suporte estão disponíveis 365 dias por ano, de segunda a segunda.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>O que está incluído nas soluções de Segurança?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Soluções de firewalls, monitoramento de ativos avançado, backup gerenciado, antivírus corporativo e gestão de vulnerabilidades.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Quais frameworks são usados em Governança de TI?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>ITIL e COBIT, junto com planejamento estratégico de TI, gestão de riscos, políticas e processos e relatórios e KPIs executivos.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Em quanto tempo recebo um retorno?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Nossa equipe responde em até 2 horas úteis às mensagens enviadas pelo formulário. Para falar agora, use o WhatsApp (62) 3142-0818 ou o 0800 000 5542.</p></div>
+          </details>
+          <details class="qa">
+            <summary><span>Onde a MultiCloud está localizada?</span><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="qa__body"><p>Av. Assis Chateaubriand, 1595 — 2º andar, sala 09 — St. Oeste, Goiânia – GO, 74130-012. Atendemos empresas em todo o Brasil.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 — CONTATO · CTA final -->
+    <section id="contact" class="contact" data-chapter="Contato" aria-labelledby="contactTitle">
+      <div class="contact__intro" id="contactIntro">
+        <div class="container contact__intro-inner">
+          <p class="eyebrow"><span class="eyebrow__line"></span>Contato</p>
+          <h2 class="contact__title" id="contactTitle">Vamos transformar <span class="accent">seu negócio?</span></h2>
+          <p class="lead">Seja bem-vindo à MultiCloud! Nossa equipe de especialistas está pronta para entender sua necessidade e arquitetar a solução ideal para seu ambiente.</p>
+        </div>
+      </div>
+      <div class="container contact__grid">
+        <div class="contact__copy">
+          <h3 class="contact__sub">Fale com a MultiCloud</h3>
+          <ul class="channels">
+            <li><a href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener"><small>WhatsApp</small><span>(62) 3142-0818</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a href="tel:08000005542"><small>Telefone</small><span>0800 000 5542</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a href="mailto:comercial@multicloud.com.br"><small>E-mail</small><span>comercial@multicloud.com.br</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Assis%20Chateaubriand%2C%201595%20-%20St.%20Oeste%2C%20Goi%C3%A2nia%20-%20GO%2C%2074130-012" target="_blank" rel="noopener"><small>Endereço</small><span>Av. Assis Chateaubriand, 1595 — 2º andar, sala 09 · St. Oeste, Goiânia – GO, 74130-012</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          </ul>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <header class="form__head">
+            <h3>Envie sua mensagem</h3>
+            <p>Como podemos te ajudar? Nossa equipe responde em até 2 horas úteis.</p>
+          </header>
+          <div class="field">
+            <input type="text" id="f-name" name="from_name" autocomplete="name" required placeholder=" ">
+            <label for="f-name">Nome completo</label>
+          </div>
+          <div class="field">
+            <input type="email" id="f-email" name="from_email" autocomplete="email" required placeholder=" ">
+            <label for="f-email">E-mail corporativo</label>
+          </div>
+          <div class="field">
+            <input type="text" id="f-company" name="company" autocomplete="organization" placeholder=" ">
+            <label for="f-company">Empresa</label>
+          </div>
+          <div class="field field--select">
+            <select id="f-solution" name="solution">
+              <option value="">Selecione...</option>
+              <option>Nuvem Privada</option>
+              <option>Nuvem Pública</option>
+              <option>Segurança</option>
+              <option>Governança de TI</option>
+              <option>Todas as soluções</option>
+            </select>
+            <label for="f-solution">Solução de interesse</label>
+          </div>
+          <div class="field">
+            <textarea id="f-message" name="message" rows="4" required placeholder=" "></textarea>
+            <label for="f-message">Mensagem</label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block"><span class="btn__label">Enviar Mensagem</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="assets/img/brand/multicloud-logo.png" alt="MultiCloud" width="480" height="90" loading="lazy">
+          <p>Uma empresa além da nuvem. 23 anos entregando infraestrutura cloud de alto desempenho, Segurança e Governança de TI para empresas que não podem parar.</p>
+        </div>
+        <nav class="footer__col" aria-label="Navegação">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">A MultiCloud</a></li>
+            <li><a href="#solutions">Soluções</a></li>
+            <li><a href="#contact">Fale Conosco</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__col" aria-label="Soluções">
+          <h4>Soluções</h4>
+          <ul>
+            <li><a href="#cloud-premium">Nuvem Privada</a></li>
+            <li><a href="#cloud-public">Nuvem Pública</a></li>
+            <li><a href="#governance">Segurança</a></li>
+            <li><a href="#compliance">Governança de TI</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener">(62) 3142-0818</a></li>
+            <li><a href="tel:08000005542">0800 000 5542</a></li>
+            <li><a href="mailto:comercial@multicloud.com.br">comercial@multicloud.com.br</a></li>
+            <li><a href="#contact">Goiânia – GO</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__wordmark" aria-hidden="true">MULTICLOUD</div>
+      <div class="footer__bottom">
+        <p>© 2026 MultiCloud® · Todos os Direitos Reservados</p>
+        <ul class="footer__social" aria-label="Redes sociais">
+          <li><a href="https://www.linkedin.com/multicloud/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/multicloud/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/multicloud/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://tiktok.com/muilticloud" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://youtube.com/multicloudoficial" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+        <p>Desenvolvido por <a href="https://inlinedigital.com.br/" target="_blank" rel="noopener">Inline Digital e Tecnologia</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/556231420818?text=Gostaria%20de%20falar%20com%20o%20suporte%20MultiCloud." target="_blank" rel="noopener" aria-label="Falar com a MultiCloud no WhatsApp">
+    <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+
+  <noscript><style>.loader,.cursor{display:none!important}</style></noscript>
+
+  <!-- Bibliotecas locais (GSAP, ScrollTrigger, SplitText, Lenis) -->
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/vendor/SplitText.min.js" defer></script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <!-- Envio do formulário (EmailJS SDK v4 — mesma conta, serviço e template do site atual) -->
+  <script src="assets/vendor/email.min.js" async></script>
+
+  <!-- Site (assets/js/*.js + Three.js empacotados por `npm run build`): arquivo comum, sem módulos,
+       para funcionar também abrindo o index.html direto do disco -->
+  <script src="assets/js/app.min.js" defer></script>
+</body>
+</html>
