@@ -1,0 +1,12 @@
+# Somente o site publicado vai para o repositório.
+# Tudo nesta pasta é ignorado, exceto site/ e este arquivo.
+/*
+!/.gitignore
+!/site/
+
+# Arquivos de sistema e editores, mesmo dentro de site/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
