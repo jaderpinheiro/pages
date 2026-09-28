@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+# Pastas internas da agência: não publicar
+Disallow: /brand/
+Disallow: /entrada/
+Disallow: /estrategia/
+Disallow: /saida/
+Disallow: /PROMPT-MASTER-SITE.md
+Disallow: /README.md
+
+# [A CONFIRMAR: domínio] → Sitemap: https://DOMINIO/sitemap.xml
