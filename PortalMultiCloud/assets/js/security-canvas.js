@@ -23,6 +23,23 @@ export function createShield(canvas, env) {
     cx = narrow ? W * 0.5 : W * 0.7;
     cy = narrow ? H * 0.54 : H * 0.48;
     maxR = Math.min(narrow ? W * 0.42 : W * 0.26, H * (narrow ? 0.21 : 0.38));
+    if (narrow && W > H) {
+      // Deitado: texto à esquerda, anéis à direita acima da lista
+      cx = W * 0.74; cy = H * 0.37;
+      maxR = Math.min(W * 0.2, H * 0.28);
+    } else if (narrow) {
+      // Em pé: os anéis ocupam o vão entre o título e a lista
+      const stage = canvas.parentElement;
+      const copy = stage.querySelector('.sec__copy'), list = stage.querySelector('.sec__layers');
+      if (copy && list) {
+        const top = canvas.getBoundingClientRect().top;
+        const a = copy.getBoundingClientRect().bottom - top, b = list.getBoundingClientRect().top - top;
+        if (b - a > 60) {
+          cy = (a + b) / 2;
+          maxR = Math.max(H * 0.1, Math.min((b - a) * 0.58, W * 0.42, H * 0.21));
+        }
+      }
+    }
     R0 = maxR * 0.3;
     gap = (maxR - R0) / (RINGS - 1);
   }

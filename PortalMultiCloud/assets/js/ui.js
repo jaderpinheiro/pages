@@ -198,6 +198,8 @@ function waFloat() {
   if (!wa) return;
   let afterHero = false, inForm = false;
   const apply = () => wa.classList.toggle('is-visible', afterHero && !inForm);
-  ScrollTrigger.create({ trigger: '#custo', start: 'top 70%', endTrigger: 'html', end: 'bottom bottom', onToggle: (s) => { afterHero = s.isActive; apply(); } });
+  // Em telas estreitas o botão só aparece depois do custo, para não cobrir o CTA daquela seção
+  const from = window.innerWidth <= 1024 ? '#about' : '#custo';
+  ScrollTrigger.create({ trigger: from, start: 'top 70%', endTrigger: 'html', end: 'bottom bottom', onToggle: (s) => { afterHero = s.isActive; apply(); } });
   ScrollTrigger.create({ trigger: '.contact__grid', start: 'top 80%', end: 'bottom top', onToggle: (s) => { inForm = s.isActive; apply(); } });
 }

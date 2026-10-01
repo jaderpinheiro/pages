@@ -29,7 +29,7 @@
   --f-body: 'Exo 2', 'Segoe UI', sans-serif;
   --f-mono: 'Space Mono', ui-monospace, 'Consolas', monospace;
 
-  --gutter: clamp(20px, 5vw, 72px);
+  --gutter: max(clamp(20px, 5vw, 72px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   --max: 1440px;
   --nav-h: 76px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -575,7 +575,7 @@ section { position: relative; }
 .iso__layer[data-layer="3"] { --idx: 3; z-index: 2; }
 .iso__layer[data-layer="4"] { --idx: 4; z-index: 1; }
 .iso__plate {
-  position: absolute; left: -150px; top: -150px; width: 300px; height: 300px;
+  position: absolute; left: calc(var(--plate, 300px) / -2); top: calc(var(--plate, 300px) / -2); width: var(--plate, 300px); height: var(--plate, 300px);
   transform: rotateX(60deg) rotateZ(45deg);
   border: 1px solid rgba(243, 241, 236, .22);
   background: linear-gradient(135deg, rgba(20, 30, 38, .92), rgba(8, 12, 16, .92));
@@ -833,18 +833,18 @@ section { position: relative; }
   .hero__hud { top: calc(var(--nav-h) + 20px); }
   .hero__cue { display: none; }
   .hero__chapter { top: auto; bottom: clamp(90px, 12vh, 140px); transform: none; }
-  .cost__head, .cost__inner { grid-template-columns: 1fr; }
+  .cost__head, .cost__inner { grid-template-columns: minmax(0, 1fr); }
   .about__grid { grid-template-columns: 1fr; gap: 20px; }
   .about__year { position: relative; top: 0; display: flex; align-items: flex-end; gap: 22px; }
   .about__num { font-size: clamp(8rem, 34vw, 16rem); }
   .about__num-cap { margin: 0 0 12px; }
   .arch__grid { grid-template-columns: 1fr; gap: 10px; }
-  .arch__visual { height: 44vh; order: -1; }
+  .arch__visual { height: calc(var(--screen) * .36); order: -1; }
   .arch__list { margin-top: 22px; }
   .arch__list li { padding: 10px 0 10px 14px; grid-template-columns: 100px 1fr; }
   .arch__list small { display: none; }
   .arch__copy .lead { display: none; }
-  .iso { transform: scale(.72); }
+  .iso { --plate: clamp(110px, min(40vw, calc(var(--screen) * .2)), 300px); }
   .iso__layer, .iso__axis { left: 50%; }
   .iso__label { display: none; }
   .logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -859,8 +859,8 @@ section { position: relative; }
   .footer__brand { grid-column: 1 / -1; }
 }
 
-/* Soluções: empilhadas (sem rolagem horizontal) */
-@media (max-width: 900px) {
+/* Soluções: empilhadas em celulares e tablets (sem rolagem horizontal) */
+@media (max-width: 1024px) {
   .solutions__stage { position: relative; height: auto; overflow: visible; }
   .solutions__track { display: block; width: auto; transform: none !important; }
   .sol-intro { width: auto; height: auto; padding: clamp(100px, 14vh, 140px) var(--gutter) 40px; }
@@ -942,13 +942,206 @@ section { position: relative; }
   .hero__lead { -webkit-line-clamp: 2; }
   .hero__hud { top: calc(var(--nav-h) + 16px); }
 }
-@media (max-width: 720px) and (max-height: 740px) {
+@media (max-width: 720px) and (max-height: 640px) {
   .hero__intro { bottom: 150px; }
   .hero__lead { -webkit-line-clamp: 2; margin-top: 12px; }
   .hero__ctas { margin-top: 16px; }
   .hero__ctas .btn--ghost { display: none; }
   .hero__stats strong { font-size: 1.35rem; }
   .hero__stats { row-gap: 8px; }
+}
+
+/* ==========================================================================
+   Ajuste fino por dispositivo
+   Conferido em 320, 360, 390 e 430 px (em pé), tablets de 600 a 1024 px e telas deitadas.
+   As alturas usam var(--screen) para acompanhar a barra de endereço do navegador.
+   ========================================================================== */
+
+/* ---------- Tablets e celulares ---------- */
+@media (max-width: 1024px) {
+  .h2 { font-size: clamp(1.85rem, 9.4vw, 3.6rem); }
+  .cost__head .h2 { font-size: clamp(1.6rem, 7.6vw, 3rem); }
+  .about__text { max-width: 44ch; }
+
+  /* Menu: rola quando não cabe e nunca passa por baixo do cabeçalho */
+  .menu {
+    flex-direction: column; align-items: stretch;
+    overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+    padding-top: calc(var(--nav-h) + 12px); padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+  }
+  .menu__inner { margin-top: auto; gap: clamp(18px, calc(var(--screen) * .04), 40px); }
+  .menu__links a { font-size: clamp(1.5rem, min(9vw, calc(var(--screen) * .054)), 4rem); }
+  .menu__links li { padding: clamp(3px, calc(var(--screen) * .007), 6px) 0; }
+  .menu__meta { display: inline-block; padding: 10px 0; }
+
+  /* Alvos de toque com pelo menos 40 px */
+  .nav__logo { display: flex; align-items: center; min-height: 44px; }
+  .link-arrow { margin-top: 22px; padding-top: 12px; }
+  .footer__col h4 { margin-bottom: 10px; }
+  .footer__col li + li { margin-top: 0; }
+  .footer__col a { display: inline-block; padding: 9px 0; }
+  .footer__social { gap: 0 22px; }
+  .footer__social a { display: inline-block; padding: 12px 0; }
+  .wa-float { right: max(24px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); }
+
+  .arch__list li { grid-template-columns: 132px 1fr; }
+  .steps { gap: 20px; }
+  .step h3 { font-size: clamp(1.15rem, 2.3vw, 1.9rem); overflow-wrap: anywhere; }
+}
+
+/* ---------- Qualquer tela de toque, inclusive tablets grandes deitados ---------- */
+@media (hover: none) and (pointer: coarse) {
+  .nav__logo { display: flex; align-items: center; min-height: 44px; }
+  .link-arrow { margin-top: 22px; padding-top: 12px; }
+  .footer__col li + li { margin-top: 0; }
+  .footer__col a { display: inline-block; padding: 9px 0; }
+  .footer__social { gap: 0 22px; }
+  .footer__social a { display: inline-block; padding: 12px 0; }
+}
+
+/* ---------- Tablets em pé: a arquitetura ganha o desenho maior e as descrições ---------- */
+@media (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
+  .arch__visual { height: calc(var(--screen) * .34); }
+  .iso { --plate: clamp(160px, min(34vw, calc(var(--screen) * .2)), 300px); }
+  .arch__list li { padding: 12px 0 12px 16px; }
+  .arch__list small { display: block; }
+}
+
+/* ---------- Soluções em duas colunas: tablets e celulares deitados ---------- */
+@media (min-width: 721px) and (max-width: 1024px), (min-width: 540px) and (max-width: 720px) and (orientation: landscape) {
+  .sol-intro__index { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
+  .sol {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); align-items: center;
+    gap: clamp(22px, 4vw, 48px); padding-block: clamp(40px, calc(var(--screen) * .08), 80px);
+  }
+  .sol__visual { height: min(46vw, calc(var(--screen) * .78), 520px); max-height: none; }
+  .sol__body { max-width: none; }
+  .sol__n { font-size: clamp(6rem, 17vw, 11rem); }
+  .sol__title { font-size: clamp(2rem, 5.2vw, 3.6rem); }
+}
+
+/* ---------- Celulares ---------- */
+@media (max-width: 720px) {
+  .hero__stats span { font-size: 10px; letter-spacing: .08em; }
+  .contact__title { font-size: clamp(2.3rem, 12.5vw, 4rem); }
+  .logos__cta a { padding: 12px 14px; font-size: clamp(.92rem, 4.3vw, 1.25rem); }
+  .step h3 { font-size: 1.6rem; }
+  .wa-float { right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
+
+  /* Custo: tudo cabe na tela, do título ao botão */
+  .cost__inner { gap: clamp(12px, calc(var(--screen) * .028), 34px) 40px; }
+  .cost__head { gap: 12px; }
+  .cost__clock { margin-top: 0; gap: 10px; }
+  .cost__item { gap: 12px; padding: clamp(8px, calc(var(--screen) * .017), 14px) 0; }
+  .cost__value { min-width: 0; font-size: clamp(1.9rem, 10vw, 2.6rem); }
+  .cost__label { flex: none; max-width: 13ch; font-size: 10px; letter-spacing: .12em; }
+
+  /* Arquitetura: desenho e lista dividem a altura */
+  .arch__visual { height: calc(var(--screen) * .3); }
+  .iso { --plate: clamp(100px, min(38vw, calc(var(--screen) * .17)), 300px); }
+  .arch__copy .eyebrow { margin-bottom: clamp(8px, calc(var(--screen) * .016), 22px); }
+  .arch__list { margin-top: clamp(10px, calc(var(--screen) * .02), 22px); }
+  .arch__list li { grid-template-columns: 1fr; padding-block: clamp(5px, calc(var(--screen) * .011), 10px); }
+  .arch__list strong { font-size: clamp(1.02rem, calc(var(--screen) * .026), 1.35rem); }
+
+  /* Segurança */
+  .sec__grid {
+    padding-top: calc(var(--nav-h) + clamp(8px, calc(var(--screen) * .03), 30px));
+    padding-bottom: clamp(16px, calc(var(--screen) * .045), 40px);
+  }
+  .sec__layers li { padding-block: clamp(5px, calc(var(--screen) * .012), 10px); }
+}
+@media (max-width: 720px) and (max-height: 620px) {
+  .arch__visual { height: calc(var(--screen) * .25); }
+}
+
+/* ---------- Celulares estreitos (320–380 px) ---------- */
+@media (max-width: 380px) {
+  .btn { max-width: 100%; padding: 0 18px; gap: 10px; font-size: 14px; letter-spacing: .06em; }
+}
+
+/* ---------- Celulares grandes e deitados, tablets pequenos (520–720 px) ---------- */
+@media (min-width: 520px) and (max-width: 720px) {
+  .hero__ctas .btn { flex: 0 1 auto; }
+  .logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .logos__cta a { padding: 10px 12px; font-size: .95rem; }
+  .leaders__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .leader__meta h3 { font-size: 1.2rem; }
+  .leader__in { width: 40px; height: 40px; }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+/* ---------- Telas deitadas: texto e desenho lado a lado ---------- */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .arch__grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(16px, 4vw, 48px); }
+  .arch__visual { order: 0; height: calc(var(--screen) * .72); }
+  .iso { --plate: clamp(100px, min(22vw, calc(var(--screen) * .32)), 300px); }
+  .sec__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-content: stretch; padding-top: 0; padding-bottom: 0; }
+  .sec__layers { align-self: end; margin-bottom: clamp(14px, calc(var(--screen) * .06), 70px); }
+}
+@media (min-width: 900px) and (max-width: 1024px) and (orientation: landscape) and (min-height: 700px) {
+  .arch__copy .lead, .arch__list small { display: block; }
+}
+
+/* ---------- Celular deitado (altura até 500 px): versão compacta de cada cena fixa ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .h2 { font-size: clamp(1.5rem, calc(var(--screen) * .085), 2.6rem); }
+  .eyebrow { margin-bottom: 10px; }
+  .btn { --h: 44px; padding: 0 20px; font-size: 13.5px; }
+
+  .hero__intro { bottom: 88px; }
+  .hero__intro .eyebrow { display: none; }
+  .hero__title { font-size: clamp(1.9rem, calc(var(--screen) * .13), 3.4rem); }
+  .hero__lead {
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+    max-width: 62ch; margin-top: 10px; font-size: .92rem; line-height: 1.55;
+  }
+  .hero__ctas { flex-wrap: nowrap; margin-top: 14px; }
+  .hero__ctas .btn { flex: 0 1 auto; }
+  .hero__ctas .btn--ghost { display: inline-flex; }
+  .hero__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 0; bottom: 12px; }
+  .hero__stats li { padding-top: 8px; }
+  .hero__stats li + li, .hero__stats li:nth-child(even) { padding-left: 14px; }
+  .hero__stats strong { font-size: 1.25rem; }
+  .hero__chapter { bottom: 40px; }
+  .hero__chapter-title { margin-bottom: 8px; font-size: clamp(1.7rem, calc(var(--screen) * .1), 2.6rem); }
+  .hero__chapter p:not(.eyebrow) { font-size: .95rem; line-height: 1.5; }
+  .hero__question { font-size: clamp(1.7rem, calc(var(--screen) * .11), 3rem); }
+
+  .cost__inner { gap: 12px 40px; }
+  .cost__head { gap: 6px; }
+  .cost__head .eyebrow, .cost__head .lead { display: none; }
+  .cost__head .h2 { font-size: clamp(1.25rem, calc(var(--screen) * .07), 2rem); }
+  .cost__clock { margin-top: 0; gap: 8px; }
+  .cost__time span { font-size: 1.4rem; }
+  .cost__ticks { height: 16px; }
+  .cost__ticks i { height: 7px; }
+  .cost__ticks i:nth-child(5n + 1) { height: 12px; }
+  .cost__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cost__item { display: block; padding: 10px 0 0; }
+  .cost__item + .cost__item { padding-left: 16px; border-left: 1px solid var(--line); }
+  .cost__value { font-size: clamp(1.6rem, calc(var(--screen) * .1), 3rem); }
+  .cost__label { max-width: none; margin-top: 6px; text-align: left; font-size: 10px; letter-spacing: .1em; }
+
+  .arch__copy .eyebrow, .arch__copy .lead, .arch__list small { display: none; }
+  .arch__list { margin-top: 10px; }
+  .arch__list li { grid-template-columns: 112px 1fr; padding: 5px 0 5px 12px; }
+  .arch__k { grid-row: auto; padding-top: 3px; font-size: 10px; }
+  .arch__list strong { font-size: 1rem; }
+
+  .sec__copy .lead { display: none; }
+  .sec__layers { margin-bottom: 14px; }
+  .sec__layers li { padding: 5px 0; font-size: 13px; }
+
+  .menu__inner { gap: 16px; }
+  .menu__links { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+  .menu__links a { font-size: 1.5rem; }
+
+  .contact__title { font-size: clamp(2.2rem, calc(var(--screen) * .17), 4.5rem); }
+}
+@media (max-height: 350px) and (orientation: landscape) {
+  .hero__lead { display: none; }
 }
 
 /* ==========================================================================

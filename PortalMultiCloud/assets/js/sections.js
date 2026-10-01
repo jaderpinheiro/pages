@@ -117,7 +117,7 @@ function band() {
 }
 
 // ---------------------------------------------------------------------------
-// 04 — Soluções: trilho horizontal no desktop, empilhado no mobile
+// 04 — Soluções: trilho horizontal no desktop, empilhado em celulares e tablets
 function solutions(ctx) {
   const sec = $('#solutions');
   const track = $('#solTrack');
@@ -129,7 +129,7 @@ function solutions(ctx) {
   gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
 
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
     const dist = () => track.scrollWidth - window.innerWidth;
     const setHeight = () => { sec.style.height = `${dist() + window.innerHeight}px`; };
     setHeight();
@@ -184,7 +184,7 @@ function solutions(ctx) {
     return () => { sec.style.height = ''; ctx.horizontal = null; };
   });
 
-  mm.add('(max-width: 900px), (prefers-reduced-motion: reduce)', () => {
+  mm.add('(max-width: 1024px), (prefers-reduced-motion: reduce)', () => {
     gsap.set('.plates__stack', { '--gap': '30px' });
     if (RM) { gsap.set(path, { strokeDashoffset: 0 }); return; }
     $$('.sol', track).forEach((panel) => {
@@ -236,11 +236,22 @@ function arch() {
     items.forEach((li) => li.classList.toggle('is-active', Number(li.dataset.layer) <= idx));
   };
   if (RM) { setIdx(4); return; }
-  const maxSpread = () => (window.innerWidth < 1025 ? 58 : 88);
+  // Em celulares e tablets a abertura da pilha cabe na altura reservada ao desenho
+  const visual = $('.arch__visual', sec);
+  const plate = $('.iso__plate', iso);
+  let maxSpread = 88, minSpread = 14, lastP = 0;
+  const measure = () => {
+    if (window.innerWidth >= 1025) { maxSpread = 88; minSpread = 14; return; }
+    maxSpread = clamp((visual.clientHeight - plate.offsetWidth * 0.71 - 8) / 4, 8, 58);
+    minSpread = Math.min(14, maxSpread * 0.4);
+  };
   const update = (p) => {
-    iso.style.setProperty('--spread', `${lerp(14, maxSpread(), smooth(0, 0.22, p)).toFixed(1)}px`);
+    lastP = p;
+    iso.style.setProperty('--spread', `${lerp(minSpread, maxSpread, smooth(0, 0.22, p)).toFixed(1)}px`);
     setIdx(p < 0.2 ? -1 : Math.min(4, Math.floor((p - 0.2) / 0.15)));
   };
+  measure();
+  ScrollTrigger.addEventListener('refresh', () => { measure(); update(lastP); });
   update(0);
   ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom', onUpdate: (s) => update(s.progress) });
   gsap.from(layers, {
