@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Serif:ital@0;1&family=Jost:wght@400;500;600&display=swap">
 <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/hero-mesa-cinco-da-tarde-1920.webp" imagesrcset="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/hero-mesa-cinco-da-tarde-960.webp 960w, https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/hero-mesa-cinco-da-tarde-1920.webp 1920w" imagesizes="100vw">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/css/site-v2.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/css/site-v3.css">
 <script>document.documentElement.classList.add('js')</script>
 
 <script type="application/ld+json">
@@ -60,28 +60,95 @@
           "name": "Leine Martins",
           "jobTitle": "Sócia e diretora de estratégia",
           "url": "https://club5pm.com.br/leine/",
-          "sameAs": "https://www.instagram.com/leinecostamartins/"
+          "sameAs": "https://www.instagram.com/leinecostamartins/",
+          "worksFor": [
+            {
+              "@id": "https://club5pm.com.br/#organizacao"
+            },
+            {
+              "@type": "Organization",
+              "name": "Leine Costa Martins",
+              "description": "Gestão em treinamentos e desenvolvimento estratégico para empresas.",
+              "url": "https://www.instagram.com/leinecostamartins/",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Goiânia",
+                "addressRegion": "GO",
+                "addressCountry": "BR"
+              }
+            }
+          ]
         },
         {
           "@type": "Person",
           "@id": "https://club5pm.com.br/luzineide/#pessoa",
           "name": "Dra. Luzineide Anaya",
           "url": "https://club5pm.com.br/luzineide/",
-          "sameAs": "https://www.instagram.com/draluzineidenutrologa/"
+          "sameAs": "https://www.instagram.com/draluzineidenutrologa/",
+          "worksFor": [
+            {
+              "@id": "https://club5pm.com.br/#organizacao"
+            },
+            {
+              "@type": "Organization",
+              "name": "Nutrolife",
+              "description": "Clínica de nutrologia em Goiânia, com protocolos de emagrecimento, modulação hormonal e rejuvenescimento.",
+              "url": "https://nutrolife.com.br/",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Goiânia",
+                "addressRegion": "GO",
+                "addressCountry": "BR"
+              }
+            }
+          ]
         },
         {
           "@type": "Person",
           "@id": "https://club5pm.com.br/dayane/#pessoa",
           "name": "Dayane Alho",
           "url": "https://club5pm.com.br/dayane/",
-          "sameAs": "https://www.instagram.com/dayanealho/"
+          "sameAs": "https://www.instagram.com/dayanealho/",
+          "worksFor": [
+            {
+              "@id": "https://club5pm.com.br/#organizacao"
+            },
+            {
+              "@type": "Organization",
+              "name": "DPA Comunica",
+              "description": "Há mais de 23 anos no mercado, com soluções em comunicação que dão visibilidade a empresas.",
+              "url": "https://www.instagram.com/dpa.comunica/",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Goiânia",
+                "addressRegion": "GO",
+                "addressCountry": "BR"
+              }
+            }
+          ]
         },
         {
           "@type": "Person",
           "@id": "https://club5pm.com.br/andreza/#pessoa",
           "name": "Andreza Pedrozo",
           "url": "https://club5pm.com.br/andreza/",
-          "sameAs": "https://www.instagram.com/dezamarques/"
+          "sameAs": "https://www.instagram.com/dezamarques/",
+          "worksFor": [
+            {
+              "@id": "https://club5pm.com.br/#organizacao"
+            },
+            {
+              "@type": "Organization",
+              "name": "Eletro Rigonato",
+              "description": "Loja de materiais elétricos e iluminação em Goiânia.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Goiânia",
+                "addressRegion": "GO",
+                "addressCountry": "BR"
+              }
+            }
+          ]
         }
       ],
       "contactPoint": {
@@ -328,6 +395,65 @@
     </div>
   </section>
 
+  <!-- EMPRESAS DAS FUNDADORAS (faixa clara: quem escreve é tinta ou vinho, nunca dourado) -->
+  <section class="empresas" id="empresas" aria-labelledby="empresas-titulo">
+    <div class="container">
+      <div class="empresas__cabeca">
+        <div>
+          <p class="rotulo">Empresas das fundadoras</p>
+          <h2 class="titulo-secao" id="empresas-titulo">Os negócios<br>de quem faz o Club</h2>
+        </div>
+        <p class="empresas__intro">Cada fundadora leva para o Club 5PM a experiência de quem também empreende. Conheça as empresas delas.</p>
+      </div>
+      <ul class="empresas__lista">
+        <li class="empresa">
+          <span class="empresa__numero" aria-hidden="true">01</span>
+          <p class="empresa__segmento">Gestão e estratégia</p>
+          <h3 class="empresa__nome">Leine Costa Martins</h3>
+          <p class="empresa__texto">Gestão em treinamentos e desenvolvimento estratégico para empresas.</p>
+          <a class="empresa__dona" href="https://club5pm.com.br/leine/" title="Cartão de visita de Leine Martins">
+            <img src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/fundadora-4-480.webp" width="46" height="46" loading="lazy" decoding="async" alt="">
+            <span><small>Fundadora</small>Leine Martins</span>
+          </a>
+          <a class="empresa__link" href="https://www.instagram.com/leinecostamartins/" target="_blank" rel="noopener" aria-label="Ver no Instagram: Leine Costa Martins">Ver no Instagram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="empresa">
+          <span class="empresa__numero" aria-hidden="true">02</span>
+          <p class="empresa__segmento">Nutrologia</p>
+          <h3 class="empresa__nome">Nutrolife</h3>
+          <p class="empresa__texto">Clínica de nutrologia em Goiânia, com protocolos de emagrecimento, modulação hormonal e rejuvenescimento.</p>
+          <a class="empresa__dona" href="https://club5pm.com.br/luzineide/" title="Cartão de visita de Dra. Luzineide Anaya">
+            <img src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/fundadora-1-480.webp" width="46" height="46" loading="lazy" decoding="async" alt="">
+            <span><small>Fundadora</small>Dra. Luzineide Anaya</span>
+          </a>
+          <a class="empresa__link" href="https://nutrolife.com.br/" target="_blank" rel="noopener" aria-label="Visitar o site: Nutrolife">Visitar o site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="empresa">
+          <span class="empresa__numero" aria-hidden="true">03</span>
+          <p class="empresa__segmento">Comunicação</p>
+          <h3 class="empresa__nome">DPA Comunica</h3>
+          <p class="empresa__texto">Há mais de 23 anos no mercado, com soluções em comunicação que dão visibilidade a empresas.</p>
+          <a class="empresa__dona" href="https://club5pm.com.br/dayane/" title="Cartão de visita de Dayane Alho">
+            <img src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/fundadora-2-480.webp" width="46" height="46" loading="lazy" decoding="async" alt="">
+            <span><small>Fundadora</small>Dayane Alho</span>
+          </a>
+          <a class="empresa__link" href="https://www.instagram.com/dpa.comunica/" target="_blank" rel="noopener" aria-label="Ver no Instagram: DPA Comunica">Ver no Instagram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </li>
+        <li class="empresa">
+          <span class="empresa__numero" aria-hidden="true">04</span>
+          <p class="empresa__segmento">Materiais elétricos e iluminação</p>
+          <h3 class="empresa__nome">Eletro Rigonato</h3>
+          <p class="empresa__texto">Loja de materiais elétricos e iluminação em Goiânia.</p>
+          <a class="empresa__dona" href="https://club5pm.com.br/andreza/" title="Cartão de visita de Andreza Pedrozo">
+            <img src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/img/fundadora-3-480.webp" width="46" height="46" loading="lazy" decoding="async" alt="">
+            <span><small>Fundadora</small>Andreza Pedrozo</span>
+          </a>
+          <p class="empresa__local">Goiânia · GO</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- COMO FUNCIONA -->
   <section class="como" id="como-funciona" aria-labelledby="como-titulo">
     <div class="container como__grade">
@@ -527,6 +653,7 @@
         <ul>
           <li><a href="#o-clube">O clube</a></li>
           <li><a href="#fundadoras">Fundadoras</a></li>
+          <li><a href="#empresas">Empresas das fundadoras</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
           <li><a href="#encontros">Encontros</a></li>
           <li><a href="#parcerias">Parcerias</a></li>
@@ -551,6 +678,6 @@
 <script src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/vendor/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/vendor/lenis.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/js/site-v2.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/js/site-v3.js" defer></script>
 </body>
 </html>
