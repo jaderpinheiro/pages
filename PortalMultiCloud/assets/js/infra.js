@@ -1,10 +1,24 @@
 // Palco da infraestrutura: controla o hero (foto → gêmeo 3D → vista explodida →
 // mergulho) e a remontagem do módulo na abertura do contato. Um único canvas fixo
 // e um único contexto WebGL atendem os dois momentos.
-import { env, smooth, clamp, $, $$ } from './env.js';
+import { env, sceneUrl, smooth, clamp, $, $$ } from './env.js';
 import { FRAMES } from './frames-config.js';
 
 const { gsap, ScrollTrigger } = window;
+
+// Busca o pacote da cena 3D (scene.min.js). Em caso de falha devolve null e o site
+// segue na versão com imagem.
+function loadScene() {
+  return new Promise((resolve) => {
+    if (window.__mcScene) { resolve(window.__mcScene); return; }
+    const s = document.createElement('script');
+    s.src = sceneUrl;
+    s.async = true;
+    s.onload = () => resolve(window.__mcScene || null);
+    s.onerror = () => resolve(null);
+    document.head.appendChild(s);
+  });
+}
 
 // Janelas (progresso do hero) em que cada legenda técnica aparece.
 // No celular elas se revezam (2–3 por vez) para não se sobreporem.
@@ -25,25 +39,40 @@ export function initStage() {
   let renderer = null;
   let heroP = 0, heroActive = true, outroActive = false, outroQ = 0;
   let labelSizes = [];
+  let inited = false, heroTl = null, heroST = null, outroST = null;
+
+  const setStageClass = () => {
+    const html = document.documentElement.classList;
+    html.toggle('has-stage', !!renderer);
+    html.toggle('no-stage', !renderer);
+  };
 
   const ready = (async () => {
     if (env.reducedMotion) {
-      document.documentElement.classList.add('no-stage');
+      setStageClass();
       return null;
     }
+    let r = null;
     try {
-      if (FRAMES) renderer = await (await import('./hero-frames.js')).createFrameRenderer(canvas, FRAMES, env);
-      else if (env.webgl && !env.lowPower) renderer = (await import('./infra-scene.js')).createInfraScene(canvas, env);
+      if (FRAMES) r = await (await import('./hero-frames.js')).createFrameRenderer(canvas, FRAMES, env);
+      else if (env.webgl && !env.lowPower) {
+        const scene = await loadScene();
+        if (scene) r = await scene.createInfraScene(canvas, env);
+      }
+      if (r) {
+        await r.ready;
+        r.setHero(0);
+        r.render();
+      }
     } catch (err) {
       console.warn('[MultiCloud] Cena 3D indisponível — usando a versão com imagem.', err);
-      renderer = null;
+      r = null;
     }
-    if (renderer) {
-      await renderer.ready;
-      renderer.setHero(0);
-      renderer.render();
-    }
-    document.documentElement.classList.add(renderer ? 'has-stage' : 'no-stage');
+    renderer = r;
+    setStageClass();
+    // A abertura não espera a cena além do seu próprio tempo: se ela chegar depois,
+    // entra em um momento em que a troca não é percebida.
+    if (inited && renderer) attachLate();
     return renderer;
   })();
 
@@ -110,12 +139,16 @@ export function initStage() {
     return tl;
   }
 
-  function init() {
-    measureLabels();
-    if (env.reducedMotion) return;
-
+  // Linha do tempo do hero ligada à rolagem. É refeita se a cena 3D chegar depois da abertura.
+  function setupHero() {
+    if (heroTl) {
+      heroST.kill();
+      heroTl.progress(0).kill();
+      gsap.set(photoImg, { clearProps: 'transform,filter' });
+    }
     const tl = buildHeroTimeline();
-    ScrollTrigger.create({
+    heroTl = tl;
+    heroST = ScrollTrigger.create({
       trigger: hero,
       start: 'top top',
       end: 'bottom bottom',
@@ -130,8 +163,8 @@ export function initStage() {
       applyCanvasOpacity();
     });
 
-    if (renderer && contactIntro) {
-      ScrollTrigger.create({
+    if (renderer && contactIntro && !outroST) {
+      outroST = ScrollTrigger.create({
         trigger: contactIntro,
         start: 'top bottom',
         end: 'bottom top',
@@ -144,6 +177,28 @@ export function initStage() {
         },
       });
     }
+  }
+
+  // Cena pronta depois da abertura: troca a versão com imagem pela 3D no topo do hero
+  // (a foto ainda cobre o canvas) ou depois dele, nunca no meio da narrativa.
+  function attachLate() {
+    const swap = () => {
+      if (heroActive && heroP >= 0.03) return;
+      gsap.ticker.remove(swap);
+      renderer.resize();
+      setupHero();
+      applyCanvasOpacity();
+    };
+    gsap.ticker.add(swap);
+  }
+
+  function init() {
+    measureLabels();
+    inited = true;
+    setStageClass();
+    if (env.reducedMotion) return;
+
+    setupHero();
 
     gsap.ticker.add(() => {
       if (!renderer) return;

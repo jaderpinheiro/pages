@@ -14,13 +14,14 @@ O site abre de duas formas:
 ```bash
 npm install
 npm run vendor   # copia GSAP, ScrollTrigger, SplitText, Lenis e EmailJS para assets/vendor
-npm run build    # empacota assets/js/*.js + Three.js em assets/js/app.min.js
+npm run build    # empacota assets/js/*.js em app.min.js e a cena 3D (Three.js) em scene.min.js
 npm run dev      # servidor local + reempacotamento automático
 ```
 
-**Importante:** o navegador carrega `assets/js/app.min.js`. Depois de editar qualquer arquivo em `assets/js/`,
-rode `npm run build` (ou mantenha o `npm run dev` rodando). O empacotamento existe porque o navegador bloqueia
-módulos JavaScript quando o `index.html` é aberto direto do disco (`file://`).
+**Importante:** o navegador carrega `assets/js/app.min.js`, que busca `assets/js/scene.min.js` (cena 3D) durante
+a abertura. Depois de editar qualquer arquivo em `assets/js/`, rode `npm run build` (ou mantenha o `npm run dev`
+rodando) e publique **os dois** arquivos. O empacotamento existe porque o navegador bloqueia módulos JavaScript
+quando o `index.html` é aberto direto do disco (`file://`).
 
 Para publicar, envie **apenas** `index.html` e a pasta `assets/`. As pastas `fontes/`, `tools/`, `_backup/`
 e `node_modules/` não vão para o servidor.
@@ -31,7 +32,9 @@ e `node_modules/` não vão para o servidor.
 | --- | --- |
 | `index.html` | Todo o conteúdo em HTML real (indexável, acessível, editável) |
 | `assets/css/main.css` | Design system (tokens de cor e tipografia) e todas as seções |
-| `assets/js/app.min.js` | **Gerado** por `npm run build` — é o arquivo que o navegador carrega |
+| `assets/js/app.min.js` | **Gerado** por `npm run build` — é o arquivo que o navegador carrega (site, sem o Three.js) |
+| `assets/js/scene.min.js` | **Gerado** por `npm run build` — cena 3D (Three.js), buscada pelo `app.min.js` em paralelo à abertura |
+| `assets/js/scene-entry.js` | Entrada do pacote da cena 3D |
 | `assets/js/main.js` | Inicialização: Lenis + GSAP, abertura, palco 3D, seções |
 | `assets/js/loader.js` | Abertura: o símbolo e o letreiro voam e se encaixam no logo da navegação |
 | `assets/js/infra.js` | Palco do hero (foto → gêmeo 3D → vista explodida → mergulho) e remontagem no contato |
@@ -132,6 +135,21 @@ npm run frames -- caminho/para/hero.mp4
 - `?lite` força a versão leve (sem WebGL), a mesma usada em aparelhos modestos ou com economia de dados.
 - `?nosmooth` desliga a rolagem suave; `?debug` expõe o estado em `window.__mc`.
 - `prefers-reduced-motion` desliga abertura, rolagem cinematográfica, grão e parallax, e mantém todo o conteúdo.
+
+## Desempenho
+
+- **Abertura:** o `app.min.js` tem ~13 KB comprimido; o Three.js (~146 KB) fica no `scene.min.js` e é baixado
+  enquanto a animação de abertura roda. A abertura espera a cena no máximo 2,4 s; se ela chegar depois, entra
+  no topo do hero ou depois dele, sem interromper a narrativa (`attachLate` em `infra.js`).
+- **Celulares e tablets** (`env.mobile` / `env.tablet`): cena 3D sem bloom e sem multiamostragem, com no máximo
+  1,5x de densidade de pixels. Em qualquer aparelho, se a taxa de quadros cair, a cena reduz a resolução
+  sozinha (`adaptResolution` em `infra-scene.js`). Em telas de toque o grão fica parado e os desfoques de
+  fundo (cabeçalho, menu, legendas) dão lugar a fundos mais fechados.
+- **Imagens:** as que ficam abaixo da dobra são `loading="lazy"` e passam a ser buscadas em segundo plano logo
+  depois da abertura (`warmImages` em `main.js`), para não aparecerem atrasadas na rolagem.
+- **Publicação pelo Inline Sync:** o serviço precisa reescrever também `srcset`/`imagesrcset`; sem isso as
+  imagens responsivas apontam para o domínio do WordPress e dão 404. O `onerror` nessas imagens remove o
+  `srcset` e cai no `src` como rede de segurança.
 
 ## Imagens
 

@@ -217,7 +217,8 @@
         <picture class="hero__photo" id="heroPhoto">
           <img src="assets/img/visuais/hero-infraestrutura-1600.webp"
                srcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w, assets/img/visuais/hero-infraestrutura-2400.webp 2400w"
-               sizes="100vw" width="2400" height="1340" alt="Módulo de infraestrutura em grafite com indicadores de status em azul, suspenso em ambiente escuro" fetchpriority="high">
+               sizes="100vw" width="2400" height="1340" alt="Módulo de infraestrutura em grafite com indicadores de status em azul, suspenso em ambiente escuro" fetchpriority="high"
+               onerror="this.onerror=null;this.removeAttribute('srcset')">
         </picture>
         <div class="hero__scan" id="heroScan" aria-hidden="true"><span></span></div>
         <div class="hero__shade" aria-hidden="true"></div>
@@ -353,7 +354,8 @@
           <img src="assets/img/visuais/datacenter-corredor-1600.webp"
                srcset="assets/img/visuais/datacenter-corredor-960.webp 960w, assets/img/visuais/datacenter-corredor-1600.webp 1600w, assets/img/visuais/datacenter-corredor-2400.webp 2400w"
                sizes="100vw" width="2400" height="1340" loading="lazy" decoding="async"
-               alt="Corredor de datacenter com racks em grafite e indicadores de status em azul">
+               alt="Corredor de datacenter com racks em grafite e indicadores de status em azul"
+               onerror="this.onerror=null;this.removeAttribute('srcset')">
         </div>
         <figcaption class="band__caption container">
           <span class="band__quote">Somos especialistas que ouvem e entendem o seu negócio.</span>
@@ -381,7 +383,7 @@
           <article class="sol" id="cloud-premium" aria-labelledby="sol1">
             <div class="sol__visual sol__visual--photo" aria-hidden="true">
               <div class="sol__photo">
-                <img src="assets/img/visuais/hero-infraestrutura-1600.webp" srcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="893" alt="" loading="lazy" decoding="async">
+                <img src="assets/img/visuais/hero-infraestrutura-1600.webp" srcset="assets/img/visuais/hero-infraestrutura-960.webp 960w, assets/img/visuais/hero-infraestrutura-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="893" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.removeAttribute('srcset')">
               </div>
               <span class="sol__tag">Ambiente exclusivo</span>
             </div>
@@ -898,8 +900,9 @@
   <!-- Envio do formulário (EmailJS SDK v4 — mesma conta, serviço e template do site atual) -->
   <script src="assets/vendor/email.min.js" async></script>
 
-  <!-- Site (assets/js/*.js + Three.js empacotados por `npm run build`): arquivo comum, sem módulos,
-       para funcionar também abrindo o index.html direto do disco -->
+  <!-- Site (assets/js/*.js empacotados por `npm run build`): arquivo comum, sem módulos, para funcionar
+       também abrindo o index.html direto do disco. A cena 3D (Three.js) fica em assets/js/scene.min.js
+       e é buscada pelo próprio app.min.js durante a abertura. -->
   <script src="assets/js/app.min.js" defer></script>
 </body>
 </html>

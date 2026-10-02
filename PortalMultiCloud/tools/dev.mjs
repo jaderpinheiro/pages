@@ -1,7 +1,6 @@
 // Desenvolvimento: reempacota o JavaScript a cada alteração e serve o site em localhost.
 import * as esbuild from 'esbuild';
-import { options } from './build.mjs';
+import { builds } from './build.mjs';
 
-const ctx = await esbuild.context(options);
-await ctx.watch();
+for (const options of builds) await (await esbuild.context(options)).watch();
 await import('./serve.mjs');

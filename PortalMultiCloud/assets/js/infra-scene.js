@@ -119,11 +119,17 @@ function makeTextures(maxAniso) {
 }
 
 // ---------------------------------------------------------------------------
-export function createInfraScene(canvas, env) {
+// Devolve o controle ao navegador entre as etapas pesadas da montagem, para a
+// animação de abertura continuar fluida enquanto a cena é construída.
+const breathe = () => new Promise((r) => setTimeout(r, 0));
+
+export async function createInfraScene(canvas, env) {
   const isMobile = env.mobile;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile, powerPreference: 'high-performance', alpha: false });
+  // Celulares e tablets: GPU móvel. Sem antisserrilhado por multiamostragem e sem bloom.
+  const mobileGpu = isMobile || env.tablet;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobileGpu, powerPreference: 'high-performance', alpha: false });
   renderer.setClearColor(0x000000, 1);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 1.75));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobileGpu ? 1.5 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -133,9 +139,11 @@ export function createInfraScene(canvas, env) {
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environmentIntensity = 0.85;
+  await breathe();
 
   const camera = new THREE.PerspectiveCamera(26, 16 / 9, 0.03, 120);
   const tex = makeTextures(renderer.capabilities.getMaxAnisotropy());
+  await breathe();
 
   // ---------------- Materiais ----------------
   const mat = {
@@ -378,9 +386,11 @@ export function createInfraScene(canvas, env) {
   back.position.set(0, -0.3, -4.2);
   scene.add(back);
 
+  await breathe();
+
   // ---------------- Pós-processamento (bloom só no desktop) ----------------
   let composer = null, bloom = null;
-  const composerReady = isMobile ? Promise.resolve() : Promise.all([
+  const composerReady = mobileGpu ? Promise.resolve() : Promise.all([
     import('three/addons/postprocessing/EffectComposer.js'),
     import('three/addons/postprocessing/RenderPass.js'),
     import('three/addons/postprocessing/UnrealBloomPass.js'),
@@ -522,9 +532,26 @@ export function createInfraScene(canvas, env) {
     }
   }
 
+  // Resolução adaptativa: se o aparelho não sustenta a taxa de quadros, a cena passa a
+  // ser desenhada com menos pixels (nunca abaixo de 1x). Não volta a subir, para não oscilar.
+  let slowFrames = 0, frameAvg = 16.7;
+  function adaptResolution(frameMs) {
+    if (frameMs > 120) return; // pausa entre trechos renderizados, não é quadro lento
+    frameAvg += (frameMs - frameAvg) * 0.1;
+    slowFrames = frameAvg > 24 ? slowFrames + 1 : 0;
+    if (slowFrames < 40) return;
+    slowFrames = 0;
+    frameAvg = 16.7;
+    const ratio = renderer.getPixelRatio();
+    if (ratio <= 1) return;
+    renderer.setPixelRatio(Math.max(1, ratio - 0.25));
+    resize();
+  }
+
   const q4 = new THREE.Quaternion(), s1 = V(1, 1, 1), pos = V(), dir = V(), rot = new THREE.Euler();
   let last = performance.now();
   function render(now = performance.now()) {
+    adaptResolution(now - last);
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     const time = now / 1000;
@@ -603,9 +630,15 @@ export function createInfraScene(canvas, env) {
   resize();
   setHero(0);
 
+  // Compila os shaders sem travar a página (quando o navegador permite); sem isso a
+  // compilação aconteceria toda de uma vez no primeiro quadro.
+  const ready = composerReady
+    .then(() => renderer.compileAsync(scene, camera))
+    .catch(() => {});
+
   return {
     kind: 'webgl',
-    ready: composerReady,
+    ready,
     setHero,
     setOutro,
     render,

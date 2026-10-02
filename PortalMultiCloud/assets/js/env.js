@@ -15,14 +15,26 @@ function hasWebGL() {
 }
 
 const conn = navigator.connection || {};
+const mobile = mq('(max-width: 720px)');
+const touch = mq('(hover: none), (pointer: coarse)');
+
+// Endereço do app.min.js em execução: a cena 3D (scene.min.js) é buscada na mesma pasta,
+// qualquer que seja o servidor que entrega os arquivos.
+const self = document.currentScript?.src || '';
+export const sceneUrl = /app\.min\.js(?=$|[?#])/.test(self)
+  ? self.replace(/app\.min\.js(?=$|[?#])/, 'scene.min.js')
+  : 'assets/js/scene.min.js';
 
 export const env = {
   // Diagnóstico: ?nosmooth desliga a rolagem suave; ?debug expõe o estado em window.__mc
   smooth: !params.has('nosmooth'),
   debug: params.has('debug'),
   reducedMotion: mq('(prefers-reduced-motion: reduce)'),
-  mobile: mq('(max-width: 720px)'),
-  touch: mq('(hover: none), (pointer: coarse)'),
+  mobile,
+  touch,
+  // Tablets: tela grande com GPU de celular. Recebem a cena 3D sem bloom e com menos pixels.
+  tablet: touch && !mobile,
+  saveData: conn.saveData === true,
   finePointer: mq('(hover: hover) and (pointer: fine)'),
   webgl: hasWebGL(),
   // Dispositivos modestos ou economia de dados recebem a versão leve (imagem + narrativa).

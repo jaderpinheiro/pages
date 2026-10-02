@@ -16,7 +16,7 @@ export function createLoader() {
   const navLogo = $('#navLogo');
   if (!el || env.reducedMotion) {
     el?.remove();
-    return { progress() {}, finish: async () => {} };
+    return { progress() {}, finish: async (onOpen) => { onOpen?.(); } };
   }
 
   const count = $('#loaderCount');
@@ -27,10 +27,10 @@ export function createLoader() {
   gsap.set(navLogo, { autoAlpha: 0 });
 
   const intro = gsap.timeline()
-    .to('.loader__ring circle', { strokeDashoffset: 0, duration: 1.9, ease: 'power2.inOut' }, 0)
-    .to('.loader__symbol', { maskPosition: '0% 0', webkitMaskPosition: '0% 0', duration: 1.3, ease: 'power2.inOut' }, 0.15)
-    .to(word, { clipPath: 'inset(0 0% 0 0)', duration: 1.1, ease: 'expo.inOut' }, 0.6)
-    .to('.loader__tag', { autoAlpha: 1, duration: 0.8 }, 1.1);
+    .to('.loader__ring circle', { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' }, 0)
+    .to('.loader__symbol', { maskPosition: '0% 0', webkitMaskPosition: '0% 0', duration: 1.1, ease: 'power2.inOut' }, 0.1)
+    .to(word, { clipPath: 'inset(0 0% 0 0)', duration: 0.95, ease: 'expo.inOut' }, 0.45)
+    .to('.loader__tag', { autoAlpha: 1, duration: 0.6 }, 0.9);
 
   const render = () => {
     const v = Math.round(shown.v);
@@ -47,7 +47,7 @@ export function createLoader() {
       target = 100;
       await Promise.all([
         intro.then(),
-        new Promise((r) => gsap.to(shown, { v: 100, duration: 0.7, ease: 'power2.out', onUpdate: render, onComplete: r, overwrite: true })),
+        new Promise((r) => gsap.to(shown, { v: 100, duration: 0.5, ease: 'power2.out', onUpdate: render, onComplete: r, overwrite: true })),
       ]);
 
       // FLIP duplo: símbolo e letreiro voam até a posição exata de cada parte
@@ -76,9 +76,9 @@ export function createLoader() {
           .set(symbol, { maskImage: 'none', webkitMaskImage: 'none' }, 0)
           .to(symbol, toSymbol, 0.2)
           .to(word, toWord, 0.25)
-          .to('.loader__shutter--top', { yPercent: -100, duration: 1.3, ease: 'expo.inOut' }, 0.55)
-          .to('.loader__shutter--bottom', { yPercent: 100, duration: 1.3, ease: 'expo.inOut' }, 0.55)
-          .call(() => onOpen?.(), null, 0.7)
+          .to('.loader__shutter--top', { yPercent: -100, duration: 1.1, ease: 'expo.inOut' }, 0.5)
+          .to('.loader__shutter--bottom', { yPercent: 100, duration: 1.1, ease: 'expo.inOut' }, 0.5)
+          .call(() => onOpen?.(), null, 0.6)
           .set(navLogo, { autoAlpha: 1 }, 1.42)
           .set([word, symbol], { autoAlpha: 0 }, 1.43);
       });
