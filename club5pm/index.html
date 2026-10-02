@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Club 5PM · Encontros por convite para mulheres em Goiânia, às cinco da tarde</title>
 <meta name="description" content="O Club 5PM é um clube de encontros presenciais, por convite, para mulheres empreendedoras e profissionais de Goiânia. Conversas, conexões e oportunidades, sempre às cinco da tarde.">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0B0A09">
-<!-- [A CONFIRMAR: domínio] → <link rel="canonical" href="https://DOMINIO/"> -->
+<link rel="canonical" href="https://club5pm.com.br/">
 <link rel="icon" href="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Club 5PM">
+<meta property="og:url" content="https://club5pm.com.br/">
 <meta property="og:title" content="Club 5PM · Encontros por convite, às cinco da tarde">
 <meta property="og:description" content="Um clube de encontros para mulheres empreendedoras e profissionais de Goiânia. Quando mulheres se encontram de verdade, ninguém sai exatamente como chegou.">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/og/club5pm-og.jpg">
@@ -33,38 +34,137 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "#organizacao",
+      "@id": "https://club5pm.com.br/#organizacao",
       "name": "Club 5PM",
       "alternateName": "CLUB 5PM",
       "description": "Clube de encontros presenciais, por convite, para mulheres empreendedoras e profissionais de Goiânia. Os encontros acontecem às cinco da tarde.",
       "foundingDate": "2025-08",
       "slogan": "Quando mulheres se encontram de verdade, ninguém sai exatamente como chegou.",
-      "areaServed": { "@type": "City", "name": "Goiânia" },
-      "address": { "@type": "PostalAddress", "addressLocality": "Goiânia", "addressRegion": "GO", "addressCountry": "BR" },
-      "sameAs": ["https://www.instagram.com/club5pm.oficial/"],
-      "founder": [
-        { "@type": "Person", "name": "Leine Martins", "jobTitle": "Sócia e diretora de estratégia", "sameAs": "https://www.instagram.com/leinecostamartins/" },
-        { "@type": "Person", "name": "Dra. Luzineide Anaya", "sameAs": "https://www.instagram.com/draluzineidenutrologa/" },
-        { "@type": "Person", "name": "Dayane Alho", "sameAs": "https://www.instagram.com/dayanealho/" },
-        { "@type": "Person", "name": "Andreza Pedrozo", "sameAs": "https://www.instagram.com/dezamarques/" }
+      "areaServed": {
+        "@type": "City",
+        "name": "Goiânia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Goiânia",
+        "addressRegion": "GO",
+        "addressCountry": "BR"
+      },
+      "sameAs": [
+        "https://www.instagram.com/club5pm.oficial/"
       ],
-      "contactPoint": { "@type": "ContactPoint", "contactType": "convites e patrocínio", "url": "https://ig.me/m/club5pm.oficial", "availableLanguage": "pt-BR" }
+      "founder": [
+        {
+          "@type": "Person",
+          "@id": "https://club5pm.com.br/leine/#pessoa",
+          "name": "Leine Martins",
+          "jobTitle": "Sócia e diretora de estratégia",
+          "url": "https://club5pm.com.br/leine/",
+          "sameAs": "https://www.instagram.com/leinecostamartins/"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://club5pm.com.br/luzineide/#pessoa",
+          "name": "Dra. Luzineide Anaya",
+          "url": "https://club5pm.com.br/luzineide/",
+          "sameAs": "https://www.instagram.com/draluzineidenutrologa/"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://club5pm.com.br/dayane/#pessoa",
+          "name": "Dayane Alho",
+          "url": "https://club5pm.com.br/dayane/",
+          "sameAs": "https://www.instagram.com/dayanealho/"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://club5pm.com.br/andreza/#pessoa",
+          "name": "Andreza Pedrozo",
+          "url": "https://club5pm.com.br/andreza/",
+          "sameAs": "https://www.instagram.com/dezamarques/"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "convites e patrocínio",
+        "url": "https://ig.me/m/club5pm.oficial",
+        "availableLanguage": "pt-BR"
+      },
+      "url": "https://club5pm.com.br/",
+      "logo": "https://cdn.jsdelivr.net/gh/jaderpinheiro/pages@main/club5pm/assets/favicon.svg"
     },
     {
       "@type": "WebSite",
       "name": "Club 5PM",
       "inLanguage": "pt-BR",
-      "publisher": { "@id": "#organizacao" }
+      "publisher": {
+        "@id": "https://club5pm.com.br/#organizacao"
+      },
+      "@id": "https://club5pm.com.br/#site",
+      "url": "https://club5pm.com.br/"
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Como faço para participar do Club 5PM?", "acceptedAnswer": { "@type": "Answer", "text": "Os encontros são fechados e por convite, com vagas limitadas. Para receber um convite, fale com o Club 5PM pelo direct do Instagram @club5pm.oficial." } },
-        { "@type": "Question", "name": "Onde acontecem os encontros?", "acceptedAnswer": { "@type": "Answer", "text": "Em Goiânia (GO). O local muda a cada edição e é informado às convidadas." } },
-        { "@type": "Question", "name": "Que horas começam os encontros?", "acceptedAnswer": { "@type": "Answer", "text": "Às cinco da tarde, 17h. É daí que vem o nome do clube." } },
-        { "@type": "Question", "name": "Para quem é o Club 5PM?", "acceptedAnswer": { "@type": "Answer", "text": "Para mulheres empreendedoras e profissionais que querem crescer em rede, com conversas, trocas e novas conexões." } },
-        { "@type": "Question", "name": "Minha marca pode patrocinar um encontro?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Marcas que acreditam em conexão, crescimento e colaboração podem patrocinar os próximos encontros. O contato é pelo direct do Instagram @club5pm.oficial." } }
-      ]
+        {
+          "@type": "Question",
+          "name": "Como faço para participar do Club 5PM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Os encontros são fechados e por convite, com vagas limitadas. Para receber um convite, fale com o Club 5PM pelo direct do Instagram @club5pm.oficial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Onde acontecem os encontros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Em Goiânia (GO). O local muda a cada edição e é informado às convidadas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que horas começam os encontros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Às cinco da tarde, 17h. É daí que vem o nome do clube."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Para quem é o Club 5PM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para mulheres empreendedoras e profissionais que querem crescer em rede, com conversas, trocas e novas conexões."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Minha marca pode patrocinar um encontro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. Marcas que acreditam em conexão, crescimento e colaboração podem patrocinar os próximos encontros. O contato é pelo direct do Instagram @club5pm.oficial."
+          }
+        }
+      ],
+      "@id": "https://club5pm.com.br/#perguntas",
+      "isPartOf": {
+        "@id": "https://club5pm.com.br/#site"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://club5pm.com.br/#pagina",
+      "url": "https://club5pm.com.br/",
+      "name": "Club 5PM · Encontros por convite para mulheres em Goiânia",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://club5pm.com.br/#site"
+      },
+      "about": {
+        "@id": "https://club5pm.com.br/#organizacao"
+      },
+      "dateModified": "2026-10-02"
     }
   ]
 }
@@ -169,7 +269,7 @@
           </figure>
           <div class="fundadora__texto">
             <p class="fundadora__papel">Fundadora</p>
-            <h3 class="fundadora__nome">Leine Martins</h3>
+            <h3 class="fundadora__nome"><a href="https://club5pm.com.br/leine/" style="color:inherit;text-decoration:none" title="Cartão de visita de Leine Martins">Leine Martins</a></h3>
             <p class="fundadora__bio">Empresária, palestrante e conselheira. É sócia e diretora de estratégia do Club 5PM, onde ajuda a desenhar o caminho de cada encontro.</p>
             <a class="fundadora__insta" href="https://www.instagram.com/leinecostamartins/" target="_blank" rel="noopener" aria-label="Instagram de Leine Martins: @leinecostamartins"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><span class="fundadora__arroba">@leinecostamartins</span><span class="fundadora__rede" aria-hidden="true">Instagram</span></a>
           </div>
@@ -183,7 +283,7 @@
           </figure>
           <div class="fundadora__texto">
             <p class="fundadora__papel">Fundadora</p>
-            <h3 class="fundadora__nome">Dra. Luzineide Anaya</h3>
+            <h3 class="fundadora__nome"><a href="https://club5pm.com.br/luzineide/" style="color:inherit;text-decoration:none" title="Cartão de visita de Dra. Luzineide Anaya">Dra. Luzineide Anaya</a></h3>
             <p class="fundadora__bio">Nutróloga em Goiânia. Sua trajetória é construída com ciência, escuta ativa e um olhar humano: cada corpo é único, e cada história também.</p>
             <a class="fundadora__insta" href="https://www.instagram.com/draluzineidenutrologa/" target="_blank" rel="noopener" aria-label="Instagram de Dra. Luzineide Anaya: @draluzineidenutrologa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><span class="fundadora__arroba">@draluzineidenutrologa</span><span class="fundadora__rede" aria-hidden="true">Instagram</span></a>
           </div>
@@ -197,7 +297,7 @@
           </figure>
           <div class="fundadora__texto">
             <p class="fundadora__papel">Fundadora</p>
-            <h3 class="fundadora__nome">Dayane Alho</h3>
+            <h3 class="fundadora__nome"><a href="https://club5pm.com.br/dayane/" style="color:inherit;text-decoration:none" title="Cartão de visita de Dayane Alho">Dayane Alho</a></h3>
             <p class="fundadora__bio">Sempre enxergou a comunicação como uma ponte entre marcas e pessoas. Por trás de cada negócio, vê uma mulher, uma história e um sonho querendo ser visto.</p>
             <a class="fundadora__insta" href="https://www.instagram.com/dayanealho/" target="_blank" rel="noopener" aria-label="Instagram de Dayane Alho: @dayanealho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><span class="fundadora__arroba">@dayanealho</span><span class="fundadora__rede" aria-hidden="true">Instagram</span></a>
           </div>
@@ -211,7 +311,7 @@
           </figure>
           <div class="fundadora__texto">
             <p class="fundadora__papel">Fundadora</p>
-            <h3 class="fundadora__nome">Andreza Pedrozo</h3>
+            <h3 class="fundadora__nome"><a href="https://club5pm.com.br/andreza/" style="color:inherit;text-decoration:none" title="Cartão de visita de Andreza Pedrozo">Andreza Pedrozo</a></h3>
             <p class="fundadora__bio">Sua história é sobre gente, verdade e escolhas conscientes: vender com o coração e acreditar no que faz.</p>
             <a class="fundadora__insta" href="https://www.instagram.com/dezamarques/" target="_blank" rel="noopener" aria-label="Instagram de Andreza Pedrozo: @dezamarques"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><span class="fundadora__arroba">@dezamarques</span><span class="fundadora__rede" aria-hidden="true">Instagram</span></a>
           </div>

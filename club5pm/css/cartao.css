@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Club 5PM · cartão de visita digital das fundadoras
+   Folha própria e leve (sem GSAP/Lenis): o cartão abre no celular, por link ou QR code.
+   Tokens do manual Pragmma. Dourado nunca sobre fundo claro.
+   ========================================================================== */
+:root {
+  --tinta: #0B0A09; --papel: #F6F1E7; --champagne: #EFE3CC;
+  --latao-claro: #D8A65A; --latao: #C08B3E; --vinho: #5B1F2A;
+  --f-display: "Marcellus", "Times New Roman", serif;
+  --f-editorial: "Instrument Serif", "Times New Roman", serif;
+  --f-texto: "Jost", "Segoe UI", system-ui, sans-serif;
+  --margem: clamp(1.25rem, 5vw, 3rem);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100svh; background: var(--tinta); color: var(--papel);
+  font: 400 clamp(1.0625rem, 1rem + .3vw, 1.1875rem)/1.6 var(--f-texto);
+  -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, p, figure, blockquote { margin: 0; }
+:focus-visible { outline: 3px solid var(--latao-claro); outline-offset: 4px; border-radius: 4px; }
+
+/* Fundo: luz das cinco da tarde + poeira dourada */
+.luz { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(70% 45% at 50% 12%, rgba(216,166,90,.20), transparent 70%),
+    radial-gradient(60% 40% at 80% 95%, rgba(91,31,42,.28), transparent 70%); }
+.luz::after { content: ""; position: absolute; inset: -10%;
+  background: radial-gradient(38% 30% at 50% 22%, rgba(216,166,90,.16), transparent 70%);
+  animation: respiro 8s ease-in-out infinite alternate; }
+@keyframes respiro { from { opacity: .45; transform: scale(1); } to { opacity: 1; transform: scale(1.12); } }
+.poeira { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+.cartao { position: relative; z-index: 1; width: min(100% - 2 * var(--margem), 1060px); margin: 0 auto;
+  padding: clamp(1.5rem, 4vh, 3rem) 0 clamp(2.5rem, 6vh, 4rem); }
+
+/* Marca */
+.marca { display: flex; align-items: center; justify-content: center; gap: .8rem; text-decoration: none; width: max-content; margin: 0 auto clamp(1.6rem, 4vh, 2.6rem); min-height: 48px; }
+.marca svg { width: 36px; height: 36px; color: var(--latao-claro); }
+.marca span { font: 400 1.3rem/1 var(--f-display); letter-spacing: .14em; }
+.marca small { display: block; font: 500 .58rem/1 var(--f-texto); letter-spacing: .55em; color: var(--latao-claro); margin-top: .32rem; text-align: center; padding-left: .55em; }
+
+.palco { display: grid; gap: clamp(1.6rem, 4vw, 4.5rem); align-items: center; }
+
+/* Retrato em arco */
+.retrato { position: relative; width: min(66vw, 290px); margin: 0 auto; aspect-ratio: 3 / 4; overflow: hidden;
+  border-radius: 999px 999px 3px 3px; background: #15120f; isolation: isolate;
+  animation: abrir 1.5s cubic-bezier(.2,.7,.2,1) both; box-shadow: 0 30px 80px -30px rgba(216,166,90,.35); }
+.retrato img { width: 100%; height: 100%; object-fit: cover; animation: assentar 2.2s cubic-bezier(.2,.7,.2,1) both; }
+.retrato::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,10,9,.45), transparent 40%); }
+.retrato::after { content: ""; position: absolute; inset: 10px; z-index: 2; border: 1px solid rgba(216,166,90,.6); border-radius: 999px 999px 0 0; }
+@keyframes abrir { from { clip-path: inset(100% 0 0 0 round 999px 999px 3px 3px); } to { clip-path: inset(0 0 0 0 round 999px 999px 3px 3px); } }
+@keyframes assentar { from { transform: scale(1.18); } to { transform: scale(1); } }
+
+/* Apresentação */
+.fala { text-align: center; }
+.sobe { animation: sobe 1s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(.35s + var(--i, 0) * .12s); }
+@keyframes sobe { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.rotulo { font: 500 .8rem/1.3 var(--f-texto); letter-spacing: .32em; text-transform: uppercase; color: var(--latao-claro); margin-bottom: .9rem; }
+.nome { font: 400 clamp(2.6rem, 1.6rem + 5vw, 4.6rem)/1.02 var(--f-editorial); letter-spacing: -.005em; }
+.cargo { font: italic 400 clamp(1.25rem, 1.1rem + .6vw, 1.6rem)/1.3 var(--f-editorial); color: var(--champagne); margin-top: .55rem; }
+.filete { width: 150px; height: 1px; margin: 1.5rem auto; background: linear-gradient(90deg, transparent, var(--latao-claro), transparent); position: relative; }
+.filete::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; transform: rotate(45deg); border: 1px solid var(--latao-claro); background: var(--tinta); }
+.apresentacao { font-size: 1.12em; line-height: 1.6; color: var(--champagne); max-width: 34ch; margin: 0 auto; }
+.apresentacao strong { color: var(--papel); font-weight: 500; }
+.convite { margin: 1.4rem auto 0; max-width: 32ch; color: var(--papel); }
+
+.acoes { display: grid; gap: .8rem; margin: 1.7rem auto 0; max-width: 380px; }
+.botao { display: flex; align-items: center; justify-content: center; gap: .65rem; min-height: 58px; padding: .6rem 1.4rem; border-radius: 999px;
+  font: 500 1.03rem/1.2 var(--f-texto); letter-spacing: .02em; text-decoration: none; text-align: center; cursor: pointer;
+  transition: transform .35s, box-shadow .35s, background .35s, color .35s, border-color .35s; }
+.botao svg { width: 22px; height: 22px; flex: none; }
+.botao--ouro { background: var(--latao-claro); color: var(--tinta); position: relative; overflow: hidden; }
+.botao--ouro::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%); transform: translateX(-120%); animation: brilho 5.5s ease-in-out 2s infinite; }
+@keyframes brilho { 0%, 60% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+.botao--ouro:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -14px rgba(216,166,90,.75); }
+.botao--contorno { border: 1px solid rgba(216,166,90,.6); color: var(--papel); }
+.botao--contorno svg { color: var(--latao-claro); transition: color .35s; }
+.botao--contorno:hover { background: var(--latao-claro); border-color: var(--latao-claro); color: var(--tinta); }
+.botao--contorno:hover svg { color: var(--tinta); }
+.botao--vinho { background: var(--vinho); color: var(--papel); }
+.botao--vinho:hover { background: var(--tinta); transform: translateY(-2px); }
+
+/* Convite para marcas: cartão papel + vinho, como a peça de patrocínio do manual */
+.marcas { position: relative; margin-top: clamp(2.6rem, 6vh, 4.5rem); background: var(--papel); color: var(--tinta);
+  padding: clamp(2rem, 5vw, 3.6rem); border-radius: 3px; }
+.marcas::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(91,31,42,.35); pointer-events: none; }
+.marcas__topo { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--vinho); padding-bottom: 1.1rem; margin-bottom: 1.6rem; }
+.marcas__rotulo { font: 500 .82rem/1 var(--f-texto); letter-spacing: .32em; text-transform: uppercase; color: var(--vinho); }
+.marcas__topo svg { width: 40px; height: 40px; color: var(--vinho); }
+.marcas h2 { font: 400 clamp(2rem, 1.4rem + 3vw, 3.3rem)/1.06 var(--f-editorial); margin-bottom: 1rem; }
+.marcas p { color: #3a3531; max-width: 52ch; margin-bottom: 1.6rem; }
+.marcas .botao { position: relative; z-index: 1; width: 100%; max-width: 420px; }
+
+/* Rodapé do cartão */
+.fim { margin-top: 2.4rem; display: grid; gap: 1rem; justify-items: center; text-align: center; }
+.compartilhar { background: none; border: 0; color: var(--champagne); font: 500 1rem/1 var(--f-texto); min-height: 48px; padding: 0 1rem; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .6rem; text-decoration: underline; text-decoration-color: var(--latao); text-underline-offset: 6px; }
+.compartilhar svg { width: 20px; height: 20px; color: var(--latao-claro); }
+.fim a.site { color: var(--papel); text-decoration-color: var(--latao); text-underline-offset: 6px; min-height: 48px; display: inline-flex; align-items: center; }
+.credito { font-size: .82rem; color: #b9ad97; margin-top: .6rem; }
+.credito a { color: inherit; text-decoration: none; }
+.credito a:hover { color: var(--latao-claro); }
+
+/* Tablet e computador: retrato à esquerda, apresentação à direita */
+@media (min-width: 820px) {
+  .palco { grid-template-columns: minmax(280px, 400px) 1fr; }
+  .retrato { width: 100%; }
+  .fala { text-align: left; }
+  .filete { margin-left: 0; background: linear-gradient(90deg, var(--latao-claro), transparent); }
+  .filete::after { left: 0; margin-left: 0; }
+  .apresentacao, .convite { margin-left: 0; max-width: 40ch; }
+  .acoes { margin-left: 0; grid-template-columns: 1fr 1fr; max-width: 560px; }
+  .marcas { display: grid; grid-template-columns: 1fr auto; gap: 0 3rem; align-items: end; }
+  .marcas__topo { grid-column: 1 / -1; }
+  .marcas p { margin-bottom: 0; }
+  .marcas h2 { grid-column: 1 / -1; }
+  .marcas .botao { width: auto; min-width: 280px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Trilha de navegação no rodapé do cartão */
+.trilha { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .2rem 1rem; }
+.trilha span { color: var(--latao); }

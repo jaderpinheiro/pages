@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- [A CONFIRMAR: domínio] Troque DOMINIO pelo endereço definitivo antes de publicar. -->
+<!-- Referência. No ar, o sitemap é gerado pelo Yoast (WordPress) e já inclui as páginas criadas pelo InlineSyncPlugin. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://DOMINIO/</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://club5pm.com.br/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://club5pm.com.br/leine/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://club5pm.com.br/luzineide/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://club5pm.com.br/dayane/</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://club5pm.com.br/andreza/</loc><lastmod>2026-10-02</lastmod></url>
 </urlset>
