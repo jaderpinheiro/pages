@@ -14,9 +14,14 @@
   <meta property="og:description"
     content="Encontre o imóvel dos seus sonhos em Goiânia com Tarly Pinheiro Imóveis. CRECI 105224.">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://tarlypinheiroimoveis.com.br">
+  <meta property="og:url" content="https://www.tarlypinheiro.com.br/">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Tarly Pinheiro Imóveis">
+  <meta property="og:image" content="https://raw.githubusercontent.com/jaderpinheiro/pages/main/Tarlypinheiro/image/tarlypinheiro%20tarlypinheiro.com.br.png">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.tarlypinheiro.com.br/">
   <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Tarly Pinheiro Imóveis","description":"Imobiliária em Goiânia especializada em compra, venda e locação de imóveis","address":{"@type":"PostalAddress","addressLocality":"Goiânia","addressRegion":"GO","addressCountry":"BR"},"telephone":"+5562995219521","url":"https://tarlypinheiroimoveis.com.br","areaServed":["Goiânia","Aparecida de Goiânia"],"hasCredential":"CRECI 105224","identifier":"CRECI 105224"}
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Tarly Pinheiro Imóveis","description":"Imobiliária em Goiânia especializada em compra, venda e locação de imóveis","address":{"@type":"PostalAddress","addressLocality":"Goiânia","addressRegion":"GO","addressCountry":"BR"},"telephone":"+5562995219521","url":"https://www.tarlypinheiro.com.br/","areaServed":["Goiânia","Aparecida de Goiânia"],"hasCredential":"CRECI 105224","identifier":"CRECI 105224"}
 </script>
   <script type="text/javascript">
     (function (c, l, a, r, i, t, y) {
@@ -402,29 +407,217 @@
       font-weight: 300;
     }
 
-    .hero-stats {
-      display: flex;
-      gap: 32px;
-      padding: 24px 0;
+    /* VITRINE — carrossel infinito de imóveis no hero */
+    .hero-left { min-width: 0; }
+
+    .hero-vitrine {
+      padding-top: 22px;
       border-top: 1px solid var(--border);
+      max-width: 560px;
     }
 
-    .stat {
+    .vitrine-head {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
     }
 
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--navy);
+    .vitrine-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
     }
 
-    .stat-label {
+    .vitrine-label::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.6);
+      animation: vitrinePulse 2s infinite;
+    }
+
+    .vitrine-all {
       font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: var(--transition);
+    }
+
+    .vitrine-all:hover { opacity: 1; color: var(--gold-dark); }
+
+    .vitrine-viewport {
+      overflow: hidden;
+      padding: 6px 0 10px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+    }
+
+    .vitrine-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: none;
+    }
+
+    .vitrine-track.is-ready { animation: vitrineScroll var(--vitrine-dur, 60s) linear infinite; }
+
+    .vitrine-viewport:hover .vitrine-track,
+    .vitrine-viewport:focus-within .vitrine-track { animation-play-state: paused; }
+
+    .vitrine-item {
+      position: relative;
+      flex: 0 0 auto;
+      width: 118px;
+      height: 118px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--blue-light), var(--cream));
+      box-shadow: 0 6px 18px rgba(13, 27, 42, 0.10);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    }
+
+    .vitrine-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+      transition: box-shadow 0.4s ease;
+      pointer-events: none;
+    }
+
+    .vitrine-item:hover,
+    .vitrine-item:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(13, 27, 42, 0.22);
+      outline: none;
+    }
+
+    .vitrine-item:hover::before,
+    .vitrine-item:focus-visible::before { box-shadow: inset 0 0 0 2px var(--gold); }
+
+    .vitrine-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .vitrine-item:hover img { transform: scale(1.1); }
+
+    .vitrine-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 27, 42, 0.88) 0%, rgba(13, 27, 42, 0.15) 55%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .vitrine-info {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 7px;
+      z-index: 1;
+      color: #fff;
+    }
+
+    .vitrine-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .vitrine-loc {
+      display: block;
+      margin-top: 2px;
+      font-size: 9.5px;
+      opacity: 0.8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .vitrine-badge {
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      z-index: 1;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      background: rgba(13, 27, 42, 0.78);
+      color: #fff;
+      backdrop-filter: blur(4px);
+    }
+
+    .vitrine-badge.gold { background: var(--gold); color: var(--navy); }
+
+    .vitrine-cta {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      z-index: 1;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: var(--navy);
+      font-size: 12px;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: var(--transition);
+    }
+
+    .vitrine-item:hover .vitrine-cta,
+    .vitrine-item:focus-visible .vitrine-cta { opacity: 1; transform: scale(1); }
+
+    .vitrine-skel {
+      flex: 0 0 auto;
+      width: 118px;
+      height: 118px;
+      border-radius: 14px;
+      background: linear-gradient(100deg, var(--blue-light) 30%, #fff 50%, var(--blue-light) 70%);
+      background-size: 300% 100%;
+      animation: vitrineShimmer 1.4s ease infinite;
+    }
+
+    @keyframes vitrineScroll { to { transform: translateX(calc(-50% - 6px)); } }
+    @keyframes vitrineShimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+    @keyframes vitrinePulse {
+      0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vitrine-track.is-ready { animation: none; }
+      .vitrine-viewport { overflow-x: auto; }
     }
 
     .hero-right {
@@ -1826,9 +2019,9 @@
         align-items: flex-start;
       }
 
-      .hero-stats {
-        gap: 16px;
-      }
+      .hero-vitrine { max-width: 100%; }
+      .vitrine-item, .vitrine-skel { width: 104px; height: 104px; }
+      .vitrine-cta { opacity: 1; transform: scale(1); }
 
       .hero {
         background-attachment: scroll;
@@ -1893,6 +2086,7 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navegação">
     <button class="mobile-close" type="button" onclick="closeMobileMenu()" aria-label="Fechar menu">✕</button>
+    <a href="https://www.tarlypinheiro.com.br/imoveis/?negocio" class="nav-link">Localizar Imóvel</a>
     <a href="#comprar" class="nav-link" onclick="closeMobileMenu()">Comprar</a>
     <a href="#alugar" class="nav-link" onclick="closeMobileMenu()">Alugar</a>
     <a href="#lancamentos" class="nav-link" onclick="closeMobileMenu()">Lançamentos</a>
@@ -1930,6 +2124,7 @@
           </div>
         </div>
         <div class="nav-links">
+          <a href="https://www.tarlypinheiro.com.br/imoveis/?negocio" class="nav-link">Localizar Imóvel</a>
           <a href="#comprar" class="nav-link active">Comprar</a>
           <a href="#alugar" class="nav-link">Alugar</a>
           <a href="#lancamentos" class="nav-link">Lançamentos</a>
@@ -1953,18 +2148,16 @@
         <h1 class="hero-h1">O imóvel que você<br>sempre sonhou está<br><em>mais perto</em> do que<br>você imagina.</h1>
         <p class="hero-sub">Com expertise, dedicação e o melhor portfólio de imóveis em Goiânia e região, transformamos
           a busca pelo lar ideal em uma jornada segura e inesquecível.</p>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-num">+1.200</span>
-            <span class="stat-label">Imóveis negociados</span>
+        <div class="hero-vitrine" aria-label="Vitrine de imóveis">
+          <div class="vitrine-head">
+            <span class="vitrine-label">Imóveis disponíveis agora</span>
+            <a href="https://www.tarlypinheiro.com.br/imoveis/?negocio" class="vitrine-all">Ver todos →</a>
           </div>
-          <div class="stat">
-            <span class="stat-num">15+</span>
-            <span class="stat-label">Anos de mercado</span>
-          </div>
-          <div class="stat">
-            <span class="stat-num">98%</span>
-            <span class="stat-label">Clientes satisfeitos</span>
+          <div class="vitrine-viewport">
+            <div class="vitrine-track" id="vitrineTrack">
+              <div class="vitrine-skel"></div><div class="vitrine-skel"></div><div class="vitrine-skel"></div>
+              <div class="vitrine-skel"></div><div class="vitrine-skel"></div><div class="vitrine-skel"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -2564,7 +2757,7 @@
 
       // Mensagem WA
       const phone   = window.TI_PHONE    || '5562995219521';
-      const siteUrl = window.TI_SITE_URL || 'https://tarlypinheiroimoveis.com.br';
+      const siteUrl = window.TI_SITE_URL || 'https://www.tarlypinheiro.com.br/';
       const propUrl = p ? (p.url || p._wpUrl || siteUrl) : siteUrl;
       const msg = p
         ? `Olá Tarly! Me chamo ${nome}.\nTenho interesse: *${p.title||''}* — ${p.price||''}\nVeja: ${propUrl}\nMeu celular: ${tel}`
@@ -2579,7 +2772,7 @@
       const all = [...imoveis.destaque, ...imoveis.novos, ...imoveis.lancamentos];
       const p = all.find(i => i.id === id);
       if (!p) return;
-      const msg = `🏠 *${p.title}*\n📍 ${p.loc}\n💰 ${p.price}\n📐 ${p.area} | 🛏 ${p.quartos} quartos\n\nVeja em: https://tarlypinheiroimoveis.com.br\n\n*Tarly Pinheiro Imóveis | CRECI 105224*\n📱 (62) 9 9521-9521`;
+      const msg = `🏠 *${p.title}*\n📍 ${p.loc}\n💰 ${p.price}\n📐 ${p.area} | 🛏 ${p.quartos} quartos\n\nVeja em: https://www.tarlypinheiro.com.br/\n\n*Tarly Pinheiro Imóveis | CRECI 105224*\n📱 (62) 9 9521-9521`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
     }
 
@@ -2879,10 +3072,62 @@
       });
     }
 
+    // Vitrine do hero: carrossel infinito (lista duplicada + translateX -50%)
+    function renderVitrine(items) {
+      var track = document.getElementById('vitrineTrack');
+      if (!track) return;
+      var seen = {};
+      items = items.filter(function (p) {
+        if (!p.img || seen[p.key]) return false;
+        return (seen[p.key] = true);
+      });
+      if (!items.length) { track.closest('.hero-vitrine').style.display = 'none'; return; }
+      while (items.length < 8) items = items.concat(items);
+
+      function card(p, clone) {
+        var badge = p.badge
+          ? '<span class="vitrine-badge' + (p.badge === 'Lançamento' ? ' gold' : '') + '">' + escAttr(p.badge) + '</span>'
+          : '';
+        return '<a class="vitrine-item" href="' + escAttr(p.url) + '"'
+          + (p.onclick ? ' onclick="' + p.onclick + '"' : '')
+          + (clone ? ' aria-hidden="true" tabindex="-1"' : ' title="' + escAttr(p.title) + '"') + '>'
+          + '<img src="' + escAttr(p.img) + '" alt="' + (clone ? '' : escAttr(p.title)) + '" loading="lazy" decoding="async">'
+          + badge + '<span class="vitrine-cta">→</span>'
+          + '<span class="vitrine-info"><span class="vitrine-title">' + escAttr(p.title) + '</span>'
+          + (p.loc ? '<span class="vitrine-loc">' + escAttr(p.loc) + '</span>' : '') + '</span></a>';
+      }
+
+      track.innerHTML = items.map(function (p) { return card(p, false); }).join('')
+                      + items.map(function (p) { return card(p, true); }).join('');
+      track.style.setProperty('--vitrine-dur', Math.max(30, items.length * 3.5) + 's');
+      track.classList.add('is-ready');
+    }
+
+    function vitrineFromWP(list) {
+      return list.map(function (p) {
+        var bairro = String(p.loc || '').split(',')[0];
+        return { key: 'wp-' + p.id, title: String(p.title || '').replace(/&#8211;/g, '–'), loc: bairro,
+                 img: p.thumb, url: p.url, badge: p.negocio || '' };
+      });
+    }
+
+    function vitrineFromLocal() {
+      if (typeof imoveis === 'undefined') return [];
+      return [].concat(imoveis.lancamentos, imoveis.destaque, imoveis.novos).map(function (p) {
+        return { key: 'l-' + p.id, title: p.title, loc: String(p.loc).split(',')[0], img: p.img,
+                 url: '#', badge: p.badge, onclick: 'event.preventDefault();openDetail(' + p.id + ')' };
+      });
+    }
+
     fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
       .then(function (data) {
         if (!data) return;
+        // "vitrine" = todos os imóveis (plugin ≥ 1.0.3); senão junta as listas que vierem
+        var vit = Array.isArray(data.vitrine) && data.vitrine.length
+          ? data.vitrine
+          : [].concat(data.lancamentos || [], data.destaque || [], data.novos || []);
+        renderVitrine(vit.length ? vitrineFromWP(vit) : vitrineFromLocal());
         if (Array.isArray(data.destaque) && data.destaque.length)
           renderWPCards(data.destaque.map(wpToCard), 'destaque-grid');
         if (Array.isArray(data.novos) && data.novos.length)
@@ -2903,6 +3148,7 @@
       })
       .catch(function (err) {
         console.warn('[T Imoveis] REST indisponivel:', err, REST_URL);
+        renderVitrine(vitrineFromLocal());
       });
   })();
   </script>
