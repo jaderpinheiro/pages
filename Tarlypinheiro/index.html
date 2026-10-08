@@ -2427,7 +2427,8 @@
     <div class="card reveal" onclick="openDetail(${p.id})">
       <div class="card-img">
         ${p.img
-          ? `<img src="${p.img}" alt="${p.title}" loading="lazy" style="width:100%;height:200px;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          /* concatenação proposital: o InlineSync prefixa a URL do GitHub em atributos src de template literal */
+          ? '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy" style="width:100%;height:200px;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
           : ''}
         <div class="ig-placeholder" style="background:linear-gradient(135deg,${p.color},${p.color}88);height:200px;${p.img ? 'display:none' : ''}">
           <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="rgba(100,130,160,0.35)" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -2858,6 +2859,26 @@
       if (typeof observeReveal === 'function') setTimeout(observeReveal, 100);
     }
 
+    function escAttr(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // Substitui os primeiros cards mock do Instagram pelos posts cadastrados no WP
+    function renderIGCards(list) {
+      var cards = document.querySelectorAll('.ig-grid .ig-card');
+      list.slice(0, cards.length).forEach(function (p, i) {
+        var a = document.createElement('a');
+        a.className = 'ig-card';
+        a.href = p.link;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Ver publicação no Instagram (abre em nova guia)');
+        a.innerHTML = '<img src="' + escAttr(p.img) + '" alt="' + escAttr(p.alt) + '" loading="lazy">'
+          + '<div class="ig-overlay"><span>' + escAttr(p.legenda) + '</span></div>';
+        cards[i].replaceWith(a);
+      });
+    }
+
     fetch(REST_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.ok ? r.json() : Promise.reject('HTTP ' + r.status); })
       .then(function (data) {
@@ -2870,6 +2891,8 @@
           renderWPCards(data.lancamentos.map(wpToCard), 'lancamentos-grid');
         if (Array.isArray(data.novos) && data.novos.length && (!data.destaque || !data.destaque.length))
           renderWPCards(data.novos.slice(0,4).map(wpToCard), 'destaque-grid');
+        if (Array.isArray(data.instagram) && data.instagram.length)
+          renderIGCards(data.instagram);
         // Re-init carousel lançamentos após dados WP
         setTimeout(function() {
           if (typeof initCarousel === 'function') {

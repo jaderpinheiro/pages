@@ -1,0 +1,13 @@
+# Pacotes compactados (plugin WP, backups) — não vão para o GitHub
+*.zip
+*.rar
+*.7z
+
+# Plugin WordPress — instalado direto no WP, não publicado
+ti-imoveis/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
