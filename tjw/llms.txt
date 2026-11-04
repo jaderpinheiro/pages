@@ -9,7 +9,7 @@ Fonte dos dados: Relatório de Portfólio Técnico da empresa, 20 de julho de 20
 - CNPJ: 18.365.763/0001-00
 - Sede: Rua 07, n. 530, Quadra F-3, Lotes 37/39, Sala 105, Setor Oeste, Goiânia - GO, CEP 74.110-130
 - Ramo: consultoria, projetos e serviços de engenharia multidisciplinar
-- Site: https://www.tjwconsultoria.com.br/
+- Site: https://www.tjwconsultoria.com/
 
 ## Capacidades técnicas
 - Engenharia Ferroviária: projetos básicos e executivos, estudos de traçado e superestrutura
@@ -47,6 +47,6 @@ Por modal: ferroviário (6) · rodoviário (4) · outros (1).
 Goiás (sede), Bahia, Tocantins, Distrito Federal, Rio de Janeiro e Roraima.
 
 ## Páginas
-- [Início](https://www.tjwconsultoria.com.br/): apresentação, capacidades, portfólio, atuação e contato
-- [Portfólio técnico](https://www.tjwconsultoria.com.br/portfolio/): os 11 contratos em ordem cronológica, com ficha completa, evolução por ano, modal e modelo de atuação, registros reais de campo e quadro resumo
-- [Registros de campo](https://www.tjwconsultoria.com.br/campo/): fotos e vídeos reais de obras rodoviárias em Goiás (GO-330, GO-338, GO-460)
+- [Início](https://www.tjwconsultoria.com/): apresentação, capacidades, portfólio, atuação e contato
+- [Portfólio técnico](https://www.tjwconsultoria.com/portfolio/): os 11 contratos em ordem cronológica, com ficha completa, evolução por ano, modal e modelo de atuação, registros reais de campo e quadro resumo
+- [Registros de campo](https://www.tjwconsultoria.com/campo/): fotos e vídeos reais de obras rodoviárias em Goiás (GO-330, GO-338, GO-460)

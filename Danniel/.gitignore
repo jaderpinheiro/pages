@@ -1,0 +1,15 @@
+# Danniel Mello: versiona SOMENTE o site publicado. O repo jaderpinheiro/pages é público.
+# brand/, entrada/, estrategia/, saida/, _privado/ e documentos nunca sobem.
+/*
+!/.gitignore
+!/*.html
+!/css/
+!/js/
+!/assets/
+!/robots.txt
+!/sitemap.xml
+!/llms.txt
+!/InlineSyncPlugin/
+
+/assets/MIDIAS.md
+/assets/og/og.html

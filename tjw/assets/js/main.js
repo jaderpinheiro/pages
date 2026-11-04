@@ -20,7 +20,7 @@
   // que troca caminhos relativos por base_url + caminho) ou direto dos arquivos
   // estáticos. A base é sempre a pasta de onde este script foi carregado.
   // ---------------------------------------------------------------------------
-  const PROD = 'https://www.tjwconsultoria.com.br';
+  const PROD = 'https://www.tjwconsultoria.com';
   const script = document.currentScript || $('script[src*="assets/js/main.js"]');
   const BASE = script ? script.src.replace(/assets\/js\/main\.js(\?.*)?$/, '') : '';
   window.TJWAsset = (p) => (!p || /^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(p) || !BASE ? p : new URL(p, BASE).href);
