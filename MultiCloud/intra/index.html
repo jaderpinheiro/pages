@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Intranet Comercial · MultiCloud</title>
+<link rel="icon" href="../Logo-img.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000;--bg:#03080d;--panel:#07121c;--panel2:#0b1a28;--blue:#01aeff;--blue-dark:#002d4b;--blue-mid:#005b8e;--white:#fff;--text:#d7e6f2;--muted:#7f98ad;--line:rgba(1,174,255,.16);--glow:rgba(1,174,255,.15);--ok:#2fd68a;--warn:#ffb020;--alert:#ff5a6a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;font-size:15px;line-height:1.55;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at top,rgba(1,174,255,.08),transparent 60%),rgba(3,8,13,.92);z-index:-1}
+a{color:var(--blue)}
+.mono{font-family:'Space Mono',monospace}
+/* topbar */
+.top{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1400px;margin:auto;display:flex;align-items:center;gap:20px;padding:12px 16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.brand img{height:24px}
+.brand span{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.15em;color:var(--blue);border-left:1px solid var(--line);padding-left:12px;text-transform:uppercase}
+.search{flex:1;position:relative;max-width:620px}
+.search input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--white);font:inherit;padding:11px 44px 11px 40px;border-radius:8px;outline:none}
+.search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--glow)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;fill:var(--muted)}
+.search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.contact-q{display:flex;gap:8px;margin-left:auto}
+.contact-q button{background:transparent;border:1px solid var(--line);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:7px 10px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.contact-q button:hover{border-color:var(--blue);color:var(--blue)}
+.chips{max-width:1400px;margin:auto;padding:0 16px 10px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--muted);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;padding:4px 14px;border-radius:99px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--blue);color:#001522;border-color:var(--blue)}
+/* layout */
+.wrap{max-width:1400px;margin:auto;display:grid;grid-template-columns:230px 1fr;gap:28px;padding:24px 16px 80px}
+.side{position:sticky;top:130px;align-self:start;display:flex;flex-direction:column;gap:2px}
+.side a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--muted);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px;padding:8px 12px;border-left:2px solid transparent}
+.side a b{font-family:'Space Mono',monospace;font-size:10px;color:var(--blue-mid);font-weight:400}
+.side a:hover,.side a.act{color:var(--white);border-left-color:var(--blue);background:linear-gradient(90deg,var(--glow),transparent)}
+.side .n{margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted)}
+section{margin-bottom:48px}
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sh .idx{font-family:'Space Mono',monospace;color:var(--blue);font-size:12px}
+h2{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;color:var(--white);line-height:1.1}
+.sd{color:var(--muted);margin-bottom:18px;max-width:780px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;display:flex;flex-direction:column;gap:10px}
+.card:hover{border-color:rgba(1,174,255,.4)}
+.card.wide{grid-column:1/-1}
+.card h3{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--white);line-height:1.15;padding-right:70px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--ok);border-color:rgba(47,214,138,.4)}
+.tag.warn{color:var(--warn);border-color:rgba(255,176,32,.45)}
+.tag.date{color:var(--blue);border-color:rgba(1,174,255,.35)}
+.lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.quote{border-left:3px solid var(--blue);background:rgba(1,174,255,.06);padding:10px 12px;color:var(--white);font-weight:600;border-radius:0 6px 6px 0}
+.use{color:var(--text);font-style:italic}
+.legal{border:1px solid rgba(255,176,32,.45);background:rgba(255,176,32,.07);color:#ffd88a;padding:8px 10px;border-radius:6px;font-size:13px}
+.sols{display:flex;flex-wrap:wrap;gap:6px}
+.sols span{font-size:12px;background:var(--blue-dark);color:#9fdcff;padding:3px 9px;border-radius:99px}
+.cp{position:absolute;top:14px;right:14px;background:transparent;border:1px solid var(--line);color:var(--blue);font-family:'Space Mono',monospace;font-size:11px;padding:5px 9px;border-radius:6px;cursor:pointer;display:flex;gap:5px;align-items:center}
+.cp:hover{background:var(--blue);color:#001522}
+.cp.done{background:var(--ok);border-color:var(--ok);color:#001522}
+.cp-row{display:flex;gap:6px;flex-wrap:wrap}
+.cp-row .cp{position:static}
+p+p{margin-top:8px}
+/* hero */
+.hero{border:1px solid var(--line);border-radius:12px;padding:28px;background:radial-gradient(ellipse at top right,rgba(1,174,255,.18),transparent 60%),var(--panel);position:relative;margin-bottom:22px}
+.hero .lbl{margin-bottom:10px}
+.hero blockquote{font-family:'Rajdhani',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--white);line-height:1.15;max-width:950px}
+.hero blockquote em{color:var(--blue);font-style:normal}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.stat{border-top:1px solid var(--line);padding-top:10px}
+.stat b{display:block;font-family:'Rajdhani',sans-serif;font-size:30px;color:var(--blue);line-height:1}
+.stat span{font-size:12px;color:var(--muted)}
+/* steps */
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.step{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:'Space Mono',monospace;color:var(--blue);font-size:18px}
+.step h4{font-family:'Rajdhani',sans-serif;font-size:18px;color:var(--white)}
+.step .cp{position:static}
+/* checklist */
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.check input{accent-color:var(--blue);margin-top:4px;width:16px;height:16px;flex-shrink:0}
+.check label:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.btn{background:var(--blue);color:#001522;border:0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;padding:8px 16px;border-radius:6px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.score{font-family:'Space Mono',monospace;font-size:13px;color:var(--muted)}
+.score b{color:var(--white)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);text-align:left;padding:8px;border-bottom:1px solid var(--blue-mid)}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{color:var(--white);font-weight:600;white-space:nowrap}
+.tbl-wrap{overflow-x:auto}
+mark{background:rgba(1,174,255,.35);color:var(--white);border-radius:2px}
+.empty{display:none;text-align:center;padding:60px 20px;color:var(--muted)}
+.hide{display:none!important}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,40px);opacity:0;background:var(--blue);color:#001522;font-family:'Rajdhani',sans-serif;font-weight:700;padding:10px 20px;border-radius:8px;transition:.25s;z-index:50;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{border-top:1px solid var(--line);padding:20px 16px;text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}
+.pb-form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.pb-form label{display:flex;flex-direction:column;gap:4px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.pb-form input,.pb-form select,.hand textarea{background:var(--bg);border:1px solid var(--line);color:var(--white);font:14px 'Exo 2',sans-serif;padding:8px 10px;border-radius:6px;outline:none;text-transform:none;letter-spacing:0}
+.pb-form input:focus,.hand textarea:focus{border-color:var(--blue)}
+.pb-form .w2{grid-column:span 2}
+.pb-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.script{background:rgba(1,174,255,.05);border-left:3px solid var(--blue);padding:10px 12px;margin:8px 0;color:var(--white);border-radius:0 6px 6px 0}
+.obj{font-size:13px;color:var(--muted)}
+.dica{font-size:13px;color:#ffd88a}
+.v{color:var(--blue);font-weight:600}
+.ph{color:var(--warn);font-family:'Space Mono',monospace;font-size:12px}
+.pb-h{font-family:'Rajdhani',sans-serif;font-size:22px;color:var(--white);margin:26px 0 12px}
+.pbm{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.pbm-h{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.pbm-h .cp{position:static}
+.pbm h4{font-family:'Rajdhani',sans-serif;font-size:18px;color:var(--white)}
+.hand{margin-top:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.hand textarea{min-height:90px;resize:vertical;width:100%}
+@media(max-width:900px){
+  .pb-form{grid-template-columns:1fr 1fr}
+  .pb-form .w2{grid-column:1/-1}
+  .wrap{grid-template-columns:1fr}
+  .side{position:static;flex-direction:row;overflow-x:auto;gap:4px;scrollbar-width:none}
+  .side a{border-left:0;border-bottom:2px solid transparent;white-space:nowrap;padding:6px 10px}
+  .side .n{display:none}
+  .contact-q{display:none}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .brand span{display:none}
+  .step{grid-template-columns:30px 1fr}
+  .step .cp{grid-column:2}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="../index.html"><img src="../MultiCloud.png" alt="MultiCloud"><span>Intranet Comercial</span></a>
+    <div class="search">
+      <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 0 1 6.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+      <input id="q" type="search" placeholder="Buscar: ransomware, backup, Claro, agro, objeção preço…" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <div class="contact-q">
+      <button data-copy="(62) 3142-0818">WhatsApp</button>
+      <button data-copy="0800 000 5542">0800</button>
+      <button data-copy="comercial@multicloud.com.br">E-mail</button>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<div class="wrap">
+  <nav class="side" id="side"></nav>
+  <main id="main">
+    <div class="empty" id="empty">Nada encontrado para essa busca. Tente outro termo (ex.: “senha”, “API”, “fornecedor”).</div>
+  </main>
+</div>
+
+<footer class="foot">MultiCloud · Uso interno da equipe comercial · Conteúdo atualizado em nov/2026 · Não divulgar o link</footer>
+<div class="toast" id="toast">Copiado!</div>
+
+<script>
+/* =========================================================
+   CONTEÚDO — edite aqui. Cada item vira um card buscável.
+   ========================================================= */
+const CONTATO = "WhatsApp: (62) 3142-0818 · Telefone: 0800 000 5542 · comercial@multicloud.com.br";
+
+const INCIDENTES = [
+ {t:"Mercado Bitcoin",setor:"Cripto",geo:"Brasil",data:"02/11/2026",st:"ok",
+  fato:"Confirmou ataque durante a madrugada. Afirmou ter identificado e contido rapidamente o incidente em um sistema, suspendeu depósitos e saques preventivamente e declarou que não houve prejuízo a clientes nem vazamento de dados. A Hypernative estimou perdas acima de US$ 40 milhões (~R$ 217 milhões) em cripto.",
+  gat:"Mesmo empresas com equipe técnica e sistemas sofisticados podem ser atingidas. A diferença está na velocidade de detecção, contenção e comunicação.",
+  uso:"O Mercado Bitcoin conseguiu conter o incidente rapidamente e suspendeu operações preventivamente. Sua empresa teria esse mesmo nível de visibilidade e resposta hoje?",
+  sol:["Monitoramento 24/7","EDR/XDR","Resposta a incidentes","Backup e recuperação","Governança de acessos"]},
+ {t:"Binance",setor:"Cripto",geo:"Global",data:"29/10/2026",st:"ok",
+  fato:"Ataque com desvio de mais de US$ 6 bilhões em ativos digitais, segundo a própria corretora. Autoridades dos EUA atribuíram ao grupo TraderTraitor, ligado à Coreia do Norte. Ocorreu poucos dias antes do caso Mercado Bitcoin.",
+  gat:"Ataques a cripto mostram que o alvo não é apenas o servidor: são chaves, credenciais, integrações, pessoas e processos.",
+  uso:"Quando o valor está em ativos digitais, credenciais e acessos privilegiados, a segurança precisa ir além do antivírus: exige MFA, cofre de senhas, monitoramento e resposta rápida.",
+  sol:["Cofre de senhas","MFA","PAM / acessos privilegiados","EDR/XDR","Monitoramento contínuo"]},
+ {t:"Claro Brasil",setor:"Telecom",geo:"Brasil",data:"set/2026",st:"warn",
+  fato:"Um ator criminoso alegou em fórum de cibercrime ter explorado uma API exposta da Claro Brasil e extraído mais de 46 milhões de números de telefone vinculados a CPFs (amostra de ~2 milhões de registros e conjunto de 6,1 GB). Não verificado independentemente.",
+  gat:"APIs expostas, integrações e bases antigas podem se transformar em vazamentos massivos — mesmo sem invasão tradicional.",
+  uso:"Não é só o site que precisa de proteção. APIs, integrações, bancos de dados e acessos a sistemas também são portas de entrada.",
+  legal:"Nunca diga “a Claro sofreu vazamento confirmado”. Diga: “houve alegação pública de vazamento envolvendo a Claro, ainda não confirmada independentemente”.",
+  sol:["Revisão de exposição externa","Gestão de vulnerabilidades","Hardening de APIs e servidores","DLP","Monitoramento de acessos"]},
+ {t:"Smart Sampa (Prefeitura de SP)",setor:"Governo",geo:"Brasil",data:"20/10 e 03/11/2026",st:"warn",
+  fato:"Em 20/10, reportagem apontou exposição de informações ligadas a mais de 58 mil câmeras, 181 credenciais e registros de ~6 mil agentes. Em 03/11, nova falha teria permitido acesso a pelo menos 17 mil câmeras de parceiros por cerca de 5 dias. A Prefeitura negou ataque externo, falou em vazamento ilegal de dados e informou à ANPD que 178 usuários tinham o mesmo padrão de senha.",
+  gat:"Credenciais repetidas, acessos mal controlados e integrações com terceiros podem expor até sistemas críticos de segurança pública.",
+  uso:"Esse caso mostra três falhas clássicas: senha padronizada, excesso de privilégios e falta de controle sobre fornecedores e integrações.",
+  legal:"A Prefeitura nega ataque externo. Fale em “falhas e exposição de dados”, não em “invasão hacker”.",
+  sol:["Gestão de identidades e acessos","MFA","Cofre de senhas","Revisão de permissões","Monitoramento de fornecedores","DLP e governança"]},
+ {t:"Falha crítica no PHP (SEI, tribunais)",setor:"Governo",geo:"Brasil",data:"22/10/2026",st:"ok",
+  fato:"Vulnerabilidade crítica ligada ao PHP levou órgãos públicos e tribunais a suspenderem sistemas e acessos externos preventivamente. O SEI foi afetado; Anatel, TRF-1, TRF-4 e TRF-6 estiveram entre os citados. CISC e GSI emitiram alertas emergenciais à Administração Pública Federal.",
+  gat:"Uma única vulnerabilidade em tecnologia de base pode obrigar governos e empresas a tirarem sistemas do ar.",
+  uso:"Atualização não é tarefa opcional. Gestão de vulnerabilidades, inventário de sistemas e plano de resposta são o que evita que uma falha vire parada operacional.",
+  sol:["Gestão de vulnerabilidades","Inventário de ativos","Patch management","Hardening","Monitoramento e resposta"]},
+ {t:"Dígitro Tecnologia",setor:"Fornecedor",geo:"Brasil",data:"mai/2026",st:"warn",
+  fato:"O CTIR Gov emitiu alerta após incidente envolvendo a Dígitro, fornecedora de sistemas para mais de 150 instituições governamentais e de segurança pública. Classificado como ataque à cadeia de suprimentos, com alegado vazamento de bancos de dados, código-fonte e arquivos internos.",
+  gat:"O risco do seu fornecedor pode se tornar o risco da sua empresa.",
+  uso:"Se um fornecedor com acesso ao seu ambiente for comprometido, o atacante pode entrar pela porta dos fundos. Por isso é preciso controlar acessos, monitorar integrações e revisar permissões.",
+  legal:"O vazamento dos dados é alegado. O alerta do CTIR Gov é fato.",
+  sol:["Governança de terceiros","Controle de acessos","MFA","Segmentação de rede","Monitoramento de integrações","Resposta a incidentes"]},
+ {t:"Chainalysis",setor:"Cripto",geo:"Brasil",data:"30/10/2026",st:"ok",
+  fato:"Comunicou invasão com acesso a registros de clientes: nomes, e-mails, identificadores e permissões de usuários. Disse não haver evidência de acesso a conteúdos de investigações. As ferramentas são usadas por órgãos públicos, e o caso pode ter alcançado Ministérios Públicos brasileiros.",
+  gat:"Um fornecedor de tecnologia pode expor dados de vários clientes ao mesmo tempo.",
+  uso:"Se sua empresa usa plataformas de terceiros, ela também depende da segurança deles. É preciso saber quem tem acesso, quais dados são compartilhados e como reagir se o fornecedor for comprometido.",
+  sol:["Avaliação de fornecedores","Controle de acessos","MFA","Monitoramento","Plano de resposta"]},
+ {t:"Agronegócio brasileiro",setor:"Agro",geo:"Brasil",data:"jan–set/2026",st:"ok",
+  fato:"1 bilhão de tentativas de ataque no agro brasileiro entre janeiro e setembro de 2026 (FortiGuard Labs). No mundo, 8,3 bilhões de atividades maliciosas contra o setor, alta de 638% sobre 2025. Granjas brasileiras ficaram com operações paradas por mais de 14 dias.",
+  gat:"No agro, um ataque não afeta só o computador: pode parar recebimento, transporte, armazenagem refrigerada, abate e entrega.",
+  uso:"A tecnologia está conectando fazendas, sensores, drones, tratores e sistemas de gestão. Se a segurança não acompanhar, a operação inteira fica exposta.",
+  frase:"Tecnologia sem cibersegurança aumenta produtividade — e também aumenta o tamanho do prejuízo quando algo falha.",
+  sol:["Segmentação de rede","Monitoramento IoT","Backup gerenciado","Alta disponibilidade","Failover automático","Resposta a incidentes"]},
+ {t:"Supermercados na França (refrigeração)",setor:"Varejo",geo:"Global",data:"11–12/10/2026",st:"ok",
+  fato:"Criminosos assumiram remotamente sistemas de refrigeração de centenas de supermercados (Intermarché, Carrefour, Monoprix, E.Leclerc, entre outros), explorando falhas em sistemas Danfoss. Resultado: descarte de alimentos e lojas paradas.",
+  gat:"Equipamentos conectados — câmeras, sensores, refrigeração, automação — também são superfície de ataque.",
+  uso:"Hoje câmera, sensor, impressora, refrigeração e equipamento industrial podem ser porta de entrada. Segurança precisa cobrir toda a rede, não apenas os computadores.",
+  sol:["Segmentação de rede","Monitoramento de IoT","Gestão de vulnerabilidades","Controle de acesso remoto","Backup e continuidade"]},
+ {t:"Amadeus / companhias aéreas",setor:"Fornecedor",geo:"Global",data:"2026",st:"ok",
+  fato:"Acesso não autorizado ao sistema de passageiros da Amadeus expôs reservas de mais de uma dúzia de companhias. A JAL informou ~92 mil clientes afetados, com exposição que teria começado em agosto de 2023.",
+  gat:"Um fornecedor comprometido pode expor dados de vários clientes ao mesmo tempo.",
+  uso:"Se um fornecedor crítico fosse comprometido hoje, sua empresa saberia em quanto tempo — e conseguiria conter o impacto?",
+  sol:["Governança de terceiros","Inventário de ativos","Monitoramento","Plano de resposta"]},
+ {t:"Sony Network Communications",setor:"Telecom",geo:"Global",data:"2026",st:"ok",
+  fato:"Cerca de 2,58 milhões de registros expostos, incluindo dados pessoais e credenciais de e-mail de 54.401 contas.",
+  gat:"Credenciais vazadas transformam um incidente em risco de acesso e fraude.",
+  uso:"Credencial vazada é porta de entrada. Firewall e antivírus são necessários, mas não bastam sem gestão de vulnerabilidades, monitoramento e resposta rápida.",
+  sol:["MFA","Cofre de senhas","Gestão de vulnerabilidades","Monitoramento 24/7"]},
+ {t:"UNM Health (ransomware)",setor:"Saúde",geo:"Global",data:"2026",st:"ok",
+  fato:"O ransomware forçou desvio de ambulâncias, cancelamento de consultas e suspensão de cirurgias ambulatoriais. O grupo alegou comprometer 36 mil sistemas.",
+  gat:"Quando a TI para, a operação do negócio para.",
+  uso:"Backup que nunca foi testado não é estratégia de recuperação — é esperança. Você consegue restaurar rápido, isolado e sem pagar resgate?",
+  sol:["Backup gerenciado","Failover automático","Alta disponibilidade","Monitoramento 24/7"]},
+ {t:"Universidade de Copenhague",setor:"Educação",geo:"Global",data:"2026",st:"ok",
+  fato:"Hackers acessaram um ambiente de teste com dados pessoais de 525 mil pessoas; outros 20 mil tiveram PINs expostos.",
+  gat:"Ambientes de teste, homologação e backup também precisam de proteção.",
+  uso:"Seu ambiente de homologação tem dados reais? Ele recebe o mesmo nível de proteção que a produção?",
+  sol:["Gestão de vulnerabilidades","Segmentação de rede","Governança de dados","Monitoramento"]},
+ {t:"Ransomware em outubro/2026",setor:"Ransomware",geo:"Global",data:"out/2026",st:"ok",
+  fato:"Grupos publicaram 1.127 alegações de vítimas em sites de vazamento, alta de 25,8% sobre setembro. Manufatura, serviços profissionais, tecnologia e saúde lideraram.",
+  gat:"Ransomware não é evento raro nem restrito a grandes corporações.",
+  uso:"A pergunta certa não é “será que vamos ser atacados?”, mas “estamos preparados para detectar, conter e restaurar?”.",
+  sol:["Backup gerenciado","EDR/XDR","Monitoramento 24/7","Resposta a incidentes"]},
+ {t:"Custo do vazamento no Brasil",setor:"Argumento financeiro",geo:"Brasil",data:"2026",st:"ok",
+  fato:"Custo médio de uma violação de dados no Brasil: R$ 7,44 milhões (+3,5%). Saúde: R$ 12,55 mi por incidente. Tecnologia: R$ 8,96 mi. Serviços: R$ 8,63 mi.",
+  gat:"Segurança não é custo de TI. É proteção de receita, reputação, operação e dados.",
+  uso:"No Brasil, o custo médio de um vazamento já passou de R$ 7 milhões. O diagnóstico custa muito menos do que descobrir tarde demais que a empresa estava exposta.",
+  sol:["Diagnóstico de Exposição Digital","Governança de TI","Gestão de riscos"]}
+];
+
+const SOLUCOES = [
+ {t:"Segurança — “O perímetro mudou”",tags:"firewall antivírus vulnerabilidade credencial",
+  ctx:"Os invasores exploram credenciais, fornecedores, ambientes de teste e ferramentas de terceiros — não só o firewall tradicional.",
+  pitch:"Sua empresa pode ter firewall, antivírus e backup. Mas, se ninguém monitora vulnerabilidades, acessos e comportamento anômalo 24 horas por dia, o invasor pode permanecer dentro por semanas.",
+  sol:["Firewalls","Gestão de vulnerabilidades","Antivírus corporativo","Monitoramento avançado de ativos","Backup gerenciado"],
+  cta:"Faça um diagnóstico de superfície de ataque e prioridade de correção."},
+ {t:"Backup gerenciado — “Ransomware é decisão de continuidade”",tags:"ransomware restore recuperação RTO",
+  ctx:"O caso UNM Health mostrou o impacto real: atendimento interrompido, ambulâncias desviadas, cirurgias suspensas.",
+  pitch:"Backup que nunca foi testado não é estratégia de recuperação — é esperança. A pergunta não é só se você tem backup, mas se consegue restaurar rápido, de forma isolada e sem pagar resgate.",
+  sol:["Backup gerenciado","Nuvem privada","Failover automático","Alta disponibilidade"],
+  cta:"Vamos validar seu tempo real de restauração e seu plano de recuperação?"},
+ {t:"Nuvem privada e pública — “Resiliência como arquitetura”",tags:"cloud azure aws oracle disponibilidade",
+  ctx:"A MultiCloud atua com Azure, Oracle Cloud e AWS, com monitoramento 24/7, escalabilidade, alta disponibilidade e gestão especializada.",
+  pitch:"Infraestrutura resiliente não é um servidor maior. É arquitetura pensada para falhar com segurança: segregação, redundância, failover, observabilidade e resposta rápida.",
+  sol:["Nuvem privada","Azure","Oracle Cloud","AWS","Failover","Alta disponibilidade"],
+  cta:"Agende uma avaliação de arquitetura e pontos únicos de falha."},
+ {t:"Governança de TI — “O risco precisa ter dono”",tags:"itil cobit riscos diretoria kpi terceiros",
+  ctx:"Muitos incidentes recentes envolveram terceiros, credenciais e processos — áreas que pedem governança, políticas e gestão de riscos.",
+  pitch:"Segurança sem governança vira uma coleção de ferramentas. Com ITIL, COBIT, gestão de riscos, políticas e KPIs, a TI passa a demonstrar redução de risco para a diretoria.",
+  sol:["ITIL","COBIT","Gestão de riscos","Políticas","KPIs executivos"],
+  cta:"Montamos um painel executivo de riscos, vulnerabilidades e continuidade."}
+];
+
+const ABERTURAS = [
+ {t:"Fornecedor comprometido",canal:"LinkedIn · E-mail",txt:"A Amadeus, fornecedora de tecnologia usada por diversas companhias aéreas, teve acesso não autorizado a dados de reservas, afetando clientes de várias empresas ao mesmo tempo.\n\nPergunta para a sua diretoria: se um fornecedor crítico fosse comprometido hoje, sua empresa saberia em quanto tempo — e conseguiria conter o impacto?\n\nA MultiCloud ajuda a mapear ativos, vulnerabilidades, acessos e planos de resposta antes que o incidente vire manchete."},
+ {t:"Custo da parada",canal:"E-mail · WhatsApp",txt:"Um ataque de ransomware à UNM Health levou ao desvio de ambulâncias, cancelamento de consultas e suspensão de cirurgias.\n\nPara empresas que dependem de sistema, estoque, atendimento ou produção, cada hora parada tem preço.\n\nA MultiCloud combina monitoramento 24/7, backup gerenciado, failover e alta disponibilidade para reduzir o impacto de falhas e ataques."},
+ {t:"Credenciais expostas",canal:"LinkedIn · E-mail",txt:"A Sony Network Communications confirmou a exposição de cerca de 2,5 milhões de registros, incluindo credenciais de e-mail de dezenas de milhares de contas.\n\nCredencial vazada é porta de entrada. Firewall e antivírus são necessários, mas não bastam sem gestão de vulnerabilidades, monitoramento e resposta rápida.\n\nA MultiCloud implementa proteção em camadas para reduzir o risco antes do impacto."},
+ {t:"Ransomware em alta",canal:"LinkedIn · WhatsApp",txt:"Em outubro, grupos de ransomware publicaram 1.127 alegações de vítimas em sites de vazamento — alta de 25,8% sobre setembro.\n\nNão é ameaça distante: manufatura, serviços, tecnologia e saúde estão entre os setores mais visados.\n\nA pergunta certa não é “será que vamos ser atacados?”, mas “estamos preparados para detectar, conter e restaurar?”."},
+ {t:"Cripto no Brasil (Mercado Bitcoin)",canal:"WhatsApp",txt:"Olá, {nome}! Viu que o Mercado Bitcoin confirmou um ataque nesta semana? Eles conseguiram conter rápido porque tinham visibilidade e plano de resposta.\n\nNa MultiCloud fazemos um Diagnóstico Inicial de Exposição Digital, sem custo, para mostrar onde a {empresa} está mais exposta hoje. Faz sentido conversarmos 15 minutos esta semana?"},
+ {t:"Agro — operação que não pode parar",canal:"WhatsApp · E-mail",txt:"Olá, {nome}! O agro brasileiro sofreu 1 bilhão de tentativas de ataque entre janeiro e setembro de 2026, e há granjas que ficaram mais de 14 dias paradas.\n\nNo agro, a pergunta não é só “os dados estão seguros?”, mas “a produção continua se o sistema cair?”.\n\nA MultiCloud oferece um diagnóstico sem custo de exposição e continuidade. Posso te mostrar em 15 minutos?"},
+ {t:"Governo / setor público",canal:"E-mail",txt:"A falha crítica no PHP de 22/10 obrigou órgãos como Anatel e TRFs a suspender sistemas, incluindo o SEI. Pouco antes, o CTIR Gov alertou sobre o incidente na Dígitro, fornecedora de mais de 150 instituições.\n\nUma única vulnerabilidade ou um fornecedor comprometido podem tirar serviços críticos do ar.\n\nA MultiCloud apoia órgãos e empresas com gestão de vulnerabilidades, inventário de ativos, governança de terceiros e monitoramento 24/7. Podemos agendar uma conversa?"}
+];
+
+const LINKEDIN = [
+ ["Gancho","Uma única credencial comprometida pode custar milhões."],
+ ["Contexto","Nos últimos dias, vimos incidentes envolvendo fornecedores de aviação, telecomunicações, saúde e criptomoedas. O padrão se repete: acesso inicial discreto, movimento lateral, exfiltração de dados e interrupção operacional."],
+ ["Insight","O maior risco não é o ataque em si. É descobrir tarde demais que não havia visibilidade, backup testado nem plano de resposta."],
+ ["Solução MultiCloud","Proteção em camadas: firewall, gestão de vulnerabilidades, antivírus corporativo, monitoramento avançado e backup gerenciado — com suporte especializado 24/7, 365 dias por ano."],
+ ["CTA","Se sua empresa não consegue responder em 60 segundos “qual é o nosso RTO e quem aciona o plano de incidentes?”, vale conversar."]
+];
+
+const ROTEIRO = [
+ ["Abertura com risco","Antes de falar de cloud, quero entender: qual sistema, se parar por 4 horas, mais prejudica sua operação?"],
+ ["Contextualizar com caso real","Use o incidente do setor do cliente (filtre por setor no topo). Ex.: agro → Agronegócio; varejo → Supermercados França; governo → PHP/Dígitro; financeiro → Mercado Bitcoin."],
+ ["Diagnóstico rápido","Pergunte sobre inventário de ativos, gestão de vulnerabilidades, testes de restore, MFA, monitoramento e plano de resposta. Use o checklist abaixo."],
+ ["Conectar à dor","Indisponibilidade, perda de dados, multa (LGPD/ANPD), reputação, fraude e paralisação produtiva."],
+ ["Apresentar a MultiCloud","Estratégia (Governança) → Infraestrutura (Nuvem privada/pública) → Proteção (Segurança) → Operação (Suporte 24/7) → Resultado (seu negócio não para)."],
+ ["Fechar com próximo passo","Propomos uma avaliação inicial de resiliência e segurança, sem alterar seu ambiente."]
+];
+
+/* ===== PLAYBOOK SDR — serviço de entrada ===== */
+const SERVICOS = {
+ diag:{n:"Diagnóstico de Exposição (porta de entrada)",tema:"a segurança da informação",
+  gancho:"a MultiCloud está oferecendo um Diagnóstico Inicial de Exposição Digital, sem custo, que mostra onde a empresa está visível, vulnerável ou desprotegida — credenciais, APIs, fornecedores e backup",
+  perguntas:["Hoje quem cuida da segurança e da infraestrutura de TI: equipe interna, fornecedor ou os dois?","Qual sistema, se parar por 4 horas, mais prejudica a operação?","Vocês já passaram por algum incidente, vírus ou parada nos últimos 12 meses?","Existe alguém monitorando o ambiente à noite e no fim de semana?"],
+  caso:"o custo médio de um vazamento no Brasil chegou a R$ 7,44 milhões em 2026, e os ataques de ransomware subiram 25,8% só em outubro.",
+  valor:"A MultiCloud tem 23 anos protegendo empresas que não podem parar: governança, nuvem, segurança em camadas e suporte 24/7, 365 dias. O primeiro passo é o diagnóstico: um retrato do risco e um plano priorizado, sem mexer no seu ambiente."},
+ firewall:{n:"Soluções de Firewall",tema:"a proteção da rede e dos acessos externos",
+  gancho:"estamos vendo muitos incidentes que entram por acesso remoto, API exposta e equipamentos conectados — e firewall mal configurado é a porta mais comum",
+  perguntas:["Vocês têm firewall dedicado ou só o do roteador/provedor?","Quem administra as regras e quando foram revisadas pela última vez?","Como os colaboradores acessam o sistema de fora: VPN, acesso remoto, nuvem?","Câmeras, sensores ou máquinas ficam na mesma rede dos computadores?"],
+  caso:"na França, criminosos assumiram remotamente a refrigeração de centenas de supermercados por sistemas conectados. E houve alegação pública (não confirmada) de extração de 46 milhões de registros da Claro por uma API exposta.",
+  valor:"A MultiCloud implanta e administra firewalls com segmentação de rede, VPN segura e regras revisadas, monitorados 24/7. Você tem um perímetro que acompanha o negócio, sem depender de alguém lembrar de atualizar."},
+ vuln:{n:"Gestão de Vulnerabilidades",tema:"atualizações e correção de falhas",
+  gancho:"em 22 de outubro uma falha crítica no PHP obrigou tribunais e órgãos como a Anatel a tirar sistemas do ar às pressas — e muitas empresas usam a mesma tecnologia sem saber",
+  perguntas:["Vocês têm inventário de todos os servidores, sistemas e sites expostos na internet?","Como é feita a atualização (patch) de sistemas e servidores? Existe rotina?","Já fizeram alguma varredura ou teste de vulnerabilidades?","Quando sai um alerta crítico, quem fica sabendo e em quanto tempo corrige?"],
+  caso:"a falha no PHP de 22/10 fez Anatel, TRF-1, TRF-4 e TRF-6 suspenderem sistemas, incluindo o SEI. Uma única vulnerabilidade tirou serviços críticos do ar.",
+  valor:"A MultiCloud faz varredura contínua, prioriza o que é crítico e acompanha a correção. Você deixa de descobrir a falha pela manchete e passa a corrigir antes que vire parada."},
+ edr:{n:"Antivírus Corporativo / EDR",tema:"a proteção dos computadores e servidores",
+  gancho:"o antivírus comum já não segura ataques como o ransomware, que cresceu 25,8% só em outubro",
+  perguntas:["Qual antivírus vocês usam hoje? Gratuito, doméstico ou corporativo com console central?","Quantas máquinas e servidores vocês têm, mais ou menos?","Alguém recebe e analisa os alertas do antivírus?","Já tiveram vírus, arquivos sequestrados ou máquina lenta sem explicação?"],
+  caso:"em outubro, grupos de ransomware publicaram 1.127 vítimas, com manufatura, serviços, tecnologia e saúde na frente. Na UNM Health, o ataque desviou ambulâncias e suspendeu cirurgias.",
+  valor:"A MultiCloud implanta antivírus corporativo com EDR e gestão central: detecta comportamento suspeito, isola a máquina e avisa a equipe — com especialistas olhando os alertas por você."},
+ monit:{n:"Monitoramento 24/7",tema:"o monitoramento do ambiente fora do horário comercial",
+  gancho:"a maioria dos ataques acontece de madrugada e no fim de semana — o Mercado Bitcoin foi atacado de madrugada e só limitou o dano porque detectou rápido",
+  perguntas:["Se um servidor cair às 2h de sábado, quem fica sabendo? Em quanto tempo?","Vocês recebem alertas de disco, link, servidor e acessos estranhos?","A TI faz plantão ou depende de alguém olhar no dia seguinte?","Quanto custa para vocês uma hora com o sistema parado?"],
+  caso:"o Mercado Bitcoin confirmou um ataque de madrugada em 02/11/2026; identificou e conteve rápido, suspendeu depósitos e saques e afirmou que não houve prejuízo a clientes. Detecção rápida fez a diferença.",
+  valor:"A MultiCloud monitora servidores, links, nuvem e segurança 24 horas, 365 dias, com equipe certificada. O problema é tratado antes de virar parada — e você fica sabendo pelo nosso relatório, não pelo cliente reclamando."},
+ backup:{n:"Backup Gerenciado",tema:"o backup e a recuperação dos dados",
+  gancho:"muitas empresas só descobrem no dia do ataque que o backup não volta — por isso estamos ajudando a validar o tempo real de restauração",
+  perguntas:["Como é o backup hoje: local, nuvem, HD externo? Fica separado da rede?","Quando foi o último teste de restauração completa?","Se perdessem o servidor hoje, em quanto tempo a operação voltaria?","Quantos dias de trabalho vocês aguentam perder?"],
+  caso:"granjas brasileiras ficaram mais de 14 dias paradas após ataques em 2026, e na UNM Health o ransomware desviou ambulâncias e suspendeu cirurgias. Quando a TI para, o negócio para.",
+  valor:"A MultiCloud faz backup gerenciado e isolado, com testes de restauração e failover. Você sabe exatamente em quanto tempo volta — e não fica refém de pagar resgate."}
+};
+
+const PB = [
+ {t:"Antes de ligar",obj:"Chegar preparada em 2 minutos",noCopy:1,txt:"• Veja site e LinkedIn da {empresa}: setor, porte, unidades.\n• Escolha 1 caso real do setor (seção Incidentes, filtro no topo).\n• Confirme o serviço de entrada acima.\n• Meta da ligação: agendar {dur} minutos com {diretor}. Não é vender na ligação.",dica:"Ligue entre 8h–10h ou 16h–18h: decisores atendem mais."},
+ {t:"Abertura (primeiros 15 segundos)",obj:"Ganhar permissão para continuar",txt:"Oi, {nome}, tudo bem? Aqui é {sdr}, da MultiCloud, empresa de cloud e segurança de Goiânia há 23 anos. Vou ser rápida: te liguei por um motivo específico. Posso levar 30 segundos do seu tempo?",dica:"Sorria ao falar. Se ouvir “agora não”: “Sem problema! Qual o melhor horário hoje ou amanhã para eu te ligar?”"},
+ {t:"Motivo da ligação",obj:"Despertar interesse com o gancho do serviço",txt:"O motivo é este: {gancho}.\n\nPor isso quero entender rapidinho: hoje, como vocês cuidam de {tema}?",dica:"Depois da pergunta, silêncio. Deixe o cliente falar."},
+ {t:"Descoberta (perguntas)",obj:"Achar a dor — ouvir 70%, falar 30%",txt:"{perguntas}",dica:"Marque as respostas no Checklist de diagnóstico: elas vão para o resumo do diretor."},
+ {t:"Conectar à dor com caso real",obj:"Mostrar que o risco é real e próximo",txt:"Pergunto isso porque {caso}\n\nSe algo assim acontecesse na {empresa} amanhã, qual seria o maior impacto: parar a operação, perder dados ou expor clientes?",dica:"Quando o caso não for confirmado, diga “houve alegação pública”."},
+ {t:"Proposta de valor (30 segundos)",obj:"Mostrar o que a MultiCloud resolve, sem termos técnicos",txt:"{valor}",dica:"Não fale de preço. Se perguntarem: “depende do ambiente; é justamente isso que o {diretor} avalia na conversa”."},
+ {t:"Convite para a call com o diretor",obj:"Agendar — sempre com duas opções de horário",txt:"Faz sentido a gente marcar uma conversa de {dur} minutos com o {diretor}, nosso diretor? Ele vai olhar o cenário da {empresa} e mostrar onde estão os riscos prioritários em {tema} — sem compromisso e sem mexer no seu ambiente.\n\nFica melhor {horarios}?",dica:"Ofereça 2 horários, nunca “quando você pode?”. Pergunte: “Mais alguém deveria participar — TI ou financeiro?”"},
+ {t:"Confirmação",obj:"Garantir que a reunião aconteça",txt:"Perfeito, {nome}! Fica agendado {horarios}, {dur} minutos, com o {diretor}. Vou te mandar agora o convite por e-mail e uma confirmação no WhatsApp. Qual o melhor e-mail?\n\nPara o {diretor} chegar preparado: vocês usam servidor local, nuvem ou os dois? E quantos colaboradores, mais ou menos?",dica:"Repita data e hora em voz alta. Registre no CRM na hora e copie o resumo para o diretor (abaixo)."}
+];
+
+const POS = [
+ {t:"1º contato por WhatsApp / LinkedIn",txt:"Oi, {nome}, tudo bem? Sou {sdr}, da MultiCloud — cloud e segurança da informação, há 23 anos em Goiânia.\n\nTe escrevo porque {gancho}.\n\nFaz sentido uma conversa rápida de {dur} minutos com nosso diretor, {diretor}, para olhar o cenário da {empresa}? Tenho {horarios}."},
+ {t:"Follow-up (sem resposta em 2 dias)",txt:"Oi, {nome}! Voltando rapidinho: só em outubro foram 1.127 vítimas de ransomware publicadas, alta de 25,8%. A conversa com o {diretor} é de {dur} minutos e sem compromisso. Fica bom {horarios}?"},
+ {t:"Confirmação no WhatsApp (após agendar)",txt:"Oi, {nome}! Aqui é {sdr}, da MultiCloud. Obrigada pela conversa! Confirmando nossa reunião com o {diretor}: {horarios}, {dur} minutos. O convite vai no seu e-mail. Qualquer coisa, é só me chamar por aqui."},
+ {t:"E-mail com o convite",txt:"Assunto: {empresa} + MultiCloud | Conversa de {dur} min sobre {serv}\n\nOlá, {nome},\n\nObrigada pelo tempo hoje. Conforme combinamos, segue o convite para a conversa com o {diretor}, diretor da MultiCloud:\n\n• Quando: {horarios}\n• Duração: {dur} minutos\n• Pauta: cenário atual de {tema}, principais riscos e próximos passos — sem compromisso.\n\nAté lá!\n{sdr}\nMultiCloud · (62) 3142-0818 · comercial@multicloud.com.br"},
+ {t:"Lembrete no dia da reunião",txt:"Bom dia, {nome}! Passando para lembrar da nossa conversa hoje com o {diretor} ({horarios}). Segue confirmado?"}
+];
+
+const HAND = "📌 REUNIÃO AGENDADA — {empresa}\nContato: {nome} · {cargo}\nQuando: {horarios} · {dur} min com {diretor}\nServiço de entrada: {serv}\nSDR: {sdr}\n\nPontos sem “sim” no checklist:\n{gaps}\n\nObservações:\n{notes}";
+
+const CHECK = [
+ "Vocês têm inventário atualizado de todos os ativos (servidores, APIs, IoT, câmeras)?",
+ "Existe gestão de vulnerabilidades e rotina de atualização (patch)?",
+ "O backup já foi testado com restauração real? Em quanto tempo volta (RTO)?",
+ "Todos os acessos usam MFA? Existe cofre de senhas?",
+ "Alguém monitora o ambiente 24/7, inclusive fim de semana?",
+ "Existe plano de resposta a incidentes — e quem aciona?",
+ "Fornecedores com acesso ao ambiente são revisados e controlados?",
+ "Ambientes de teste/homologação têm dados reais?"
+];
+
+const FRASES = [
+ "Backup existe para restaurar; monitoramento existe para antecipar.",
+ "Segurança não é um produto: é capacidade de resposta.",
+ "Um incidente de terceiro pode se tornar o seu incidente.",
+ "Alta disponibilidade não é promessa: é arquitetura, teste e operação.",
+ "O ransomware cobra duas vezes: primeiro pelo acesso, depois pela recuperação.",
+ "Empresas que não podem parar precisam de TI que não dorme.",
+ "O Mercado Bitcoin provou que detectar rápido e conter rápido pode evitar dano maior.",
+ "O caso da Claro mostra por que API, banco de dados e integração também precisam entrar no diagnóstico.",
+ "O Smart Sampa mostra que senha padronizada e acesso excessivo ainda são falhas caras.",
+ "A falha no PHP provou que uma vulnerabilidade pode tirar sistemas críticos do ar.",
+ "O caso da Dígitro mostra que fornecedor comprometido é risco direto para o cliente.",
+ "No agro, a pergunta não é apenas “os dados estão seguros?”, mas “a produção continua funcionando se o sistema cair?”.",
+ "Um vazamento no Brasil custa, em média, R$ 7,44 milhões. O diagnóstico é o primeiro passo para não entrar nessa estatística."
+];
+
+const OBJECOES = [
+ {t:"“Já temos firewall e antivírus.”",r:"Ótimo, é a base. Mas os casos recentes (Sony, Smart Sampa, Dígitro) entraram por credencial, fornecedor ou API — não pelo firewall. A pergunta é: alguém monitora acessos e vulnerabilidades 24 horas por dia? O diagnóstico mostra isso sem mexer no seu ambiente."},
+ {t:"“Somos pequenos, ninguém vai nos atacar.”",r:"Em outubro foram 1.127 vítimas de ransomware publicadas, e manufatura, serviços e saúde lideram. Ataque hoje é automatizado: procura quem está exposto, não quem é grande. E o custo médio de um vazamento no Brasil é de R$ 7,44 milhões."},
+ {t:"“Já temos backup.”",r:"Perfeito. Quando foi o último teste de restauração completo? E em quanto tempo a operação volta? Backup que nunca foi testado não é estratégia de recuperação — é esperança."},
+ {t:"“Está caro / não temos orçamento.”",r:"Faz sentido olhar o custo. Por isso começamos com o Diagnóstico Inicial de Exposição Digital, sem custo. Ele mostra o que é prioridade, e você decide o que vale investir comparando com o custo de uma hora parada."},
+ {t:"“Nossa TI interna resolve.”",r:"Sua equipe conhece o negócio, e isso é essencial. A MultiCloud entra como parceira: cobre madrugada, fim de semana e feriado (24/7, 365 dias) e traz especialistas em segurança e cloud para a equipe focar no que gera resultado."},
+ {t:"“Agora não é o momento.”",r:"Entendo. Só uma pergunta para deixar registrado: se o sistema principal parasse amanhã por 4 horas, quanto custaria? Posso te enviar um resumo dos incidentes deste mês para você levar à diretoria?"},
+ {t:"“Manda por e-mail que eu vejo.”",r:"Mando sim! Mas um material genérico não mostra o risco específico de vocês. A conversa com nosso diretor é rápida, de 20 minutos, e você já sai com um retrato do seu cenário. Fica melhor terça ou quinta? Aí mando o material junto com o convite."},
+ {t:"“Não sou eu quem decide.”",r:"Entendi, obrigada por avisar! Quem participa dessa decisão? Faz sentido incluirmos essa pessoa na conversa com nosso diretor? Assim você não precisa repassar nada e todos saem com as respostas."},
+ {t:"“Já temos fornecedor de TI.”",r:"Ótimo, a ideia não é substituir ninguém. Muitos clientes têm fornecedor e usam a MultiCloud como segunda opinião em segurança. Em 20 minutos nosso diretor mostra se há alguma brecha — se estiver tudo certo, vocês ganham essa confirmação."},
+ {t:"“Quanto custa?”",r:"Depende do tamanho do ambiente, e não quero te passar um número errado. É exatamente isso que nosso diretor avalia na conversa: ele entende o cenário e mostra os caminhos com investimento claro. O diagnóstico inicial é sem custo."}
+];
+
+const CTA_FINAL = "Esses casos mostram que o risco não está apenas no firewall: está em credenciais, APIs, fornecedores, IoT, backups e acessos privilegiados.\n\nA MultiCloud começa com o Diagnóstico Inicial de Exposição Digital, sem custo, para mostrar onde sua empresa está visível, vulnerável ou desprotegida — e entregar um plano priorizado de proteção.\n\n" + CONTATO;
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nl = s => esc(s).replace(/\n/g,'<br>');
+let STORE = [], sid = 0;
+const cpBtn = (txt, label='Copiar') => { STORE.push(txt); return `<button class="cp" data-i="${STORE.length-1}">⧉ ${label}</button>`; };
+const sols = a => `<div class="sols">${a.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`;
+
+const SECTIONS = [
+ {id:"playbook",n:"Linha de atendimento",static:1,d:"Roteiro da SDR, da abordagem ao agendamento da call com o diretor. Preencha os dados e escolha o serviço: as falas se ajustam sozinhas e podem ser copiadas.",html:()=>`
+  <div class="pb-form">
+   <label>Seu nome (SDR)<input data-v="sdr" placeholder="Ex.: Ana"></label>
+   <label>Nome do cliente<input data-v="nome" placeholder="Ex.: Carlos"></label>
+   <label>Empresa<input data-v="empresa" placeholder="Ex.: Agro Forte"></label>
+   <label>Cargo<input data-v="cargo" placeholder="Ex.: Gerente de TI"></label>
+   <label>Diretor da call<input data-v="diretor" placeholder="Nome do diretor"></label>
+   <label>Duração (min)<select data-v="dur"><option>20</option><option>30</option></select></label>
+   <label class="w2">Opções de horário<input data-v="horarios" placeholder="terça às 10h ou quinta às 15h"></label>
+  </div>
+  <div class="lbl" style="margin:16px 0 8px">Serviço de entrada</div>
+  <div class="pb-tabs" id="pbTabs"></div>
+  <div class="steps" id="pbSteps" style="margin-top:16px"></div>
+  <h3 class="pb-h">Mensagens de apoio</h3>
+  <div class="grid" id="pbPos"></div>
+  <div class="pbm hand"><h4>Resumo para o diretor (passagem do lead)</h4>
+   <textarea data-v="notes" placeholder="Observações da ligação: dores, sistemas, urgência, quem vai participar…"></textarea>
+   <button class="btn" id="cpHand">Copiar resumo para o diretor</button></div>`},
+ {id:"inicio",n:"Narrativa",d:"A narrativa que guia toda conversa. Leia antes de ligar.",html:()=>`
+  <div class="hero card wide" data-k="narrativa mestre continuidade">
+   ${cpBtn("O ataque não começa quando os sistemas caem. Começa muito antes — em uma credencial exposta, um fornecedor vulnerável, um backup desatualizado ou um alerta que ninguém viu.")}
+   <div class="lbl">Narrativa-mestre</div>
+   <blockquote>“O ataque não começa quando os sistemas caem. Começa muito antes — em uma <em>credencial exposta</em>, um <em>fornecedor vulnerável</em>, um <em>backup desatualizado</em> ou um <em>alerta que ninguém viu</em>.”</blockquote>
+   <div class="stats">
+    <div class="stat"><b>23+</b><span>anos de mercado · desde 2003</span></div>
+    <div class="stat"><b>24/7</b><span>monitoramento · 365 dias</span></div>
+    <div class="stat"><b>R$ 7,44 mi</b><span>custo médio de vazamento no BR</span></div>
+    <div class="stat"><b>+25,8%</b><span>ransomware out × set/2026</span></div>
+   </div>
+  </div>
+  <div class="grid">
+   <div class="card" data-k="mensagem central vendemos continuidade">${cpBtn("Não vendemos apenas tecnologia. Vendemos continuidade: reduzir a chance de o incidente acontecer, encurtar o tempo de detecção e garantir que a empresa consiga recuperar a operação.")}
+    <h3>Mensagem central</h3><div class="quote">Não vendemos apenas tecnologia. Vendemos continuidade: reduzir a chance de o incidente acontecer, encurtar o tempo de detecção e garantir que a empresa consiga recuperar a operação.</div></div>
+   <div class="card" data-k="quem somos posicionamento ponta a ponta">${cpBtn("A MultiCloud protege empresas que não podem parar com uma arquitetura de ponta a ponta: governança e gestão de riscos, nuvem privada ou pública, segurança em camadas e operação com monitoramento 24/7.")}
+    <h3>Como apresentar a MultiCloud</h3><p>Protege empresas que não podem parar com arquitetura de ponta a ponta: governança e gestão de riscos, nuvem privada ou pública, segurança em camadas e operação com monitoramento 24/7.</p>
+    ${sols(["Estratégia","Infraestrutura","Proteção","Operação","Resultado"])}</div>
+   <div class="card" data-k="regra jurídica alegação confirmado cuidado">
+    <h3>Regra de ouro (jurídico)</h3>
+    <p>Diferencie sempre <span class="tag ok">Confirmado</span> de <span class="tag warn">Alegação</span>. Nunca afirme vazamento que a empresa não confirmou. Fale de risco de negócio, sem sensacionalismo e sem falar mal de concorrente ou vítima.</p></div>
+  </div>`},
+ {id:"incidentes",n:"Incidentes",d:"Casos atuais para abrir conversa. Use o filtro de setor no topo para achar o caso do seu cliente.",html:()=>`<div class="grid">${INCIDENTES.map(i=>{
+   const txt=`${i.t} (${i.setor} · ${i.geo} · ${i.data})\n${i.fato}\n\n“${i.gat}”`;
+   return `<div class="card inc" data-f="${esc(i.setor+' '+i.geo)}" data-k="${esc(i.sol.join(' '))}">
+    ${cpBtn(txt)}
+    <h3>${esc(i.t)}</h3>
+    <div class="meta"><span class="tag ${i.st}">${i.st=='ok'?'Confirmado':'Alegação / contestado'}</span><span class="tag date">${esc(i.data)}</span><span class="tag">${esc(i.setor)}</span><span class="tag">${esc(i.geo)}</span></div>
+    <div><div class="lbl">Fato</div><p>${esc(i.fato)}</p></div>
+    <div><div class="lbl">Gatilho comercial</div><div class="quote">“${esc(i.gat)}”</div></div>
+    <div><div class="lbl">Como falar com o cliente</div><p class="use">“${esc(i.uso)}”</p></div>
+    ${i.frase?`<div><div class="lbl">Frase forte</div><p class="use">“${esc(i.frase)}”</p></div>`:''}
+    ${i.legal?`<div class="legal">⚠ ${esc(i.legal)}</div>`:''}
+    <div><div class="lbl">Oferecer</div>${sols(i.sol)}</div>
+    <div class="cp-row">${cpBtn(i.uso,'Copiar fala')}</div>
+   </div>`}).join('')}</div>`},
+ {id:"tabela",n:"Resumo rápido",d:"Tabela para consultar em segundos durante a ligação ou colar no WhatsApp.",html:()=>{
+   const txt=INCIDENTES.map(i=>`• ${i.t} (${i.setor}/${i.geo}): ${i.gat}`).join('\n');
+   return `<div class="card wide" data-k="tabela resumo slide">${cpBtn(txt,'Copiar tabela')}<h3>Incidente → mensagem MultiCloud</h3><div class="tbl-wrap"><table><thead><tr><th>Incidente</th><th>Setor</th><th>Status</th><th>Mensagem</th></tr></thead><tbody>${INCIDENTES.map(i=>`<tr><td>${esc(i.t)}</td><td>${esc(i.setor)} / ${esc(i.geo)}</td><td><span class="tag ${i.st}">${i.st=='ok'?'Confirmado':'Alegação'}</span></td><td>“${esc(i.gat)}”</td></tr>`).join('')}</tbody></table></div></div>`}},
+ {id:"solucoes",n:"Pitch por solução",d:"O que dizer para cada serviço, com o CTA certo.",html:()=>`<div class="grid">${SOLUCOES.map(s=>`
+   <div class="card" data-k="${esc(s.tags)}">${cpBtn(s.pitch+'\n\n'+s.cta,'Copiar pitch')}
+    <h3>${esc(s.t)}</h3><p>${esc(s.ctx)}</p>
+    <div><div class="lbl">Pitch</div><div class="quote">“${esc(s.pitch)}”</div></div>
+    <div><div class="lbl">Conexão MultiCloud</div>${sols(s.sol)}</div>
+    <div><div class="lbl">CTA</div><p class="use">“${esc(s.cta)}”</p></div>
+   </div>`).join('')}</div>`},
+ {id:"aberturas",n:"Mensagens prontas",d:"Copie e cole no LinkedIn, e-mail ou WhatsApp. Troque {nome} e {empresa} antes de enviar.",html:()=>`<div class="grid">${ABERTURAS.map(a=>`
+   <div class="card" data-k="${esc(a.canal)}">${cpBtn(a.txt)}<h3>${esc(a.t)}</h3><div class="meta"><span class="tag date">${esc(a.canal)}</span></div><p>${nl(a.txt)}</p></div>`).join('')}
+   <div class="card" data-k="post linkedin estrutura">${cpBtn(LINKEDIN.map(x=>x[1]).join('\n\n'),'Copiar post')}<h3>Post para LinkedIn</h3><div class="meta"><span class="tag date">LinkedIn</span></div>${LINKEDIN.map(x=>`<div><div class="lbl">${x[0]}</div><p>${esc(x[1])}</p></div>`).join('')}</div>
+  </div>`},
+ {id:"roteiro",n:"Roteiro de reunião",d:"Sequência de 6 passos para a call de descoberta.",html:()=>`
+  <div class="steps">${ROTEIRO.map(r=>`<div class="step card" data-k="roteiro reunião"><div><h4>${esc(r[0])}</h4><p>${esc(r[1])}</p></div>${cpBtn(r[1])}</div>`).join('')}</div>`},
+ {id:"diagnostico",n:"Checklist de diagnóstico",d:"Marque durante a conversa. Cada “não” é uma oportunidade de solução.",html:()=>`
+  <div class="card wide check" data-k="diagnóstico perguntas checklist mfa backup restore">
+   <h3>Perguntas de qualificação</h3>
+   ${CHECK.map((c,i)=>`<label><input type="checkbox" data-c="${i}"><span>${esc(c)}</span></label>`).join('')}
+   <div class="cp-row" style="align-items:center;margin-top:8px">
+    <span class="score" id="score">Respondidas “sim”: <b>0</b>/${CHECK.length}</span>
+    <button class="btn" id="cpGaps">Copiar lacunas (para CRM)</button>
+    <button class="btn ghost" id="rst">Limpar</button>
+   </div>
+  </div>`},
+ {id:"objecoes",n:"Objeções",d:"Respostas curtas para as objeções mais comuns.",html:()=>`<div class="grid">${OBJECOES.map(o=>`
+   <div class="card" data-k="objeção">${cpBtn(o.r)}<h3>${esc(o.t)}</h3><p>${esc(o.r)}</p></div>`).join('')}</div>`},
+ {id:"frases",n:"Frases de impacto",d:"Um clique copia.",html:()=>`<div class="grid">${FRASES.map(f=>`
+   <div class="card" data-k="frase">${cpBtn(f)}<h3 style="font-size:17px">“${esc(f)}”</h3></div>`).join('')}</div>`},
+ {id:"cta",n:"CTA e contato",d:"Encerramento padrão de toda conversa.",html:()=>`<div class="grid">
+   <div class="card wide" data-k="cta diagnóstico gratuito sem custo">${cpBtn(CTA_FINAL,'Copiar CTA')}<h3>Diagnóstico Inicial de Exposição Digital — sem custo</h3><p>${nl(CTA_FINAL)}</p></div>
+   <div class="card" data-k="contato whatsapp telefone">${cpBtn(CONTATO)}<h3>Contatos</h3><p>WhatsApp: (62) 3142-0818<br>Telefone: 0800 000 5542<br>E-mail: comercial@multicloud.com.br</p></div>
+   <div class="card" data-k="endereço goiânia">${cpBtn("Av. Assis Chateaubriand, 1595 — 2º andar, sala 09 · St. Oeste, Goiânia – GO, 74130-012")}<h3>Endereço</h3><p>Av. Assis Chateaubriand, 1595 — 2º andar, sala 09 · St. Oeste, Goiânia – GO, 74130-012</p></div>
+  </div>`}
+];
+
+const main=$('#main'), side=$('#side');
+const ORDER=['playbook','objecoes','diagnostico','aberturas','incidentes','tabela','solucoes','frases','cta','inicio'];
+ORDER.map(id=>SECTIONS.find(s=>s.id==id)).forEach((s,i)=>{
+  const num=String(i).padStart(2,'0');
+  main.insertAdjacentHTML('beforeend',`<section id="${s.id}"${s.static?' data-static="1"':''}><div class="sh"><span class="idx">${num}</span><h2>${s.n}</h2></div><p class="sd">${s.d}</p>${s.html()}</section>`);
+  side.insertAdjacentHTML('beforeend',`<a href="#${s.id}" data-s="${s.id}"><b>${num}</b>${s.n}<span class="n"></span></a>`);
+});
+
+/* Filtro de setor */
+const setores=['Todos',...new Set(INCIDENTES.flatMap(i=>[i.geo,i.setor]))];
+let setor='Todos';
+$('#chips').innerHTML=setores.map(s=>`<button class="chip${s=='Todos'?' on':''}" data-f="${s}">${s}</button>`).join('');
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;setor=b.dataset.f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c==b));apply();if(setor!='Todos')location.hash='incidentes';};
+
+/* Busca (ignora acentos) */
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const cards=[...document.querySelectorAll('.card')];
+cards.forEach(c=>{c._base=c.innerHTML;c._txt=norm(c.textContent+' '+(c.dataset.k||'')+' '+(c.dataset.f||''));});
+function highlight(el,terms){
+  const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest('button,.lbl')?2:1});
+  const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+  nodes.forEach(n=>{const t=n.nodeValue,nt=norm(t);let out='',last=0,found=false;
+    const re=new RegExp(terms.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');let m;
+    while((m=re.exec(nt))){if(!m[0])break;found=true;out+=esc(t.slice(last,m.index))+'<mark>'+esc(t.slice(m.index,m.index+m[0].length))+'</mark>';last=m.index+m[0].length;}
+    if(found){const sp=document.createElement('span');sp.innerHTML=out+esc(t.slice(last));n.replaceWith(sp);}});
+}
+function apply(){
+  const terms=norm($('#q').value.trim()).split(/\s+/).filter(Boolean);
+  let total=0;
+  cards.forEach(c=>{
+    if(c.innerHTML!==c._base){const st=[...c.querySelectorAll('input')].map(i=>i.checked);c.innerHTML=c._base;c.querySelectorAll('input').forEach((i,k)=>i.checked=st[k]);}
+    const okQ=terms.every(t=>c._txt.includes(t));
+    const okS=setor=='Todos'||!c.classList.contains('inc')||(c.dataset.f||'').includes(setor);
+    const show=okQ&&okS;c.classList.toggle('hide',!show);
+    if(show&&terms.length)highlight(c,terms);
+  });
+  document.querySelectorAll('section').forEach(s=>{
+    if(s.dataset.static){const h=terms.length>0;s.classList.toggle('hide',h);side.querySelector(`[data-s="${s.id}"]`).classList.toggle('hide',h);return;}
+    const n=s.querySelectorAll('.card:not(.hide)').length;total+=n;
+    s.classList.toggle('hide',n===0);
+    const a=side.querySelector(`[data-s="${s.id}"]`);a.classList.toggle('hide',n===0);
+    a.querySelector('.n').textContent=terms.length||setor!='Todos'?n:'';
+  });
+  $('#empty').style.display=total?'none':'block';
+  bindChecks();
+}
+let tmr;$('#q').addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(()=>{apply();if($('#q').value)window.scrollTo({top:0});},120)});
+document.addEventListener('keydown',e=>{if(e.key=='/'&&document.activeElement!==$('#q')){e.preventDefault();$('#q').focus();}if(e.key=='Escape'){$('#q').value='';apply();}});
+
+/* Copiar */
+const toast=$('#toast');let tt;
+function copy(txt,btn){
+  const done=()=>{toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1400);if(btn){const o=btn.innerHTML;btn.classList.add('done');btn.innerHTML='✓ Copiado';setTimeout(()=>{btn.classList.remove('done');btn.innerHTML=o},1400);}};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(done,()=>fallback(txt,done));else fallback(txt,done);
+}
+function fallback(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){}ta.remove();}
+document.addEventListener('click',e=>{
+  const f=e.target.closest('[data-from]');if(f){copy(document.getElementById(f.dataset.from).innerText,f);return;}
+  const b=e.target.closest('[data-i],[data-copy]');if(!b)return;
+  copy(b.dataset.copy??STORE[b.dataset.i],b.dataset.i?b:null);
+});
+
+/* Checklist */
+function bindChecks(){
+  const box=document.querySelectorAll('[data-c]');
+  const upd=()=>{const y=[...box].filter(i=>i.checked).length;$('#score').innerHTML=`Respondidas “sim”: <b>${y}</b>/${CHECK.length}`;};
+  box.forEach(i=>i.onchange=upd);upd();
+  const g=$('#cpGaps');if(g)g.onclick=()=>{const gaps=[...box].filter(i=>!i.checked).map(i=>'• '+CHECK[i.dataset.c]);copy('Lacunas identificadas no diagnóstico:\n'+(gaps.join('\n')||'Nenhuma'),g);};
+  const r=$('#rst');if(r)r.onclick=()=>{box.forEach(i=>i.checked=false);upd();};
+}
+bindChecks();
+
+/* Playbook: dados do atendimento + falas dinâmicas */
+const PBK='mc-pb';let V={dur:'30',serv:'diag'};
+try{Object.assign(V,JSON.parse(localStorage.getItem(PBK)||'{}'))}catch(e){}
+if(!SERVICOS[V.serv])V.serv='diag';
+const savePB=()=>{try{localStorage.setItem(PBK,JSON.stringify(V))}catch(e){}};
+const PERS=['sdr','nome','empresa','cargo','diretor','dur','horarios'];
+function vars(){const s=SERVICOS[V.serv];
+  const gaps=[...document.querySelectorAll('[data-c]')].filter(i=>!i.checked).map(i=>'• '+CHECK[i.dataset.c]).join('\n');
+  return {...V,serv:s.n,tema:s.tema,gancho:s.gancho,caso:s.caso,valor:s.valor,perguntas:s.perguntas.map(p=>'• '+p).join('\n'),gaps,notes:V.notes||'—'};}
+function fill(t,html){const v=vars();
+  if(!html)return t.replace(/\{(\w+)\}/g,(m,k)=>(v[k]||'').trim()||`[${k}]`);
+  return t.split(/(\{\w+\})/).map(p=>{const m=p.match(/^\{(\w+)\}$/);if(!m)return nl(p);const x=(v[m[1]]||'').trim();
+    return x?(PERS.includes(m[1])?`<b class="v">${nl(x)}</b>`:nl(x)):`<span class="ph">[${m[1]}]</span>`;}).join('');}
+function renderPB(){
+  $('#pbTabs').innerHTML=Object.entries(SERVICOS).map(([k,s])=>`<button class="chip${k==V.serv?' on':''}" data-sv="${k}">${esc(s.n)}</button>`).join('');
+  $('#pbSteps').innerHTML=PB.map((p,i)=>`<div class="step"><div><h4>${esc(p.t)}</h4><div class="obj">🎯 ${esc(p.obj)}</div><div class="script" id="pb${i}">${fill(p.txt,1)}</div><div class="dica">💡 ${fill(p.dica,1)}</div></div>${p.noCopy?'':`<button class="cp" data-from="pb${i}">⧉ Copiar</button>`}</div>`).join('');
+  $('#pbPos').innerHTML=POS.map((p,i)=>`<div class="pbm"><div class="pbm-h"><h4>${esc(p.t)}</h4><button class="cp" data-from="po${i}">⧉ Copiar</button></div><div class="script" id="po${i}">${fill(p.txt,1)}</div></div>`).join('');
+}
+$('#pbTabs').onclick=e=>{const b=e.target.closest('[data-sv]');if(!b)return;V.serv=b.dataset.sv;savePB();renderPB();};
+document.querySelectorAll('[data-v]').forEach(el=>{if(V[el.dataset.v])el.value=V[el.dataset.v];
+  el.addEventListener('input',()=>{V[el.dataset.v]=el.value;savePB();if(el.dataset.v!='notes')renderPB();});});
+$('#cpHand').onclick=()=>copy(fill(HAND),$('#cpHand'));
+renderPB();
+
+/* Menu ativo ao rolar */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)side.querySelectorAll('a').forEach(a=>a.classList.toggle('act',a.dataset.s==e.target.id));}),{rootMargin:'-140px 0px -60% 0px'});
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
