@@ -1,0 +1,3 @@
+[submodule "tj/TJW"]
+	path = tj/TJW
+	url = https://github.com/jaderpinheiro/tjw.git
