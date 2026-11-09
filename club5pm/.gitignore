@@ -1,0 +1,16 @@
+# Club 5PM: versiona SOMENTE o site publicado. O repo é público.
+# brand/, entrada/, estrategia/, saida/, _privado/ e documentos nunca sobem.
+/*
+!/.gitignore
+!/*.html
+!/css/
+!/js/
+!/assets/
+!/convite/
+!/robots.txt
+!/sitemap.xml
+!/llms.txt
+!/InlineSyncPlugin/
+
+/assets/MIDIAS.md
+/assets/og/og.html

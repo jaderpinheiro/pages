@@ -485,3 +485,27 @@ html:not(.js) .cortina__lado--dir { transform: translateX(46%); }
   .empresas__lista[data-total="5"] .empresa:last-child { padding: 2rem 0 2.2rem; border-right: 0; grid-column: auto; }
   .empresa__logo { height: 58px; }
 }
+
+/* ---------- Novidades (08/11/2026): link do encontro, parceiras, loja ---------- */
+.marco__links { margin-top: 1rem !important; }
+.marco__link { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; color: var(--latao-claro) !important; text-decoration: none; border-bottom: 1px solid rgba(216,166,90,.5); font-weight: 500; }
+.marco__link:hover { color: var(--papel) !important; border-color: var(--papel); }
+.parcerias__acoes { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem 2rem; margin-top: -2rem; margin-bottom: clamp(3.5rem, 7vw, 6rem); }
+.parcerias__acoes p { margin: 0; max-width: 52ch; color: var(--champagne); }
+.novidade-pilula { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.6rem; padding: .45rem 1.1rem .45rem .45rem; min-height: 44px; border-radius: 999px; background: rgba(11,10,9,.55); border: 1px solid rgba(216,166,90,.45); color: var(--papel); text-decoration: none; font-size: 1rem; backdrop-filter: blur(6px); transition: background .3s, border-color .3s; }
+.novidade-pilula span:first-child { background: var(--latao-claro); color: var(--tinta); border-radius: 999px; padding: .3rem .75rem; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; }
+.novidade-pilula:hover { background: rgba(11,10,9,.8); border-color: var(--latao-claro); }
+.loja-chamada { padding: 0 0 var(--secao); }
+.loja-chamada__cartao { display: grid; grid-template-columns: minmax(180px, 300px) 1fr; gap: clamp(1.6rem, 4vw, 4rem); align-items: center; background: var(--champagne); color: var(--tinta); text-decoration: none; padding: clamp(2rem, 4.5vw, 3.8rem); border-radius: var(--raio); position: relative; max-width: 1080px; margin: 0 auto; transition: transform .45s, box-shadow .45s; }
+.loja-chamada__cartao::after { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(91,31,42,.3); pointer-events: none; }
+.loja-chamada__cartao:hover { transform: translateY(-4px); box-shadow: 0 30px 70px -30px rgba(216,166,90,.45); }
+.loja-chamada__arte { aspect-ratio: 1; color: var(--vinho); width: 100%; max-width: 260px; justify-self: center; }
+.loja-chamada__arte svg { width: 100%; height: 100%; }
+.loja-chamada__rotulo { display: flex; align-items: center; gap: .8rem; margin: 0 0 1.2rem; font: 500 .9rem/1 var(--f-texto); letter-spacing: .28em; text-transform: uppercase; color: var(--vinho); }
+.loja-chamada__rotulo span { background: var(--vinho); color: var(--papel); padding: .4rem .8rem; border-radius: 999px; letter-spacing: .18em; font-size: .78rem; }
+.loja-chamada h2 { font: 400 clamp(2.2rem, 1.5rem + 2.6vw, 3.8rem)/1.05 var(--f-editorial); margin-bottom: 1.1rem; }
+.loja-chamada h2 em { color: var(--vinho); }
+.loja-chamada p { color: #3a3531; max-width: 52ch; margin-bottom: 1.8rem; }
+.loja-chamada .botao { position: relative; z-index: 1; }
+.loja-chamada__cartao:hover .botao--vinho { background: var(--tinta); }
+@media (max-width: 760px) { .loja-chamada__cartao { grid-template-columns: 1fr; text-align: left; } .loja-chamada__arte { max-width: 150px; justify-self: start; } .parcerias__acoes { margin-top: -1rem; } }
