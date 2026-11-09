@@ -48,7 +48,7 @@
         D.produtos = (c.produtos || []).map((p) => ({ ...p, esgotado: p.estoque === 0 }));
         D.entrega = c.entrega || [];
         D.parcelasMax = c.parcelasMax || D.parcelasMax;
-        D.aberta = !!c.aberta;
+        D.aberta = !!c.aberta && !!D.api; // sem o Apps Script ligado, ninguém consegue comprar (mostra "abre em breve")
       } catch (e) {
         lista.innerHTML = `<li class="produtos__aviso"><p>Não conseguimos carregar os produtos agora. Atualize a página em instantes.</p></li>`;
         lista.removeAttribute("aria-busy");

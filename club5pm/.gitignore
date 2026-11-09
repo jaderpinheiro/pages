@@ -11,6 +11,7 @@
 !/sitemap.xml
 !/llms.txt
 !/InlineSyncPlugin/
+# _sistema/ (geradores, Apps Script, plugin da loja) e estrategia/ ficam SEMPRE fora: não estão na lista acima.
 
 /assets/MIDIAS.md
 /assets/og/og.html
