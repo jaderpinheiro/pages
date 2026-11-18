@@ -2,6 +2,70 @@
    Registros de campo — filtros e visualizador (dialog nativo)
    Sem JS, a grade completa continua visível e cada imagem tem legenda.
    ========================================================================== */
+// ---- vídeos: botão de play, um vídeo por vez, cenas clicáveis ----
+// Sem JS, cada vídeo mantém os controles nativos.
+(function () {
+  'use strict';
+  const cards = Array.prototype.slice.call(document.querySelectorAll('.vcard'));
+  if (!cards.length) return;
+  const vids = [];
+  function tocar(v) {
+    vids.forEach((o) => { if (o !== v && !o.paused) o.pause(); });
+    v.controls = true;
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
+  }
+  cards.forEach((card) => {
+    const v = card.querySelector('video'), media = card.querySelector('.vcard__media');
+    if (!v || !media) return;
+    vids.push(v);
+    v.controls = false;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'vcard__play';
+    const nome = card.querySelector('.atv');
+    b.setAttribute('aria-label', 'Assistir: ' + (nome ? nome.textContent.replace(/^\d/, '').trim() : 'vídeo'));
+    b.innerHTML = '<i aria-hidden="true"></i>';
+    media.appendChild(b);
+    b.addEventListener('click', () => { b.remove(); tocar(v); v.focus(); });
+    v.addEventListener('play', () => { card.classList.add('is-playing'); if (b.isConnected) b.remove(); v.controls = true; vids.forEach((o) => { if (o !== v && !o.paused) o.pause(); }); });
+  });
+  document.querySelectorAll('[data-cenas]').forEach((box) => {
+    const v = document.getElementById(box.dataset.cenas);
+    if (!v) return;
+    const bts = Array.prototype.slice.call(box.querySelectorAll('button[data-t]'));
+    const marcar = () => {
+      const t = v.currentTime; let ativo = null;
+      bts.forEach((x) => { if (t >= +x.dataset.t - 0.05) ativo = x; });
+      bts.forEach((x) => x.setAttribute('aria-current', String(x === ativo && (t > 0 || !v.paused))));
+    };
+    bts.forEach((x) => x.addEventListener('click', () => {
+      const ir = () => { v.currentTime = +x.dataset.t; tocar(v); marcar(); };
+      if (v.readyState >= 1) ir(); else { v.preload = 'auto'; v.addEventListener('loadedmetadata', ir, { once: true }); v.load(); }
+    }));
+    v.addEventListener('timeupdate', marcar);
+  });
+  // setas para as faixas com mais vídeos do que cabem na tela
+  document.querySelectorAll('.vcap').forEach((cap) => {
+    const strip = cap.querySelector('.vstrip'), head = cap.querySelector('.vcap__head');
+    if (!strip || !head || strip.classList.contains('vstrip--cenas')) return;
+    const nav = document.createElement('div');
+    nav.className = 'vnav'; nav.hidden = true;
+    nav.innerHTML = '<button type="button" aria-label="Vídeo anterior">←</button><button type="button" aria-label="Próximo vídeo">→</button>';
+    head.appendChild(nav);
+    const [ant, prox] = nav.querySelectorAll('button');
+    const passo = () => { const c = strip.querySelector('.vcard'); return c ? c.offsetWidth + 16 : strip.clientWidth * 0.8; };
+    const estado = () => {
+      const max = strip.scrollWidth - strip.clientWidth;
+      nav.hidden = max < 8;
+      ant.disabled = strip.scrollLeft < 4; prox.disabled = strip.scrollLeft > max - 4;
+    };
+    ant.addEventListener('click', () => strip.scrollBy({ left: -passo(), behavior: 'smooth' }));
+    prox.addEventListener('click', () => strip.scrollBy({ left: passo(), behavior: 'smooth' }));
+    strip.addEventListener('scroll', estado, { passive: true });
+    window.addEventListener('resize', estado);
+    estado();
+  });
+})();
+
 (function () {
   'use strict';
   const $ = (s, c) => (c || document).querySelector(s);
