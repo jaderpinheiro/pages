@@ -787,6 +787,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .caso__visual--foto figcaption { left: 0; right: 0; bottom: 0; padding: 48px 16px 14px; background: linear-gradient(180deg, transparent, rgba(1, 7, 20, .85)); color: var(--on-dark-2); }
 .caso__visual--foto figcaption span { display: block; color: var(--gold-300); margin-bottom: 4px; }
 .caso:hover .caso__visual--foto img { transform: scale(1.04); }
+.caso__visual--video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .caso__cod { display: flex; align-items: flex-end; gap: 16px; margin: 0; font-family: var(--f-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-700); }
 .caso__n { font-family: var(--f-display); font-weight: 600; font-size: clamp(3.4rem, 2.2rem + 3.4vw, 5.6rem); line-height: .78; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px var(--gold-600); transition: color .8s var(--ease-out); }
 .caso:hover .caso__n { color: rgba(210, 155, 50, .16); }

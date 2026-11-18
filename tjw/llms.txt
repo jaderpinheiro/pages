@@ -24,9 +24,9 @@ Fonte dos dados: Relatório de Portfólio Técnico da empresa, 20 de julho de 20
 - 2021–2023: sócia participante (70% de participação) em Sociedades em Conta de Participação (SCP) com a ENEFER Consultoria Projetos Ltda. (sócia ostensiva)
 - A partir de 2023: empresa líder de consórcios contratados pela GOINFRA (Consórcio Supervisor GO; Consórcio TJW-CAVA)
 
-## Portfólio (11 contratos, em ordem cronológica)
+## Portfólio (12 contratos)
 Por ano de assinatura: 2021 (4 contratos) · 2022 (3) · 2023 (2) · 2024 (2).
-Por modal: ferroviário (6) · rodoviário (4) · outros (1).
+Por modal: ferroviário (6) · rodoviário (5) · outros (1). Ano de assinatura do contrato da Prefeitura de São Patrício não informado.
 - SCP 01/2021 — FCA — Projeto Básico da FIOL, Lote 09FB e 8FA, Barreiras/BA a Arraias/TO (100 km) — 210 dias
 - SCP 02/2021 — FCA — Projeto PETRA Pacote 4, Trem de Passageiros (Brasília a Valparaíso, Solução Barra Mansa, Trem Turístico Angra/RJ a Lídice/RJ) — 150 dias
 - SCP 03/2021 — GOINFRA — Supervisão da manutenção da malha rodoviária de Goiás, Lote 09 — 36 meses
@@ -38,9 +38,10 @@ Por modal: ferroviário (6) · rodoviário (4) · outros (1).
 - Contrato 96/23 — GOINFRA — Projetos Executivos Lote 03 (líder) — 24 meses
 - Contrato 92/2024 — GOINFRA — Supervisão regional, Lote 02 (TJW líder, Consórcio TJW-CAVA) — 24 meses
 - Contrato 112/2024 — GOINFRA — Supervisão de obras, Lote 03, Plano de Obras 2023/2026 (TJW líder, Consórcio Supervisor GO) — 48 meses
+- Prefeitura de São Patrício — Contratação de empresa técnica para execução dos serviços especializados de supervisão de obras de implantação e restauração das rodovias sob jurisdição da Agência Goiana de Infraestrutura e Transportes (GOINFRA) no Estado de Goiás — Plano de Obras 2023/2026; GO-460, trecho Distrito de Diolândia (Itapuranga) a São Patrício, 12,94 km
 
 ## Clientes e parceiros
-- Clientes: Ferrovia Centro Atlântica S.A. (FCA), Bahia Mineração S.A. (BAMIN), Agência Goiana de Infraestrutura e Transportes (GOINFRA), Consórcio TT FIOL Lote 6F-A, SEINF/RR
+- Clientes: Ferrovia Centro Atlântica S.A. (FCA), Bahia Mineração S.A. (BAMIN), Agência Goiana de Infraestrutura e Transportes (GOINFRA), Consórcio TT FIOL Lote 6F-A, SEINF/RR, Prefeitura de São Patrício
 - Parcerias: CAVA, EULER, COEMA; parceira histórica ENEFER
 
 ## Onde atua
@@ -48,5 +49,5 @@ Goiás (sede), Bahia, Tocantins, Distrito Federal, Rio de Janeiro e Roraima.
 
 ## Páginas
 - [Início](https://www.tjwconsultoria.com/): apresentação, capacidades, portfólio, atuação e contato
-- [Portfólio técnico](https://www.tjwconsultoria.com/portfolio/): os 11 contratos em ordem cronológica, com ficha completa, evolução por ano, modal e modelo de atuação, registros reais de campo e quadro resumo
+- [Portfólio técnico](https://www.tjwconsultoria.com/portfolio/): os 12 contratos em ordem cronológica, com ficha completa, evolução por ano, modal e modelo de atuação, registros reais de campo e quadro resumo
 - [Registros de campo](https://www.tjwconsultoria.com/campo/): fotos e vídeos reais de obras rodoviárias em Goiás (GO-330, GO-338, GO-460)
